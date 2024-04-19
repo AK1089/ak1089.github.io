@@ -70,6 +70,12 @@ a {
 .tooltip {
     position: relative;
     cursor: pointer;
+    display: inline-block;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
 }
 
 .tooltip-text {
@@ -98,9 +104,4 @@ a {
     border-width: 5px;
     border-style: solid;
     border-color: #333 transparent transparent transparent;
-}
-
-.tooltip:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
 }
