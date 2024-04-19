@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())) {
         age--;
     }
+    
     ageElement.textContent = age + ' ';
-    tooltipElement.textContent = 'Birthday: ' + birthDate.toDateString();
+    tooltipElement.textContent = 'I was born on ' + birthDate.toDateString() + ', making me ' + 
+    (Math.floor((currentDate.getTime() - birthDate.getTime()) / (1000 * 60 * 60 * 24))).toString() + ' days old.';
 });
