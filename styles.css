@@ -68,17 +68,16 @@ a {
     text-underline-offset: 1pt;
 }
 
-/* Tooltip container */
 .tooltip {
     position: relative;
+    cursor: pointer;
     display: inline-block;
     border-bottom: 1px dotted black;
     font-family: 'Courier New', Courier, monospace;
     padding: 0px;
-    /* If you want dots under the hoverable text */
+    
 }
 
-/* Tooltip text */
 .tooltip .tooltiptext {
     visibility: hidden;
     background-color: rgba(40,40,40,0.85);
@@ -91,10 +90,9 @@ a {
     width: 140px;
     bottom: 120%;
     left: 50%;
-    margin-left: -80px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    margin-left: -80px;
   }
 
-/* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
@@ -103,7 +101,7 @@ a {
     content: " ";
     position: absolute;
     padding-top: 10px;
-    top: 100%; /* At the bottom of the tooltip */
+    top: 100%;
     left: 50%;
     margin-left: -5px;
     border-width: 5px;
