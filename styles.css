@@ -74,23 +74,24 @@ a {
     display: inline-block;
     border-bottom: 1px dotted black;
     font-family: 'Courier New', Courier, monospace;
+    padding: 0px;
     /* If you want dots under the hoverable text */
 }
 
 /* Tooltip text */
 .tooltip .tooltiptext {
     visibility: hidden;
-    background-color: black;
+    background-color: rgba(40,40,40,0.85);
     color: #fff;
     text-align: center;
-    padding: 5px 0;
+    padding: 10px;
     border-radius: 6px;
     position: absolute;
     z-index: 1;
     width: 140px;
     bottom: 120%;
     left: 50%;
-    margin-left: -70px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    margin-left: -80px; /* Use half of the width (120/2 = 60), to center the tooltip */
   }
 
 /* Show the tooltip text when you mouse over the tooltip container */
@@ -101,6 +102,7 @@ a {
 .tooltip .tooltiptext::after {
     content: " ";
     position: absolute;
+    padding-top: 10px;
     top: 100%; /* At the bottom of the tooltip */
     left: 50%;
     margin-left: -5px;

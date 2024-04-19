@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // age updator
-    var ageElement = document.getElementById('age');
-    var tooltipElement = document.getElementById('tooltiptext');
+    var ageElement = document.getElementById('agenumber');
+    var tooltipElement = document.getElementById('agetooltip');
     var birthDate = new Date('2004-02-07');
     var currentDate = new Date();
     var age = currentDate.getFullYear() - birthDate.getFullYear();
@@ -22,6 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())) {
         age--;
     }
-    ageElement.textContent = age;
+    ageElement.textContent = age + ' ';
     tooltipElement.textContent = 'Birthday: ' + birthDate.toDateString();
 });
