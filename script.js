@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // age updator
     var ageElement = document.getElementById('age');
-    var tooltipElement = document.getElementById('tooltip');
+    var tooltipElement = document.getElementById('tooltiptext');
     var birthDate = new Date('2004-02-07');
     var currentDate = new Date();
     var age = currentDate.getFullYear() - birthDate.getFullYear();
