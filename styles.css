@@ -47,7 +47,8 @@ nav ul li a {
 
 main {
     padding: 20px;
-    margin-left: 100px;
+    margin-left: 160px;
+    margin-right: 160px;
     text-align: left;
 }
 
@@ -59,4 +60,47 @@ h2 {
 
 p {
     font-family: 'Courier New', Courier, monospace;
+}
+
+a {
+    text-decoration: underline;
+    text-underline-offset: 1pt;
+}
+
+.tooltip {
+    position: relative;
+    cursor: pointer;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
 }
