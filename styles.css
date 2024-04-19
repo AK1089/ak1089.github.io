@@ -64,8 +64,14 @@ p {
 }
 
 a {
-    text-decoration: underline;
+    text-decoration: none;
     text-underline-offset: 1pt;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    padding: 0px;
+    color: black;
 }
 
 .tooltip {
