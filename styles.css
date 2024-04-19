@@ -15,6 +15,7 @@ h1 {
     font-size: 100px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: bold;
+    user-select: none;
 }
 
 nav {
@@ -46,7 +47,14 @@ nav ul li a {
 
 main {
     padding: 20px;
-    text-align: center;
+    margin-left: 100px;
+    text-align: left;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 40px;
 }
 
 p {
