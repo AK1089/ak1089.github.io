@@ -218,15 +218,22 @@ ol {
     color: #666;
 }
 
+.social-link {
+    text-decoration: none;
+    color: inherit;
+}
+
 .social-box {
-    background-color: #EBEBEB;
-    padding: 20px;
+    background-color: #fff;
+    padding: 5px;
     margin: 10px;
     border-radius: 10px;
-    box-shadow: 4px 4px 0 #999;
+    box-shadow: 4px 4px 0 #666;
     display: flex;
     align-items: center;
     transition: transform 0.2s, box-shadow 0.2s;
+    border: #666;
+    border-width: 4px;
 }
 
 .social-box:hover {
@@ -236,6 +243,8 @@ ol {
 
 .social-icon {
     margin-right: 20px;
+    margin-top: 5px;
+    margin-left: 5px;
 }
 
 .social-icon img {
@@ -245,5 +254,5 @@ ol {
 
 .social-text {
     font-family: 'ETBook', serif;
-    font-size: 10px;
+    font-size: 18px;
 }

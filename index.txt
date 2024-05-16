@@ -9,6 +9,8 @@ In my free time, I enjoy programming, reading, making and solving puzzles, socia
 [Minr](!zero.minr.org, a Minecraft server I'm a staff member on), and creating things. This is a website where I keep things
 I make, link to things I enjoy, or talk about things in a loosely structured forum.
 
+<br>
+
 ## About This Website
 
 I wrote the HTML, CSS, and Javascript for this website myself. To make editing the site easier, I wrote a custom Markdown-like
@@ -39,9 +41,44 @@ Thanks to the wonderful work of [KaTeX](https://katex.org/), it also supports be
 The font used on this site is [ET Book](https://edwardtufte.github.io/et-book/) by Edward Tufte.
 """
 
-<div class="social-box">
-    <div class="social-icon">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Discord_logo.svg" alt="Discord">
-    </div>
-    <div class="social-text">Discord • @ak1089</div>
-</div>
+<br>
+
+## Links To Elsewhere
+
+These are the public accounts I regularly use online. Feel free to contact me at any of them.
+
+</p><a href="https://discord.com/users/380805820415344644" class="social-link"><div class="social-box">
+    <div class="social-icon"><img src="images/social-media-sites/discord.png" alt="Discord"></div>
+    <div class="social-text">Discord • @ak1089</div></div></a><p>
+
+</p><a href="https://www.github.com/ak1089/" class="social-link"><div class="social-box">
+    <div class="social-icon"><img src="images/social-media-sites/github.png" alt="Github"></div>
+    <div class="social-text">Github • AK1089</div></div></a><p>
+
+</p><a href="https://twitter.com/_AK1089_" class="social-link"><div class="social-box">
+    <div class="social-icon"><img src="images/social-media-sites/twitter.png" alt="Twitter"></div>
+    <div class="social-text">Twitter / X • @_AK1089_</div></div></a><p>
+
+</p><a href="https://www.instagram.com/_ak1089_/" class="social-link"><div class="social-box">
+    <div class="social-icon"><img src="images/social-media-sites/instagram.png" alt="Instagram"></div>
+    <div class="social-text">Instagram • @_ak1089_</div></div></a><p>
+
+</p><a href="https://steamcommunity.com/profiles/76561198281258106/" class="social-link"><div class="social-box">
+    <div class="social-icon"><img src="images/social-media-sites/steam.png" alt="Steam"></div>
+    <div class="social-text">Steam • AK1089</div></div></a><p>
+
+</p><a href="https://www.last.fm/user/AK1089-" class="social-link"><div class="social-box">
+    <div class="social-icon"><img src="images/social-media-sites/lastfm.png" alt="Last.FM"></div>
+    <div class="social-text">Last.fm • @_ak1089_</div></div></a><p>
+
+</p><a href="https://open.spotify.com/user/bz1tyfsu1p40r48rte5eyyy7q?si=3badb1008433403b&nd=1&dlsi=07baf3f018954791" class="social-link"><div class="social-box">
+    <div class="social-icon"><img src="images/social-media-sites/spotify.png" alt="Spotify"></div>
+    <div class="social-text">Spotify • Avish Kumar</div></div></a><p>
+
+</p><a href="https://www.lesswrong.com/users/ak1089" class="social-link"><div class="social-box">
+    <div class="social-icon"><img src="images/social-media-sites/lesswrong.png" alt="LessWrong"></div>
+    <div class="social-text">LessWrong • AK1089</div></div></a><p>
+
+</p><a href="https://www.linkedin.com/in/avishkumar/" class="social-link"><div class="social-box">
+    <div class="social-icon"><img src="images/social-media-sites/linkedin.png" alt="LinkedIn"></div>
+    <div class="social-text">LinkedIn • Avish Kumar</div></div></a><p>
