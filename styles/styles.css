@@ -259,3 +259,31 @@ ol {
     font-family: 'ETBook', serif;
     font-size: 18px;
 }
+
+/* Image with caption */
+.image-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.image-container img {
+    width: 60%;
+    height: auto;
+}
+
+.image-container .caption {
+    font-size: 0.9em;
+    color: grey;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.image-container img {
+    width: 60%;
+    height: auto;
+    transition: filter 0.3s ease;
+}
+
+.image-container img:hover {
+    filter: brightness(80%);
+}

@@ -30,6 +30,7 @@ def convert_markdown_to_html(input_file, output_file, depth):
     content = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', content)
     content = re.sub(r'\*(.*?)\*', r'<em>\1</em>', content)
     content = re.sub(r'__(.*?)__', r'<u>\1</u>', content)
+    content = re.sub(r'\[\&(.+?)\]\((.+?)\)', r'<div class="image-container"><img src="\2" alt="\1"><div class="caption">\1</div></div>', content)
     content = re.sub(r'\[(.*)\]\(!(.+?)\)', r'<span class="tooltip">\1<span class="tooltiptext">\2</span></span>', content)
     content = re.sub(r'\[(.*)\]\((.*?)\)', r'<a href="\2">\1</a>', content)
 
