@@ -1,13 +1,8 @@
 # AK1089's Site
 
-Hey, I'm Avish, a [${current_age_in_years}](!${current_age_in_days}) year old from London,
-and this is my personal site! I go by AK1089 on the internet, after my initials and
-[my favourite number](https://en.wikipedia.org/wiki/1089_%28number%29#In_magic).
-I'm currently an undergraduate maths student at the University of Cambridge, in the UK.
+Hey, I'm Avish, a [${current_age_in_years}](!${current_age_in_days}) year old from London, and this is my personal site! I go by AK1089 on the internet, after my initials and [my favourite number](https://en.wikipedia.org/wiki/1089_%28number%29#In_magic). I'm currently an undergraduate maths student at the University of Cambridge, in the UK.
 
-In my free time, I enjoy programming, reading, making and solving puzzles, social deduction games, playing on
-[Minr](!zero.minr.org, a Minecraft server I'm a staff member on), and creating things. This is a website where I keep things
-I make, link to things I enjoy, or talk about things in a loosely structured forum.
+In my free time, I enjoy programming, reading, making and solving puzzles, social deduction games, playing on [Minr](!zero.minr.org, a Minecraft server I'm a staff member on), and creating things. This is a website where I keep things I make, link to things I enjoy, or talk about things in a loosely structured forum.
 
 """info #7F00B5 #EEEEEE
 __**Jump to / visit:**__
@@ -23,9 +18,7 @@ __**Jump to / visit:**__
 
 ## About This Website
 
-I wrote the [HTML, CSS, and Javascript for this website](https://github.com/AK1089/ak1089.github.io) myself. To make editing the site easier, I wrote a custom Markdown-like
-parser in Python, which converts relatively vanilla text files into fully formatted HTML. It supports the default Markdown syntax
-for things like *italics*, **bold**, __underlined text__, and [website links](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
+I wrote the [HTML, CSS, and Javascript for this website](https://github.com/AK1089/ak1089.github.io) myself. To make editing the site easier, I wrote a custom Markdown-like parser in Python, which converts relatively vanilla text files into fully formatted HTML. It supports the default Markdown syntax for things like *italics*, **bold**, __underlined text__, and [website links](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
 
 It also has things like [hover text](!ta-da!), [spoiler]spoiler blocks,[/spoiler], code blocks,
 ```python
@@ -41,8 +34,7 @@ which can be numbered, like that, or
 - unnumbered
 - like this.
 </ul>
-It also supports <&red>coloured</&red> <&blue>text</&blue> and  `inline_code` blocks, as well as dynamically loaded content
-(eg. you loaded this page at ${current_date}).
+It also supports <&red>coloured</&red> <&blue>text</&blue> and  `inline_code` blocks, as well as dynamically loaded content (eg. you loaded this page at ${current_date}).
 
 Thanks to the wonderful work of [KaTeX](https://katex.org/), it also supports beautiful LaTeX expressions, like 
 \[ \mathbb{P} \left( |X-\mu| \geq k \sigma \right) \leq \frac{1}{k^2} \quad \text{(Chebyshev's Inequality).}\]
