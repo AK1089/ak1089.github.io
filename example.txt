@@ -1,10 +1,14 @@
 # AK1089's Site
 
-Welcome to my personal website!
+Hey, I'm Avish, and this is my personal site! I go by AK1089 on the internet, after my initials and
+[my favourite number](https://en.wikipedia.org/wiki/1089_%28number%29#In_magic).
+Originally from London, I'm currently an undergraduate maths student at the University of Cambridge, in the UK.
+I built this site myself, as a home for projects, writing, guides, and anything else I feel like putting out here.
 
-## Features
+## About This Website
 
-**Bold Text**
+I wrote the HTML, CSS, and Javascript for this website myself. To make editing the site easier, I wrote a custom Markdown-like
+parser in Python, which converts relatively vanilla text files into fully formatted HTML.
 
 *Italic Text*
 
@@ -42,3 +46,8 @@ I can also do `inline code` wahoo
 ${variable_content}
 
 For example, I am [${current_age_in_years}](!${current_age_in_days}) years old.
+
+Here's some inline LaTeX: \(x^2 + y^2 = r^2\)
+
+And here's some in display mode:
+\[\mathbb{P} \left( |X-\mu| \geq \varepsilon \right) = \frac{2}{\sigma^2}\]

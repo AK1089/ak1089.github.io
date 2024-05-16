@@ -43,6 +43,14 @@ function replaceVariables() {
     
     // Update the HTML content
     document.body.innerHTML = html;
+
+    // Render LaTeX
+    renderMathInElement(document.body, {
+        delimiters: [
+            {left: "\\(", right: "\\)", display: false},
+            {left: "\\[", right: "\\]", display: true}
+        ]
+    });
 }
 
 // Run the replaceVariables function on page load

@@ -63,6 +63,10 @@ def convert_markdown_to_html(input_file, output_file):
     <title>AK1089's Website</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
 {content}
