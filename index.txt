@@ -10,7 +10,7 @@ In my free time, I enjoy programming, reading, making and solving puzzles, socia
 I make, link to things I enjoy, or talk about things in a loosely structured forum.
 
 """info #7F00B5 #EEEEEE
-Jump to:
+__**Jump to:**__
 <ul>
 - [About this website](#about-this-website)
 - [Links to elsewhere](#links-to-elsewhere)
