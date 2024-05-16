@@ -8,4 +8,7 @@ Here are some useful ones:
 <ol>
 - [AK's Custom Minr Mapmaking Tool](https://minr-map-art-814d7355b513.herokuapp.com/), a tool for importing reference images directly into the game as map artwork
 - [Lightwood13's MSC VSCode Extension](https://marketplace.visualstudio.com/items?itemName=Lightwood13.msc), a VSCode Marketplace extension to which I have contributed a fair bit
+- [My MSC Tips Series](../minr-script-help), a series of writeups about different aspects of MSC
+<ul>
+- [Functions](../minr-script-help/functions), published 16/05/2024
 </ol>
