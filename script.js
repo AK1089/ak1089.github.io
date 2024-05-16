@@ -29,7 +29,8 @@ function replaceVariables() {
     const variables = {
         variable_content: "Hello, World!",
         current_age_in_years: age.toString(),
-        current_age_in_days: current_age_in_days.toString()
+        current_age_in_days: current_age_in_days.toString().Date,
+        current_date: currentDate.toLocaleTimeString()
     };
     
     // Get the entire HTML content

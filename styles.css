@@ -196,6 +196,7 @@ ul li::before {
 
 ol {
     padding-left: 20px;
+    list-style-type: decimal;
 }
 
 /* Spoiler */

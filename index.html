@@ -13,40 +13,36 @@
 </head>
 <body>
 <p><h1>AK1089's Site</p></h1>
-<p>Hey, I'm Avish, and this is my personal site! I go by AK1089 on the internet, after my initials and
+<p>Hey, I'm Avish, a <span class="tooltip">${current_age_in_years}<span class="tooltiptext">${current_age_in_days}</span></span> year old from London,
+and this is my personal site! I go by AK1089 on the internet, after my initials and
 <a href="https://en.wikipedia.org/wiki/1089_%28number%29#In_magic">my favourite number</a>.
-Originally from London, I'm currently an undergraduate maths student at the University of Cambridge, in the UK.
+I'm currently an undergraduate maths student at the University of Cambridge, in the UK.
 I built this site myself, as a home for projects, writing, guides, and anything else I feel like putting out here.</p>
 <p><h2>About This Website</p></h2>
-<p>I </p>
-<p><em>Italic Text</em></p>
-<p><u>Underlined Text</u></p>
-<p><a href="https://example.com">url</a></p>
-<p><span class="tooltip">hover over this text<span class="tooltiptext">ta-da!</span></span></p>
-<p><h3>Code Block</p></h3>
-<p>
+<p>I wrote the HTML, CSS, and Javascript for this website myself. To make editing the site easier, I wrote a custom Markdown-like
+parser in Python, which converts relatively vanilla text files into fully formatted HTML. It supports the default Markdown syntax
+for things like <em>italics</em>, <strong>bold</strong>, <u>underlined text</u>, and <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">website links</a>.</p>
+<p>It also has things like <span class="tooltip">hover text<span class="tooltiptext">ta-da!</span></span>, <span class="spoiler">spoiler blocks,</span>, code blocks,
+
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
-            <code data-language="python" class="line-numbers"><span>def hello_world():</span>
+            <code data-language="python" class="line-numbers"><span>def code_block_example():</span>
 <span>    print("Hello, World!")</span>
 </code>
-        </pre></p>
-<p><h3>Spoiler</p></h3>
-<p><span class="spoiler">This is a spoiler. Hover to reveal.</span></p>
-<p><h3>Numbering</p></h3>
-<p><ol> 
-<li>Hello</li>
-<li>Yeah</li>
-<li>Abc</li>
-</ol></p>
-<p>new thing not in the list which has <span style="color:#FF0000;">coloured text</span> because I can do that now</p>
-<p>I can also do <code class="inline-code">inline code</code> wahoo</p>
-<p><h3>Dynamically Loaded Content</p></h3>
-<p>${variable_content}</p>
-<p>For example, I am <span class="tooltip">${current_age_in_years}<span class="tooltiptext">${current_age_in_days}</span></span> years old.</p>
-<p>Here's some inline LaTeX: \(x^2 + y^2 = r^2\)</p>
-<p>And here's some in display mode:
-\[\mathbb{P} \left( |X-\mu| \geq \varepsilon \right) = \frac{2}{\sigma^2}\]</p>
+        </pre>
+<ol> 
+<li>lists</li>
+<li>with multiple items</li>
+</ol>
+which can be numbered, like that, or
+<ul> 
+<li>unnumbered</li>
+<li>like this.</li>
+</ul>
+It also supports <span style="color:#FF0000;">coloured</span> <span style="color:#0000FF;">text</span> and  <code class="inline-code">inline_code</code> blocks, as well as dynamically loaded content
+(eg. you loaded this page at ${current_date}).</p>
+<p>Thanks to the wonderful work of <a href="https://katex.org/">Katex</a>, it also supports beautiful LaTeX expressions, like 
+\[ \mathbb{P} \left( |X-\mu| \geq k \sigma \right) \leq \frac{1}{k^2} \quad \text{(Chebyshev's Inequality)}\]</p>
 
 </body>
 </html>
