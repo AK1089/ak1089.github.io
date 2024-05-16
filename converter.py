@@ -4,12 +4,20 @@ def convert_markdown_to_html(input_file, output_file):
     with open(input_file, 'r') as f:
         content = f.read()
     
+    # Replace line breaks with paragraph tags
+    content = content.replace('\n\n', '</p><p>')
+    content = f'<p>{content}</p>'
+
+    # Convert markdown headers to HTML headers
+    for i in range(6, 0, -1):
+        content = re.sub(r'^{} (.+)$'.format('#' * i), r'<h{}>\1</h{}>'.format(i, i), content, flags=re.MULTILINE)
+
     # Custom markdown to HTML conversions
     content = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', content)
     content = re.sub(r'\*(.*?)\*', r'<em>\1</em>', content)
     content = re.sub(r'__(.*?)__', r'<u>\1</u>', content)
     content = re.sub(r'\[url\]\((.*?)\)', r'<a href="\1">\1</a>', content)
-    content = re.sub(r'\[hover\]\(!(.+?)\)', r'<span title="\1" style="border-bottom: 1px dotted; cursor: help;">\1</span>', content)
+    content = re.sub(r'\[hover\]\(!(.+?)\)', r'<span class="tooltip">\1<span class="tooltiptext">\1</span></span>', content)
 
     # Code blocks
     def code_block_replacer(match):

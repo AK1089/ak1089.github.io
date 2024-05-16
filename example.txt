@@ -20,3 +20,6 @@ __Underlined Text__
 def hello_world():
     print("Hello, World!")
 ```
+
+Spoiler
+[spoiler]This is a spoiler. Hover to reveal.[/spoiler]
