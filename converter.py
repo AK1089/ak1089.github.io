@@ -37,7 +37,7 @@ def convert_markdown_to_html(input_file, output_file):
         language = match.group(1)
         code = match.group(2)
         code_lines = code.split('\n')
-        formatted_code = ''.join(f'<span>{line}</span>\n' for line in code_lines)
+        formatted_code = ''.join(f'<span>{line}</span>\n' for line in code_lines[:-1])
         return f'''
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>

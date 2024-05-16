@@ -70,14 +70,14 @@ pre {
 pre code {
     font-family: 'Monaco', 'Courier New', Courier, monospace;
     display: block;
-    padding: 0px 30px 10px;
+    padding: 0px 10px 10px;
     position: relative;
 }
 
 pre code::before {
     content: attr(data-language);
     position: absolute;
-    top: 10px;
+    top: -36px;
     left: 10px;
     font-size: 12px;
     color: #666;
@@ -94,7 +94,7 @@ pre code.line-numbers span::before {
     display: inline-block;
     width: 2em;
     margin-left: -0.8em;
-    margin-right: 0.5em;
+    margin-right: 0.6em;
     text-align: right;
     color: #888;
 }
