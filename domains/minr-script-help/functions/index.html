@@ -74,6 +74,29 @@ Let's write our script:
 </code>
         </pre>
 Here, the distance is calculated as \( \sqrt{x^2 + y^2 + z^2} \), by Pythagoras' Theorem. On the last line, we use the <span class="tooltip"><code class="inline-code">@return</code> keyword<span class="tooltiptext">You might recognise this from normal scripts as ending the execution of a program. It still does this in functions, but it has a more important purpose.</span></span>. This <em>returns</em> the value of the distance as the function's <em>output</em>. We'll see what this means when we use the function.</p>
+<p><h3 id="importing-functi">Importing functions</h3>
+We can <em>import</em> this function using the command
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="minecraft" class="line-numbers"><span>/script import function function_demo distance https://paste.minr.org/ababababab</span>
+</code>
+        </pre>
+or alternatively add it line-by-line:
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="minecraft" class="line-numbers"><span>/script create function function_demo distance @define Double delta_X = player.getX() - coordinates[0]</span>
+<span>...</span>
+</code>
+        </pre>
+This is similar to the process of importing any other script. For short, you can use
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="minecraft" class="line-numbers"><span>/s i f namespace function_name https://paste.minr.org/dedededede</span>
+</code>
+        </pre></p>
 <p><h3 id="calling-functions">Calling functions</p></h3>
 <p>Okay, we have a function which calculates the distance between a player and a point. So what? How do we even use it?</p>
 <p>The process of using a function is known as <em>calling</em> it. In MSC, this uses the <code class="inline-code">@var</code> keyword.

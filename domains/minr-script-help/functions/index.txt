@@ -55,6 +55,21 @@ Let's write our script:
 ```
 Here, the distance is calculated as \( \sqrt{x^2 + y^2 + z^2} \), by Pythagoras' Theorem. On the last line, we use the [`@return` keyword](!You might recognise this from normal scripts as ending the execution of a program. It still does this in functions, but it has a more important purpose.). This *returns* the value of the distance as the function's *output*. We'll see what this means when we use the function.
 
+### Importing functions
+We can *import* this function using the command
+```minecraft
+/script import function function_demo distance https://paste.minr.org/ababababab
+```
+or alternatively add it line-by-line:
+```minecraft
+/script create function function_demo distance @define Double delta_X = player.getX() - coordinates[0]
+...
+```
+This is similar to the process of importing any other script. For short, you can use
+```minecraft
+/s i f namespace function_name https://paste.minr.org/dedededede
+```
+
 ### Calling functions
 
 Okay, we have a function which calculates the distance between a player and a point. So what? How do we even use it?
