@@ -1,0 +1,22 @@
+# My Personal Website
+
+Welcome to my personal website!
+
+## Features
+
+**Bold Text**
+
+*Italic Text*
+
+__Underlined Text__
+
+[url](https://example.com)
+
+[hover](!Hover over this text to see a tooltip)
+
+### Code Block
+
+```python
+def hello_world():
+    print("Hello, World!")
+```

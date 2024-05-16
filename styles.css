@@ -1,0 +1,102 @@
+/* styles.css */
+
+/* Import custom font ET Book */
+@font-face {
+    font-family: 'ETBook';
+    src: url('https://github.com/edwardtufte/et-book/blob/gh-pages/et-book-ligatures-enabled/et-book-roman-old-style-figures/etbookot-roman-webfont.woff') format('woff');
+}
+
+body {
+    font-family: 'ETBook', serif;
+    line-height: 1.6;
+    margin: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 20px 0 10px;
+}
+
+p {
+    margin: 10px 0;
+}
+
+/* Bold, Italics, Underline */
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+u {
+    text-decoration: underline;
+}
+
+/* Links */
+a {
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Code blocks */
+pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ddd;
+    overflow-x: auto;
+    position: relative;
+    margin: 10px 0;
+}
+
+pre code {
+    font-family: 'Courier New', Courier, monospace;
+    display: block;
+    padding-left: 30px;
+    position: relative;
+}
+
+pre code::before {
+    content: attr(data-language);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 12px;
+    color: #666;
+}
+
+pre code.line-numbers {
+    counter-reset: line;
+}
+
+pre code.line-numbers span::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 2em;
+    margin-left: -2em;
+    text-align: right;
+    color: #888;
+}
+
+/* Spoiler */
+.spoiler {
+    background-color: #000;
+    color: #000;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.spoiler:hover {
+    color: #fff;
+}
+
+.spoiler::after {
+    content: ' (hover to reveal)';
+    font-size: 12px;
+    color: #666;
+}
