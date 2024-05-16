@@ -1,4 +1,4 @@
-from os import path, sep
+from os import path, sep, walk
 import re
 
 # Function which writes the contents of a custom-syntax file to HTML
@@ -89,7 +89,21 @@ def process_directories(directories):
         depth = directory.count(sep)
         convert_markdown_to_html(input_file, output_file, depth)
 
-# Runs this for the given directories
+# Function to process directories and run conversion on all index.txt files
+def process_all_index_files(root_dir):
+    for dirpath, _, filenames in walk(root_dir):
+        if 'index.txt' in filenames:
+            input_file = path.join(dirpath, 'index.txt')
+            output_file = path.join(dirpath, 'index.html')
+            
+            # Calculate depth based on the relative path from root_dir
+            relative_path = path.relpath(output_file, root_dir)
+            depth = relative_path.count(sep)
+            print(f"Successfully wrote to {relative_path}")
+            
+            convert_markdown_to_html(input_file, output_file, depth)
+
+# Runs this for the root directory
 if __name__ == "__main__":
-    directories = ['', 'domains/minr-utilities/']
-    process_directories(directories)
+    root_directory = '.'
+    process_all_index_files(root_directory)
