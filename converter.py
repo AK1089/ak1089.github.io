@@ -23,7 +23,7 @@ def convert_markdown_to_html(input_file, output_file):
 
     # Convert markdown headers to HTML headers
     for i in range(6, 0, -1):
-        content = re.sub(('#' * i ) + r' (.+)$', r'<h{}>\1</h{}>'.format(i, i), content, flags=re.MULTILINE)
+        content = re.sub(('#' * i) + r' (.+)$', lambda match: '<h{0} id="{2}">{1}</h{0}>'.format(i, match.group(1), re.sub(r'[^a-zA-Z0-9]+', '-', match.group(1).lower())[:-3]), content, flags=re.MULTILINE)
 
     # Custom markdown to HTML conversions
     content = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', content)
