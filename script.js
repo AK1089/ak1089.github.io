@@ -6,7 +6,7 @@ function copyToClipboard(button) {
     window.getSelection().addRange(range); 
     document.execCommand('copy');
     window.getSelection().removeAllRanges();
-    button.textContent = 'Copied';
+    button.textContent = 'Copied!';
     setTimeout(() => {
         button.textContent = 'Copy';
     }, 2000);
