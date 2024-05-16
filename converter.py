@@ -1,7 +1,8 @@
+from os import path, sep
 import re
 
 # Function which writes the contents of a custom-syntax file to HTML
-def convert_markdown_to_html(input_file, output_file):
+def convert_markdown_to_html(input_file, output_file, depth):
     with open(input_file, 'r') as f:
         content = f.read()
 
@@ -68,12 +69,27 @@ def convert_markdown_to_html(input_file, output_file):
     # Spoilers
     content = re.sub(r'\[spoiler\](.*?)\[\/spoiler\]', r'<span class="spoiler">\1</span>', content, flags=re.DOTALL)
 
+    # Adjust paths in the HTML content based on the depth
+    html_content = html_content.replace('src="', f'src="{"../" * depth}')
+    html_content = html_content.replace('href="', f'href="{"../" * depth}')
+
     # Add all content to the template file and write it to the output
     html_content = html_content.replace("ALL_CONTENT_GOES_HERE", content)
     with open(output_file, 'w') as f:
         f.write(html_content)
 
 
-# Runs this for our standard file
+# Function to process directories and run conversion
+def process_directories(directories):
+    for directory in directories:
+        input_file = path.join(directory, 'index.txt')
+        output_file = path.join(directory, 'index.html')
+        
+        # Calculate depth
+        depth = directory.count(sep)
+        convert_markdown_to_html(input_file, output_file, depth)
+
+# Runs this for the given directories
 if __name__ == "__main__":
-    convert_markdown_to_html('index.txt', 'index.html')
+    directories = ['', 'domains/minr-utilities/']
+    process_directories(directories)
