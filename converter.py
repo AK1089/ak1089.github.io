@@ -11,7 +11,9 @@ def convert_markdown_to_html(input_file, output_file):
         "blue": "#0000FF"
     }
 
-    # Replace commented
+    # Ignore commented lines
+    content = re.sub(r'\/\*.*\*\/', "", content, flags=re.MULTILINE)
+
     
     # Replace line breaks with paragraph tags
     content = content.replace('\n\n', '</p>\n<p>')
@@ -70,11 +72,11 @@ def convert_markdown_to_html(input_file, output_file):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AK1089's Website</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
     <script src="script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" defer></script>
+    <link rel="stylesheet" href="katex/katex.min.css">
+    <script src="katex/katex.min.js" defer></script>
+    <script src="katex/auto-render.min.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 <body>
