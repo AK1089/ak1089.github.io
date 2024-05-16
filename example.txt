@@ -1,4 +1,4 @@
-# My Personal Website
+# AK1089's Site
 
 Welcome to my personal website!
 
@@ -36,3 +36,9 @@ def hello_world():
 new thing not in the list which has <&red>coloured text</&red> because I can do that now
 
 I can also do `inline code` wahoo
+
+### Dynamically Loaded Content
+
+${variable_content}
+
+For example, I am [${current_age_in_years}](!${current_age_in_days}) years old.
