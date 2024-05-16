@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AK1089's Website</title>
+    <link rel="icon" type="image/x-icon" href="../../../images/favicon.ico">
+    <link rel="stylesheet" href="../../../styles/styles.css">
+    <script src="../../../script.js"></script>
+    <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css">
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" defer></script>
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" defer></script>
+</head>
+<body>
+    <div id="content-container">
+        <a href="../../..//" id="home-icon">
+            <img src="../../../images/home.png" alt="Home" width="50" height="50" style="position: absolute; left: 6%; top: 60px;">
+        </a>
+        <div id="main-content">
+            <p><h2 id="functions-in-minr-script-code">Functions in Minr Script Code</p></h2>
+<p><h3 id="what-are-functions">What are functions?</p></h3>
+<p>Like any language, functions in MSC are <em>reusable pieces of code</em> which perform a specific task. They allow you to encapsulate a set of instructions and give it a name, making your code more organized, readable, and maintainable. Functions can take input arguments, perform operations, and return a value if needed.</p>
+<p>More generally, a function is <em>something which does something</em>. In this guide, we're going to make a function which takes in a <strong>player</strong> and a <strong>set of block coordinates</strong> and determines how far away the player is from the coordinates.</p>
+<p><h3 id="why-are-functions-useful">Why are functions useful?</p></h3>
+<p><ol>
+<li>Code reuse: Functions allow you to write a piece of code once and use it multiple times throughout your script. This saves time and effort, as you don't have to repeat the same code in different places. It also helps a lot if you need to change how your function works: you can change it in just one place.</li>
+<li>Modularity: By breaking down your script into smaller, self-contained functions, you can make your code more modular and easier to understand. Each function focuses on a specific task, making your script more structured and less cluttered.</li>
+<li>Abstraction: Functions provide a level of abstraction by hiding the complexity of a task behind a simple function call. This makes your main script more readable and allows you to focus on the high-level logic without getting bogged down in the details.</li>
+</ol></p>
+<p><h3 id="how-do-you-create-a-function">How do you create a function?</p></h3>
+<p>To create a new function in MSC, you use the following syntax:
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="minecraft" class="line-numbers"><span>/function define &lt;namespace&gt; &lt;returnType&gt; &lt;function_name&gt;(&lt;type_1&gt; &lt;argument_1&gt;, ...)</span>
+</code>
+        </pre>
+<ol>
+<li><code class="inline-code">&lt;namespace&gt;</code>: The <span class="tooltip">namespace<span class="tooltiptext">If you don't know about namespaces, don't worry - they're just a way of managing the scope of objects and keeping scripts organised.</span></span> your function will be defined in. Here, we'll use the <code class="inline-code">function_demo</code> namespace.</li>
+<li><code class="inline-code">&lt;returnType&gt;</code>: The type of value the function will return. (If the function doesn't return a value, you can use <code class="inline-code">Void</code>.) Here, since we're calculating a distance, we're going to be returning a <span class="tooltip"><code class="inline-code">Double</code><span class="tooltiptext">A Type is a kind of data. Double is short for a double-precision number, which is a decimal like 3.141592.</span></span>.</li>
+<li><code class="inline-code">&lt;function_name&gt;</code>: This is the name of the function, which you'll use to call it later. Let's call our function <code class="inline-code">get_distance</code>.</li>
+<li><code class="inline-code">&lt;type_1&gt; &lt;argument_1&gt;, ...</code>: This is list of input <span class="tooltip">arguments<span class="tooltiptext">Arguments, or parameters, are things which a function uses to do its job. The output of a function depends on the arguments. Here, the function needs to know which player we're checking, and the coordinates we want to get the distance to.</span></span> the function accepts, specified as pairs of Type and argument name. The argument name doesn't matter except within the function, so name your arguments things which are helpful and easy to remember. Here, we'll call our arguments <code class="inline-code">player</code> and <code class="inline-code">coordinates</code>, which are of type <code class="inline-code">Player</code> and <code class="inline-code">Int[]</code> respectively.</li>
+</ol>
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="minecraft" class="line-numbers"><span>/function define function_demo Double get_distance(Player player, Int[] coordinates)</span>
+</code>
+        </pre>
+This creates a function named <code class="inline-code">get_distance</code> in the <code class="inline-code">function_demo</code> namespace, which takes the two arguments we discussed. Great! But now we need our function to actually <em>do</em> something, and for that we'll need to write the script.</p>
+<p><h3 id="writing-a-function-scr">Writing a function script</h3>
+Writing the script for a function body is very similar to writing an interact script, except the variables that you have access to are slightly different <span class="tooltip">by default<span class="tooltiptext">You can still access namespaced variables with @using, of course.</span></span>. Recall that in an interact script, you can access
+<ul>
+<li><code class="inline-code">Player player</code>: the player who triggered your script</li>
+<li><code class="inline-code">Block block</code>: the block they clicked on to trigger it</li>
+</ul>
+In a function, the <span class="tooltip">local namespace<span class="tooltiptext">The local namespace holds all the variables which are unique to the specific script you're running. This is where variables created using @define go.</span></span> is instead populated with the <em>arguments</em> you defined earlier. Here, that means we have access to
+<ul>
+<li><code class="inline-code">Player player</code>: the player that we input into the function (this does <strong>not</strong> have to be the player triggering the script)</li>
+<li><code class="inline-code">Int[] coordinates</code>: the list of coordinates that we input into the function</li>
+</ul>
+Let's write our script:
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>&#35; The difference between the player's X/Y/Z ordinate and the provided one</span>
+<span>@define Double delta_X = player.getX() - coordinates[0]</span>
+<span>@define Double delta_Y = player.getY() - coordinates[1]</span>
+<span>@define Double delta_Z = player.getZ() - coordinates[2]</span>
+<span> </span>
+<span>&#35; Calculate the distance based on these components</span>
+<span>@define Double distance = (delta_X^2 + delta_Y^2 + delta_Z^2)^0.5</span>
+<span>@return distance</span>
+</code>
+        </pre>
+Here, the distance is calculated as \( \sqrt{x^2 + y^2 + z^2} \), by Pythagoras' Theorem. On the last line, we use the <span class="tooltip"><code class="inline-code">@return</code> keyword<span class="tooltiptext">You might recognise this from normal scripts as ending the execution of a program. It still does this in functions, but it has a more important purpose.</span></span>. This <em>returns</em> the value of the distance as the function's <em>output</em>. We'll see what this means when we use the function.</p>
+<p><h3 id="calling-functions">Calling functions</p></h3>
+<p>Okay, we have a function which calculates the distance between a player and a point. So what? How do we even use it?</p>
+<p>The process of using a function is known as <em>calling</em> it. In MSC, this uses the <code class="inline-code">@var</code> keyword.
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>@define Double dist</span>
+<span>@var dist = function_demo::get_distance(player, Int[123, 45, 678])</span>
+<span>@player You are {{dist}} metres away from the point (123, 45, 678)!</span>
+</code>
+        </pre>
+The <code class="inline-code">function_demo::</code> denotes our namespace. Alternatively, if we'd used <code class="inline-code">@using function_demo</code> at the start of this script, we could have omitted it.</p>
+<p>Here, since our function returns a value, we probably want to use that value. That's why we set our variable to the output of <code class="inline-code">function_demo::get_distance</code>. If we weren't using a value (eg. if our function was <code class="inline-code">Void</code>), we'd use <code class="inline-code">@var function_demo::get_distance(...)</code> without any <code class="inline-code">dist = </code> or such. </p>
+<p>Note that the <code class="inline-code">player</code> in the function does not have to be the same as the <code class="inline-code">player</code> in the local namespace of the calling script. For example,
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>@define Double dist</span>
+<span>@var dist = function_demo::get_distance(Player("AK1089"), Int[123, 45, 678])</span>
+<span>@player AK1089 is {{dist}} metres away from the point (123, 45, 678)!</span>
+</code>
+        </pre>
+does the same thing no matter who runs it.</p>
+<p><h3 id="more-complex-examples">More complex examples</p></h3>
+<p>Here's a example from real code I've written for a map:
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>&#35; FUNCTION | getBookPages(Item book) -> String[]</span>
+<span>@define String bookString = book.string()</span>
+<span> </span>
+<span>&#35; extract the pages from the book string</span>
+<span>@define Int startIndex = bookString.indexOf("pages=[") + 7</span>
+<span>@define String pagesString = bookString.substring(startIndex, bookString.length() - 3)</span>
+<span> </span>
+<span>&#35; split the pages string by ", " to get individual pages</span>
+<span>@define String[] rawPages = pagesString.split(", ")</span>
+<span> </span>
+<span>&#35; process each raw page to remove leading "&#35; file <filename>" and trailing "\\n"</span>
+<span>@define String[] pages = String[]</span>
+<span>@for Int i in list::range(0, rawPages.length())</span>
+<span>    @define String rawPage = rawPages[i]</span>
+<span>    @define Int newlineIndex = rawPage.indexOf("\\n")</span>
+<span>    @if newlineIndex != -1</span>
+<span>        @var pages[i] = rawPage.substring(newlineIndex + 2, rawPage.length() - 2)</span>
+<span>    @else</span>
+<span>        @var pages[i] = rawPage</span>
+<span>    @fi</span>
+<span>@done</span>
+<span> </span>
+<span>@return pages</span>
+</code>
+        </pre>
+This function allowed me to get the pages of a written book the player was holding based on the <code class="inline-code">Item</code> object corresponding to it. This saved a lot of time, as in other scripts I could simply use
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>@define String[] book_pages = akrobots::getBookPages(player.getItemInMainHand())</span>
+<span>&#35; do stuff with the pages ...</span>
+</code>
+        </pre>
+rather than rewriting the code to extract the book pages every time. Also, say later I want to change the format of the book, and use a <code class="inline-code">§§</code> instead of a <code class="inline-code">&#35;</code>. If I hadn't used a function, I would have had to change <em>every single</em> occurence across hundreds of scripts, but now I can just change <span class="tooltip">one number<span class="tooltiptext">"newlineIndex + 2" should be changed to "newlineIndex + 3"</span></span> in line 17 of this script.</p>
+<p><h3 id="list-range">list::range</p></h3>
+<p>You've probably encountered at least one function before, possibly without realising it! The <code class="inline-code">range</code> function in the <code class="inline-code">list</code> namespace is a function, which we could recreate (if we had a <code class="inline-code">forever</code> keyword) as follows:
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="minecraft" class="line-numbers"><span>/function define list Int[] range(Int start, Int end)</span>
+</code>
+        </pre>
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>@define Int[] numbers = Int[]</span>
+<span>@define Int x = start</span>
+<span> </span>
+<span>&#35; This doesn't really exist, but pretend it does! </span>
+<span>@forever</span>
+<span>    &#35; If we reach the end of the specified range, we can stop and feed back our generated list</span>
+<span>    @if x >= end</span>
+<span>        @return numbers</span>
+<span>    @fi</span>
+<span>    </span>
+<span>    &#35; Otherwise, add our current number to the list and increase it by 1 for the next round</span>
+<span>    @var numbers.append(x)</span>
+<span>    @var x = x + 1</span>
+<span>@done</span>
+</code>
+        </pre>
+This creates a list of numbers, starting from the first argument (the <code class="inline-code">start</code>) and finishing when we hit the second argument (the <code class="inline-code">end</code>).</p>
+<p><h3 id="shortcuts">Shortcuts</p></h3>
+<p>Let's take our previous script, which tells the player how far from a point they are.
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>@define Double dist</span>
+<span>@var dist = function_demo::get_distance(player, Int[123, 45, 678])</span>
+<span>@player You are {{dist}} metres away from the point (123, 45, 678)!</span>
+</code>
+        </pre>
+Technically, you don't always need the <code class="inline-code">@var</code> keyword: you can implicitly call the function wherever you use it. For example, we can shorten this to:
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>@define Double dist = function_demo::get_distance(player, Int[123, 45, 678])</span>
+<span>@player You are {{dist}} metres away from the point (123, 45, 678)!</span>
+</code>
+        </pre>
+which still runs the function and sets the value of <code class="inline-code">dist</code> to its output. In fact, we can go further!
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>@player You are {{function_demo::get_distance(player, Int[123, 45, 678])}} metres away from the point (123, 45, 678)!</span>
+</code>
+        </pre>
+<code class="inline-code">{{•}}</code> is the <em>evaluation operator</em>: it automatically evaluates everything you put inside it. Here, it's evaluating the expression
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>function_demo::get_distance(player, Int[123, 45, 678])</span>
+</code>
+        </pre>
+which is equal to the distance from the player to (123, 45, 678), which is what we wanted!</p>
+<p><h3 id="test-yourself">Test yourself</p></h3>
+<p>How would you <em>define</em> a function in the <code class="inline-code">function_demo</code> namespace which:
+<ol>
+<li>Chooses a random player from a provided list? <span class="spoiler">/function define function_demo Player choose_random_player(Player[] players)</span></li>
+<li>Takes a list of integers and returns the sum of the biggest two? <span class="spoiler">/function define function_demo Int get_biggest_two_sum(Int[] numbers)</span></li>
+<li>Gives everyone online a mangrove propagule?  <span class="spoiler">/function define function_demo Void give_propagules()</span></li>
+</ol>
+How would you <em>call</em> the following functions in the <code class="inline-code">function_demo</code> namespace from an interact script?
+<ol>
+<li><code class="inline-code">give_ingot(Player p)</code>, to give the player a gold ingot? <span class="spoiler">@var give_ingot(player)</span></li>
+<li><code class="inline-code">Int maximum(Int[] numbers)</code>, to set the variable <code class="inline-code">x</code> to the largest number of -4, 10, 17, and 2? <span class="spoiler">@define Int x = maximum(Int[-4, 10, 17, 2])</span></li>
+</ol></p>
+<p><h3 id="more-advanced-notes-and-qui">More advanced notes and quirks</h3>
+<ol>
+<li>In MSC, functions can't be overloaded (unlike constructors). This also means you can't have optional parameters.</li>
+<li>Functions are not <a href="https://en.wikipedia.org/wiki/First-class_citizen">first-class</a> in MSC. This means you can't have lambda functions, nor can you pass functions as arguments to other functions.</li>
+<li><em>Methods</em> are essentially functions which are bound to a specific type! They are called in the same way.</li>
+</ol></p>
+
+        </div>
+    </div>
+</body>
+</html>
