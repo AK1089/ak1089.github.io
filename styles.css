@@ -72,11 +72,12 @@ pre {
 pre code {
     font-family: 'Monaco', 'Courier New', Courier, monospace;
     display: block;
-    padding: 10px 10px -30px 20px;  /* Adjusted padding */
+    padding: 10px 10px -30px 20px;
     position: relative;
     top: 10px;
     right: 20px;
-    margin: 10px 0 -32px 0; /* Adjust margin to bring up the bottom edge */
+    margin: 10px 0 -32px 0;
+    font-size: 10pt;
 }
 
 pre code::before {
@@ -93,7 +94,7 @@ pre code.line-numbers {
     position: relative;
     top: -20px;
     left: 0px;
-    padding: 10px 10px 0px 20px;  /* Adjusted padding */
+    padding: 10px 10px 0px 20px;
 }
 
 pre code.line-numbers span::before {
