@@ -34,6 +34,7 @@ h5 { font-size: 14pt; }
 h6 { font-size:  9pt; }
 
 p {
+    font-family: 'ETBook', serif;
     margin: 10px 0;
     font-size: 12pt;
 }
