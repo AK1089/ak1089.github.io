@@ -13,7 +13,7 @@ I make, link to things I enjoy, or talk about things in a loosely structured for
 __**Jump to / visit:**__
 <ul>
 - [About this website](#about-this-website)
-- [Useful things I've made for Minr](domains/minr-utilities/index.html)
+- [Useful things I've made for Minr](domains/minr-utilities/)
 - [Links to my other accounts](#links-to-elsewhere)
 </ul>
 """
