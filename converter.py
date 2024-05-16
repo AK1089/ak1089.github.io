@@ -5,6 +5,9 @@ def convert_markdown_to_html(input_file, output_file):
     with open(input_file, 'r') as f:
         content = f.read()
 
+    with open("templates/template.html", 'r') as f:
+        html_content = f.read()
+
     # Some basic colours for colour tags
     color_dict = {
         "red": "#FF0000",
@@ -66,23 +69,7 @@ def convert_markdown_to_html(input_file, output_file):
     # Spoiler
     content = re.sub(r'\[spoiler\](.*?)\[\/spoiler\]', r'<span class="spoiler">\1</span>', content, flags=re.DOTALL)
 
-    html_content = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AK1089's Website</title>
-    <link rel="stylesheet" href="styles/styles.css">
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="katex/katex.min.css">
-    <script src="katex/katex.min.js" defer></script>
-    <script src="katex/auto-render.min.js" defer></script>
-    <script src="script.js" defer></script>
-</head>
-<body>
-{content}
-</body>
-</html>"""
+    html_content = html_content.replace("ALL_CONTENT_GOES_HERE", content)
 
     with open(output_file, 'w') as f:
         f.write(html_content)
