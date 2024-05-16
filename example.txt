@@ -21,5 +21,6 @@ def hello_world():
     print("Hello, World!")
 ```
 
-Spoiler
+### Spoiler
+
 [spoiler]This is a spoiler. Hover to reveal.[/spoiler]
