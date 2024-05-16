@@ -19,11 +19,12 @@ function replaceVariables() {
     var currentDate = new Date();
     var age = currentDate.getFullYear() - birthDate.getFullYear();
     var monthDiff = currentDate.getMonth() - birthDate.getMonth();
+    console.log(birthDate, currentDate);
     if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())) {
         age--;
     }
     
-    current_age_in_days = 'I was born on ' + birthDate.toDateString() + ', making me ' + (Math.floor((currentDate.getTime() - birthDate.getTime()) / (1000 * 60 * 60 * 24))).toString() + ' days old.';
+    current_age_in_days = 'I was born on ' + birthDate.toDateString() // + ', making me ' + (Math.floor((currentDate.getTime() - birthDate.getTime()) / (1000 * 60 * 60 * 24))).toString() + ' days old.';
 
     // Define your global variable dictionary
     const variables = {
