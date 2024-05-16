@@ -173,3 +173,21 @@ ul li::before {
 ol {
     padding-left: 20px;
 }
+
+/* Spoiler */
+.spoiler {
+    background-color: #000;
+    color: #000;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.spoiler:hover {
+    color: #fff;
+}
+
+.spoiler::after {
+    content: ' (hover to reveal)';
+    font-size: 12px;
+    color: #666;
+}
