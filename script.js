@@ -24,13 +24,13 @@ function replaceVariables() {
         age--;
     }
     
-    current_age_in_days = 'I was born on ' + birthDate.toDateString() // + ', making me ' + (Math.floor((currentDate.getTime() - birthDate.getTime()) / (1000 * 60 * 60 * 24))).toString() + ' days old.';
+    current_age_in_days = 'I was born on ' + birthDate.toDateString() + ', making me ' + (Math.floor((currentDate.getTime() - birthDate.getTime()) / (1000 * 60 * 60 * 24))).toString() + ' days old.';
 
     // Define your global variable dictionary
     const variables = {
         variable_content: "Hello, World!",
         current_age_in_years: age.toString(),
-        current_age_in_days: current_age_in_days.toString().Date,
+        current_age_in_days: current_age_in_days.toString(),
         current_date: currentDate.toLocaleTimeString()
     };
     
