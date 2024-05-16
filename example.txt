@@ -24,3 +24,13 @@ def hello_world():
 ### Spoiler
 
 [spoiler]This is a spoiler. Hover to reveal.[/spoiler]
+
+### Numbering
+
+<ol> 
+- Hello
+- Yeah
+- Abc
+</ol>
+
+new thing not in the list which has <&red>coloured text</&red> because I can do that now

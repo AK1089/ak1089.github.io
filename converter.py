@@ -5,10 +5,13 @@ def convert_markdown_to_html(input_file, output_file):
     with open(input_file, 'r') as f:
         content = f.read()
 
+    # Some basic colours for colour tags
     color_dict = {
         "red": "#FF0000",
         "blue": "#0000FF"
     }
+
+    # Replace commented
     
     # Replace line breaks with paragraph tags
     content = content.replace('\n\n', '</p>\n<p>')
@@ -42,6 +45,12 @@ def convert_markdown_to_html(input_file, output_file):
         </pre>'''
 
     content = re.sub(r'```(\w+)\n(.*?)```', code_block_replacer, content, flags=re.DOTALL)
+
+    # Inline code
+    content = re.sub(r'`([^`]+)`', r'<code class="inline-code">\1</code>', content)
+
+    # Lists
+    content = re.sub(r'^- (.+)$', r'<li>\1</li>', content, flags=re.MULTILINE)
 
     # Spoiler
     content = re.sub(r'\[spoiler\](.*?)\[\/spoiler\]', r'<span class="spoiler">\1</span>', content, flags=re.DOTALL)

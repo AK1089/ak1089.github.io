@@ -123,12 +123,13 @@ pre code.line-numbers span::before {
     cursor: pointer;
     display: inline-block;
     border-bottom: 1px dotted black;
-    padding: 0px;
+    margin-bottom: -2px;
+    padding-top: -2px;
 }
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    background-color: rgba(40, 40, 40, 0.85);
+    background-color: rgba(36, 41, 35, 0.95);
     color: #fff;
     text-align: center;
     padding: 10px;
@@ -154,7 +155,7 @@ pre code.line-numbers span::before {
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: rgba(40, 40, 40, 0.85) transparent transparent transparent;
+    border-color: rgba(40, 40, 40, 0.95) transparent transparent transparent;
 }
 
 /* Info box */
