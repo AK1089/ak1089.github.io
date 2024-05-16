@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AK1089's Website</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
 </head>
 <body>
 <p><h1>My Personal Website</p></h1>
@@ -16,10 +17,14 @@
 <p><a href="https://example.com">url</a></p>
 <p><span class="tooltip">hover over this text<span class="tooltiptext">ta-da!</span></span></p>
 <p><h3>Code Block</p></h3>
-<p><pre><code data-language="python" class="line-numbers"><span>def hello_world():</span>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="python" class="line-numbers"><span>def hello_world():</span>
 <span>    print("Hello, World!")</span>
 <span></span>
-</code></pre></p>
+</code>
+        </pre></p>
 <p><h3>Spoiler</p></h3>
 <p><span class="spoiler">This is a spoiler. Hover to reveal.</span></p>
 

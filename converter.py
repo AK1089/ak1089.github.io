@@ -4,6 +4,11 @@ import re
 def convert_markdown_to_html(input_file, output_file):
     with open(input_file, 'r') as f:
         content = f.read()
+
+    color_dict = {
+        "red": "#FF0000",
+        "blue": "#0000FF"
+    }
     
     # Replace line breaks with paragraph tags
     content = content.replace('\n\n', '</p>\n<p>')
@@ -20,13 +25,21 @@ def convert_markdown_to_html(input_file, output_file):
     content = re.sub(r'\[(.*)\]\(!(.+?)\)', r'<span class="tooltip">\1<span class="tooltiptext">\2</span></span>', content)
     content = re.sub(r'\[(.*)\]\((.*?)\)', r'<a href="\2">\1</a>', content)
 
+    # Replace color tags
+    for color, hex_value in color_dict.items():
+        content = re.sub(r'<&{}>(.*?)</&{}>'.format(color, color), r'<span style="color:{};">\1</span>'.format(hex_value), content)
+
     # Code blocks
     def code_block_replacer(match):
         language = match.group(1)
         code = match.group(2)
         code_lines = code.split('\n')
         formatted_code = ''.join(f'<span>{line}</span>\n' for line in code_lines)
-        return f'<pre><code data-language="{language}" class="line-numbers">{formatted_code}</code></pre>'
+        return f'''
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="{language}" class="line-numbers">{formatted_code}</code>
+        </pre>'''
 
     content = re.sub(r'```(\w+)\n(.*?)```', code_block_replacer, content, flags=re.DOTALL)
 
@@ -40,6 +53,7 @@ def convert_markdown_to_html(input_file, output_file):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AK1089's Website</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
 </head>
 <body>
 {content}
