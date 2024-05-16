@@ -13,8 +13,8 @@ I make, link to things I enjoy, or talk about things in a loosely structured for
 __**Jump to:**__
 <ul>
 - [About this website](#about-this-website)
-- [Links to elsewhere](#links-to-elsewhere)
-- 3
+- [Useful things I've made for Minr](#utilities-for-minr)
+- [Links to my other accounts](#links-to-elsewhere)
 </ul>
 """
 
@@ -49,6 +49,15 @@ Thanks to the wonderful work of [KaTeX](https://katex.org/), it also supports be
 """info #7F00B5 #EEEEEE
 The font used on this site is [ET Book](https://edwardtufte.github.io/et-book/) by Edward Tufte.
 """
+
+<br>
+
+## Utilities for Minr
+
+I often make tools and guides for Zero.Minr.Org, particularly for
+[mapmakers](!Minr is a challenge map server, where players of a sufficiently high rank can submit their own puzzles, parkour maps, mazes, and more.)
+and [scripters](!Minr runs a custom plugin called Minr Script Code, or MSC, which allows players to write code for use in their maps. I've made a lot of utilities on top of it.).
+Here are some 
 
 <br>
 
