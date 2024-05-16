@@ -175,6 +175,7 @@ pre code.line-numbers span::before {
     background-color: var(--secondary-color);
     padding: 10px;
     margin: 10px 0;
+    padding-left: 20px;
 }
 
 /* Inline code */
