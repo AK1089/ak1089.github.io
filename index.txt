@@ -38,3 +38,10 @@ Thanks to the wonderful work of [KaTeX](https://katex.org/), it also supports be
 """info #7F00B5 #EEEEEE
 The font used on this site is [ET Book](https://edwardtufte.github.io/et-book/) by Edward Tufte.
 """
+
+<div class="social-box">
+    <div class="social-icon">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Discord_logo.svg" alt="Discord">
+    </div>
+    <div class="social-text">Discord • @ak1089</div>
+</div>
