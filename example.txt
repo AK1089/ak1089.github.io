@@ -5,7 +5,7 @@ and this is my personal site! I go by AK1089 on the internet, after my initials 
 [my favourite number](https://en.wikipedia.org/wiki/1089_%28number%29#In_magic).
 I'm currently an undergraduate maths student at the University of Cambridge, in the UK.
 
-In my free time, I enjoy programming, reading, making and solving puzzles, playing social deduction games, playing on
+In my free time, I enjoy programming, reading, making and solving puzzles, social deduction games, playing on
 [Minr](!zero.minr.org, a Minecraft server I'm a staff member on), and creating things. This is a website where I keep things
 I make, link to things I enjoy, or talk about things in a loosely structured forum.
 
@@ -35,8 +35,6 @@ It also supports <&red>coloured</&red> <&blue>text</&blue> and  `inline_code` bl
 Thanks to the wonderful work of [KaTeX](https://katex.org/), it also supports beautiful LaTeX expressions, like 
 \[ \mathbb{P} \left( |X-\mu| \geq k \sigma \right) \leq \frac{1}{k^2} \quad \text{(Chebyshev's Inequality).}\]
 
+"""info #7F00B5 #EEEEEE
 The font used on this site is [ET Book](https://edwardtufte.github.io/et-book/) by Edward Tufte.
-
-"""info #AAAAAA #BBBBBB
-Info content here!
 """

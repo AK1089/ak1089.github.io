@@ -32,6 +32,15 @@ def convert_markdown_to_html(input_file, output_file):
     for color, hex_value in color_dict.items():
         content = re.sub(r'<&{}>(.*?)</&{}>'.format(color, color), r'<span style="color:{};">\1</span>'.format(hex_value), content)
 
+    # Replace info box syntax
+    def info_box_replacer(match):
+        primary_color = match.group(1)
+        secondary_color = match.group(2)
+        info_content = match.group(3)
+        return f'<div class="info-box" style="--primary-color: #{primary_color}; --secondary-color: #{secondary_color};">{info_content}</div>'
+    
+    content = re.sub(r'"""info #([A-Fa-f0-9]{6}) #([A-Fa-f0-9]{6})\n(.*?)\n"""', info_box_replacer, content, flags=re.DOTALL)
+
     # Code blocks
     def code_block_replacer(match):
         language = match.group(1)
