@@ -1,0 +1,5 @@
+<h1>Zip File SHA-1 Hash Calculator</h1>
+<div id="drop-zone">
+ <p>Drop a zip file here</p>
+</div>
+<script src= "script.js"></script>
