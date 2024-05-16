@@ -52,15 +52,6 @@ The font used on this site is [ET Book](https://edwardtufte.github.io/et-book/) 
 
 <br>
 
-## Utilities for Minr
-
-I often make tools and guides for Zero.Minr.Org, particularly for
-[mapmakers](!Minr is a challenge map server, where players of a sufficiently high rank can submit their own puzzles, parkour maps, mazes, and more.)
-and [scripters](!Minr runs a custom plugin called Minr Script Code, or MSC, which allows players to write code for use in their maps. I've made a lot of utilities on top of it.).
-Here are some 
-
-<br>
-
 ## Links To Elsewhere
 
 These are the public accounts I regularly use online. Feel free to contact me at any of them.
