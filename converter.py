@@ -1,5 +1,6 @@
 from os import path, sep, walk
 import re
+import subprocess
 
 # Function which writes the contents of a custom-syntax file to HTML
 def convert_markdown_to_html(input_file, output_file, depth):
@@ -83,31 +84,30 @@ def convert_markdown_to_html(input_file, output_file, depth):
         f.write(html_content)
 
 
-# Function to process directories and run conversion
-def process_directories(directories):
-    for directory in directories:
-        input_file = path.join(directory, 'index.txt')
-        output_file = path.join(directory, 'index.html')
+# Gets the text files which have been modified since the last commit
+def get_modified_index_files():
+    output = subprocess.check_output(["git", "diff", "--name-only", "--cached", "*.txt"])
+    modified_files = output.decode("utf-8").strip().split("\n")
+    return [file for file in modified_files if file.endswith("index.txt")]
+
+
+# Converts txt to HTML for each of these files
+def process_modified_index_files(root_dir):
+    modified_index_files = get_modified_index_files()
+    for index_file in modified_index_files:
+
+        # Input file is the .txt, output file is the .html
+        input_file = path.join(root_dir, index_file)
+        output_file = path.join(root_dir, index_file[:-4] + ".html")
+
+        # Depth is the number of folders in we are
+        relative_path = path.relpath(output_file, root_dir)
+        depth = relative_path.count(sep)
+        print(f"Successfully wrote to {relative_path}")
         
-        # Calculate depth
-        depth = directory.count(sep)
         convert_markdown_to_html(input_file, output_file, depth)
 
-# Function to process directories and run conversion on all index.txt files
-def process_all_index_files(root_dir):
-    for dirpath, _, filenames in walk(root_dir):
-        if 'index.txt' in filenames:
-            input_file = path.join(dirpath, 'index.txt')
-            output_file = path.join(dirpath, 'index.html')
-            
-            # Calculate depth based on the relative path from root_dir
-            relative_path = path.relpath(output_file, root_dir)
-            depth = relative_path.count(sep)
-            print(f"Successfully wrote to {relative_path}")
-            
-            convert_markdown_to_html(input_file, output_file, depth)
-
-# Runs this for the root directory
+# Runs this on our root directory
 if __name__ == "__main__":
-    root_directory = '.'
-    process_all_index_files(root_directory)
+    root_directory = "."
+    process_modified_index_files(root_directory)
