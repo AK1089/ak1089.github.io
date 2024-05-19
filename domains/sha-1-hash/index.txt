@@ -1,5 +1,12 @@
-<h1>Zip File SHA-1 Hash Calculator</h1>
-<div id="drop-zone">
- <p>Drop a zip file here</p>
-</div>
 <script src= "script.js"></script>
+## Minecraft Resource Pack Hosting
+
+This is intended as a start-to-finish guide for hosting a Minecraft resource pack. 
+
+This website allows you to drag and drop a zip file and view its hash.
+
+You uploaded (no file uploaded yet) at (N/A). Its SHA-1 Hash is:
+
+```hash
+null
+```
