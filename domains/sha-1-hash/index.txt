@@ -1,7 +1,8 @@
 <script src= "script.js"></script>
 ## Minecraft Resource Pack Hosting
 
-This is intended as a start-to-finish guide for hosting a Minecraft resource pack. 
+This page is intended as a start-to-finish guide for hosting a Minecraft [resource pack](!Resource packs in Minecraft allow you to control the de).
+We'll be using [GitHub](https://github.com) to host our pack. If you don't yet have an account, sign up [here](https://github.com/signup).
 
 This website allows you to drag and drop a zip file and view its hash.
 
