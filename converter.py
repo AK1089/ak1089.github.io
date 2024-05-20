@@ -110,5 +110,4 @@ def process_modified_index_files(root_dir):
 # Runs this on our root directory
 if __name__ == "__main__":
     root_directory = "."
-    print(get_modified_index_files())
     process_modified_index_files(root_directory)
