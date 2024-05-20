@@ -12,8 +12,8 @@ function copyToClipboard(button) {
     }, 2000);
 }
 
-// Function to replace variable placeholders with their values
-function replaceVariables() {
+// Function to do startup things like replacing variables
+function on_window_load() {
 
     console.log("hiii fellow console enthusiast <3");
 
@@ -56,5 +56,5 @@ function replaceVariables() {
     });
 }
 
-// Run the replaceVariables function on page load
-window.onload = replaceVariables;
+// Run the on_window_load function on page load
+window.onload = on_window_load;
