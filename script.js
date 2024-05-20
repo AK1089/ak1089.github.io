@@ -67,6 +67,7 @@ function on_window_load() {
         if (href && (href.includes('http') || href.includes('www'))) {
             // Set the target attribute to "_blank" to open the link in a new tab
             link.setAttribute('target', '_blank');
+            link.innerHTML += 'º';
         }
     }
 }
