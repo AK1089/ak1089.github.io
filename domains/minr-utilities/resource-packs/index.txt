@@ -54,7 +54,7 @@ We'll go over each of these in more detail individually later on.
 
 ### Creating Your Resource Pack
 
-To create your resource pack, start by creating a new folder with your desired resource pack name. This folder will serve as the root directory for your resource pack. Alternatively, you can download my [basic example pack](!Coming soon!) and copy from there.
+To create your resource pack, start by creating a new folder with your desired resource pack name. This folder will serve as the root directory for your resource pack. Alternatively, you can <a href="example-pack.zip" download>download my example resource pack</a> and copy from there.
 
 Inside the root folder, create the following files and folders:
 <ol>
