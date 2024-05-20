@@ -20,17 +20,13 @@ document.addEventListener('drop', (e) => {
                 const hashArray = Array.from(new Uint8Array(hash));
                 const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-                // Update the filename
-                const filenameElement = document.querySelector('p:nth-of-type(3)');
-                filenameElement.textContent = filenameElement.textContent.replace('(no file uploaded yet)', file.name);
-
-                // Update the timestamp
-                const timestampElement = document.querySelector('p:nth-of-type(3)');
+                // Update the filename, timestamp, and hash using the element ID
+                const fileHashInfo = document.getElementById('file-hash-info');
                 const currentTime = new Date().toLocaleString();
-                timestampElement.textContent = timestampElement.textContent.replace('(N/A)', currentTime);
+                fileHashInfo.textContent = `You uploaded ${file.name} at ${currentTime}. Its SHA-1 Hash is:`;
 
-                // Update the hash
-                const hashElement = document.querySelector('code span');
+                // Update the hash using the data-language attribute
+                const hashElement = document.querySelector('code[data-language="hash"] span');
                 hashElement.textContent = hashHex;
             });
         };
@@ -40,4 +36,3 @@ document.addEventListener('drop', (e) => {
         console.log('Please drop a .zip file.');
     }
 });
-
