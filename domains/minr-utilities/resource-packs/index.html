@@ -36,29 +36,32 @@
 <p><h3 id="understanding-the-folder-structure">Understanding the Folder Structure</p></h3>
 <p>A Minecraft Resource Pack is essentially a folder which holds a lot of files with your custom textures and resources in them. The below file tree shows how this folder is organised. Hover over each item to see more detail.</p>
 <p>(This is originally based on the <a href="https://minecraft.fandom.com/wiki/Resource_pack#Folder_structure">wiki</a>'s version. I have simplified it to omit some paths which are more complex or less relevant for server resource packs.)</p>
-<p>``<code class="inline-code">file-tree
-[resource pack name]
-<li>pack.mcmeta</li>
-<li>pack.png</li>
-<li>assets</li>
-  - minecraft
-    - font
-        - your-font
-    - sounds.json
-    - sounds
-        - [sound].ogg
-    - textures
-        - block
-            - [texture].png
-        - entity
-            - [texture].png
-            - [entity type]
-              - [texture].png
-        - item
-            - [texture].png
-        - painting
-            - [texture].png
-</code>``</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="tree" class="line-numbers"><span>[resource pack name]</span>
+<span>- pack.mcmeta</span>
+<span>- pack.png</span>
+<span>- assets</span>
+<span>  - minecraft</span>
+<span>    - font</span>
+<span>        - your-font</span>
+<span>    - sounds.json</span>
+<span>    - sounds</span>
+<span>        - [sound].ogg</span>
+<span>    - textures</span>
+<span>        - block</span>
+<span>            - [texture].png</span>
+<span>        - entity</span>
+<span>            - [texture].png</span>
+<span>            - [entity type]</span>
+<span>              - [texture].png</span>
+<span>        - item</span>
+<span>            - [texture].png</span>
+<span>        - painting</span>
+<span>            - [texture].png</span>
+</code>
+        </pre></p>
 <p>We'll go over each of these in more detail individually later on.</p>
 <p><h3 id="creating-your-resource-pack">Creating Your Resource Pack</p></h3>
 <p>to-write</p>

@@ -26,7 +26,7 @@ A Minecraft Resource Pack is essentially a folder which holds a lot of files wit
 
 (This is originally based on the [wiki](https://minecraft.fandom.com/wiki/Resource_pack#Folder_structure)'s version. I have simplified it to omit some paths which are more complex or less relevant for server resource packs.)
 
-```file-tree
+```tree
 [resource pack name]
 - pack.mcmeta
 - pack.png
