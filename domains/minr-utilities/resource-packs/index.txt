@@ -1,7 +1,7 @@
 <script src= "script.js"></script>
 ## Minecraft Resource Pack Hosting
 
-This page is intended as a start-to-finish guide for hosting a Minecraft [resource pack](!Resource packs in Minecraft allow you to control the visuals, sounds, and other aesthetics for the game in a lot of detail). Each section is self-contained: if a step doesn't apply to you, or you don't need help with it, feel free to skip any of them.
+This page is intended as a start-to-finish guide for hosting a basic Minecraft [resource pack](!Resource packs in Minecraft allow you to control the visuals, sounds, and other aesthetics for the game in a lot of detail.) and adding it to a map. Each section is self-contained: if a step doesn't apply to you, or you don't need help with it, feel free to skip any of them.
 
 We'll be using [GitHub](https://github.com) to host our pack. If you don't yet have an account, sign up [here](https://github.com/signup).
 
@@ -22,7 +22,7 @@ __**Contents:**__
 
 ### Understanding the Folder Structure
 
-A Minecraft Resource Pack is essentially a folder which holds a lot of files with your custom textures and resources in them. The below file tree shows how this folder is organised. Hover over each item to see more detail.
+A Minecraft Resource Pack is essentially a folder which holds a lot of files with your custom textures and resources in them. The below file tree shows how this folder is organised.
 
 (This is originally based on the [wiki](https://minecraft.fandom.com/wiki/Resource_pack#Folder_structure)'s version. I have simplified it to omit some paths which are more complex or less relevant for server resource packs.)
 
@@ -33,7 +33,7 @@ A Minecraft Resource Pack is essentially a folder which holds a lot of files wit
 - assets
   - minecraft
     - font
-        - your-font
+        - [your-font]
     - sounds.json
     - sounds
         - [sound].ogg
@@ -42,7 +42,7 @@ A Minecraft Resource Pack is essentially a folder which holds a lot of files wit
             - [texture].png
         - entity
             - [texture].png
-            - [entity type]
+            - [entity-type]
               - [texture].png
         - item
             - [texture].png
@@ -54,15 +54,46 @@ We'll go over each of these in more detail individually later on.
 
 ### Creating Your Resource Pack
 
-to-write
+To create your resource pack, start by creating a new folder with your desired resource pack name. This folder will serve as the root directory for your resource pack. Alternatively, you can download my [basic example pack](!Coming soon!) and copy from there.
+
+Inside the root folder, create the following files and folders:
+<ol>
+- `pack.mcmeta`: This file contains some important metadata about your resource pack: we'll get to it later.
+- `pack.png`: This is the icon for your resource pack that displays in the Resource Pack Selection screen.
+- `assets` folder: This folder will contain all the custom textures, sounds, and fonts for your resource pack.
+</ol>
+Inside the `assets` folder, create a `minecraft` subfolder, and inside it create the subfolders:
+<ol>
+- `font`: If you want a custom font in your pack, otherwise ignore this.
+- `textures`: If you want to edit the visual appearance / texture of any block, entity, item, or anything else in the game.
+- `sounds`: If you want to edit or add any sounds in the game. If you include this, make sure to also add a `sounds.json` file.
+</ol>
 
 ### Structuring Pack Meta Files
 
-to-write
+The `pack.mcmeta` file is a JSON file that provides information about your resource pack. Inside it, paste the following text:
+
+```json
+{
+  "pack": {
+    "pack_format": 23,
+    "description": "Your resource pack description goes here"
+  }
+}
+```
+Pack format 23 is valid for Minecraft version 1.20.4. To check the most recent version, you can see the [wiki](https://minecraft.fandom.com/wiki/Pack_format#Resources)'s page on pack formats.
+
+In the description field, add the description you want to be visible in the Resource Pack Selection screen. Note that this is displayed over two lines, and cut off if it is too long.
+
+The `pack.png` file is an optional PNG image that will be displayed as the icon for your resource pack in the selection screen. This should ideally be a 128x128 square image. If you don't include this image, the icon for your resource pack will be greyed out.
 
 ### Adding Textures
 
-to-write
+To add custom textures to your resource pack, navigate to the `assets/minecraft/textures` folder. Here, you can create subfolders for different texture categories, such as `block`, `entity`, `item`, and `painting`.
+
+Place your custom texture files (in PNG format) inside the respective subfolders. For example, if you have a custom texture for a block, place it inside the `block` folder.
+
+Make sure to name your texture files correctly, matching the names of the default Minecraft textures you want to replace.
 
 ### Adding Sounds
 

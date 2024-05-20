@@ -19,7 +19,7 @@
         <div id="main-content">
             <p><script src= "script.js"></script>
 <h2 id="minecraft-resource-pack-hosting">Minecraft Resource Pack Hosting</p></h2>
-<p>This page is intended as a start-to-finish guide for hosting a Minecraft <span class="tooltip">resource pack<span class="tooltiptext">Resource packs in Minecraft allow you to control the visuals, sounds, and other aesthetics for the game in a lot of detail</span></span>. Each section is self-contained: if a step doesn't apply to you, or you don't need help with it, feel free to skip any of them.</p>
+<p>This page is intended as a start-to-finish guide for hosting a basic Minecraft <span class="tooltip">resource pack<span class="tooltiptext">Resource packs in Minecraft allow you to control the visuals, sounds, and other aesthetics for the game in a lot of detail.</span></span> and adding it to a map. Each section is self-contained: if a step doesn't apply to you, or you don't need help with it, feel free to skip any of them.</p>
 <p>We'll be using <a href="https://github.com">GitHub</a> to host our pack. If you don't yet have an account, sign up <a href="https://github.com/signup">here</a>.</p>
 <p><div class="info-box" style="--primary-color: #7F00B5; --secondary-color: #EEEEEE;"><u><strong>Contents:</strong></u>
 <ul>
@@ -34,7 +34,7 @@
 <li><a href="#hash-calculator">SHA-1 Hash Calculator</a></li>
 </ul></div></p>
 <p><h3 id="understanding-the-folder-structure">Understanding the Folder Structure</p></h3>
-<p>A Minecraft Resource Pack is essentially a folder which holds a lot of files with your custom textures and resources in them. The below file tree shows how this folder is organised. Hover over each item to see more detail.</p>
+<p>A Minecraft Resource Pack is essentially a folder which holds a lot of files with your custom textures and resources in them. The below file tree shows how this folder is organised.</p>
 <p>(This is originally based on the <a href="https://minecraft.fandom.com/wiki/Resource_pack#Folder_structure">wiki</a>'s version. I have simplified it to omit some paths which are more complex or less relevant for server resource packs.)</p>
 <p>
         <pre style="position: relative;">
@@ -45,7 +45,7 @@
 <span>- assets</span>
 <span>  - minecraft</span>
 <span>    - font</span>
-<span>        - your-font</span>
+<span>        - [your-font]</span>
 <span>    - sounds.json</span>
 <span>    - sounds</span>
 <span>        - [sound].ogg</span>
@@ -54,7 +54,7 @@
 <span>            - [texture].png</span>
 <span>        - entity</span>
 <span>            - [texture].png</span>
-<span>            - [entity type]</span>
+<span>            - [entity-type]</span>
 <span>              - [texture].png</span>
 <span>        - item</span>
 <span>            - [texture].png</span>
@@ -64,11 +64,39 @@
         </pre></p>
 <p>We'll go over each of these in more detail individually later on.</p>
 <p><h3 id="creating-your-resource-pack">Creating Your Resource Pack</p></h3>
-<p>to-write</p>
+<p>To create your resource pack, start by creating a new folder with your desired resource pack name. This folder will serve as the root directory for your resource pack. Alternatively, you can download my <span class="tooltip">basic example pack<span class="tooltiptext">Coming soon!</span></span> and copy from there.</p>
+<p>Inside the root folder, create the following files and folders:
+<ol>
+<li><code class="inline-code">pack.mcmeta</code>: This file contains some important metadata about your resource pack: we'll get to it later.</li>
+<li><code class="inline-code">pack.png</code>: This is the icon for your resource pack that displays in the Resource Pack Selection screen.</li>
+<li><code class="inline-code">assets</code> folder: This folder will contain all the custom textures, sounds, and fonts for your resource pack.</li>
+</ol>
+Inside the <code class="inline-code">assets</code> folder, create a <code class="inline-code">minecraft</code> subfolder, and inside it create the subfolders:
+<ol>
+<li><code class="inline-code">font</code>: If you want a custom font in your pack, otherwise ignore this.</li>
+<li><code class="inline-code">textures</code>: If you want to edit the visual appearance / texture of any block, entity, item, or anything else in the game.</li>
+<li><code class="inline-code">sounds</code>: If you want to edit or add any sounds in the game. If you include this, make sure to add a <code class="inline-code">sounds.json</code> file.</li>
+</ol></p>
 <p><h3 id="structuring-pack-meta-files">Structuring Pack Meta Files</p></h3>
-<p>to-write</p>
+<p>The <code class="inline-code">pack.mcmeta</code> file is a JSON file that provides information about your resource pack. Inside it, paste the following text:</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="json" class="line-numbers"><span>{</span>
+<span>  "pack": {</span>
+<span>    "pack_format": 23,</span>
+<span>    "description": "Your resource pack description goes here"</span>
+<span>  }</span>
+<span>}</span>
+</code>
+        </pre>
+Pack format 23 is valid for Minecraft version 1.20.4. To check the most recent version, you can see the <a href="https://minecraft.fandom.com/wiki/Pack_format#Resources">wiki</a>'s page on pack formats.</p>
+<p>In the description field, add the description you want to be visible in the Resource Pack Selection screen. Note that this is displayed over two lines, and cut off if it is too long.</p>
+<p>The <code class="inline-code">pack.png</code> file is an optional PNG image that will be displayed as the icon for your resource pack in the selection screen. This should ideally be a 128x128 square image. If you don't include this image, the icon for your resource pack will be greyed out.</p>
 <p><h3 id="adding-textures">Adding Textures</p></h3>
-<p>to-write</p>
+<p>To add custom textures to your resource pack, navigate to the <code class="inline-code">assets/minecraft/textures</code> folder. Here, you can create subfolders for different texture categories, such as <code class="inline-code">block</code>, <code class="inline-code">entity</code>, <code class="inline-code">item</code>, and <code class="inline-code">painting</code>.</p>
+<p>Place your custom texture files (in PNG format) inside the respective subfolders. For example, if you have a custom texture for a block, place it inside the <code class="inline-code">block</code> folder.</p>
+<p>Make sure to name your texture files correctly, matching the names of the default Minecraft textures you want to replace.</p>
 <p><h3 id="adding-sounds">Adding Sounds</p></h3>
 <p>to-write</p>
 <p><h3 id="adding-fonts">Adding Fonts</p></h3>
