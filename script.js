@@ -64,7 +64,7 @@ function on_window_load() {
         const href = link.getAttribute('href');
         
         // Check if the link is an external link (contains "http" or "www")
-        if (href && (href.includes('http') || href.includes('www'))) {
+        if (href && (href.includes('http') || href.includes('www')) && link.getAttribute("class") != "social-link") {
             // Set the target attribute to "_blank" to open the link in a new tab
             link.setAttribute('target', '_blank');
             link.innerHTML += 'º';
