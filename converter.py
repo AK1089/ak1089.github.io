@@ -92,8 +92,11 @@ def get_modified_index_files():
 
 
 # Converts txt to HTML for each of these files
-def process_modified_index_files(root_dir):
-    modified_index_files = get_modified_index_files()
+def process_modified_index_files(root_dir, all_files=False):
+    if all_files:
+        modified_index_files = [path.join(dirpath, 'index.txt') for dirpath, _, filenames in walk(root_dir) if 'index.txt' in filenames]
+    else:
+        modified_index_files = get_modified_index_files()
     for index_file in modified_index_files:
 
         # Input file is the .txt, output file is the .html
