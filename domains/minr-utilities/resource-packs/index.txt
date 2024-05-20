@@ -99,31 +99,7 @@ The example pack I provided has some examples:
 - `assets/minecraft/textures/entity/zombie/zombie.png`: retextures the Zombie to look ghostlike
 - `assets/minecraft/textures/item/iron_nugget.png`: retextures the iron nugget to look like a chicken nugget
 - `assets/minecraft/textures/painting/skull_and_roses.png`: retextures the Skull & Roses painting to look like the Mona Lisa
-<\ul>
-
-
-├── assets
-│   └── minecraft
-│       ├── font
-│       ├── sounds
-│       ├── sounds.json
-│       └── textures
-│           ├── block
-│           │   ├── black_wool.png
-│           │   └── white_wool.png
-│           ├── entity
-│           │   └── zombie
-│           │       └── zombie.png
-│           ├── item
-│           │   └── iron_nugget.png
-│           └── painting
-│               └── skull_and_roses.png
-├── pack.mcmeta
-└── pack.png
-
-### Adding Sounds
-
-to-write
+</ul>
 
 ### Adding Fonts
 
@@ -133,14 +109,17 @@ Place your custom font files (in TTF or OTF format) inside the font subfolder.
 
 to-write
 
+### Adding Sounds
+
+to-write
+
 ### Setting up a GitHub Repository
 
 Once again, we'll be using [GitHub](https://github.com) to host our pack. If you still don't have an account, sign up [here](https://github.com/signup).
 
 <ol>
 - Click [here](https://github.com/new) to create a new GitHub [repository](!A repository is essentially a folder on GitHub, which stores your code or resource pack.).
-- Add a repository name in the `Repository name` field: this can be anything and won't affect the resource pack itself in-game.
-- Scroll down to the bottom and click the green "Create repository" button.
+- Add your repository name in the `Repository name` field: this should be the name of your resource pack. For server resource packs, the name isn't super important.
 - Click on "upload an existing file".
 - Navigate to a Finder (Mac) / File Explorer (Windows) window where you can see your resource pack folder. Drag and drop it into the main part of the GitHub browser window.
 - Wait for everything to finish uploading, then scroll down and click the big green button.
