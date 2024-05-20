@@ -63,8 +63,8 @@ function on_window_load() {
         const link = links[i];
         const href = link.getAttribute('href');
         
-        // Check if the link is an external link (contains "www")
-        if (href && href.includes('www')) {
+        // Check if the link is an external link (contains "http" or "www")
+        if (href && (href.includes('http') || href.includes('www'))) {
             // Set the target attribute to "_blank" to open the link in a new tab
             link.setAttribute('target', '_blank');
         }
