@@ -11,6 +11,7 @@ __**Jump to / visit:**__
 - [Useful things I've made for Minr](domains/minr-utilities/)
 - [Links to my other accounts](#links-to-elsewhere)
 - [Projects and other websites of mine](domains/projects/)
+- [Interesting mathematical tidbits](domains/maths/)
 </ul>
 """
 
