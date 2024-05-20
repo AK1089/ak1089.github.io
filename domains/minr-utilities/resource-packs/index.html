@@ -40,26 +40,25 @@
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
             <code data-language="tree" class="line-numbers"><span>[resource pack name]</span>
-<span>- pack.mcmeta</span>
-<span>- pack.png</span>
-<span>- assets</span>
-<span>  - minecraft</span>
-<span>    - font</span>
-<span>      - [your-font]</span>
-<span>    - sounds.json</span>
-<span>    - sounds</span>
-<span>      - [sound].ogg</span>
-<span>    - textures</span>
-<span>      - block</span>
-<span>        - [texture].png</span>
-<span>      - entity</span>
-<span>        - [texture].png</span>
-<span>        - [entity-type]</span>
-<span>          - [texture].png</span>
-<span>      - item</span>
-<span>        - [texture].png</span>
-<span>      - painting</span>
-<span>        - [texture].png</span>
+<span>├── pack.mcmeta</span>
+<span>├── pack.png</span>
+<span>└── assets</span>
+<span>    └── minecraft</span>
+<span>        ├── font</span>
+<span>        │   ├── [your-font]</span>
+<span>        ├── sounds.json</span>
+<span>        ├── sounds</span>
+<span>        │   └── [sound].ogg</span>
+<span>        └── textures</span>
+<span>            ├── [entity-type]</span>
+<span>            │   └── [texture].png</span>
+<span>            ├── entity</span>
+<span>            │   └── [entity-type]</span>
+<span>            │       └── [texture].png</span>
+<span>            ├── item</span>
+<span>            │   └── [texture].png</span>
+<span>            └── painting</span>
+<span>                └── [texture].png</span>
 </code>
         </pre></p>
 <p>We'll go over each of these in more detail individually later on.</p>
@@ -96,7 +95,33 @@ Pack format 23 is valid for Minecraft version 1.20.4. To check the most recent v
 <p><h3 id="adding-textures">Adding Textures</p></h3>
 <p>To add custom textures to your resource pack, navigate to <code class="inline-code">assets/minecraft/textures</code>. In here, you can create subfolders for the different texture categories, such as <code class="inline-code">block</code>, <code class="inline-code">entity</code>, <code class="inline-code">item</code>, and <code class="inline-code">painting</code>.</p>
 <p>Place your custom texture files (which should be PNG images) inside the respective subfolders. For example, if you have a custom texture for spruce planks, place it inside the <code class="inline-code">block</code> folder and name it <code class="inline-code">spruce_planks.png</code>.</p>
-<p>The example pack I provided should have a few files of each type. Hopefully the pattern is fairly obvious from there.</p>
+<p>The example pack I provided has some examples:
+<ul>
+<li><code class="inline-code">assets/minecraft/textures/block/black_wool.png</code>: retextures black wool to be pure black</li>
+<li><code class="inline-code">assets/minecraft/textures/block/white_wool.png</code>: retextures white wool to be pure white</li>
+<li><code class="inline-code">assets/minecraft/textures/entity/zombie/zombie.png</code>: retextures the Zombie to look ghostlike</li>
+<li><code class="inline-code">assets/minecraft/textures/item/iron_nugget.png</code>: retextures the iron nugget to look like a chicken nugget</li>
+<li><code class="inline-code">assets/minecraft/textures/painting/skull_and_roses.png</code>: retextures the Skull & Roses painting to look like the Mona Lisa</li>
+<\ul></p>
+<p>
+├── assets
+│   └── minecraft
+│       ├── font
+│       ├── sounds
+│       ├── sounds.json
+│       └── textures
+│           ├── block
+│           │   ├── black_wool.png
+│           │   └── white_wool.png
+│           ├── entity
+│           │   └── zombie
+│           │       └── zombie.png
+│           ├── item
+│           │   └── iron_nugget.png
+│           └── painting
+│               └── skull_and_roses.png
+├── pack.mcmeta
+└── pack.png</p>
 <p><h3 id="adding-sounds">Adding Sounds</p></h3>
 <p>to-write</p>
 <p><h3 id="adding-fonts">Adding Fonts</p></h3>
