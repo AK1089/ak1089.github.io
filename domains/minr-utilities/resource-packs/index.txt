@@ -94,11 +94,11 @@ Place your custom texture files (which should be PNG images) inside the respecti
 
 The example pack I provided has some examples:
 <ul>
-- `assets/minecraft/textures/block/black_wool.png`: retextures black wool to be pure black
-- `assets/minecraft/textures/block/white_wool.png`: retextures white wool to be pure white
-- `assets/minecraft/textures/entity/zombie/zombie.png`: retextures the Zombie to look ghostlike
-- `assets/minecraft/textures/item/iron_nugget.png`: retextures the iron nugget to look like a chicken nugget
-- `assets/minecraft/textures/painting/skull_and_roses.png`: retextures the Skull & Roses painting to look like the Mona Lisa
+- `/textures/block/black_wool.png`: retextures black wool to be pure black
+- `/textures/block/white_wool.png`: retextures white wool to be pure white
+- `/textures/entity/zombie/zombie.png`: retextures the Zombie to look ghostlike
+- `/textures/item/iron_nugget.png`: retextures the iron nugget to look like a chicken nugget
+- `/textures/painting/skull_and_roses.png`: retextures the Skull & Roses painting to look like the Mona Lisa
 </ul>
 
 ### Adding Fonts
