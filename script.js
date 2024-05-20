@@ -54,6 +54,21 @@ function on_window_load() {
             {left: "\\[", right: "\\]", display: true}
         ]
     });
+
+    // Get all the links in the document
+    const links = document.getElementsByTagName('a');
+    
+    // Iterate through each link
+    for (let i = 0; i < links.length; i++) {
+        const link = links[i];
+        const href = link.getAttribute('href');
+        
+        // Check if the link is an external link (contains "www")
+        if (href && href.includes('www')) {
+            // Set the target attribute to "_blank" to open the link in a new tab
+            link.setAttribute('target', '_blank');
+        }
+    }
 }
 
 // Run the on_window_load function on page load
