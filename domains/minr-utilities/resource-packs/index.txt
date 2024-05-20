@@ -8,18 +8,83 @@ We'll be using [GitHub](https://github.com) to host our pack. If you don't yet h
 """info #7F00B5 #EEEEEE
 __**Contents:**__
 <ul>
-- [Step 1: Setting up a GitHub repository](#setting-up-a-github-repository)
-- [Useful things I've made for Minr](domains/minr-utilities/)
-- [Links to my other accounts](#links-to-elsewhere)
-- [Projects and other websites of mine](domains/projects/)
+- [Step 1: Understanding the Folder Structure of a Resource Pack](#understanding-the-folder-structure)
+- [Step 2: Creating your Resource Pack](#creating-your-resource-pack)
+- [Step 3: Structuring Pack Meta Files](#structuring-pack-meta-files)
+- [Step 4a: Adding Textures](#adding-textures)
+- [Step 4b: Adding Fonts](#adding-fonts)
+- [Step 4c: Adding Sounds](#adding-sounds)
+- [Step 5: Setting up a GitHub repository](#setting-up-a-github-repository)
+- [Step 6: Setting up a Server Resource Pack](#setting-up-a-server-resource-pack)
+- [SHA-1 Hash Calculator](#hash-calculator)
 </ul>
 """
 
-### Setting up a GitHub repository
+### Understanding the Folder Structure
+
+A Minecraft Resource Pack is essentially a folder which holds a lot of files with your custom textures and resources in them. The below file tree shows how this folder is organised. Hover over each item to see more detail.
+
+(This is originally based on the [wiki](https://minecraft.fandom.com/wiki/Resource_pack#Folder_structure)'s version. I have simplified it to omit some paths which are more complex or less relevant for server resource packs.)
+
+```file-tree
+[resource pack name]
+- pack.mcmeta
+- pack.png
+- assets
+  - minecraft
+    - font
+        - your-font
+    - sounds.json
+    - sounds
+        - [sound].ogg
+    - textures
+        - block
+            - [texture].png
+        - entity
+            - [texture].png
+            - [entity type]
+              - [texture].png
+        - item
+            - [texture].png
+        - painting
+            - [texture].png
+```
+
+We'll go over each of these in more detail individually later on.
+
+### Creating Your Resource Pack
 
 to-write
 
-### 
+### Structuring Pack Meta Files
+
+to-write
+
+### Adding Textures
+
+to-write
+
+### Adding Sounds
+
+to-write
+
+### Adding Fonts
+
+to-write
+
+### Setting up a GitHub Repository
+
+to-write
+
+### Uploading Your Pack to GitHub
+
+to-write
+
+### Setting up a Server Resource Pack
+
+to-write
+
+### Hash Calculator
 
 This website allows you to drag and drop a zip file and view its hash.
 

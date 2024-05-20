@@ -23,14 +23,60 @@
 <p>We'll be using <a href="https://github.com">GitHub</a> to host our pack. If you don't yet have an account, sign up <a href="https://github.com/signup">here</a>.</p>
 <p><div class="info-box" style="--primary-color: #7F00B5; --secondary-color: #EEEEEE;"><u><strong>Contents:</strong></u>
 <ul>
-<li><a href="#setting-up-a-github-repository">Step 1: Setting up a GitHub repository</a></li>
-<li><a href="domains/minr-utilities/">Useful things I've made for Minr</a></li>
-<li><a href="#links-to-elsewhere">Links to my other accounts</a></li>
-<li><a href="domains/projects/">Projects and other websites of mine</a></li>
+<li><a href="#understanding-the-folder-structure">Step 1: Understanding the Folder Structure of a Resource Pack</a></li>
+<li><a href="#creating-your-resource-pack">Step 2: Creating your Resource Pack</a></li>
+<li><a href="#structuring-pack-meta-files">Step 3: Structuring Pack Meta Files</a></li>
+<li><a href="#adding-textures">Step 4a: Adding Textures</a></li>
+<li><a href="#adding-fonts">Step 4b: Adding Fonts</a></li>
+<li><a href="#adding-sounds">Step 4c: Adding Sounds</a></li>
+<li><a href="#setting-up-a-github-repository">Step 5: Setting up a GitHub repository</a></li>
+<li><a href="#setting-up-a-server-resource-pack">Step 6: Setting up a Server Resource Pack</a></li>
+<li><a href="#hash-calculator">SHA-1 Hash Calculator</a></li>
 </ul></div></p>
-<p><h3 id="setting-up-a-github-repository">Setting up a GitHub repository</p></h3>
+<p><h3 id="understanding-the-folder-structure">Understanding the Folder Structure</p></h3>
+<p>A Minecraft Resource Pack is essentially a folder which holds a lot of files with your custom textures and resources in them. The below file tree shows how this folder is organised. Hover over each item to see more detail.</p>
+<p>(This is originally based on the <a href="https://minecraft.fandom.com/wiki/Resource_pack#Folder_structure">wiki</a>'s version. I have simplified it to omit some paths which are more complex or less relevant for server resource packs.)</p>
+<p>``<code class="inline-code">file-tree
+[resource pack name]
+<li>pack.mcmeta</li>
+<li>pack.png</li>
+<li>assets</li>
+  - minecraft
+    - font
+        - your-font
+    - sounds.json
+    - sounds
+        - [sound].ogg
+    - textures
+        - block
+            - [texture].png
+        - entity
+            - [texture].png
+            - [entity type]
+              - [texture].png
+        - item
+            - [texture].png
+        - painting
+            - [texture].png
+</code>``</p>
+<p>We'll go over each of these in more detail individually later on.</p>
+<p><h3 id="creating-your-resource-pack">Creating Your Resource Pack</p></h3>
 <p>to-write</p>
-<p><h3 id=""></p></h3>
+<p><h3 id="structuring-pack-meta-files">Structuring Pack Meta Files</p></h3>
+<p>to-write</p>
+<p><h3 id="adding-textures">Adding Textures</p></h3>
+<p>to-write</p>
+<p><h3 id="adding-sounds">Adding Sounds</p></h3>
+<p>to-write</p>
+<p><h3 id="adding-fonts">Adding Fonts</p></h3>
+<p>to-write</p>
+<p><h3 id="setting-up-a-github-repository">Setting up a GitHub Repository</p></h3>
+<p>to-write</p>
+<p><h3 id="uploading-your-pack-to-github">Uploading Your Pack to GitHub</p></h3>
+<p>to-write</p>
+<p><h3 id="setting-up-a-server-resource-pack">Setting up a Server Resource Pack</p></h3>
+<p>to-write</p>
+<p><h3 id="hash-calculator">Hash Calculator</p></h3>
 <p>This website allows you to drag and drop a zip file and view its hash.</p>
 <p>You uploaded (no file uploaded yet) at (N/A). Its SHA-1 Hash is:</p>
 <p>
