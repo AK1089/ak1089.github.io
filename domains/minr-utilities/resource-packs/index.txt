@@ -24,7 +24,7 @@ __**Contents:**__
 
 A Minecraft Resource Pack is essentially a folder which holds a lot of files with your custom textures and resources in them. The below file tree shows how this folder is organised.
 
-(This is originally based on the [wiki](https://minecraft.fandom.com/wiki/Resource_pack#Folder_structure)'s version. I have simplified it to omit some paths which are more complex or less relevant for server resource packs.)
+(This is adapted from the [Minecraft wiki](https://minecraft.fandom.com/wiki/Resource_pack#Folder_structure)'s version. I have simplified it to omit some paths which are more complex or less relevant for server resource packs.)
 
 ```tree
 [resource pack name]
@@ -55,7 +55,7 @@ We'll go over each of these in more detail individually later on.
 
 To create your resource pack, start by creating a new folder with your desired resource pack name. This folder will serve as the root directory for your resource pack. Alternatively, you can <a href="example-pack.zip" download>download my example resource pack</a> and copy from there.
 
-Inside the root folder, create the following files and folders:
+If you're not using my example pack, create the following files and folders inside the root folder:
 <ol>
 - `pack.mcmeta`: This file contains some important metadata about your resource pack: we'll get to it later.
 - `pack.png`: This is the icon for your resource pack that displays in the Resource Pack Selection screen.
