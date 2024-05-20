@@ -1,8 +1,25 @@
 <script src= "script.js"></script>
 ## Minecraft Resource Pack Hosting
 
-This page is intended as a start-to-finish guide for hosting a Minecraft [resource pack](!Resource packs in Minecraft allow you to control the de).
+This page is intended as a start-to-finish guide for hosting a Minecraft [resource pack](!Resource packs in Minecraft allow you to control the visuals, sounds, and other aesthetics for the game in a lot of detail). Each section is self-contained: if a step doesn't apply to you, or you don't need help with it, feel free to skip any of them.
+
 We'll be using [GitHub](https://github.com) to host our pack. If you don't yet have an account, sign up [here](https://github.com/signup).
+
+"""info #7F00B5 #EEEEEE
+__**Contents:**__
+<ul>
+- [Step 1: Setting up a GitHub repository](#setting-up-a-github-repository)
+- [Useful things I've made for Minr](domains/minr-utilities/)
+- [Links to my other accounts](#links-to-elsewhere)
+- [Projects and other websites of mine](domains/projects/)
+</ul>
+"""
+
+### Setting up a GitHub repository
+
+to-write
+
+### 
 
 This website allows you to drag and drop a zip file and view its hash.
 

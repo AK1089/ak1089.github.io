@@ -86,7 +86,7 @@ def convert_markdown_to_html(input_file, output_file, depth):
 
 # Gets the text files which have been modified since the last commit
 def get_modified_index_files():
-    output = subprocess.check_output(["git", "diff", "--name-only", "--cached", "*.txt"])
+    output = subprocess.check_output(["git", "diff", "--name-only", "*.txt"])
     modified_files = output.decode("utf-8").strip().split("\n")
     return [file for file in modified_files if file.endswith("index.txt")]
 
@@ -110,4 +110,5 @@ def process_modified_index_files(root_dir):
 # Runs this on our root directory
 if __name__ == "__main__":
     root_directory = "."
+    print(get_modified_index_files())
     process_modified_index_files(root_directory)
