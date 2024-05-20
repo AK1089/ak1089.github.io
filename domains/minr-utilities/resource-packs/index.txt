@@ -33,21 +33,21 @@ A Minecraft Resource Pack is essentially a folder which holds a lot of files wit
 - assets
   - minecraft
     - font
-        - [your-font]
+      - [your-font]
     - sounds.json
     - sounds
-        - [sound].ogg
+      - [sound].ogg
     - textures
-        - block
-            - [texture].png
-        - entity
-            - [texture].png
-            - [entity-type]
-              - [texture].png
-        - item
-            - [texture].png
-        - painting
-            - [texture].png
+      - block
+        - [texture].png
+      - entity
+        - [texture].png
+        - [entity-type]
+          - [texture].png
+      - item
+        - [texture].png
+      - painting
+        - [texture].png
 ```
 
 We'll go over each of these in more detail individually later on.
@@ -85,15 +85,15 @@ Pack format 23 is valid for Minecraft version 1.20.4. To check the most recent v
 
 In the description field, add the description you want to be visible in the Resource Pack Selection screen. Note that this is displayed over two lines, and cut off if it is too long.
 
-The `pack.png` file is an optional PNG image that will be displayed as the icon for your resource pack in the selection screen. This should ideally be a 128x128 square image. If you don't include this image, the icon for your resource pack will be greyed out.
+The `pack.png` file is an optional PNG image that will be displayed as the icon for your resource pack in the selection screen. This should ideally be a small square image. If you don't include this image, the icon for your resource pack will be greyed out.
 
 ### Adding Textures
 
-To add custom textures to your resource pack, navigate to the `assets/minecraft/textures` folder. Here, you can create subfolders for different texture categories, such as `block`, `entity`, `item`, and `painting`.
+To add custom textures to your resource pack, navigate to `assets/minecraft/textures`. In here, you can create subfolders for the different texture categories, such as `block`, `entity`, `item`, and `painting`.
 
-Place your custom texture files (in PNG format) inside the respective subfolders. For example, if you have a custom texture for a block, place it inside the `block` folder.
+Place your custom texture files (which should be PNG images) inside the respective subfolders. For example, if you have a custom texture for spruce planks, place it inside the `block` folder and name it `spruce_planks.png`.
 
-Make sure to name your texture files correctly, matching the names of the default Minecraft textures you want to replace.
+The example pack I provided should have a few files of each type. Hopefully the pattern is fairly obvious from there.
 
 ### Adding Sounds
 
@@ -101,15 +101,24 @@ to-write
 
 ### Adding Fonts
 
+To add custom fonts to your resource pack, create a `font` folder inside the `assets/minecraft` folder. Inside the `font` folder, create a subfolder with your font name.
+
+Place your custom font files (in TTF or OTF format) inside the font subfolder.
+
 to-write
 
 ### Setting up a GitHub Repository
 
-to-write
+Once again, we'll be using [GitHub](https://github.com) to host our pack. If you still don't have an account, sign up [here](https://github.com/signup).
 
-### Uploading Your Pack to GitHub
-
-to-write
+<ol>
+- Click [here](https://github.com/new) to create a new GitHub [repository](!A repository is essentially a folder on GitHub, which stores your code or resource pack.).
+- Add a repository name in the `Repository name` field: this can be anything and won't affect the resource pack itself in-game.
+- Scroll down to the bottom and click the green "Create repository" button.
+- Click on "upload an existing file".
+- Navigate to a Finder (Mac) / File Explorer (Windows) window where you can see your resource pack folder. Drag and drop it into the main part of the GitHub browser window.
+- Wait for everything to finish uploading, then scroll down and click the big green button.
+</ol>
 
 ### Setting up a Server Resource Pack
 

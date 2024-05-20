@@ -45,21 +45,21 @@
 <span>- assets</span>
 <span>  - minecraft</span>
 <span>    - font</span>
-<span>        - [your-font]</span>
+<span>      - [your-font]</span>
 <span>    - sounds.json</span>
 <span>    - sounds</span>
-<span>        - [sound].ogg</span>
+<span>      - [sound].ogg</span>
 <span>    - textures</span>
-<span>        - block</span>
-<span>            - [texture].png</span>
-<span>        - entity</span>
-<span>            - [texture].png</span>
-<span>            - [entity-type]</span>
-<span>              - [texture].png</span>
-<span>        - item</span>
-<span>            - [texture].png</span>
-<span>        - painting</span>
-<span>            - [texture].png</span>
+<span>      - block</span>
+<span>        - [texture].png</span>
+<span>      - entity</span>
+<span>        - [texture].png</span>
+<span>        - [entity-type]</span>
+<span>          - [texture].png</span>
+<span>      - item</span>
+<span>        - [texture].png</span>
+<span>      - painting</span>
+<span>        - [texture].png</span>
 </code>
         </pre></p>
 <p>We'll go over each of these in more detail individually later on.</p>
@@ -75,7 +75,7 @@ Inside the <code class="inline-code">assets</code> folder, create a <code class=
 <ol>
 <li><code class="inline-code">font</code>: If you want a custom font in your pack, otherwise ignore this.</li>
 <li><code class="inline-code">textures</code>: If you want to edit the visual appearance / texture of any block, entity, item, or anything else in the game.</li>
-<li><code class="inline-code">sounds</code>: If you want to edit or add any sounds in the game. If you include this, make sure to add a <code class="inline-code">sounds.json</code> file.</li>
+<li><code class="inline-code">sounds</code>: If you want to edit or add any sounds in the game. If you include this, make sure to also add a <code class="inline-code">sounds.json</code> file.</li>
 </ol></p>
 <p><h3 id="structuring-pack-meta-files">Structuring Pack Meta Files</p></h3>
 <p>The <code class="inline-code">pack.mcmeta</code> file is a JSON file that provides information about your resource pack. Inside it, paste the following text:</p>
@@ -92,19 +92,27 @@ Inside the <code class="inline-code">assets</code> folder, create a <code class=
         </pre>
 Pack format 23 is valid for Minecraft version 1.20.4. To check the most recent version, you can see the <a href="https://minecraft.fandom.com/wiki/Pack_format#Resources">wiki</a>'s page on pack formats.</p>
 <p>In the description field, add the description you want to be visible in the Resource Pack Selection screen. Note that this is displayed over two lines, and cut off if it is too long.</p>
-<p>The <code class="inline-code">pack.png</code> file is an optional PNG image that will be displayed as the icon for your resource pack in the selection screen. This should ideally be a 128x128 square image. If you don't include this image, the icon for your resource pack will be greyed out.</p>
+<p>The <code class="inline-code">pack.png</code> file is an optional PNG image that will be displayed as the icon for your resource pack in the selection screen. This should ideally be a small square image. If you don't include this image, the icon for your resource pack will be greyed out.</p>
 <p><h3 id="adding-textures">Adding Textures</p></h3>
-<p>To add custom textures to your resource pack, navigate to the <code class="inline-code">assets/minecraft/textures</code> folder. Here, you can create subfolders for different texture categories, such as <code class="inline-code">block</code>, <code class="inline-code">entity</code>, <code class="inline-code">item</code>, and <code class="inline-code">painting</code>.</p>
-<p>Place your custom texture files (in PNG format) inside the respective subfolders. For example, if you have a custom texture for a block, place it inside the <code class="inline-code">block</code> folder.</p>
-<p>Make sure to name your texture files correctly, matching the names of the default Minecraft textures you want to replace.</p>
+<p>To add custom textures to your resource pack, navigate to <code class="inline-code">assets/minecraft/textures</code>. In here, you can create subfolders for the different texture categories, such as <code class="inline-code">block</code>, <code class="inline-code">entity</code>, <code class="inline-code">item</code>, and <code class="inline-code">painting</code>.</p>
+<p>Place your custom texture files (which should be PNG images) inside the respective subfolders. For example, if you have a custom texture for spruce planks, place it inside the <code class="inline-code">block</code> folder and name it <code class="inline-code">spruce_planks.png</code>.</p>
+<p>The example pack I provided should have a few files of each type. Hopefully the pattern is fairly obvious from there.</p>
 <p><h3 id="adding-sounds">Adding Sounds</p></h3>
 <p>to-write</p>
 <p><h3 id="adding-fonts">Adding Fonts</p></h3>
+<p>To add custom fonts to your resource pack, create a <code class="inline-code">font</code> folder inside the <code class="inline-code">assets/minecraft</code> folder. Inside the <code class="inline-code">font</code> folder, create a subfolder with your font name.</p>
+<p>Place your custom font files (in TTF or OTF format) inside the font subfolder.</p>
 <p>to-write</p>
 <p><h3 id="setting-up-a-github-repository">Setting up a GitHub Repository</p></h3>
-<p>to-write</p>
-<p><h3 id="uploading-your-pack-to-github">Uploading Your Pack to GitHub</p></h3>
-<p>to-write</p>
+<p>Once again, we'll be using <a href="https://github.com">GitHub</a> to host our pack. If you still don't have an account, sign up <a href="https://github.com/signup">here</a>.</p>
+<p><ol>
+<li>Click <a href="https://github.com/new">here</a> to create a new GitHub <span class="tooltip">repository<span class="tooltiptext">A repository is essentially a folder on GitHub, which stores your code or resource pack.</span></span>.</li>
+<li>Add a repository name in the <code class="inline-code">Repository name</code> field: this can be anything and won't affect the resource pack itself in-game.</li>
+<li>Scroll down to the bottom and click the green "Create repository" button.</li>
+<li>Click on "upload an existing file".</li>
+<li>Navigate to a Finder (Mac) / File Explorer (Windows) window where you can see your resource pack folder. Drag and drop it into the main part of the GitHub browser window.</li>
+<li>Wait for everything to finish uploading, then scroll down and click the big green button.</li>
+</ol></p>
 <p><h3 id="setting-up-a-server-resource-pack">Setting up a Server Resource Pack</p></h3>
 <p>to-write</p>
 <p><h3 id="hash-calculator">Hash Calculator</p></h3>
