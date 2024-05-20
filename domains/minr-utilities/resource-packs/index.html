@@ -18,7 +18,7 @@
         </a>
         <div id="main-content">
             <p><script src= "script.js"></script>
-<h2 id="minecraft-resource-pack-hosting">Minecraft Resource Pack Hosting</p></h2>
+<h2 id="creating-and-hosting-minecraft-server-resource-packs">Creating and Hosting Minecraft Server Resource Packs</p></h2>
 <p>This page is intended as a start-to-finish guide for hosting a basic Minecraft <span class="tooltip">resource pack<span class="tooltiptext">Resource packs in Minecraft allow you to control the visuals, sounds, and other aesthetics for the game in a lot of detail.</span></span> and adding it to a map. Each section is self-contained: if a step doesn't apply to you, or you don't need help with it, feel free to skip any of them.</p>
 <p>We'll be using <a href="https://github.com">GitHub</a> to host our pack. If you don't yet have an account, sign up <a href="https://github.com/signup">here</a>.</p>
 <p><strong>If you already have a pack and just need help with hosting it, skip to <a href="#setting-up-a-github-repository">Setting up a GitHub Repository</a></strong>.</p>
@@ -46,7 +46,8 @@
 <span>└── assets</span>
 <span>    └── minecraft</span>
 <span>        ├── font</span>
-<span>        │   ├── [your-font]</span>
+<span>        │   ├── [your-font].json</span>
+<span>        │   └── [your-font].ttf</span>
 <span>        ├── sounds.json</span>
 <span>        ├── sounds</span>
 <span>        │   └── [sound].ogg</span>
@@ -105,11 +106,85 @@ Pack format 23 is valid for Minecraft version 1.20.4. To check the most recent v
 <li><code class="inline-code">/textures/painting/skull_and_roses.png</code>: retextures the Skull & Roses painting to look like the Mona Lisa</li>
 </ul></p>
 <p><h3 id="adding-fonts">Adding Fonts</p></h3>
-<p>To add custom fonts to your resource pack, create a <code class="inline-code">font</code> folder inside the <code class="inline-code">assets/minecraft</code> folder. Inside the <code class="inline-code">font</code> folder, create a subfolder with your font name.</p>
-<p>Place your custom font files (in TTF or OTF format) inside the font subfolder.</p>
-<p>to-write</p>
+<p>To add custom fonts to your resource pack, create a <code class="inline-code">font</code> folder inside the <code class="inline-code">assets/minecraft</code> folder. Place your custom font file (in TTF or OTF format) inside the font subfolder. In the example pack, I've added <code class="inline-code">courier.ttf</code>.</p>
+<p>Then, create a file named (e.g.) <code class="inline-code">courier.json</code>. Inside it, specify your font, in the format
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="json" class="line-numbers"><span>{</span>
+<span>    "providers": [</span>
+<span>        {</span>
+<span>            "type": "ttf",</span>
+<span>            "file": "minecraft:courier.ttf"</span>
+<span>        }</span>
+<span>	]</span>
+<span>}</span>
+</code>
+        </pre>
+Replace <code class="inline-code">courier.ttf</code> with your filename.</p>
+<p>When you want to display text in this new font, you can use
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="minecraft" class="line-numbers"><span>/tellraw @s {"text": "This is a custom font!", "font": "courier"}</span>
+</code>
+        </pre>
+to control the display.</p>
 <p><h3 id="adding-sounds">Adding Sounds</p></h3>
-<p>to-write</p>
+<p>To add custom sounds to your resource pack, create a <code class="inline-code">sounds</code> folder inside the <code class="inline-code">assets/minecraft</code> folder to store all your <code class="inline-code">.ogg</code> files. You can organise sounds however you want in here, including in subfolders. In my example pack, the sounds directory is structured as:
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="tree" class="line-numbers"><span>assets/minecraft/sounds</span>
+<span>├── dial_tone.ogg</span>
+<span>├── metronome.ogg</span>
+<span>├── square_wave.ogg</span>
+<span>└── random</span>
+<span>    └── white_noise.ogg</span>
+</code>
+        </pre>
+Then, navigate back one folder into the <code class="inline-code">assets/minecraft</code> folder. Add a file called <code class="inline-code">sounds.json</code>, and add the following text (for example):
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="json" class="line-numbers"><span>{</span>
+<span>    "block.lever.click": {</span>
+<span>        "sounds": [</span>
+<span>            {</span>
+<span>                "name": "random\/white_noise",</span>
+<span>                "volume": 1.00</span>
+<span>            }</span>
+<span>        ],</span>
+<span>        "replace": true</span>
+<span>    },</span>
+<span>    "entity.player.splash": {</span>
+<span>        "sounds": [</span>
+<span>            {</span>
+<span>                "name": "dial_tone",</span>
+<span>                "volume": 1.00</span>
+<span>            },</span>
+<span>            {</span>
+<span>                "name": "metronome",</span>
+<span>                "volume": 1.00</span>
+<span>            },</span>
+<span>            {</span>
+<span>                "name": "square_wave",</span>
+<span>                "volume": 1.00</span>
+<span>            }</span>
+<span>        ],</span>
+<span>        "replace": true</span>
+<span>    }</span>
+<span>}</span>
+</code>
+        </pre>
+This follows a simple pattern: For each sound, we have:
+<ol>
+<li><code class="inline-code">"sound.resource.location":</code> (this is the name of the sound path you use in a <code class="inline-code">/playsound</code> command)</li>
+<li><code class="inline-code">"sounds":</code> (followed by a list of sound files)</li>
+<li><code class="inline-code">"name": "path\/to\/sound_file"</code> (using backslashes before each slash)</li>
+<li><code class="inline-code">"replace": true</code> (so the game uses these sound files)</li>
+</ol>
+Edit this accordingly to match all of your files.</p>
 <p><h3 id="setting-up-a-github-repository">Setting up a GitHub Repository</p></h3>
 <p>Once again, we'll be using <a href="https://github.com">GitHub</a> to host our pack. If you still don't have an account, sign up <a href="https://github.com/signup">here</a>.</p>
 <p><ol>

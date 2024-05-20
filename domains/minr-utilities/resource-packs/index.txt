@@ -1,5 +1,5 @@
 <script src= "script.js"></script>
-## Minecraft Resource Pack Hosting
+## Creating and Hosting Minecraft Server Resource Packs
 
 This page is intended as a start-to-finish guide for hosting a basic Minecraft [resource pack](!Resource packs in Minecraft allow you to control the visuals, sounds, and other aesthetics for the game in a lot of detail.) and adding it to a map. Each section is self-contained: if a step doesn't apply to you, or you don't need help with it, feel free to skip any of them.
 
@@ -35,7 +35,8 @@ A Minecraft Resource Pack is essentially a folder which holds a lot of files wit
 └── assets
     └── minecraft
         ├── font
-        │   ├── [your-font]
+        │   ├── [your-font].json
+        │   └── [your-font].ttf
         ├── sounds.json
         ├── sounds
         │   └── [sound].ogg
@@ -105,15 +106,77 @@ The example pack I provided has some examples:
 
 ### Adding Fonts
 
-To add custom fonts to your resource pack, create a `font` folder inside the `assets/minecraft` folder. Inside the `font` folder, create a subfolder with your font name.
+To add custom fonts to your resource pack, create a `font` folder inside the `assets/minecraft` folder. Place your custom font file (in TTF or OTF format) inside the font subfolder. In the example pack, I've added `courier.ttf`.
 
-Place your custom font files (in TTF or OTF format) inside the font subfolder.
+Then, create a file named (e.g.) `courier.json`. Inside it, specify your font, in the format
+```json
+{
+    "providers": [
+        {
+            "type": "ttf",
+            "file": "minecraft:courier.ttf"
+        }
+	]
+}
+```
+Replace `courier.ttf` with your filename.
 
-to-write
+When you want to display text in this new font, you can use
+```minecraft
+/tellraw @s {"text": "This is a custom font!", "font": "courier"}
+```
+to control the display.
 
 ### Adding Sounds
 
-to-write
+To add custom sounds to your resource pack, create a `sounds` folder inside the `assets/minecraft` folder to store all your `.ogg` files. You can organise sounds however you want in here, including in subfolders. In my example pack, the sounds directory is structured as:
+```tree
+assets/minecraft/sounds
+├── dial_tone.ogg
+├── metronome.ogg
+├── square_wave.ogg
+└── random
+    └── white_noise.ogg
+```
+Then, navigate back one folder into the `assets/minecraft` folder. Add a file called `sounds.json`, and add the following text (for example):
+```json
+{
+    "block.lever.click": {
+        "sounds": [
+            {
+                "name": "random\/white_noise",
+                "volume": 1.00
+            }
+        ],
+        "replace": true
+    },
+    "entity.player.splash": {
+        "sounds": [
+            {
+                "name": "dial_tone",
+                "volume": 1.00
+            },
+            {
+                "name": "metronome",
+                "volume": 1.00
+            },
+            {
+                "name": "square_wave",
+                "volume": 1.00
+            }
+        ],
+        "replace": true
+    }
+}
+```
+This follows a simple pattern: For each sound, we have:
+<ol>
+- `"sound.resource.location":` (this is the name of the sound path you use in a `/playsound` command)
+- `"sounds":` (followed by a list of sound files)
+- `"name": "path\/to\/sound_file"` (using backslashes before each slash)
+- `"replace": true` (so the game uses these sound files)
+</ol>
+Edit this accordingly to match all of your files.
 
 ### Setting up a GitHub Repository
 
