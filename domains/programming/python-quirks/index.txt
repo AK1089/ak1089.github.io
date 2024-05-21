@@ -1,0 +1,12 @@
+## Some Weird Python Quirks
+
+#### Integer Memory Preallocation
+
+```python
+>>> 256 is int("256")
+True
+>>> 257 is int("257")
+False
+```
+
+#### Floating Point Imprecision
