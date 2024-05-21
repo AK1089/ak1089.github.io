@@ -9,4 +9,99 @@ True
 False
 ```
 
-#### Floating Point Imprecision
+#### Floating Point Weirdness
+
+```python
+>>> int((3.0 &#42; 0.1 - 0.3) &#42;&#42; (-0.1))
+42
+```
+
+#### Lambda Arguments Are Captured at Definition Time
+```python
+>>> funcs = [(lambda: i) for i in range(3)]
+>>> [f() for f in funcs]
+[2, 2, 2]
+```
+
+#### Default Arguments Can Be Mutated
+```python
+>>> def append_to_list(item, my_list=[]):
+...     my_list.append(item)
+...     return my_list
+...
+>>> append_to_list(1)
+[1]
+>>> append_to_list(2)
+[1, 2]
+```
+
+#### Attributes Have Their Name Mangled
+```python
+>>> class MyClass:
+...     def __init__(self):
+...         self.__private = 42
+...
+>>> obj = MyClass()
+>>> obj.__private
+AttributeError: 'MyClass' object has no attribute '__private'
+>>> obj._MyClass__private
+42
+```
+
+#### And / Or Actual Behaviour
+```python
+>>> 'a' and 'b'
+'b'
+>>> 'a' or 'b'
+'a'
+```
+
+#### String Interning
+
+```python
+>>> a = "hello"
+>>> b = "hello"
+>>> a is b
+True
+>>> a = "hello world"
+>>> b = "hello world"
+>>> a is b
+False
+```
+
+#### Multiple Inheritances
+```python
+>>> class A:
+...     def method(self):
+...         print("A")
+...
+>>> class B(A):
+...     def method(self):
+...         print("B")
+...         super().method()
+...
+>>> class C(A):
+...     def method(self):
+...         print("C")
+...         super().method()
+...
+>>> class D(B, C):
+...     pass
+...
+>>> obj = D()
+>>> obj.method()
+B
+C
+A
+```
+
+#### Overriding System Methods
+
+```python
+>>> class MyClass:
+...     __init__ = print
+... 
+>>> (obj := MyClass())
+ 
+<__main__.MyClass object at 0x1009caae0>
+```

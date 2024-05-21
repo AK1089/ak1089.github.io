@@ -28,7 +28,117 @@
 <span>False</span>
 </code>
         </pre></p>
-<p><h4 id="floating-point-imprecision">Floating Point Imprecision</p></h4>
+<p><h4 id="floating-point-weirdness">Floating Point Weirdness</p></h4>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="python" class="line-numbers"><span>>>> int((3.0 &#42; 0.1 - 0.3) &#42;&#42; (-0.1))</span>
+<span>42</span>
+</code>
+        </pre></p>
+<p><h4 id="lambda-arguments-are-captured-at-definition-t">Lambda Arguments Are Captured at Definition Time</h4>
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="python" class="line-numbers"><span>>>> funcs = [(lambda: i) for i in range(3)]</span>
+<span>>>> [f() for f in funcs]</span>
+<span>[2, 2, 2]</span>
+</code>
+        </pre></p>
+<p><h4 id="default-arguments-can-be-muta">Default Arguments Can Be Mutated</h4>
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="python" class="line-numbers"><span>>>> def append_to_list(item, my_list=[]):</span>
+<span>...     my_list.append(item)</span>
+<span>...     return my_list</span>
+<span>...</span>
+<span>>>> append_to_list(1)</span>
+<span>[1]</span>
+<span>>>> append_to_list(2)</span>
+<span>[1, 2]</span>
+</code>
+        </pre></p>
+<p><h4 id="attributes-have-their-name-mang">Attributes Have Their Name Mangled</h4>
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="python" class="line-numbers"><span>>>> class MyClass:</span>
+<span>...     def <u>init</u>(self):</span>
+<span>...         self.__private = 42</span>
+<span>...</span>
+<span>>>> obj = MyClass()</span>
+<span>>>> obj.__private</span>
+<span>AttributeError: 'MyClass' object has no attribute '__private'</span>
+<span>>>> obj._MyClass__private</span>
+<span>42</span>
+</code>
+        </pre></p>
+<p><h4 id="and-or-actual-behavi">And / Or Actual Behaviour</h4>
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="python" class="line-numbers"><span>>>> 'a' and 'b'</span>
+<span>'b'</span>
+<span>>>> 'a' or 'b'</span>
+<span>'a'</span>
+</code>
+        </pre></p>
+<p><h4 id="string-interning">String Interning</p></h4>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="python" class="line-numbers"><span>>>> a = "hello"</span>
+<span>>>> b = "hello"</span>
+<span>>>> a is b</span>
+<span>True</span>
+<span>>>> a = "hello world"</span>
+<span>>>> b = "hello world"</span>
+<span>>>> a is b</span>
+<span>False</span>
+</code>
+        </pre></p>
+<p><h4 id="multiple-inheritan">Multiple Inheritances</h4>
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="python" class="line-numbers"><span>>>> class A:</span>
+<span>...     def method(self):</span>
+<span>...         print("A")</span>
+<span>...</span>
+<span>>>> class B(A):</span>
+<span>...     def method(self):</span>
+<span>...         print("B")</span>
+<span>...         super().method()</span>
+<span>...</span>
+<span>>>> class C(A):</span>
+<span>...     def method(self):</span>
+<span>...         print("C")</span>
+<span>...         super().method()</span>
+<span>...</span>
+<span>>>> class D(B, C):</span>
+<span>...     pass</span>
+<span>...</span>
+<span>>>> obj = D()</span>
+<span>>>> obj.method()</span>
+<span>B</span>
+<span>C</span>
+<span>A</span>
+</code>
+        </pre></p>
+<p><h4 id="overriding-system-methods">Overriding System Methods</p></h4>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="python" class="line-numbers"><span>>>> class MyClass:</span>
+<span>...     <u>init</u> = print</span>
+<span>... </span>
+<span>>>> (obj := MyClass())</span>
+<span> </span>
+<span><<u>main</u>.MyClass object at 0x1009caae0></span>
+</code>
+        </pre>
+</p>
 
         </div>
         <h6 id="copyright">&#169; Avish Kumar 2024</h6>

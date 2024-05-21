@@ -1,0 +1,7 @@
+## The Programming Section
+
+Here's where I put everything on here to do with programming, in no particular order. Mostly about Python.
+
+<ul>
+- [Weird Python Quirks and Oddities](python-quirks)
+</ul>
