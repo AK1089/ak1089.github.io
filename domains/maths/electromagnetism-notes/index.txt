@@ -1,0 +1,8 @@
+## Electromagnetism Notes
+
+The strength of the electromagnetic force experienced by a particle is proportional to its \textit{charge}, measured in Coulombs. Here, we assume this charge takes values in $\mathbb{R}$, but in reality this is quantised: charges must be integer multiples of the fundamental charge $e \approx 1.6 \times 10^{-19}$C. The electron has charge $-e$.
+
+The \textbf{charge density} is the charge per unit volume. The total charge in a region $V$ is therefore
+\[
+Q = \int
+\]
