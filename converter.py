@@ -113,4 +113,4 @@ def process_modified_index_files(root_dir, all_files=False):
 # Runs this on our root directory
 if __name__ == "__main__":
     root_directory = "."
-    process_modified_index_files(root_directory, True)
+    process_modified_index_files(root_directory)

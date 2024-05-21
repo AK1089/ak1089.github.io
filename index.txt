@@ -9,9 +9,10 @@ __**Jump to / visit:**__
 <ul>
 - [About this website](#about-this-website)
 - [Useful things I've made for Minr](domains/minr-utilities/)
-- [Links to my other accounts](#links-to-elsewhere)
 - [Projects and other websites of mine](domains/projects/)
+- [Links to my other accounts](#links-to-elsewhere)
 - [Interesting mathematical tidbits](domains/maths/)
+- [Everything to do with programming](domains/programming/)
 </ul>
 """
 

@@ -38,13 +38,13 @@ False
 #### Attributes Have Their Name Mangled
 ```python
 >>> class MyClass:
-...     def __init__(self):
-...         self.__private = 42
+...     def &#95;&#95;init&#95;&#95;(self):
+...         self.&#95;&#95;private = 42
 ...
 >>> obj = MyClass()
->>> obj.__private
-AttributeError: 'MyClass' object has no attribute '__private'
->>> obj._MyClass__private
+>>> obj.&#95;&#95;private
+AttributeError: 'MyClass' object has no attribute '&#95;&#95;private'
+>>> obj._MyClass&#95;&#95;private
 42
 ```
 
@@ -99,9 +99,9 @@ A
 
 ```python
 >>> class MyClass:
-...     __init__ = print
+...     &#95;&#95;init&#95;&#95; = print
 ... 
 >>> (obj := MyClass())
  
-<__main__.MyClass object at 0x1009caae0>
+<&#95;&#95;main&#95;&#95;.MyClass object at 0x1009caae0>
 ```
