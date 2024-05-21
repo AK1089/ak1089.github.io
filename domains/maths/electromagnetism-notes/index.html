@@ -18,10 +18,27 @@
         </a>
         <div id="main-content">
             <p><h2 id="electromagnetism-notes">Electromagnetism Notes</p></h2>
-<p>The strength of the electromagnetic force experienced by a particle is proportional to its <em>charge</em>, measured in Coulombs. Here, we assume this charge takes values in $$\mathbb{R}$$, but in reality this is quantised: charges must be integer multiples of the fundamental charge $$e \approx 1.6 \times 10^{-19}$$C. The electron has charge $$-e$$.</p>
-<p>The \textbf{charge density} is the charge per unit volume. The total charge in a region $$V$$ is therefore
+<p><h3 id="basics-charge-current-and-fields">Basics: Charge, Current, and Fields</p></h3>
+<p>The strength of the electromagnetic force experienced by a particle is proportional to its <em>charge</em>, measured in Coulombs. Here, we assume this charge takes values in \( \mathbb{R} \), but in reality this is quantised: charges must be integer multiples of the <span class="tooltip">fundamental charge<span class="tooltiptext">The electron has charge \&#40;-e\&#41;.</span></span> \(e \approx 1.6 \times 10^{-19} \; \mathrm{C}\).</p>
+<p>The <em>charge density</em> \( \rho(\mathbf{x}, t) \) is the charge per unit volume. The total charge in a region \(V\) is therefore
 \[ Q = \int_V \rho(\mathbf{x}, t) \text{d}V \]
-This might</p>
+This might be expressed in terms of sheets or lines instead, as a 2D or 1D integral.</p>
+<p>For any surface \( S \),
+\[ I = \int_S \mathbf{J} \cdot \text{d}S \]
+is the current, where \( \mathbf{J} \) is the <em>current density</em>.</p>
+<p>If the charge \( \rho(\mathbf{x}, t) \) has velocity \( \mathbf{v}(\mathbf{x}, t) \), then the current density <span class="tooltip">is fairly obviously<span class="tooltiptext">ignoring relativistic effects</span></span> \( \rho \mathbf{v} \).</p>
+<p>Charge is conserved. More specifically, it is <span class="tooltip">conserved <em>locally</em><span class="tooltiptext">Global conservation of charge only means the total charge in all of space is constant. We also require that a charge here can't disappear and instantly reappear on Jupiter, say.</span></span>: it can only change due to continuous currents. This gives rise to the <em>continuity equation</em>:
+\[ \frac{\partial \rho}{\partial t} + \nabla \cdot \mathbf{J} = 0 \]
+Note that, by our definition of charge and the <span class="tooltip">divergence theorem<span class="tooltiptext">\&#40; \int_V \nabla \cdot \mathbf{F} \text{ d}V= \int_{\partial V} \mathbf{F} \cdot \text{d}\mathbf{S} \&#41;</span></span>, the charge \( Q \) in some region \( V \) satisfies
+\[ \frac{\text{d} \rho}{\text{d} t} = \int_V \frac{\partial \rho}{\partial t} \text{d}V = - \int_V \nabla \cdot \mathbf{J} \text{d}V = - \int_S \mathbf{J} \cdot \text{d}S \]
+If we take \( V = \mathbb{R}^3 \), the whole of space, then assuming there are no currents at infinity, \( Q' = 0 \) (global conservation of charge).</p>
+<p>A field is a function from \( \mathbb{R}^3 \times \mathbb{R} \to \mathbb{R}^3 \text{ or } \mathbb{R} \). It assigns each point in time and space a vector or scalar quantity. We have the <span class="tooltip">electric and magnetic fields<span class="tooltiptext">These are both <em>vector</em> fields: they assign each point a 3D vector showing the direction of the field.</span></span> \( \mathbf{E}(\mathbf{x}, t) \) and \( \mathbf{B}(\mathbf{x}, t) \).</p>
+<p>Fields cause particles to move according to the <em>Lorentz Force Law</em>:
+\[ \mathbf{F} = q(\mathbf{E} + \mathbf{v} \times \mathbf{B} ) \]
+We also have <span class="tooltip">Maxwell's equations<span class="tooltiptext">Named for James Clerk Maxwell, who published them in 1865.</span></span>:
+\[ \begin{align&#42;} \nabla \cdot \mathbf{E} &= \frac{\rho}{\varepsilon_0} \\ \nabla \cdot \mathbf{B} &= 0 \\ \nabla \times \mathbf{E} + \frac{\partial \mathbf{B}}{\partial t} &= 0 \\ \nabla \times \mathbf{B} - \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} &= \mu_0 \mathbf{J} \end{align&#42;} \]
+These use the constants <span class="tooltip">\( \mu_0 \)<span class="tooltiptext">Known as the magnetic constant, or <em>permeability of free space</em>.</span></span> \( = 4 \pi \times 10^{-6} \; \mathrm{m} \; \mathrm{kg} \; \mathrm{C}^{-2} \) and <span class="tooltip">\( \varepsilon_0 \)<span class="tooltiptext">Known as the electric constant, or <em>permittivity of free space</em>.</span></span> \( = 8.85 \pi \times 10^{-12} \; \mathrm{m}^{-3} \; \mathrm{kg}^{-1} \; \mathrm{s}^{-2} \; \mathrm{C}^2 \).
+</p>
 
         </div>
         <h6 id="copyright">&#169; Avish Kumar 2024</h6>
