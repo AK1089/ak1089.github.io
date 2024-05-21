@@ -60,7 +60,7 @@ To create your resource pack, start by creating a new folder with your desired r
 
 If you're not using my example pack, create the following files and folders inside the root folder:
 <ol>
-- `pack.mcmeta`: This file contains some important metadata about your resource pack: we'll get to it later.
+- `pack.mcmeta`: This file contains some important metadata about your resource pack: we'll get to it soon.
 - `pack.png`: This is the icon for your resource pack that displays in the Resource Pack Selection screen.
 - `assets` folder: This folder will contain all the custom textures, sounds, and fonts for your resource pack.
 </ol>
@@ -174,9 +174,10 @@ This follows a simple pattern: For each sound, we have:
 - `"sound.resource.location":` (this is the name of the sound path you use in a `/playsound` command)
 - `"sounds":` (followed by a list of sound files)
 - `"name": "path\/to\/sound_file"` (using backslashes before each slash)
+- `"volume": 1.00` (edit this to whatever volume level you desire)
 - `"replace": true` (so the game uses these sound files)
 </ol>
-Edit this accordingly to match all of your files.
+Edit this accordingly to match all of your files. A full list of `/playsound` sound paths can be found [here](https://www.digminecraft.com/lists/sound_list_pc.php).
 
 ### Setting up a GitHub Repository
 
@@ -184,10 +185,10 @@ Once again, we'll be using [GitHub](https://github.com) to host our pack. If you
 
 <ol>
 - Click [here](https://github.com/new) to create a new GitHub [repository](!A repository is essentially a folder on GitHub, which stores your code or resource pack.).
-- Add your repository name in the `Repository name` field: this should be the name of your resource pack. For server resource packs, the name isn't super important: it's probably best practice to just name it after your map's name.
+- Add your repository name in the `Repository name` field: this will be the name of your [resource pack](!For server resource packs, the name isn't super important. If there are spaces in your repository name, they will be replaced with hyphens.).
 - Click on the blue "uploading an existing file" link.
-- Navigate to a Finder (Mac) / File Explorer (Windows) window and open your resource pack folder. You should be able to see `assets`, `pack.mcmeta`, and `pack.png`, Drag and drop it into the main part of the GitHub browser window.
-- Wait for everything to finish uploading, then scroll down and click the big green button which says "Commit changes".
+- Navigate to a Finder (Mac) / File Explorer (Windows) window and open your resource pack folder. You should be able to see `assets`, `pack.mcmeta`, and `pack.png`, Drag and drop these three into the main part of the GitHub browser window.
+- You should see [several](!14, if you've left my example pack untouched) files uploading. Wait for everything to finish uploading, then scroll down and click the big green button which says "Commit changes".
 </ol>
 
 Your files are now stored online!
@@ -198,7 +199,7 @@ Now, it's time to grab the link for them. Take the link
 ```url
 https://github.com/AK1089/Example-Resource-Pack/archive/refs/heads/main.zip
 ```
-then replace `AK1089` with your GitHub username and `Example-Resource-Pack` with your repository name. Paste the link into your browser to download the zip file. Then, drag and drop your zip file onto this webpage to view its SHA-1 Hash.
+then replace `AK1089` with your GitHub username and `Example-Resource-Pack` with your repository name. Paste the link into your browser to download the zip file. Then, drag and drop your zip file onto this webpage to view its [SHA-1 Hash](!A hash is a one-way algorithm used to verify that a file is intact. When your game downloads the pack, it checks the hash against this value. Even the tiniest, one-bit difference in the resource pack will make the hash completely different, and the disrepancy will be flagged.).
 
 ##### Hash Calculator
 
@@ -208,10 +209,16 @@ then replace `AK1089` with your GitHub username and `Example-Resource-Pack` with
 null
 ```
 
-(All processing is done clientside: your file is never uploaded to this website, and I cannot see it. The source code is available [here](script.js).)
+(Your data remains private: all processing is done [clientside](!Your file is never uploaded to this website, and I cannot see it. Your browser calculates the hash for you, and displays it here without ever sending it to me.). The source code is available [here](script.js).)
 
 Copy the hash as well as the download link you used, and give them to an admin. They will run the command
 ```minecraft
 /c setresourcepack mapcode url hash
 ```
 where `mapcode` is your map's code, `url` is the download link, and `hash` is the hash generated.
+
+If you want to test this on the test server (which you should!) then run this command yourself on there. When joining the map, you will automatically have the resource pack applied.
+
+With that, your map's custom resource pack is all ready - congratulations!
+
+As usual, if there are any mistakes on this page, please let me know on [Discord](https://discordapp.com/channels/@me/380805820415344644).
