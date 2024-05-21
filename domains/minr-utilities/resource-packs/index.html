@@ -117,7 +117,7 @@ Pack format 23 is valid for Minecraft version 1.20.4. To check the most recent v
 <span>            "type": "ttf",</span>
 <span>            "file": "minecraft:courier.ttf"</span>
 <span>        }</span>
-<span>	]</span>
+<span>    ]</span>
 <span>}</span>
 </code>
         </pre>
@@ -190,21 +190,37 @@ Edit this accordingly to match all of your files.</p>
 <p><ol>
 <li>Click <a href="https://github.com/new">here</a> to create a new GitHub <span class="tooltip">repository<span class="tooltiptext">A repository is essentially a folder on GitHub, which stores your code or resource pack.</span></span>.</li>
 <li>Add your repository name in the <code class="inline-code">Repository name</code> field: this should be the name of your resource pack. For server resource packs, the name isn't super important: it's probably best practice to just name it after your map's name.</li>
-<li>Click on "upload an existing file".</li>
-<li>Navigate to a Finder (Mac) / File Explorer (Windows) window where you can see your resource pack folder. Drag and drop it into the main part of the GitHub browser window.</li>
-<li>Wait for everything to finish uploading, then scroll down and click the big green button.</li>
+<li>Click on the blue "uploading an existing file" link.</li>
+<li>Navigate to a Finder (Mac) / File Explorer (Windows) window and open your resource pack folder. You should be able to see <code class="inline-code">assets</code>, <code class="inline-code">pack.mcmeta</code>, and <code class="inline-code">pack.png</code>, Drag and drop it into the main part of the GitHub browser window.</li>
+<li>Wait for everything to finish uploading, then scroll down and click the big green button which says "Commit changes".</li>
 </ol></p>
+<p>Your files are now stored online!</p>
 <p><h3 id="setting-up-a-server-resource-pack">Setting up a Server Resource Pack</p></h3>
-<p>to-write</p>
-<p><h3 id="hash-calculator">Hash Calculator</p></h3>
-<p>Drag and drop your zip file here to view its SHA-1 Hash. All processing is done clientside: your file is never uploaded to this website, and I cannot see it. The source code is available <a href="script.js">here</a>.
-</p><p id="file-hash-info">You have not yet uploaded a file. Drag and drop a file anywhere on this page to see its hash.</p><p></p>
+<p>Now, it's time to grab the link for them. Take the link
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="url" class="line-numbers"><span>https://github.com/AK1089/Example-Resource-Pack/archive/refs/heads/main.zip</span>
+</code>
+        </pre>
+then replace <code class="inline-code">AK1089</code> with your GitHub username and <code class="inline-code">Example-Resource-Pack</code> with your repository name. Paste the link into your browser to download the zip file. Then, drag and drop your zip file onto this webpage to view its SHA-1 Hash.</p>
+<p><h5 id="hash-calculator">Hash Calculator</p></h5>
+<p></p><p id="file-hash-info">You have not yet uploaded a file. Drag and drop a file anywhere on this page to see its hash.</p><p></p>
 <p>
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
             <code data-language="hash" class="line-numbers"><span>null</span>
 </code>
         </pre></p>
+<p>(All processing is done clientside: your file is never uploaded to this website, and I cannot see it. The source code is available <a href="script.js">here</a>.)</p>
+<p>Copy the hash as well as the download link you used, and give them to an admin. They will run the command
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="minecraft" class="line-numbers"><span>/c setresourcepack mapcode url hash</span>
+</code>
+        </pre>
+where <code class="inline-code">mapcode</code> is your map's code, <code class="inline-code">url</code> is the download link, and <code class="inline-code">hash</code> is the hash generated.</p>
 
         </div>
         <h6 id="copyright">&#169; Avish Kumar 2024</h6>
