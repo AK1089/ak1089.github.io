@@ -52,6 +52,7 @@ function on_window_load() {
         delimiters: [
             {left: "\\(", right: "\\)", display: false},
             {left: "\\[", right: "\\]", display: true}
+            {left: "$$", right: "$$", display: false}
         ]
     });
 
