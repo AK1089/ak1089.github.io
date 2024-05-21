@@ -1,5 +1,7 @@
 ## Electromagnetism Notes
 
+Here are my revision notes for Electromagnetism, lectured in early 2024 by David Tong at the University of Cambridge.
+
 ### Basics: Charge, Current, and Fields
 
 The strength of the electromagnetic force experienced by a particle is proportional to its *charge*, measured in Coulombs. Here, we assume this charge takes values in \( \mathbb{R} \), but in reality this is quantised: charges must be integer multiples of the [fundamental charge](!The electron has charge \&#40;-e\&#41;.) \(e \approx 1.6 \times 10^{-19} \; \mathrm{C}\).
@@ -27,3 +29,51 @@ Fields cause particles to move according to the *Lorentz Force Law*:
 We also have [Maxwell's equations](!Named for James Clerk Maxwell, who published them in 1865.):
 \[ \begin{align&#42;} \nabla \cdot \mathbf{E} &= \frac{\rho}{\varepsilon_0} \\ \nabla \cdot \mathbf{B} &= 0 \\ \nabla \times \mathbf{E} + \frac{\partial \mathbf{B}}{\partial t} &= 0 \\ \nabla \times \mathbf{B} - \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} &= \mu_0 \mathbf{J} \end{align&#42;} \]
 These use the constants [\( \mu_0 \)](!Known as the magnetic constant, or *permeability of free space*.) \( = 4 \pi \times 10^{-6} \; \mathrm{m} \; \mathrm{kg} \; \mathrm{C}^{-2} \) and [\( \varepsilon_0 \)](!Known as the electric constant, or *permittivity of free space*.) \( = 8.85 \pi \times 10^{-12} \; \mathrm{m}^{-3} \; \mathrm{kg}^{-1} \; \mathrm{s}^{-2} \; \mathrm{C}^2 \).
+
+### Electrostatics
+
+Now, we [ignore magnetic fields](!Set \&#40; \mathbf{B} = 0 \&#41; everywhere.) and look for [time-independent solutions](!Where the charge depends only on space, not time.). Our relevant equations are now
+\[ \begin{align&#42;} \nabla \cdot \mathbf{E} &= \frac{\rho}{\varepsilon_0} \\ \nabla \times \mathbf{E} &= 0 \end{align&#42;} \]
+as the other two disappear.
+
+Consider a region \( V \subseteq \mathbb{R}^3 \) with boundary \( S = \partial V \). Then we obtain [Gauss' Law](!Named, of course, for Carl Friedrich Gauss.)
+\[ \int_S \mathbf{E} \cdot \text{d}\mathbf{S} = \int_V \nabla \cdot \mathbf{E} \text{ d}V = \frac{1}{\varepsilon_0} \int_V \rho \text{ d}V = \frac{Q}{\varepsilon_0}\]
+The *flux* of the electric field through \( S \) is defined as
+\[ \int_S \mathbf{E} \cdot \text{d}\mathbf{S}. \]
+Gauss's Law tells us that this depends *only* on the charge contained within the surface.
+
+Consider a [spherically symmetric](!Depending only on the distance from the origin, not the direction.) charge density \( \rho(r) \) contained inside a ball of radius \(R\) such that \( r > R \implies \rho(r) = 0 \).
+
+Then by symmetry, the [force](!&#40;and thus the electric field, which is parallel to the force in the absence of a magnetic field by the Lorentz Force Law&#41;) must point out radially: \(\mathbf{E} = E(r)\hat{\mathbf{r}} \). Thus it is [conservative](!\&#40; \nabla \times \mathbf{E} = 0 \&#41;).
+
+For a sphere of radius \(r > R\) containing the charge, the total flux is thus
+\[ \int_S \mathbf{E} \cdot \text{ d}\mathbf{S} = E(r) \int_S \hat{\mathbf{r}} \cdot \text{d}\mathbf{S} = 4\pi r^2 E(r) = \frac{Q}{\varepsilon_0} \]
+Thus we have our expression for the electric field, and therefore [Coulomb's law](!Named for Charles-Augustin de Coulomb, who described this law in 1785.):
+\[ \mathbf{E}(r) = \frac{Q}{4\pi \varepsilon_0 r^2} \hat{\mathbf{r}} \implies \mathbf{F}(\mathbf{r}) = \frac{Qq}{4\pi \varepsilon_0 \mathbf{r} \cdot \mathbf{r}} \hat{\mathbf{r}}  \]
+If there is some scalar field \( \phi \) such that \( \mathbf{E} = - \nabla \phi \), then we call \( \phi \) the *electrostatic potential*. This gives rise to the [Poisson equation](!Named for Siméon Denis Poisson.)
+\[\nabla^2 \phi = \frac{\rho}{\varepsilon_0}\]
+When \(\rho = 0\), away from any charges, this is the Laplace equation.
+
+Note that this is a linear equation: if we have two charges, we can simply [add the corresponding potentials and fields](!The ability to do this is known as the *principle of superposition*, and is unique to electromagnetism among the four fundamental forces.). To ensure \(\phi\) is unique, we insist that the the electrostatic potential vanishes at infinity.
+
+Take a point particle with charge \(Q\) at the origin, so that
+\[\rho(\mathbf{r}) = Q \delta^3 (\mathbf{r})\]
+with \(\delta^3\) the [three-dimensional Dirac delta function](!This "function" is zero everywhere except the origin, but the integral of it over any volume containing the origin is one.). We then must solve
+\[\nabla^2 \phi = - \frac{Q}{\varepsilon_0} \delta^3 (\mathbf{r})\]
+Away from the origin, we have the Laplace equation, which is solved by \(\phi(\mathbf{r} = a r^{-1})\). Integrating over a sphere of radius \(r\) centred at the origin,
+\[ \int_V \nabla^2 \phi \text{ d}V = \int_S \nabla \phi \cdot \text{ d}\mathbf{S} = \int_S \frac{a}{r^2} \hat{\mathbf{r}} \cdot \text{ d}\mathbf{S} =  -4 \pi a = - \frac{Q}{\varepsilon_0} \implies a = \frac{Q}{4\pi \varepsilon_0} \implies \mathbf{E} = \frac{Q}{4\pi \varepsilon_0 r^2} \hat{\mathbf{r}}. \]
+
+A *field line* is a line tangent to \(\mathbf{E}\). Field line density is proportional to \(|\mathbf{E}|\). Field lines begin only at charges or infinity, and can never intersect. Similarly, equipotentials are line of constant electrostatic potential \(\phi\). They are always perpendicular to the field lines. By convention, these lines point towards negative charges.
+
+Recall that a particle of charge \(q\) has potential energy \(U = q \phi(\mathbf{r})\), which is the work it takes to bring the particle from infinity to its current location.
+
+The energy of a particle [*system*](!\&#40; N \&#41; charges \&#40; q_i \&#41; at positions \&#40; \mathbf{r}_i \&#41;) is slightly different.
+\[ U = \frac{1}{8\pi \varepsilon_0} \sum_{i \neq j} \frac{q_i q_j}{|\mathbf{r}_i - \mathbf{r}_j|} = \frac{1}{2} \sum_{i=1}{N} q_i \phi(\mathbf{r}_i). \]
+This is very similar to the continuous case:
+\[ U = \frac{1}{2} \int \rho (\mathbf{r}) \; \phi(\mathbf{r}) \; \mathrm{d}^3\mathbf{r} = \frac{\varepsilon_0}{2} \int (\nabla \cdot \mathbf{E}) \phi \; \mathrm{d}^3\mathbf{r} = \frac{\varepsilon_0}{2} \int \mathbf{E} \cdot \mathbf{E} \; \mathrm{d}^3\mathbf{r} \]
+This depends only on the field, not the charges.
+
+A *conductor* is a region of space where many charges can move freely until they reach equilibrium. This necessitates \( \mathbf{E} = \mathbf{0} \) everywhere in the conductor. This then implies both that [\( \phi \) is constant](!This means that the surface is an equipotential, so the electric field must be perpendicular to it.), and that \( \rho \) is zero everywhere inside the conductor: all net charge must be on the surface of the conductor.
+
+Consider a spherical conductor with no net charge. Place a positive plate on the left and negative plate on the right to induce a rightward field. The field lines must be perpendicular to each surface, so they bend, and a surface charge is induced.
+
