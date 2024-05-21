@@ -32,22 +32,22 @@
 
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
-            <code data-language="minecraft" class="line-numbers"><span>/function define &lt;namespace&gt; &lt;returnType&gt; &lt;function_name&gt;(&lt;type_1&gt; &lt;argument_1&gt;, ...)</span>
+            <code data-language="minecraft" class="line-numbers"><span>/function define &lt;namespace&gt; &lt;returnType&gt; &lt;functionName&gt;(&lt;type_1&gt; &lt;argument_1&gt;, ...)</span>
 </code>
         </pre>
 <ol>
 <li><code class="inline-code">&lt;namespace&gt;</code>: The <span class="tooltip">namespace<span class="tooltiptext">If you don't know about namespaces, don't worry - they're just a way of managing the scope of objects and keeping scripts organised.</span></span> your function will be defined in. Here, we'll use the <code class="inline-code">function_demo</code> namespace.</li>
 <li><code class="inline-code">&lt;returnType&gt;</code>: The type of value the function will return. (If the function doesn't return a value, you can use <code class="inline-code">Void</code>.) Here, since we're calculating a distance, we're going to be returning a <span class="tooltip"><code class="inline-code">Double</code><span class="tooltiptext">A Type is a kind of data. Double is short for a double-precision number, which is a decimal like 3.141592.</span></span>.</li>
-<li><code class="inline-code">&lt;function_name&gt;</code>: This is the name of the function, which you'll use to call it later. Let's call our function <code class="inline-code">get_distance</code>.</li>
+<li><code class="inline-code">&lt;functionName&gt;</code>: This is the name of the function, which you'll use to call it later. Let's call our function <code class="inline-code">getDistance</code>.</li>
 <li><code class="inline-code">&lt;type_1&gt; &lt;argument_1&gt;, ...</code>: This is list of input <span class="tooltip">arguments<span class="tooltiptext">Arguments, or parameters, are things which a function uses to do its job. The output of a function depends on the arguments. Here, the function needs to know which player we're checking, and the coordinates we want to get the distance to.</span></span> the function accepts, specified as pairs of Type and argument name. The argument name doesn't matter except within the function, so name your arguments things which are helpful and easy to remember. Here, we'll call our arguments <code class="inline-code">player</code> and <code class="inline-code">coordinates</code>, which are of type <code class="inline-code">Player</code> and <code class="inline-code">Int[]</code> respectively.</li>
 </ol>
 
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
-            <code data-language="minecraft" class="line-numbers"><span>/function define function_demo Double get_distance(Player player, Int[] coordinates)</span>
+            <code data-language="minecraft" class="line-numbers"><span>/function define function_demo Double getDistance(Player player, Int[] coordinates)</span>
 </code>
         </pre>
-This creates a function named <code class="inline-code">get_distance</code> in the <code class="inline-code">function_demo</code> namespace, which takes the two arguments we discussed. Great! But now we need our function to actually <em>do</em> something, and for that we'll need to write the script.</p>
+This creates a function named <code class="inline-code">getDistance</code> in the <code class="inline-code">function_demo</code> namespace, which takes the two arguments we discussed. Great! But now we need our function to actually <em>do</em> something, and for that we'll need to write the script.</p>
 <p><h3 id="writing-a-function-scr">Writing a function script</h3>
 Writing the script for a function body is very similar to writing an interact script, except the variables that you have access to are slightly different <span class="tooltip">by default<span class="tooltiptext">You can still access namespaced variables with @using, of course.</span></span>. Recall that in an interact script, you can access
 <ul>
@@ -64,12 +64,12 @@ Let's write our script:
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
             <code data-language="msc" class="line-numbers"><span>&#35; The difference between the player's X/Y/Z ordinate and the provided one</span>
-<span>@define Double delta_X = player.getX() - coordinates[0]</span>
-<span>@define Double delta_Y = player.getY() - coordinates[1]</span>
-<span>@define Double delta_Z = player.getZ() - coordinates[2]</span>
+<span>@define Double deltaX = player.getX() - coordinates[0]</span>
+<span>@define Double deltaY = player.getY() - coordinates[1]</span>
+<span>@define Double deltaZ = player.getZ() - coordinates[2]</span>
 <span> </span>
 <span>&#35; Calculate the distance based on these components</span>
-<span>@define Double distance = (delta_X^2 + delta_Y^2 + delta_Z^2)^0.5</span>
+<span>@define Double distance = (deltaX^2 + deltaY^2 + deltaZ^2)^0.5</span>
 <span>@return distance</span>
 </code>
         </pre>
@@ -79,14 +79,14 @@ We can <em>import</em> this function using the command
 
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
-            <code data-language="minecraft" class="line-numbers"><span>/script import function function_demo distance https://paste.minr.org/ababababab</span>
+            <code data-language="minecraft" class="line-numbers"><span>/script import function function_demo getDistance https://paste.minr.org/ababababab</span>
 </code>
         </pre>
 or alternatively add it line-by-line:
 
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
-            <code data-language="minecraft" class="line-numbers"><span>/script create function function_demo distance @define Double delta_X = player.getX() - coordinates[0]</span>
+            <code data-language="minecraft" class="line-numbers"><span>/script create function function_demo getDistance @define Double deltaX = player.getX() - coordinates[0]</span>
 <span>...</span>
 </code>
         </pre>
@@ -94,7 +94,7 @@ This is similar to the process of importing any other script. For short, you can
 
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
-            <code data-language="minecraft" class="line-numbers"><span>/s i f namespace function_name https://paste.minr.org/dedededede</span>
+            <code data-language="minecraft" class="line-numbers"><span>/s i f namespace functionName https://paste.minr.org/dedededede</span>
 </code>
         </pre></p>
 <p><h3 id="calling-functions">Calling functions</p></h3>
@@ -104,18 +104,18 @@ This is similar to the process of importing any other script. For short, you can
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
             <code data-language="msc" class="line-numbers"><span>@define Double dist</span>
-<span>@var dist = function_demo::get_distance(player, Int[123, 45, 678])</span>
+<span>@var dist = function_demo::getDistance(player, Int[123, 45, 678])</span>
 <span>@player You are {{dist}} metres away from the point (123, 45, 678)!</span>
 </code>
         </pre>
 The <code class="inline-code">function_demo::</code> denotes our namespace. Alternatively, if we'd used <code class="inline-code">@using function_demo</code> at the start of this script, we could have omitted it.</p>
-<p>Here, since our function returns a value, we probably want to use that value. That's why we set our variable to the output of <code class="inline-code">function_demo::get_distance</code>. If we weren't using a value (eg. if our function was <code class="inline-code">Void</code>), we'd use <code class="inline-code">@var function_demo::get_distance(...)</code> without any <code class="inline-code">dist = </code> or such. </p>
+<p>Here, since our function returns a value, we probably want to use that value. That's why we set our variable to the output of <code class="inline-code">function_demo::getDistance</code>. If we weren't using a value (eg. if our function was <code class="inline-code">Void</code>), we'd use <code class="inline-code">@var function_demo::getDistance(...)</code> without any <code class="inline-code">dist = </code> or such. </p>
 <p>Note that the <code class="inline-code">player</code> in the function does not have to be the same as the <code class="inline-code">player</code> in the local namespace of the calling script. For example,
 
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
             <code data-language="msc" class="line-numbers"><span>@define Double dist</span>
-<span>@var dist = function_demo::get_distance(Player("AK1089"), Int[123, 45, 678])</span>
+<span>@var dist = function_demo::getDistance(Player("AK1089"), Int[123, 45, 678])</span>
 <span>@player AK1089 is {{dist}} metres away from the point (123, 45, 678)!</span>
 </code>
         </pre>
@@ -154,7 +154,7 @@ This function allowed me to get the pages of a written book the player was holdi
 
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
-            <code data-language="msc" class="line-numbers"><span>@define String[] book_pages = akrobots::getBookPages(player.getItemInMainHand())</span>
+            <code data-language="msc" class="line-numbers"><span>@define String[] bookPages = akrobots::getBookPages(player.getItemInMainHand())</span>
 <span>&#35; do stuff with the pages ...</span>
 </code>
         </pre>
@@ -193,7 +193,7 @@ This creates a list of numbers, starting from the first argument (the <code clas
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
             <code data-language="msc" class="line-numbers"><span>@define Double dist</span>
-<span>@var dist = function_demo::get_distance(player, Int[123, 45, 678])</span>
+<span>@var dist = function_demo::getDistance(player, Int[123, 45, 678])</span>
 <span>@player You are {{dist}} metres away from the point (123, 45, 678)!</span>
 </code>
         </pre>
@@ -201,7 +201,7 @@ Technically, you don't always need the <code class="inline-code">@var</code> key
 
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
-            <code data-language="msc" class="line-numbers"><span>@define Double dist = function_demo::get_distance(player, Int[123, 45, 678])</span>
+            <code data-language="msc" class="line-numbers"><span>@define Double dist = function_demo::getDistance(player, Int[123, 45, 678])</span>
 <span>@player You are {{dist}} metres away from the point (123, 45, 678)!</span>
 </code>
         </pre>
@@ -209,27 +209,27 @@ which still runs the function and sets the value of <code class="inline-code">di
 
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
-            <code data-language="msc" class="line-numbers"><span>@player You are {{function_demo::get_distance(player, Int[123, 45, 678])}} metres away from the point (123, 45, 678)!</span>
+            <code data-language="msc" class="line-numbers"><span>@player You are {{function_demo::getDistance(player, Int[123, 45, 678])}} metres away from the point (123, 45, 678)!</span>
 </code>
         </pre>
 <code class="inline-code">{{•}}</code> is the <em>evaluation operator</em>: it automatically evaluates everything you put inside it. Here, it's evaluating the expression
 
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
-            <code data-language="msc" class="line-numbers"><span>function_demo::get_distance(player, Int[123, 45, 678])</span>
+            <code data-language="msc" class="line-numbers"><span>function_demo::getDistance(player, Int[123, 45, 678])</span>
 </code>
         </pre>
 which is equal to the distance from the player to (123, 45, 678), which is what we wanted!</p>
 <p><h3 id="test-yourself">Test yourself</p></h3>
 <p>How would you <em>define</em> a function in the <code class="inline-code">function_demo</code> namespace which:
 <ol>
-<li>Chooses a random player from a provided list? <span class="spoiler">/function define function_demo Player choose_random_player(Player[] players)</span></li>
-<li>Takes a list of integers and returns the sum of the biggest two? <span class="spoiler">/function define function_demo Int get_biggest_two_sum(Int[] numbers)</span></li>
-<li>Gives everyone online a mangrove propagule?  <span class="spoiler">/function define function_demo Void give_propagules()</span></li>
+<li>Chooses a random player from a provided list? <span class="spoiler">/function define function_demo Player chooseRandomPlayer(Player[] players)</span></li>
+<li>Takes a list of integers and returns the sum of the biggest two? <span class="spoiler">/function define function_demo Int getBiggestTwoSum(Int[] numbers)</span></li>
+<li>Gives everyone online a mangrove propagule?  <span class="spoiler">/function define function_demo Void givePropagules()</span></li>
 </ol>
 How would you <em>call</em> the following functions in the <code class="inline-code">function_demo</code> namespace from an interact script?
 <ol>
-<li><code class="inline-code">give_ingot(Player p)</code>, to give the player a gold ingot? <span class="spoiler">@var give_ingot(player)</span></li>
+<li><code class="inline-code">giveIngot(Player p)</code>, to give the player a gold ingot? <span class="spoiler">@var giveIngot(player)</span></li>
 <li><code class="inline-code">Int maximum(Int[] numbers)</code>, to set the variable <code class="inline-code">x</code> to the largest number of -4, 10, 17, and 2? <span class="spoiler">@define Int x = maximum(Int[-4, 10, 17, 2])</span></li>
 </ol></p>
 <p><h3 id="more-advanced-notes-and-qui">More advanced notes and quirks</h3>
