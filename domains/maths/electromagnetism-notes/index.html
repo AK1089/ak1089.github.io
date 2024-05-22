@@ -73,7 +73,30 @@ This is very similar to the continuous case:
 This depends only on the field, not the charges.</p>
 <p>A <em>conductor</em> is a region of space where many charges can move freely until they reach equilibrium. This necessitates \( \mathbf{E} = \mathbf{0} \) everywhere in the conductor. This then implies both that <span class="tooltip">\( \phi \) is constant<span class="tooltiptext">This means that the surface is an equipotential, so the electric field must be perpendicular to it.</span></span>, and that \( \rho \) is zero everywhere inside the conductor: all net charge must be on the surface of the conductor.</p>
 <p>Consider a spherical conductor with no net charge. Place a positive plate on the left and negative plate on the right to induce a rightward field. The field lines must be perpendicular to each surface, so they bend, and a surface charge is induced.</p>
-<p></p>
+<p><h3 id="magnetostatics">Magnetostatics</p></h3>
+<p>Now we look at the converse: <span class="tooltip">steady-current situations<span class="tooltiptext">\&#40;\rho = 0 \implies \mathbf{E} = \mathbf{0}\&#41; but \&#40;\mathbf{J} \neq 0\&#41;: note that \&#40;\rho = 0\&#41; only implies the absence of <em>net</em> charge.</span></span>. Maxwell's equations here are
+\[ \begin{align&#42;} \nabla \times \mathbf{B} &= \mu_0 \mathbf{J} \\ \nabla \cdot \mathbf{B} &= 0 \end{align&#42;} \]
+In this situation, as \(\rho = 0\), the net charge in and out of every point in space is null: for example in a wire, all electrons move at the same speed.</p>
+<p>For a surface \(S\) with current \(\mathbf{J}\) flowing through it, we integrate
+\[ \int_S (\nabla \times \mathbf{B}) \cdot d\mathbf{S} = \oint_{\partial S} \mathbf{B} \cdot d\mathbf{r} = \mu_0 \int_S \mathbf{J} \cdot d\mathbf{S} = \mu_0 I \]
+which is <span class="tooltip">Ampère's Law<span class="tooltiptext">Named for André-Marie Ampère, who also has the unit of current the <em>amp</em> named after him.</span></span>, where \(I\) is the current through the surface.</p>
+<p>The general solution to \(\nabla \cdot \mathbf{B} = 0\) is \(\mathbf{B} = \nabla \times \mathbf{A}\) for some vector potential \( \mathbf{A} \). Then
+\[ \nabla \times \mathbf{B} = -\nabla^2 \mathbf{A} + \nabla (\nabla \cdot \mathbf{A}) = \mu_0 \mathbf{J}  \]
+To make this easier to solve, we can do a <em>gauge transformation</em>. Any \(\mathbf{A}' = \mathbf{A} + \nabla \chi(\mathbf{x}) \) works, and we can choose this \(\chi\) so that \( \nabla \cdot \mathbf{A}' = 0 \). Thus without loss of generality, we are solving
+\[ \nabla^2 \mathbf{A} = - \mu_0 \mathbf{J} \text{ where } \nabla \cdot \mathbf{A} = 0 \]
+We can solve this using <span class="tooltip">Green's functions<span class="tooltiptext">Written componentwise, we have that \&#40; \nabla^2 A_i = -\mu_0 J_i \&#41;, which is the Poisson equation.</span></span>:
+\[ \mathbf{A}(\mathbf{r}) = \frac{\mu_0}{4 \pi} \int \frac{\mathbf{J}(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|} \; dV' \]
+Now the magnetic field is the curl of this \(\mathbf{A}\), which gives us the <em>Biot-Savart law</em>:
+\[ \mathbf{B}(\mathbf{r}) = \frac{\mu_0}{4 \pi} \int \mathbf{J}(\mathbf{r}') \times \frac{\mathbf{r}-\mathbf{r}'}{|\mathbf{r}-\mathbf{r}'|^3} \; dV' \]
+or, if the current is on a closed curve,
+\[ \mathbf{B} = \frac{\mu_0 I}{4 \pi} \oint_C d\mathbf{r}' \times \frac{\mathbf{r}-\mathbf{r}'}{|\mathbf{r}-\mathbf{r}'|^3} \; dV' \]
+For a circular loop \(C\) of radius \(R\) carrying current \(I\), we can use Biot-Savart:
+\[ \mathbf{A} = \frac{\mu_0 I}{4 \pi} \oint_C \frac{d\mathbf{r}'}{|\mathbf{r}-\mathbf{r}'|} \]
+We claim that far from the loop, this approximates a <span class="tooltip">magnetic dipole<span class="tooltiptext">An electric dipole is a separate positive and negative point charge. A magnetic dipole is the magnetic equivalent of this.</span></span>. We use the Taylor expansion of the denominator:
+\[ \mathbf{A} = \frac{\mu_0 I}{4 \pi} \oint_C \left( \frac{1}{r} + \frac{\mathbf{r} \cdot \mathbf{r}'}{r^3} \cdots \right) d\mathbf{r}' \]
+The first term is a constant and so vanishes on a closed loop. We take only the second term in the limit.
+For any constant vector \(\mathbf{g}\), the integral of \(\mathbf{g} \cdot \mathbf{r}\) along a closed curve \(C\) is \(\mathbf{S} \times \mathbf{g}\), where  \(\mathbf{S}\) is the <span class="tooltip">vector area<span class="tooltiptext">Defined as \&#40; \int_S \text{d}\mathbf{S} \&#41;</span></span> of the surface \(S\) bounded by \(C\). Thus
+\[ \mathbf{A} \approx \frac{\mu_0 I}{4 \pi} \frac{I \mathbf{S} \times \mathbf{r}}{r^3}. \]</p>
 
         </div>
         <h6 id="copyright">&#169; Avish Kumar 2024</h6>
