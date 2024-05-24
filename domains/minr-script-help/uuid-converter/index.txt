@@ -111,10 +111,14 @@ Okay, here's what we want our function to be able to do. Say we have a pig that'
 - It returns an `Entity` object which corresponds to our pig.
 </ol>
 
-Let's write this piece by piece.
+```minecraft
+/function define aktools Entity selectorToEntity(String selectorString, String world)
+```
+
+This defines the function. Let's begin writing it.
 
 ```msc
-&num; Function aktools::selectorToUUID(String selectorString, String world) -> Optional&lt;Entity&gt;
+&num; Function aktools::selectorToEntity(String selectorString, String world) -> Optional&lt;Entity&gt;
  
 &num; these are the alphanumeric characters used as digits in hexadecimal
 @define String[] hexadecimalDigits = String["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
@@ -130,7 +134,7 @@ Let's write this piece by piece.
 @define String[] u = String[]
 ```
 
-This should be good setup-wise. We have a few variables we need, which we'll use to work with UUIDs. In the end, `u` will be a list with the hexadecimal digits of the UUID. Note that `powers` is the list of powers of 16:
+This should be good setup-wise. We have a function `aktools::selectorToUUID`. It takes in two strings: `selectorString` and `world`, which are the strings we decided on earlier. We also have a few variables we need, which we'll use to work with UUIDs. In the end, `u` will be a list with the hexadecimal digits of the UUID. Note that `powers` is the list of powers of 16:
 
 ```powers
 00000001 (base 16) = 16^0 = 1
@@ -143,4 +147,4 @@ This should be good setup-wise. We have a few variables we need, which we'll use
 10000000 (base 16) = 16^7 = 268435456
 ```
 
-Now, let's work with them.
+Now, let's work with them. We need to get the cu

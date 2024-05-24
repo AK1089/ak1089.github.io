@@ -106,11 +106,17 @@ Well, let's make one!</p>
 <li>We pass in a string like <code class="inline-code">type=pig,x=113,dx=20,y=35,dy=20,z=668</code>, and the world we want to search in (say <code class="inline-code">Theta</code>).</li>
 <li>It returns an <code class="inline-code">Entity</code> object which corresponds to our pig.</li>
 </ol></p>
-<p>Let's write this piece by piece.</p>
 <p>
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
-            <code data-language="msc" class="line-numbers"><span>&num; Function aktools::selectorToUUID(String selectorString, String world) -> Optional&lt;Entity&gt;</span>
+            <code data-language="minecraft" class="line-numbers"><span>/function define aktools Entity selectorToEntity(String selectorString, String world)</span>
+</code>
+        </pre></p>
+<p>This defines the function. Let's begin writing it.</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>&num; Function aktools::selectorToEntity(String selectorString, String world) -> Optional&lt;Entity&gt;</span>
 <span> </span>
 <span>&num; these are the alphanumeric characters used as digits in hexadecimal</span>
 <span>@define String[] hexadecimalDigits = String["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]</span>
@@ -126,8 +132,8 @@ Well, let's make one!</p>
 <span>@define String[] u = String[]</span>
 </code>
         </pre></p>
-<p>This should be good setup-wise. We have a few variables we need, which we'll use to work with UUIDs. In the end, <code class="inline-code">u</code> will be a list with the hexadecimal digits of the UUID. Note that <code class="inline-code">powers</code> is the list of powers of 16:
-
+<p>This should be good setup-wise. We have a function <code class="inline-code">aktools::selectorToUUID</code>. It takes in two strings: <code class="inline-code">selectorString</code> and <code class="inline-code">world</code>, which are the strings we decided on earlier. We also have a few variables we need, which we'll use to work with UUIDs. In the end, <code class="inline-code">u</code> will be a list with the hexadecimal digits of the UUID. Note that <code class="inline-code">powers</code> is the list of powers of 16:</p>
+<p>
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
             <code data-language="powers" class="line-numbers"><span>00000001 (base 16) = 16^0 = 1</span>
@@ -140,6 +146,7 @@ Well, let's make one!</p>
 <span>10000000 (base 16) = 16^7 = 268435456</span>
 </code>
         </pre></p>
+<p>Now, let's work with them. We need to get the cu</p>
 
         </div>
         <h6 id="copyright">&#169; Avish Kumar 2024</h6>

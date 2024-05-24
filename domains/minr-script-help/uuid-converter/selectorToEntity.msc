@@ -1,4 +1,4 @@
-# Function aktools::selectorToUUID(String selectorString, String world) -> Optional<Entity>
+# Function aktools::selectorToEntity(String selectorString, String world) -> Optional<Entity>
 
 # these are the alphanumeric characters used as digits in hexadecimal
 @define String[] hexadecimalDigits = String["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
