@@ -18,7 +18,7 @@
         </a>
         <div id="main-content">
             <p><script src= "script.js"></script>
-<h2 id="let-s-build-a-selector-to-entity-converter-or-all-about-uuids">Let's Build a Selector-To-Entity Converter (or, All About UUIDs)</p></h2>
+<h3 id="let-s-build-a-selector-to-entity-converter-or-all-about-uuids">Let's Build a Selector-To-Entity Converter (or, All About UUIDs)</p></h3>
 <p>You're probably familiar with UUIDs in Minecraft. They're the weird strings of numbers and letters that everyone seems to have associated with their username - you might have seen them on <a href="https://namemc.com/">NameMC</a>, for example. Mine is <code class="inline-code">e62bfa1e-f625-4ad3-9403-7e7f8e14d0f1</code>. In today's article, we're going to explore what these mean and why they're useful, and build a useful function which allows you to get them for arbitrary entities.</p>
 <p><div class="info-box" style="--primary-color: #7F00B5; --secondary-color: #EEEEEE;"><u><strong>Contents:</strong></u>
 <ul>
@@ -27,7 +27,7 @@
 <li><a href="#what-are-we-building-and-why">What are we building and why?</a></li>
 <li><a href="#creating-a-selector-to-entity-converter-in-msc">Let's make our function!</a></li>
 </ul></div></p>
-<p><h2 id="what-is-a-uuid">What is a UUID?</p></h2>
+<p><h3 id="what-is-a-uuid">What is a UUID?</p></h3>
 <p>A UUID, short for <em><u>U</u>niversally <u>U</u>nique <u>ID</u>entifier</em>, is a 32-character long <a href="https://byjus.com/maths/hexadecimal-number-system/">hexadecimal</a> number with dashes to separate it into blocks of <code class="inline-code">8-4-4-4-12</code>. Hexadecimal is a number system with 16 digits (hexa = 6, deci = 10), which are 0-9 then A-F. For example, the number <code class="inline-code">23</code> in hexadecimal represents what we would think of as 35, since 35 = 2 × 16 + 3 × 1.</p>
 <p>The "point" of UUIDs is that they really are unique, and you can (almost) guarantee this <em>without having to put in effort into ensuring it manually</em>. Why? Well, let's understand the structure of UUIDs to find out.</p>
 <p>
@@ -41,7 +41,7 @@
 <p>Why is this unique? Well, probability!</p>
 <p>The 13th digit is always 4. The 17th digit can be any of 4 possibilities. The 30 other digits each have 16 possibilities. This means the number of total possible UUIDs is \( 4 \times 16^{30} = 2^{122} = 5,316,911,983,139,663,491,615,228,241,121,378,304 \), or over 5 billion billion billion billion. This is a mindblowingly large number. To put it in perspective, if you generated one UUID every second <em>since the dawn of the universe</em>, there would be an <span class="tooltip">over 98% chance<span class="tooltiptext">\&#40; \mathbb{P}&#40;\text{collision}&#41; \approx 1 - e^{-t^2/2n} \\ = 1 - e^{-1.89 \cdot 10^{35} / 2^{123}} \approx 0.0176 \&#41;</span></span> that they were <em>all</em> unique!</p>
 <p>That's pretty useful! We can generate these things pretty easily and cheaply, and have a guarantee that they're unique, so we can use them as our internal references for things without worrying that something will break because we've given two things the same name.</p>
-<p>#&num; How does Minecraft use UUIDs?</p>
+<p><h3 id="how-does-minecraft-use-uuids">How does Minecraft use UUIDs?</p></h3>
 <p>Minecraft does this with every entity. This means every single entity (including players) has one of these unique codes. We often have to reference these UUIDs, for example when running pretty much every command targeting an entity, or when constructing an <code class="inline-code">Entity</code> object in MSC.</p>
 <p>Sometimes we want the UUID of an entity. Let's see where it's displayed in <code class="inline-code">/data get entity</code>, tried on a minecart which I know to have a UUID of <code class="inline-code">11ac0982-00e1-4f5e-a8dc-c96258766524</code>.</p>
 <p><div class="image-container"><img src="minecart.png" alt="What you see when looking at the data of an entity (here, the minecart)"><div class="caption">What you see when looking at the data of an entity (here, the minecart)</div></div></p>
@@ -80,7 +80,7 @@
 </code>
         </pre></p>
 <p>Fantastic! This means we know how our numbers are stored. We'll keep this in mind for when we're writing our code.</p>
-<p><h2 id="what-are-we-building-and-why">What are we building and why?</p></h2>
+<p><h3 id="what-are-we-building-and-why">What are we building and why?</p></h3>
 <p><span class="tooltip">A lot of the time<span class="tooltiptext">Well. Maybe for some people.</span></span>, you'll be writing scripts which deal with entities. This is all well and good if you have an <code class="inline-code">Entity</code> object already, or if you just want to use default Minecraft commands. For example,</p>
 <p>
         <pre style="position: relative;">
@@ -100,7 +100,7 @@
 <p>What if there was a way to turn <code class="inline-code">@e[type=pig,distance=..5,sort=nearest,limit=1]</code> into <code class="inline-code">27f6a0b7-db1c-4bfa-ac43-148a88b53c3d</code> (or whatever the UUID of the pig really is?)
  
 Well, let's make one!</p>
-<p><h2 id="creating-a-selector-to-entity-converter-in-msc">Creating a selector-to-Entity converter in MSC</p></h2>
+<p><h3 id="creating-a-selector-to-entity-converter-in-msc">Creating a selector-to-Entity converter in MSC</p></h3>
 <p>Okay, here's what we want our function to be able to do. Say we have a pig that's somewhere in the 20x20x20 cube centred at (123, 45, 678). We want to use it as an <code class="inline-code">Entity</code>, say to <span class="tooltip">eject all its passengers<span class="tooltiptext">This is just a random example. Entity objects are pretty useful and this is just one of the methods on them.</span></span>. This means we need a function which takes entity selectors (<code class="inline-code">@e[...]</code>) and returns <code class="inline-code">Entity</code> objects.</p>
 <p><ol>
 <li>We pass in a string like <code class="inline-code">type=pig,x=113,dx=20,y=35,dy=20,z=668</code>, and the world we want to search in (say <code class="inline-code">Theta</code>).</li>
