@@ -33,7 +33,7 @@ The 13th digit is always 4. The 17th digit can be any of 4 possibilities. The 30
 
 That's pretty useful! We can generate these things pretty easily and cheaply, and have a guarantee that they're unique, so we can use them as our internal references for things without worrying that something will break because we've given two things the same name.
 
-#&num; How does Minecraft use UUIDs?
+## How does Minecraft use UUIDs?
 
 Minecraft does this with every entity. This means every single entity (including players) has one of these unique codes. We often have to reference these UUIDs, for example when running pretty much every command targeting an entity, or when constructing an `Entity` object in MSC.
 
