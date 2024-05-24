@@ -16,6 +16,8 @@ False
 42
 ```
 
+([explanation](floating-points-and-42))
+
 #### Lambda Arguments Are Captured at Definition Time
 ```python
 >>> funcs = [(lambda: i) for i in range(3)]
