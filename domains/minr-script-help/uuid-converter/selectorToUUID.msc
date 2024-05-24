@@ -1,0 +1,51 @@
+# Function aktools::selectorToUUID(String selectorString, String world) -> Optional<Entity>
+
+# these are the alphanumeric characters used as digits in hexadecimal
+@define String[] hexadecimalDigits = String["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+
+# pow will store the value of 16^n for some n, ie. some basic higher digit value in hexadecimal
+# for example, "10" is 16 in hexadecimal, "100" is 256, "1000" is 4096, etc.
+@define Long pow = 0L
+
+# stores the integer UUID being worked with at any given time
+# this must be a Long, as Int values are capped at 2^31 - 1 = 2,147,483,647 and we deal with larger numbers
+@define Long currentUUID = 0L
+
+# this is just used to cache the value of a calculation later on
+@define Int indexOfNextDigit = 0
+
+# the characters of the UUID in hexadecimal
+@define String[] u = String[]
+
+# UUIDs are stored as four decimal integers - this gets all of them one-by-one
+@for Int i in list::range(0, 4)
+
+    # minecraft command to get UUID - must be stored as a Long for further processing
+    @var currentUUID = Long(util::executeAndQueryResult("/execute in {{world}} run data get entity @e[{{selectorString}},limit=1] UUID[{{i}}]"))
+
+    # half the time, this number is negative due to integer overflows.
+    # this line makes it positive: 4294967296 is the unsigned 32-bit integer limit, equal to 2^32.
+    @if currentUUID < 0
+        @var currentUUID = Long(4294967296L + currentUUID)
+    @fi
+
+    # converts decimal to hexadecimal using backwards-iterating powers of 16
+    @for Int pow_inverse in list::range(0, 8)
+        @var pow = Long(16 ^ (7 - pow_inverse))
+
+        # caches the value of the digit, which is equal to the number of complete times the basic place value fits (/ is integer division)
+        @var indexOfNextDigit = Int(currentUUID / pow)
+
+        # adds the correct hex character to the list u
+        @var u.append(hexadecimalDigits[indexOfNextDigit])
+
+        # reduces the UUID by stripping off the first hex digit (which is a subtraction in decimal)
+        @var currentUUID = Long(currentUUID - Long(indexOfNextDigit * pow))
+
+    @done
+@done
+
+    
+# vanilla UUIDs have dashes in them splitting the 32-character UUID into blocks of 8-4-4-4-12
+@define String stringifiedUUID = u[0] + u[1] + u[2] + u[3] + u[4] + u[5] + u[6] + u[7] + "-" + u[8] + u[9] + u[10] + u[11] + "-" + u[12] + u[13] + u[14] + u[15] + "-" + u[16] + u[17] + u[18] + u[19] + "-" + u[20] + u[21] + u[22] + u[23] + u[24] + u[25] + u[26] + u[27] + u[28] + u[29] + u[30] + u[31]
+@return Entity(stringifiedUUID)
