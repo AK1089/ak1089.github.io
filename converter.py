@@ -60,7 +60,7 @@ def convert_markdown_to_html(input_file, output_file, depth):
             <code data-language="{language}" class="line-numbers">{formatted_code}</code>
         </pre>'''
 
-    content = re.sub(r'```(\w+)\n(.*?)```', code_block_replacer, content, flags=re.DOTALL)
+    content = re.sub(r'```(\S*)\n(.*?)```', code_block_replacer, content, flags=re.DOTALL)
 
     # Inline code
     content = re.sub(r'`([^`]+)`', r'<code class="inline-code">\1</code>', content)
