@@ -18,14 +18,14 @@
         </a>
         <div id="main-content">
             <p><script src= "script.js"></script>
-<h2 id="let-s-build-a-selector-to-uuid-converter">Let's Build a Selector-To-UUID Converter</p></h2>
+<h2 id="let-s-build-a-selector-to-entity-converter-or-all-about-uuids">Let's Build a Selector-To-Entity Converter (or, All About UUIDs)</p></h2>
 <p>You're probably familiar with UUIDs in Minecraft. They're the weird strings of numbers and letters that everyone seems to have associated with their username - you might have seen them on <a href="https://namemc.com/">NameMC</a>, for example. Mine is <code class="inline-code">e62bfa1e-f625-4ad3-9403-7e7f8e14d0f1</code>. In today's article, we're going to explore what these mean and why they're useful, and build a useful function which allows you to get them for arbitrary entities.</p>
 <p><div class="info-box" style="--primary-color: #7F00B5; --secondary-color: #EEEEEE;"><u><strong>Contents:</strong></u>
 <ul>
 <li><a href="#what-is-a-uuid">What is a UUID?</a></li>
 <li><a href="#how-does-minecraft-use-uuids">How does Minecraft use them?</a></li>
 <li><a href="#what-are-we-building-and-why">What are we building and why?</a></li>
-<li><a href="#creating-a-selector-to-uuid-converter-in-msc">Let's make a function!</a></li>
+<li><a href="#creating-a-selector-to-entity-converter-in-msc">Let's make our function!</a></li>
 </ul></div></p>
 <p><h2 id="what-is-a-uuid">What is a UUID?</p></h2>
 <p>A UUID, short for <em><u>U</u>niversally <u>U</u>nique <u>ID</u>entifier</em>, is a 32-character long <a href="https://byjus.com/maths/hexadecimal-number-system/">hexadecimal</a> number with dashes to separate it into blocks of <code class="inline-code">8-4-4-4-12</code>. Hexadecimal is a number system with 16 digits (hexa = 6, deci = 10), which are 0-9 then A-F. For example, the number <code class="inline-code">23</code> in hexadecimal represents what we would think of as 35, since 35 = 2 × 16 + 3 × 1.</p>
@@ -79,12 +79,34 @@
 <span>= -                      1461925534</span>
 </code>
         </pre></p>
-<p>
-1461925533
-Fantastic! This means we know how our numbers are stored. We'll keep this in mind for when we're writing our code.</p>
-<p></p>
+<p>Fantastic! This means we know how our numbers are stored. We'll keep this in mind for when we're writing our code.</p>
 <p><h2 id="what-are-we-building-and-why">What are we building and why?</p></h2>
-<p><h2 id="creating-a-selector-to-uuid-converter-in-msc">Creating a selector-to-UUID converter in MSC</p></h2>
+<p><span class="tooltip">A lot of the time<span class="tooltiptext">Well. Maybe for some people.</span></span>, you'll be writing scripts which deal with entities. This is all well and good if you have an <code class="inline-code">Entity</code> object already, or if you just want to use default Minecraft commands. For example,</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>@bypass /minecraft:kill @e[type=pig,distance=..5,sort=nearest,limit=1]</span>
+</code>
+        </pre></p>
+<p>kills the nearest pig to the player if it's within 5 blocks, and</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>@var some_namespace::clickedEntityHealth = entity.getHealth()</span>
+</code>
+        </pre></p>
+<p>(<span class="tooltip">if applied as an entity script<span class="tooltiptext">This is so the entity variable is defined, which it is by default in an entity script - in fact it is the entity the script is bound to.</span></span>) sets the variable <code class="inline-code">Int some_namespace::clickedEntityHealth</code> to the health of the entity the script is on.</p>
+<p>But this doesn't cover every use-case! Sometimes you want to select entities, and do things to them that you can do in MSC. There's no standard way to do this - you can only select entities using <code class="inline-code">@e[...]</code> if you're using Minecraft command selectors, and you can't run MSC things on them.</p>
+<p>What if there was a way to turn <code class="inline-code">@e[type=pig,distance=..5,sort=nearest,limit=1]</code> into <code class="inline-code">27f6a0b7-db1c-4bfa-ac43-148a88b53c3d</code> (or whatever the UUID of the pig really is?)
+ 
+Well, let's make one!</p>
+<p><h2 id="creating-a-selector-to-entity-converter-in-msc">Creating a selector-to-Entity converter in MSC</p></h2>
+<p>Okay, here's what we want our function to be able to do. Say we have a pig that's somewhere in the 20x20x20 cube centred at (123, 45, 678). There are a bunch of pigs there, but we specifically want one we've given the tag <code class="inline-code">piggy</code> to. We want to use it as an <code class="inline-code">Entity</code>, say to <span class="tooltip">eject all its passengers<span class="tooltiptext">This is just a random example. Entity objects are pretty useful and this is just one of the methods on them.</span></span>. This means we need a function which takes entity selectors (<code class="inline-code">@e[...]</code>) and returns <code class="inline-code">Entity</code> objects.</p>
+<p><ol>
+<li>We pass in a string like <code class="inline-code">type=pig,x=113,dx=20,y=35,dy=20,z=668</code>, and the world we want to search in (say <code class="inline-code">Theta</code>).</li>
+<li>It returns an <code class="inline-code">Entity</code> object which corresponds to our pig.</li>
+</ol></p>
+<p>Let's write this piece by piece.</p>
 
         </div>
         <h6 id="copyright">&#169; Avish Kumar 2024</h6>

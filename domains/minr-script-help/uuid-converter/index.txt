@@ -1,5 +1,5 @@
 <script src= "script.js"></script>
-## Let's Build a Selector-To-UUID Converter
+## Let's Build a Selector-To-Entity Converter (or, All About UUIDs)
 
 You're probably familiar with UUIDs in Minecraft. They're the weird strings of numbers and letters that everyone seems to have associated with their username - you might have seen them on [NameMC](https://namemc.com/), for example. Mine is `e62bfa1e-f625-4ad3-9403-7e7f8e14d0f1`. In today's article, we're going to explore what these mean and why they're useful, and build a useful function which allows you to get them for arbitrary entities.
 
@@ -9,7 +9,7 @@ __**Contents:**__
 - [What is a UUID?](#what-is-a-uuid)
 - [How does Minecraft use them?](#how-does-minecraft-use-uuids)
 - [What are we building and why?](#what-are-we-building-and-why)
-- [Let's make a function!](#creating-a-selector-to-uuid-converter-in-msc)
+- [Let's make our function!](#creating-a-selector-to-entity-converter-in-msc)
 </ul>
 """
 
@@ -82,7 +82,7 @@ Fantastic! This means we know how our numbers are stored. We'll keep this in min
 
 ## What are we building and why?
 
-A lot of the time, you'll be writing scripts which deal with entities. This is all well and good if you have an `Entity` object already, or if you just want to use default Minecraft commands. For example,
+[A lot of the time](!Well. Maybe for some people.), you'll be writing scripts which deal with entities. This is all well and good if you have an `Entity` object already, or if you just want to use default Minecraft commands. For example,
 
 ```msc
 @bypass /minecraft:kill @e[type=pig,distance=..5,sort=nearest,limit=1]
@@ -94,11 +94,21 @@ kills the nearest pig to the player if it's within 5 blocks, and
 @var some_namespace::clickedEntityHealth = entity.getHealth()
 ```
 
-(if applied as an entity script) sets the variable `Int some_namespace::clickedEntityHealth` to the health of the entity the script is on.
+([if applied as an entity script](!This is so the entity variable is defined, which it is by default in an entity script - in fact it is the entity the script is bound to.)) sets the variable `Int some_namespace::clickedEntityHealth` to the health of the entity the script is on.
 
 But this doesn't cover every use-case! Sometimes you want to select entities, and do things to them that you can do in MSC. There's no standard way to do this - you can only select entities using `@e[...]` if you're using Minecraft command selectors, and you can't run MSC things on them.
 
 What if there was a way to turn `@e[type=pig,distance=..5,sort=nearest,limit=1]` into `27f6a0b7-db1c-4bfa-ac43-148a88b53c3d` (or whatever the UUID of the pig really is?)
+ 
+Well, let's make one!
 
+## Creating a selector-to-Entity converter in MSC
 
-## Creating a selector-to-UUID converter in MSC
+Okay, here's what we want our function to be able to do. Say we have a pig that's somewhere in the 20x20x20 cube centred at (123, 45, 678). There are a bunch of pigs there, but we specifically want one we've given the tag `piggy` to. We want to use it as an `Entity`, say to [eject all its passengers](!This is just a random example. Entity objects are pretty useful and this is just one of the methods on them.). This means we need a function which takes entity selectors (`@e[...]`) and returns `Entity` objects.
+
+<ol>
+- We pass in a string like `type=pig,x=113,dx=20,y=35,dy=20,z=668`, and the world we want to search in (say `Theta`).
+- It returns an `Entity` object which corresponds to our pig.
+</ol>
+
+Let's write this piece by piece.
