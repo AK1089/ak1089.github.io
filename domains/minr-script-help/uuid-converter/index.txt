@@ -23,7 +23,7 @@ The "point" of UUIDs is that they really are unique, and you can (almost) guaran
 xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
 ```
 
-The `4` in position 13 represents the version of the UUID (since Minecraft uses version 4). The `y` in position 17 represents the variant: Minecraft uses variant 4.1, so [this digit can be `8`, `9`, `a`, or `b`](!The two most significant bits of the nibble corresponding to the 17th hexadecimal digit are set to 10, leaving the possible values as these four: 1000, 1001, 1010, 1011.). This specification is described in [Section 4.4 of the IETF's RFC4122 document](https://datatracker.ietf.org/doc/html/rfc4122#section-4.4) from 2005.
+The `4` in position 13 represents the version of the UUID (since Minecraft uses version 4). The `y` in position 17 represents the variant: Minecraft uses variant 4.1, so [this digit can be `8`, `9`, `a`, or `b`](!The two most significant bits of the nibble corresponding to the 17th hexadecimal digit are set to 10, leaving the possible values as these four: 1000, 1001, 1010, 1011.). This specification is described in [Section 4.4 of the IETF's RFC4122 document](https://datatracker.ietf.org/doc/html/rfc4122#section-4.4) from [2005](!I am *just* older than the Version 4 UUID, which is shocking to me.).
 
 **Every single other part of the UUID is generated completely at random.**
 
@@ -33,7 +33,7 @@ The 13th digit is always 4. The 17th digit can be any of 4 possibilities. The 30
 
 That's pretty useful! We can generate these things pretty easily and cheaply, and have a guarantee that they're unique, so we can use them as our internal references for things without worrying that something will break because we've given two things the same name.
 
-## How does Minecraft use UUIDs?
+#&num; How does Minecraft use UUIDs?
 
 Minecraft does this with every entity. This means every single entity (including players) has one of these unique codes. We often have to reference these UUIDs, for example when running pretty much every command targeting an entity, or when constructing an `Entity` object in MSC.
 
@@ -112,3 +112,35 @@ Okay, here's what we want our function to be able to do. Say we have a pig that'
 </ol>
 
 Let's write this piece by piece.
+
+```msc
+&num; Function aktools::selectorToUUID(String selectorString, String world) -> Optional&lt;Entity&gt;
+ 
+&num; these are the alphanumeric characters used as digits in hexadecimal
+@define String[] hexadecimalDigits = String["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+ 
+&num; powers stores the value of 16^n for each n, ie. some basic higher digit value in hexadecimal
+@define Long[] powers = [268435456, 16777216, 1048576, 65536, 4096, 256, 16, 1]
+ 
+&num; stores the integer UUID being worked with at any given time
+&num; this must be a Long, as Int values are capped at 2^31 - 1 = 2,147,483,647 and we deal with larger numbers
+@define Long currentUUID
+ 
+&num; the characters of the UUID in hexadecimal
+@define String[] u = String[]
+```
+
+This should be good setup-wise. We have a few variables we need, which we'll use to work with UUIDs. In the end, `u` will be a list with the hexadecimal digits of the UUID. Note that `powers` is the list of powers of 16:
+
+```powers
+00000001 (base 16) = 16^0 = 1
+00000010 (base 16) = 16^1 = 16
+00000100 (base 16) = 16^2 = 256
+00001000 (base 16) = 16^3 = 4096
+00010000 (base 16) = 16^4 = 65536
+00100000 (base 16) = 16^5 = 1048576
+01000000 (base 16) = 16^6 = 16777216
+10000000 (base 16) = 16^7 = 268435456
+```
+
+Now, let's work with them.

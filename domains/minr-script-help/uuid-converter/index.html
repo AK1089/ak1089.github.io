@@ -36,12 +36,12 @@
             <code data-language="uuid-v4.1" class="line-numbers"><span>xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx</span>
 </code>
         </pre></p>
-<p>The <code class="inline-code">4</code> in position 13 represents the version of the UUID (since Minecraft uses version 4). The <code class="inline-code">y</code> in position 17 represents the variant: Minecraft uses variant 4.1, so <span class="tooltip">this digit can be <code class="inline-code">8</code>, <code class="inline-code">9</code>, <code class="inline-code">a</code>, or <code class="inline-code">b</code><span class="tooltiptext">The two most significant bits of the nibble corresponding to the 17th hexadecimal digit are set to 10, leaving the possible values as these four: 1000, 1001, 1010, 1011.</span></span>. This specification is described in <a href="https://datatracker.ietf.org/doc/html/rfc4122#section-4.4">Section 4.4 of the IETF's RFC4122 document</a> from 2005.</p>
+<p>The <code class="inline-code">4</code> in position 13 represents the version of the UUID (since Minecraft uses version 4). The <code class="inline-code">y</code> in position 17 represents the variant: Minecraft uses variant 4.1, so <span class="tooltip">this digit can be <code class="inline-code">8</code>, <code class="inline-code">9</code>, <code class="inline-code">a</code>, or <code class="inline-code">b</code><span class="tooltiptext">The two most significant bits of the nibble corresponding to the 17th hexadecimal digit are set to 10, leaving the possible values as these four: 1000, 1001, 1010, 1011.</span></span>. This specification is described in <a href="https://datatracker.ietf.org/doc/html/rfc4122#section-4.4">Section 4.4 of the IETF's RFC4122 document</a> from <span class="tooltip">2005<span class="tooltiptext">I am <em>just</em> older than the Version 4 UUID, which is shocking to me.</span></span>.</p>
 <p><strong>Every single other part of the UUID is generated completely at random.</strong></p>
 <p>Why is this unique? Well, probability!</p>
 <p>The 13th digit is always 4. The 17th digit can be any of 4 possibilities. The 30 other digits each have 16 possibilities. This means the number of total possible UUIDs is \( 4 \times 16^{30} = 2^{122} = 5,316,911,983,139,663,491,615,228,241,121,378,304 \), or over 5 billion billion billion billion. This is a mindblowingly large number. To put it in perspective, if you generated one UUID every second <em>since the dawn of the universe</em>, there would be an <span class="tooltip">over 98% chance<span class="tooltiptext">\&#40; \mathbb{P}&#40;\text{collision}&#41; \approx 1 - e^{-t^2/2n} \\ = 1 - e^{-1.89 \cdot 10^{35} / 2^{123}} \approx 0.0176 \&#41;</span></span> that they were <em>all</em> unique!</p>
 <p>That's pretty useful! We can generate these things pretty easily and cheaply, and have a guarantee that they're unique, so we can use them as our internal references for things without worrying that something will break because we've given two things the same name.</p>
-<p><h2 id="how-does-minecraft-use-uuids">How does Minecraft use UUIDs?</p></h2>
+<p>#&num; How does Minecraft use UUIDs?</p>
 <p>Minecraft does this with every entity. This means every single entity (including players) has one of these unique codes. We often have to reference these UUIDs, for example when running pretty much every command targeting an entity, or when constructing an <code class="inline-code">Entity</code> object in MSC.</p>
 <p>Sometimes we want the UUID of an entity. Let's see where it's displayed in <code class="inline-code">/data get entity</code>, tried on a minecart which I know to have a UUID of <code class="inline-code">11ac0982-00e1-4f5e-a8dc-c96258766524</code>.</p>
 <p><div class="image-container"><img src="minecart.png" alt="What you see when looking at the data of an entity (here, the minecart)"><div class="caption">What you see when looking at the data of an entity (here, the minecart)</div></div></p>
@@ -107,6 +107,39 @@ Well, let's make one!</p>
 <li>It returns an <code class="inline-code">Entity</code> object which corresponds to our pig.</li>
 </ol></p>
 <p>Let's write this piece by piece.</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>&num; Function aktools::selectorToUUID(String selectorString, String world) -> Optional&lt;Entity&gt;</span>
+<span> </span>
+<span>&num; these are the alphanumeric characters used as digits in hexadecimal</span>
+<span>@define String[] hexadecimalDigits = String["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]</span>
+<span> </span>
+<span>&num; powers stores the value of 16^n for each n, ie. some basic higher digit value in hexadecimal</span>
+<span>@define Long[] powers = [268435456, 16777216, 1048576, 65536, 4096, 256, 16, 1]</span>
+<span> </span>
+<span>&num; stores the integer UUID being worked with at any given time</span>
+<span>&num; this must be a Long, as Int values are capped at 2^31 - 1 = 2,147,483,647 and we deal with larger numbers</span>
+<span>@define Long currentUUID</span>
+<span> </span>
+<span>&num; the characters of the UUID in hexadecimal</span>
+<span>@define String[] u = String[]</span>
+</code>
+        </pre></p>
+<p>This should be good setup-wise. We have a few variables we need, which we'll use to work with UUIDs. In the end, <code class="inline-code">u</code> will be a list with the hexadecimal digits of the UUID. Note that <code class="inline-code">powers</code> is the list of powers of 16:
+
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="powers" class="line-numbers"><span>00000001 (base 16) = 16^0 = 1</span>
+<span>00000010 (base 16) = 16^1 = 16</span>
+<span>00000100 (base 16) = 16^2 = 256</span>
+<span>00001000 (base 16) = 16^3 = 4096</span>
+<span>00010000 (base 16) = 16^4 = 65536</span>
+<span>00100000 (base 16) = 16^5 = 1048576</span>
+<span>01000000 (base 16) = 16^6 = 16777216</span>
+<span>10000000 (base 16) = 16^7 = 268435456</span>
+</code>
+        </pre></p>
 
         </div>
         <h6 id="copyright">&#169; Avish Kumar 2024</h6>
