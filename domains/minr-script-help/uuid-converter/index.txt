@@ -34,7 +34,9 @@ That's pretty useful! We can generate these things pretty easily and cheaply, an
 
 ## How does Minecraft use UUIDs?
 
-Minecraft does this with every entity. This means every single entity (including players) has one of these unique codes.
+Minecraft does this with every entity. This means every single entity (including players) has one of these unique codes. We often have to reference these UUIDs, for example when running pretty much every command targeting an entity, or when constructing an `Entity` object in MSC.
+
+Sometimes we want the UUIDs of an entity.
 
 ## What are we building and why?
 

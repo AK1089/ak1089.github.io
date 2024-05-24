@@ -41,7 +41,8 @@
 <p>The 13th digit is always 4. The 17th digit can be any of 4 possibilities. The 30 other digits each have 16 possibilities. This means the number of total possible UUIDs is \( 4 \times 16^{30} = 2^{122} = 5,316,911,983,139,663,491,615,228,241,121,378,304 \), or over 5 billion billion billion billion. This is a mindblowingly large number. To put it in perspective, if you generated one UUID every second <em>since the dawn of the universe</em>, there would be an <span class="tooltip">over 98% chance<span class="tooltiptext">\&#40; \mathbb{P}&#40;\text{collision}&#41; \approx 1 - e^{-t^2/2n} \\ = 1 - e^{-1.89 \cdot 10^{35} / 2^{123}} \approx 0.0176 \&#41;</span></span> that they were <em>all</em> unique!</p>
 <p>That's pretty useful! We can generate these things pretty easily and cheaply, and have a guarantee that they're unique, so we can use them as our internal references for things without worrying that something will break because we've given two things the same name.</p>
 <p><h2 id="how-does-minecraft-use-uuids">How does Minecraft use UUIDs?</p></h2>
-<p>Minecraft does this with every entity. This means every single entity (including players) has one of these unique codes.</p>
+<p>Minecraft does this with every entity. This means every single entity (including players) has one of these unique codes. We often have to reference these UUIDs, for example when running pretty much every command targeting an entity, or when constructing an <code class="inline-code">Entity</code> object in MSC.</p>
+<p>Sometimes we want the UUIDs of an entity.</p>
 <p><h2 id="what-are-we-building-and-why">What are we building and why?</p></h2>
 <p><h2 id="creating-a-selector-to-uuid-converter-in-msc">Creating a selector-to-UUID converter in MSC</p></h2>
 
