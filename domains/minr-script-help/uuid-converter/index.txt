@@ -1,5 +1,5 @@
 <script src= "script.js"></script>
-## Let's Build a Selector-To-Entity Converter (or, All About UUIDs)
+### Let's Build a Selector-To-Entity Converter (or, All About UUIDs)
 
 You're probably familiar with UUIDs in Minecraft. They're the weird strings of numbers and letters that everyone seems to have associated with their username - you might have seen them on [NameMC](https://namemc.com/), for example. Mine is `e62bfa1e-f625-4ad3-9403-7e7f8e14d0f1`. In today's article, we're going to explore what these mean and why they're useful, and build a useful function which allows you to get them for arbitrary entities.
 
@@ -13,7 +13,7 @@ __**Contents:**__
 </ul>
 """
 
-## What is a UUID?
+### What is a UUID?
 
 A UUID, short for *__U__niversally __U__nique __ID__entifier*, is a 32-character long [hexadecimal](https://byjus.com/maths/hexadecimal-number-system/) number with dashes to separate it into blocks of `8-4-4-4-12`. Hexadecimal is a number system with 16 digits (hexa = 6, deci = 10), which are 0-9 then A-F. For example, the number `23` in hexadecimal represents what we would think of as 35, since 35 = 2 × 16 + 3 × 1.
 
@@ -80,7 +80,7 @@ But now let's take `10101000110111001100100101100010` and represent it as a 32-b
 
 Fantastic! This means we know how our numbers are stored. We'll keep this in mind for when we're writing our code.
 
-## What are we building and why?
+### What are we building and why?
 
 [A lot of the time](!Well. Maybe for some people.), you'll be writing scripts which deal with entities. This is all well and good if you have an `Entity` object already, or if you just want to use default Minecraft commands. For example,
 
@@ -102,7 +102,7 @@ What if there was a way to turn `@e[type=pig,distance=..5,sort=nearest,limit=1]`
  
 Well, let's make one!
 
-## Creating a selector-to-Entity converter in MSC
+### Creating a selector-to-Entity converter in MSC
 
 Okay, here's what we want our function to be able to do. Say we have a pig that's somewhere in the 20x20x20 cube centred at (123, 45, 678). We want to use it as an `Entity`, say to [eject all its passengers](!This is just a random example. Entity objects are pretty useful and this is just one of the methods on them.). This means we need a function which takes entity selectors (`@e[...]`) and returns `Entity` objects.
 
