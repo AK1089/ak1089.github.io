@@ -17,7 +17,8 @@
             <img src="../../../images/home.png" alt="Home" width="50" height="50" style="position: absolute; left: 6%; top: 60px;">
         </a>
         <div id="main-content">
-            <p><h2 id="let-s-build-a-selector-to-uuid-converter">Let's Build a Selector-To-UUID Converter</p></h2>
+            <p><script src= "script.js"></script>
+<h2 id="let-s-build-a-selector-to-uuid-converter">Let's Build a Selector-To-UUID Converter</p></h2>
 <p>You're probably familiar with UUIDs in Minecraft. They're the weird strings of numbers and letters that everyone seems to have associated with their username - you might have seen them on <a href="https://namemc.com/">NameMC</a>, for example. Mine is <code class="inline-code">e62bfa1e-f625-4ad3-9403-7e7f8e14d0f1</code>. In today's article, we're going to explore what these mean and why they're useful, and build a useful function which allows you to get them for arbitrary entities.</p>
 <p><div class="info-box" style="--primary-color: #7F00B5; --secondary-color: #EEEEEE;"><u><strong>Contents:</strong></u>
 <ul>
@@ -42,8 +43,11 @@
 <p>That's pretty useful! We can generate these things pretty easily and cheaply, and have a guarantee that they're unique, so we can use them as our internal references for things without worrying that something will break because we've given two things the same name.</p>
 <p><h2 id="how-does-minecraft-use-uuids">How does Minecraft use UUIDs?</p></h2>
 <p>Minecraft does this with every entity. This means every single entity (including players) has one of these unique codes. We often have to reference these UUIDs, for example when running pretty much every command targeting an entity, or when constructing an <code class="inline-code">Entity</code> object in MSC.</p>
-<p>Sometimes we want the UUIDs of an entity.</p>
-<p><h2 id="what-are-we-building-and-why">What are we building and why?</p></h2>
+<p>Sometimes we want the UUID of an entity. Let's see where it's displayed in <code class="inline-code">/data get entity</code>, tried on a minecart which I know to have a UUID of <code class="inline-code">11ac0982-00e1-4f5e-a8dc-c96258766524</code>.</p>
+<p><div class="image-container"><img src="minecart.png" alt="What you see when looking at the data of an entity (here, the minecart)"><div class="caption">What you see when looking at the data of an entity (here, the minecart)</div></div></p>
+<p>That's weird. It says <code class="inline-code">UUID: [I; 296487298, 14765918, -1461925534, 1484154148]</code>. That doesn't look like the format we're expecting at all!</p>
+<p>
+<h2 id="what-are-we-building-and-why">What are we building and why?</p></h2>
 <p><h2 id="creating-a-selector-to-uuid-converter-in-msc">Creating a selector-to-UUID converter in MSC</p></h2>
 
         </div>

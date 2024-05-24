@@ -1,3 +1,4 @@
+<script src= "script.js"></script>
 ## Let's Build a Selector-To-UUID Converter
 
 You're probably familiar with UUIDs in Minecraft. They're the weird strings of numbers and letters that everyone seems to have associated with their username - you might have seen them on [NameMC](https://namemc.com/), for example. Mine is `e62bfa1e-f625-4ad3-9403-7e7f8e14d0f1`. In today's article, we're going to explore what these mean and why they're useful, and build a useful function which allows you to get them for arbitrary entities.
@@ -36,7 +37,12 @@ That's pretty useful! We can generate these things pretty easily and cheaply, an
 
 Minecraft does this with every entity. This means every single entity (including players) has one of these unique codes. We often have to reference these UUIDs, for example when running pretty much every command targeting an entity, or when constructing an `Entity` object in MSC.
 
-Sometimes we want the UUIDs of an entity.
+Sometimes we want the UUID of an entity. Let's see where it's displayed in `/data get entity`, tried on a minecart which I know to have a UUID of `11ac0982-00e1-4f5e-a8dc-c96258766524`.
+
+[&What you see when looking at the data of an entity (here, the minecart)](minecart.png)
+
+That's weird. It says `UUID: [I; 296487298, 14765918, -1461925534, 1484154148]`. That doesn't look like the format we're expecting at all!
+
 
 ## What are we building and why?
 
