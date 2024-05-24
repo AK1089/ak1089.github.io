@@ -53,19 +53,37 @@
 <label for="hexadecimal">Hexadecimal:</label>
 <input type="text" id="hexadecimal" oninput="convertHexToDec()" value="11ac0982"></p>
 <p>That's interesting. <code class="inline-code">296487298</code> in decimal (the first number of the list) is <code class="inline-code">11ac0982</code> in hexadecimal (the first 8 characters of the string UUID). This obviously isn't a coincidence. The reason for this is that Minecraft stores UUIDs in a weird format which uses four 32-bit signed integers.</p>
-<p>A 32-bit integer is an integer which is stored using 32 binary digits, or "bits". "Signed" means the first bit is used to denote the <em>sign</em> of a number: whether it's positive or negative.</p>
+<p>A 32-bit integer is an integer which is stored using 32 binary digits, or "bits". "Signed" means the first bit is used to denote the <em>sign</em> of a number: whether it's positive or negative. Let's convert the hexadecimal <code class="inline-code">11ac0982</code> to binary.</p>
 <p>
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
-            <code data-language="binary" class="line-numbers"><span>   1    1    a    c    0    9    8    2</span>
-<span>0001 0001 1010 1100 0000 1001 1000 0010</span>
+            <code data-language="hexadecimal-binary" class="line-numbers"><span>     1    1    a    c    0    9    8    2</span>
+<span>= 0001 0001 1010 1100 0000 1001 1000 0010</span>
 </code>
         </pre></p>
 <p><code class="inline-code">00010001101011000000100110000010</code> in binary is exactly <code class="inline-code">296487298</code>. You can see how each <span class="tooltip">4 bits<span class="tooltiptext">Also known as a nibble. \&#40; 2^4 = 16 \&#41;, hence there being 4 bits: each hexadecimal digit contains \&#40; \mathrm{log}_2 &#40; 16 &#41; = 4 \&#41; times as much information as a bit.</span></span> correspond to each hexadecimal character, too.</p>
 <p>However, you might notice something weird. If you put the third number, <code class="inline-code">-1461925534</code>, into the converter on the decimal side, you'll notice that it doesn't match up at all with the third octet of hexadecimal digits. We should get <code class="inline-code">a8dcc962</code>, but we get a negative number.</p>
-<p>Okay, what number <em>would have</em> given us the correct answer? Sticking <code class="inline-code">a8dcc962</code> into the hexadecimal side of the converter, we get <code class="inline-code">2833041762</code>. <span class="tooltip">On a whim<span class="tooltiptext">Not really on a whim. There's obviously a reason this works, and we'll see it shortly.</span></span>, let's calculate \( 2833041762 + 1461925534 = 4294967296 = 2^{32} \). So the number we wanted is exactly </p>
+<p>Okay, what number <em>would have</em> given us the correct answer? Sticking <code class="inline-code">a8dcc962</code> into the hexadecimal side of the converter, we get <code class="inline-code">2833041762</code>. <span class="tooltip">On a whim<span class="tooltiptext">Not really on a whim. There's obviously a reason this works, and we'll see it shortly.</span></span>, let's calculate \( 2833041762 + 1461925534 = 4294967296 = 2^{32} \). So the number we wanted is exactly \( 2^{32} \) away from the number we have. This is interesting, because we're dealing with 32-bit numbers! In fact, that's exactly why this works. Let's see how <code class="inline-code">a8dcc962</code> is stored in binary.</p>
 <p>
-<h2 id="what-are-we-building-and-why">What are we building and why?</p></h2>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="hexadecimal-binary" class="line-numbers"><span>     a    8    d    c    c    9    6    2</span>
+<span>= 1010 1000 1101 1100 1100 1001 0110 0010</span>
+</code>
+        </pre></p>
+<p>But now let's take <code class="inline-code">10101000110111001100100101100010</code> and represent it as a 32-bit signed integer. Since the first bit is a <code class="inline-code">1</code>, this number is negative. These numbers are written in <a href="https://www.cs.cornell.edu/~tomf/notes/cps104/twoscomp.html">two's complement notation</a>, which is <span class="tooltip">a bit too advanced to go into here<span class="tooltiptext">The rundown is that to convert a negative binary number to decimal, you strip the leading 1, invert the remaining 31 bits, convert that number to decimal - treating it as a positive number - and then add 1. Then, you negate it to get a negative.</span></span>, but suffice it to say that</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="binary-decimal" class="line-numbers"><span>  1 0101000110111001100100101100010</span>
+<span>= -                      1461925534</span>
+</code>
+        </pre></p>
+<p>
+1461925533
+Fantastic! This means we know how our numbers are stored. We'll keep this in mind for when we're writing our code.</p>
+<p></p>
+<p><h2 id="what-are-we-building-and-why">What are we building and why?</p></h2>
 <p><h2 id="creating-a-selector-to-uuid-converter-in-msc">Creating a selector-to-UUID converter in MSC</p></h2>
 
         </div>

@@ -53,20 +53,52 @@ However, [let's do some digging](!Okay, I do know why this happens. However, I t
 
 That's interesting. `296487298` in decimal (the first number of the list) is `11ac0982` in hexadecimal (the first 8 characters of the string UUID). This obviously isn't a coincidence. The reason for this is that Minecraft stores UUIDs in a weird format which uses four 32-bit signed integers.
 
-A 32-bit integer is an integer which is stored using 32 binary digits, or "bits". "Signed" means the first bit is used to denote the *sign* of a number: whether it's positive or negative.
+A 32-bit integer is an integer which is stored using 32 binary digits, or "bits". "Signed" means the first bit is used to denote the *sign* of a number: whether it's positive or negative. Let's convert the hexadecimal `11ac0982` to binary.
 
-```binary
-   1    1    a    c    0    9    8    2
-0001 0001 1010 1100 0000 1001 1000 0010
+```hexadecimal-binary
+     1    1    a    c    0    9    8    2
+= 0001 0001 1010 1100 0000 1001 1000 0010
 ```
 
 `00010001101011000000100110000010` in binary is exactly `296487298`. You can see how each [4 bits](!Also known as a nibble. \&#40; 2^4 = 16 \&#41;, hence there being 4 bits: each hexadecimal digit contains \&#40; \mathrm{log}_2 &#40; 16 &#41; = 4 \&#41; times as much information as a bit.) correspond to each hexadecimal character, too.
 
 However, you might notice something weird. If you put the third number, `-1461925534`, into the converter on the decimal side, you'll notice that it doesn't match up at all with the third octet of hexadecimal digits. We should get `a8dcc962`, but we get a negative number.
 
-Okay, what number *would have* given us the correct answer? Sticking `a8dcc962` into the hexadecimal side of the converter, we get `2833041762`. [On a whim](!Not really on a whim. There's obviously a reason this works, and we'll see it shortly.), let's calculate \( 2833041762 + 1461925534 = 4294967296 = 2^{32} \). So the number we wanted is exactly 
+Okay, what number *would have* given us the correct answer? Sticking `a8dcc962` into the hexadecimal side of the converter, we get `2833041762`. [On a whim](!Not really on a whim. There's obviously a reason this works, and we'll see it shortly.), let's calculate \( 2833041762 + 1461925534 = 4294967296 = 2^{32} \). So the number we wanted is exactly \( 2^{32} \) away from the number we have. This is interesting, because we're dealing with 32-bit numbers! In fact, that's exactly why this works. Let's see how `a8dcc962` is stored in binary.
 
+```hexadecimal-binary
+     a    8    d    c    c    9    6    2
+= 1010 1000 1101 1100 1100 1001 0110 0010
+```
+
+But now let's take `10101000110111001100100101100010` and represent it as a 32-bit signed integer. Since the first bit is a `1`, this number is negative. These numbers are written in [two's complement notation](https://www.cs.cornell.edu/~tomf/notes/cps104/twoscomp.html), which is [a bit too advanced to go into here](!The rundown is that to convert a negative binary number to decimal, you strip the leading 1, invert the remaining 31 bits, convert that number to decimal - treating it as a positive number - and then add 1. Then, you negate it to get a negative.), but suffice it to say that
+
+```binary-decimal
+  1 0101000110111001100100101100010
+= -                      1461925534
+```
+
+Fantastic! This means we know how our numbers are stored. We'll keep this in mind for when we're writing our code.
 
 ## What are we building and why?
+
+A lot of the time, you'll be writing scripts which deal with entities. This is all well and good if you have an `Entity` object already, or if you just want to use default Minecraft commands. For example,
+
+```msc
+@bypass /minecraft:kill @e[type=pig,distance=..5,sort=nearest,limit=1]
+```
+
+kills the nearest pig to the player if it's within 5 blocks, and
+
+```msc
+@var some_namespace::clickedEntityHealth = entity.getHealth()
+```
+
+(if applied as an entity script) sets the variable `Int some_namespace::clickedEntityHealth` to the health of the entity the script is on.
+
+But this doesn't cover every use-case! Sometimes you want to select entities, and do things to them that you can do in MSC. There's no standard way to do this - you can only select entities using `@e[...]` if you're using Minecraft command selectors, and you can't run MSC things on them.
+
+What if there was a way to turn `@e[type=pig,distance=..5,sort=nearest,limit=1]` into `27f6a0b7-db1c-4bfa-ac43-148a88b53c3d` (or whatever the UUID of the pig really is?)
+
 
 ## Creating a selector-to-UUID converter in MSC
