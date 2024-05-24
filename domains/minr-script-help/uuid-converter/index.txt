@@ -43,6 +43,29 @@ Sometimes we want the UUID of an entity. Let's see where it's displayed in `/dat
 
 That's weird. It says `UUID: [I; 296487298, 14765918, -1461925534, 1484154148]`. That doesn't look like the format we're expecting at all!
 
+However, [let's do some digging](!Okay, I do know why this happens. However, I think it's more interesting to show the process of figuring it out!). Here's a converter which swaps numbers back and forth between decimal and hexadecimal. (Try it yourself - you can edit the numbers on either side!)
+
+<label for="decimal">Decimal:</label>
+<input type="text" id="decimal" oninput="convertDecToHex()" value="296487298">
+<span>&#8596;</span>
+<label for="hexadecimal">Hexadecimal:</label>
+<input type="text" id="hexadecimal" oninput="convertHexToDec()" value="11ac0982">
+
+That's interesting. `296487298` in decimal (the first number of the list) is `11ac0982` in hexadecimal (the first 8 characters of the string UUID). This obviously isn't a coincidence. The reason for this is that Minecraft stores UUIDs in a weird format which uses four 32-bit signed integers.
+
+A 32-bit integer is an integer which is stored using 32 binary digits, or "bits". "Signed" means the first bit is used to denote the *sign* of a number: whether it's positive or negative.
+
+```binary
+   1    1    a    c    0    9    8    2
+0001 0001 1010 1100 0000 1001 1000 0010
+```
+
+`00010001101011000000100110000010` in binary is exactly `296487298`. You can see how each [4 bits](!Also known as a nibble. \&#40; 2^4 = 16 \&#41;, hence there being 4 bits: each hexadecimal digit contains \&#40; \mathrm{log}_2 &#40; 16 &#41; = 4 \&#41; times as much information as a bit.) correspond to each hexadecimal character, too.
+
+However, you might notice something weird. If you put the third number, `-1461925534`, into the converter on the decimal side, you'll notice that it doesn't match up at all with the third octet of hexadecimal digits. We should get `a8dcc962`, but we get a negative number.
+
+Okay, what number *would have* given us the correct answer? Sticking `a8dcc962` into the hexadecimal side of the converter, we get `2833041762`. [On a whim](!Not really on a whim. There's obviously a reason this works, and we'll see it shortly.), let's calculate \( 2833041762 + 1461925534 = 4294967296 = 2^{32} \). So the number we wanted is exactly 
+
 
 ## What are we building and why?
 

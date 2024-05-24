@@ -46,6 +46,24 @@
 <p>Sometimes we want the UUID of an entity. Let's see where it's displayed in <code class="inline-code">/data get entity</code>, tried on a minecart which I know to have a UUID of <code class="inline-code">11ac0982-00e1-4f5e-a8dc-c96258766524</code>.</p>
 <p><div class="image-container"><img src="minecart.png" alt="What you see when looking at the data of an entity (here, the minecart)"><div class="caption">What you see when looking at the data of an entity (here, the minecart)</div></div></p>
 <p>That's weird. It says <code class="inline-code">UUID: [I; 296487298, 14765918, -1461925534, 1484154148]</code>. That doesn't look like the format we're expecting at all!</p>
+<p>However, <span class="tooltip">let's do some digging<span class="tooltiptext">Okay, I do know why this happens. However, I think it's more interesting to show the process of figuring it out!</span></span>. Here's a converter which swaps numbers back and forth between decimal and hexadecimal. (Try it yourself - you can edit the numbers on either side!)</p>
+<p><label for="decimal">Decimal:</label>
+<input type="text" id="decimal" oninput="convertDecToHex()" value="296487298">
+<span>&#8596;</span>
+<label for="hexadecimal">Hexadecimal:</label>
+<input type="text" id="hexadecimal" oninput="convertHexToDec()" value="11ac0982"></p>
+<p>That's interesting. <code class="inline-code">296487298</code> in decimal (the first number of the list) is <code class="inline-code">11ac0982</code> in hexadecimal (the first 8 characters of the string UUID). This obviously isn't a coincidence. The reason for this is that Minecraft stores UUIDs in a weird format which uses four 32-bit signed integers.</p>
+<p>A 32-bit integer is an integer which is stored using 32 binary digits, or "bits". "Signed" means the first bit is used to denote the <em>sign</em> of a number: whether it's positive or negative.</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="binary" class="line-numbers"><span>   1    1    a    c    0    9    8    2</span>
+<span>0001 0001 1010 1100 0000 1001 1000 0010</span>
+</code>
+        </pre></p>
+<p><code class="inline-code">00010001101011000000100110000010</code> in binary is exactly <code class="inline-code">296487298</code>. You can see how each <span class="tooltip">4 bits<span class="tooltiptext">Also known as a nibble. \&#40; 2^4 = 16 \&#41;, hence there being 4 bits: each hexadecimal digit contains \&#40; \mathrm{log}_2 &#40; 16 &#41; = 4 \&#41; times as much information as a bit.</span></span> correspond to each hexadecimal character, too.</p>
+<p>However, you might notice something weird. If you put the third number, <code class="inline-code">-1461925534</code>, into the converter on the decimal side, you'll notice that it doesn't match up at all with the third octet of hexadecimal digits. We should get <code class="inline-code">a8dcc962</code>, but we get a negative number.</p>
+<p>Okay, what number <em>would have</em> given us the correct answer? Sticking <code class="inline-code">a8dcc962</code> into the hexadecimal side of the converter, we get <code class="inline-code">2833041762</code>. <span class="tooltip">On a whim<span class="tooltiptext">Not really on a whim. There's obviously a reason this works, and we'll see it shortly.</span></span>, let's calculate \( 2833041762 + 1461925534 = 4294967296 = 2^{32} \). So the number we wanted is exactly </p>
 <p>
 <h2 id="what-are-we-building-and-why">What are we building and why?</p></h2>
 <p><h2 id="creating-a-selector-to-uuid-converter-in-msc">Creating a selector-to-UUID converter in MSC</p></h2>
