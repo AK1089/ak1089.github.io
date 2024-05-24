@@ -115,7 +115,7 @@ Okay, here's what we want our function to be able to do. Say we have a pig that'
 /function define aktools Entity selectorToEntity(String selectorString, String world)
 ```
 
-This defines the function. Let's begin writing it.
+This defines the function. (If this line looks confusing to you, see [last week's writeup on functions](../functions)). Let's begin writing it.
 
 ```msc
 &num; Function aktools::selectorToEntity(String selectorString, String world) -> Optional&lt;Entity&gt;
@@ -199,5 +199,141 @@ How do we convert a `Long` into an eight-digit hexadecimal number? We uses the f
 ```
 
 and so by decomposing a number like 670474423 into the form
-\[\sum_{i=0}^7 a_i \cdot 16^i \quad a_i \in \{0, \, 1, \, \ldots, \, 15\}\]
-we can reverse this process and get the sequence of digits we need. We use a greedy algorithm
+\[N = \sum_{i=0}^7 a_i \cdot 16^i \quad a_i \in \{0, \, 1, \, \ldots, \, 15\}\]
+we can reverse this process and get the sequence of digits we need. We use a greedy algorithm to do this: for each base, take off as many as possible (maximise \(a_7\), then \(a_6\), then ...). For our specific example of \(670474423\), we would do:
+
+```decimal
+current number we're working with is 670,474,423.
+2 × 16^7 = 536,870,912 <= 670,474,423 < 805,306,368 = 3 × 16^7
+├── digit in position 1/8 is a 2.
+└── subtract 536,870,912 from current number to get 133,603,511.
+ 
+current number we're working with is 133,603,511.
+7 × 16^6 = 117,440,512 <= 133,603,511 < 134,217,728 = 8 × 16^6
+├── digit in position 2/8 is a 7.
+└── subtract 117,440,512 from current number to get 16,162,999.
+ 
+...
+ 
+current number we're working with is 183.
+11 × 16^1 = 176 <= 183 < 192 = 12 × 16^1
+├── digit in position 7/8 is a b (corresponding to 11 in decimal).
+└── subtract 176 from current number to get 7.
+ 
+current number we're working with is 7.
+so last digit is a 7.
+ 
+so the full hexadecimal number is 27f6a0b7.
+```
+
+Let's implement this in code, using \(\mathrm{pow} = 16^i\):
+
+```msc
+    &num; converts decimal to hexadecimal using backwards-iterating powers of 16
+    @for Long pow in powers
+ 
+        &num; adds the correct hex character to the list u
+        @var u.append(hexadecimalDigits[Int(currentUUID / pow)])
+ 
+        &num; reduces the UUID by stripping off the first hex digit (which is a subtraction in decimal)
+        @var currentUUID = Long(currentUUID - Long(Int(currentUUID / pow) * pow))
+ 
+    @done
+```
+
+Here, \(a_i = \) `Int(currentUUID / pow)` is the biggest multiple of \(16^i\) you can take off the number you're working with. This is then the next digit of the UUID in hexadecimal, so we can add it to our list (line 5 of the above code block).
+
+We then need to remove it to "trim" the first hexadecimal digit. This is done with line 7. We take off `Long(Int(currentUUID / pow) * pow)`, which is equal to \(a_i \cdot 16^i\). This means we can repeat the process with the next largest power of 16.
+
+And with that, we're pretty much done! We just need to do this for [all four parts of the UUID](!The four integers, as Minecraft stores them.), and we can concatenate them together to get our UUID. In fact, we get this for free. Since we're looping through in order, and each digit is just appended to the list, all four parts are *automatically in the right order after each other*. Isn't that neat?!
+
+Putting this loop all together, we get
+
+```msc
+&num; UUIDs are stored as four decimal integers - this gets all of them one-by-one
+@for Int i in list::range(0, 4)
+ 
+    &num; minecraft command to get UUID - must be stored as a Long for further processing
+    @var currentUUID = Long(util::executeAndQueryResult("/execute in {{world}} run data get entity @e[{{selectorString}},limit=1] UUID[{{i}}]"))
+ 
+    &num; half the time, this number is negative due to integer overflows.
+    &num; this line makes it positive: 4294967296 is the unsigned 32-bit integer limit, equal to 2^32.
+    @if currentUUID < 0
+        @var currentUUID = Long(4294967296L + currentUUID)
+    @fi
+ 
+    &num; converts decimal to hexadecimal using backwards-iterating powers of 16
+    @for Long pow in powers
+ 
+        &num; adds the correct hex character to the list u
+        @var u.append(hexadecimalDigits[Int(currentUUID / pow)])
+ 
+        &num; reduces the UUID by stripping off the first hex digit (which is a subtraction in decimal)
+        @var currentUUID = Long(currentUUID - Long(Int(currentUUID / pow) * pow))
+ 
+    @done
+@done
+```
+
+There's just one last thing left to do: convert the list of hexadecimal digits into a UUID, and use it to construct an `Entity`.
+
+```msc
+&num; UUIDs have dashes in them splitting the 32-character UUID into blocks of 8-4-4-4-12
+@define String stringifiedUUID = u[0] + u[1] + u[2] + u[3] + u[4] + u[5] + u[6] + u[7] + "-" + u[8] + u[9] + u[10] + u[11] + "-" + u[12] + u[13] + u[14] + u[15] + "-" + u[16] + u[17] + u[18] + u[19] + "-" + u[20] + u[21] + u[22] + u[23] + u[24] + u[25] + u[26] + u[27] + u[28] + u[29] + u[30] + u[31]
+@return Entity(stringifiedUUID)
+```
+
+This just adds all the characters together, with dashes in the right places, as we mentioned earlier. Then, it makes an `Entity` object in MSC based on this UUID, and returns it to you. (This might be `null`, but it won't error - the onus is on the user to ensure their entity exists.)
+
+Fantastic! The only thing left to do is to put all this code together.
+
+```msc
+&num; Function aktools::selectorToEntity(String selectorString, String world) -> Optional<Entity>
+ 
+&num; these are the alphanumeric characters used as digits in hexadecimal
+@define String[] hexadecimalDigits = String["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+ 
+&num; powers stores the value of 16^n for each n, ie. some basic higher digit value in hexadecimal
+@define Long[] powers = [268435456, 16777216, 1048576, 65536, 4096, 256, 16, 1]
+ 
+&num; stores the integer UUID being worked with at any given time
+&num; this must be a Long, as Int values are capped at 2^31 - 1 = 2,147,483,647 and we deal with larger numbers
+@define Long currentUUID
+ 
+&num; the characters of the UUID in hexadecimal
+@define String[] u = String[]
+ 
+&num; UUIDs are stored as four decimal integers - this gets all of them one-by-one
+@for Int i in list::range(0, 4)
+ 
+    &num; minecraft command to get UUID - must be stored as a Long for further processing
+    @var currentUUID = Long(util::executeAndQueryResult("/execute in {{world}} run data get entity @e[{{selectorString}},limit=1] UUID[{{i}}]"))
+ 
+    &num; half the time, this number is negative due to integer overflows.
+    &num; this line makes it positive: 4294967296 is the unsigned 32-bit integer limit, equal to 2^32.
+    @if currentUUID < 0
+        @var currentUUID = Long(4294967296L + currentUUID)
+    @fi
+ 
+    &num; converts decimal to hexadecimal using backwards-iterating powers of 16
+    @for Long pow in powers
+ 
+        &num; adds the correct hex character to the list u
+        @var u.append(hexadecimalDigits[Int(currentUUID / pow)])
+ 
+        &num; reduces the UUID by stripping off the first hex digit (which is a subtraction in decimal)
+        @var currentUUID = Long(currentUUID - Long(Int(currentUUID / pow) * pow))
+ 
+    @done
+@done
+ 
+&num; UUIDs have dashes in them splitting the 32-character UUID into blocks of 8-4-4-4-12
+@define String stringifiedUUID = u[0] + u[1] + u[2] + u[3] + u[4] + u[5] + u[6] + u[7] + "-" + u[8] + u[9] + u[10] + u[11] + "-" + u[12] + u[13] + u[14] + u[15] + "-" + u[16] + u[17] + u[18] + u[19] + "-" + u[20] + u[21] + u[22] + u[23] + u[24] + u[25] + u[26] + u[27] + u[28] + u[29] + u[30] + u[31]
+@return Entity(stringifiedUUID)
+```
+
+(You can also download it by clicking <a href="selectorToEntity.msc" download>here</a>.)
+
+Thanks for reading! UUIDs are pretty cool, but they're often weird and unintuitive, especially in the way Minecraft handles them. Hopefully this clears some of the weird behaviour up!
+
+If there are any errors here, or you have any questions, please let me know on [Discord](https://discordapp.com/channels/@me/380805820415344644)!

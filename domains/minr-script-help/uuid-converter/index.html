@@ -112,7 +112,7 @@ Well, let's make one!</p>
             <code data-language="minecraft" class="line-numbers"><span>/function define aktools Entity selectorToEntity(String selectorString, String world)</span>
 </code>
         </pre></p>
-<p>This defines the function. Let's begin writing it.</p>
+<p>This defines the function. (If this line looks confusing to you, see <a href="../functions">last week's writeup on functions</a>). Let's begin writing it.</p>
 <p>
         <pre style="position: relative;">
             <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
@@ -203,8 +203,144 @@ Well, let's make one!</p>
 </code>
         </pre></p>
 <p>and so by decomposing a number like 670474423 into the form
-\[\sum_{i=0}^7 a_i \cdot 16^i \quad a_i \in \{0, \, 1, \, \ldots, \, 15\}\]
-we can reverse this process and get the sequence of digits we need. We use a greedy algorithm</p>
+\[N = \sum_{i=0}^7 a_i \cdot 16^i \quad a_i \in \{0, \, 1, \, \ldots, \, 15\}\]
+we can reverse this process and get the sequence of digits we need. We use a greedy algorithm to do this: for each base, take off as many as possible (maximise \(a_7\), then \(a_6\), then ...). For our specific example of \(670474423\), we would do:</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="decimal" class="line-numbers"><span>current number we're working with is 670,474,423.</span>
+<span>2 × 16^7 = 536,870,912 <= 670,474,423 < 805,306,368 = 3 × 16^7</span>
+<span>├── digit in position 1/8 is a 2.</span>
+<span>└── subtract 536,870,912 from current number to get 133,603,511.</span>
+<span> </span>
+<span>current number we're working with is 133,603,511.</span>
+<span>7 × 16^6 = 117,440,512 <= 133,603,511 < 134,217,728 = 8 × 16^6</span>
+<span>├── digit in position 2/8 is a 7.</span>
+<span>└── subtract 117,440,512 from current number to get 16,162,999.</span>
+<span> </span>
+<span>...</span>
+<span> </span>
+<span>current number we're working with is 183.</span>
+<span>11 × 16^1 = 176 <= 183 < 192 = 12 × 16^1</span>
+<span>├── digit in position 7/8 is a b (corresponding to 11 in decimal).</span>
+<span>└── subtract 176 from current number to get 7.</span>
+<span> </span>
+<span>current number we're working with is 7.</span>
+<span>so last digit is a 7.</span>
+<span> </span>
+<span>so the full hexadecimal number is 27f6a0b7.</span>
+</code>
+        </pre></p>
+<p>Let's implement this in code, using \(\mathrm{pow} = 16^i\):</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>    &num; converts decimal to hexadecimal using backwards-iterating powers of 16</span>
+<span>    @for Long pow in powers</span>
+<span> </span>
+<span>        &num; adds the correct hex character to the list u</span>
+<span>        @var u.append(hexadecimalDigits[Int(currentUUID / pow)])</span>
+<span> </span>
+<span>        &num; reduces the UUID by stripping off the first hex digit (which is a subtraction in decimal)</span>
+<span>        @var currentUUID = Long(currentUUID - Long(Int(currentUUID / pow) * pow))</span>
+<span> </span>
+<span>    @done</span>
+</code>
+        </pre></p>
+<p>Here, \(a_i = \) <code class="inline-code">Int(currentUUID / pow)</code> is the biggest multiple of \(16^i\) you can take off the number you're working with. This is then the next digit of the UUID in hexadecimal, so we can add it to our list (line 5 of the above code block).</p>
+<p>We then need to remove it to "trim" the first hexadecimal digit. This is done with line 7. We take off <code class="inline-code">Long(Int(currentUUID / pow) * pow)</code>, which is equal to \(a_i \cdot 16^i\). This means we can repeat the process with the next largest power of 16.</p>
+<p>And with that, we're pretty much done! We just need to do this for <span class="tooltip">all four parts of the UUID<span class="tooltiptext">The four integers, as Minecraft stores them.</span></span>, and we can concatenate them together to get our UUID. In fact, we get this for free. Since we're looping through in order, and each digit is just appended to the list, all four parts are <em>automatically in the right order after each other</em>. Isn't that neat?!</p>
+<p>Putting this loop all together, we get</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>&num; UUIDs are stored as four decimal integers - this gets all of them one-by-one</span>
+<span>@for Int i in list::range(0, 4)</span>
+<span> </span>
+<span>    &num; minecraft command to get UUID - must be stored as a Long for further processing</span>
+<span>    @var currentUUID = Long(util::executeAndQueryResult("/execute in {{world}} run data get entity @e[{{selectorString}},limit=1] UUID[{{i}}]"))</span>
+<span> </span>
+<span>    &num; half the time, this number is negative due to integer overflows.</span>
+<span>    &num; this line makes it positive: 4294967296 is the unsigned 32-bit integer limit, equal to 2^32.</span>
+<span>    @if currentUUID < 0</span>
+<span>        @var currentUUID = Long(4294967296L + currentUUID)</span>
+<span>    @fi</span>
+<span> </span>
+<span>    &num; converts decimal to hexadecimal using backwards-iterating powers of 16</span>
+<span>    @for Long pow in powers</span>
+<span> </span>
+<span>        &num; adds the correct hex character to the list u</span>
+<span>        @var u.append(hexadecimalDigits[Int(currentUUID / pow)])</span>
+<span> </span>
+<span>        &num; reduces the UUID by stripping off the first hex digit (which is a subtraction in decimal)</span>
+<span>        @var currentUUID = Long(currentUUID - Long(Int(currentUUID / pow) * pow))</span>
+<span> </span>
+<span>    @done</span>
+<span>@done</span>
+</code>
+        </pre></p>
+<p>There's just one last thing left to do: convert the list of hexadecimal digits into a UUID, and use it to construct an <code class="inline-code">Entity</code>.</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>&num; UUIDs have dashes in them splitting the 32-character UUID into blocks of 8-4-4-4-12</span>
+<span>@define String stringifiedUUID = u[0] + u[1] + u[2] + u[3] + u[4] + u[5] + u[6] + u[7] + "-" + u[8] + u[9] + u[10] + u[11] + "-" + u[12] + u[13] + u[14] + u[15] + "-" + u[16] + u[17] + u[18] + u[19] + "-" + u[20] + u[21] + u[22] + u[23] + u[24] + u[25] + u[26] + u[27] + u[28] + u[29] + u[30] + u[31]</span>
+<span>@return Entity(stringifiedUUID)</span>
+</code>
+        </pre></p>
+<p>This just adds all the characters together, with dashes in the right places, as we mentioned earlier. Then, it makes an <code class="inline-code">Entity</code> object in MSC based on this UUID, and returns it to you. (This might be <code class="inline-code">null</code>, but it won't error - the onus is on the user to ensure their entity exists.)</p>
+<p>Fantastic! The only thing left to do is to put all this code together.</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>&num; Function aktools::selectorToEntity(String selectorString, String world) -> Optional<Entity></span>
+<span> </span>
+<span>&num; these are the alphanumeric characters used as digits in hexadecimal</span>
+<span>@define String[] hexadecimalDigits = String["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]</span>
+<span> </span>
+<span>&num; powers stores the value of 16^n for each n, ie. some basic higher digit value in hexadecimal</span>
+<span>@define Long[] powers = [268435456, 16777216, 1048576, 65536, 4096, 256, 16, 1]</span>
+<span> </span>
+<span>&num; stores the integer UUID being worked with at any given time</span>
+<span>&num; this must be a Long, as Int values are capped at 2^31 - 1 = 2,147,483,647 and we deal with larger numbers</span>
+<span>@define Long currentUUID</span>
+<span> </span>
+<span>&num; the characters of the UUID in hexadecimal</span>
+<span>@define String[] u = String[]</span>
+<span> </span>
+<span>&num; UUIDs are stored as four decimal integers - this gets all of them one-by-one</span>
+<span>@for Int i in list::range(0, 4)</span>
+<span> </span>
+<span>    &num; minecraft command to get UUID - must be stored as a Long for further processing</span>
+<span>    @var currentUUID = Long(util::executeAndQueryResult("/execute in {{world}} run data get entity @e[{{selectorString}},limit=1] UUID[{{i}}]"))</span>
+<span> </span>
+<span>    &num; half the time, this number is negative due to integer overflows.</span>
+<span>    &num; this line makes it positive: 4294967296 is the unsigned 32-bit integer limit, equal to 2^32.</span>
+<span>    @if currentUUID < 0</span>
+<span>        @var currentUUID = Long(4294967296L + currentUUID)</span>
+<span>    @fi</span>
+<span> </span>
+<span>    &num; converts decimal to hexadecimal using backwards-iterating powers of 16</span>
+<span>    @for Long pow in powers</span>
+<span> </span>
+<span>        &num; adds the correct hex character to the list u</span>
+<span>        @var u.append(hexadecimalDigits[Int(currentUUID / pow)])</span>
+<span> </span>
+<span>        &num; reduces the UUID by stripping off the first hex digit (which is a subtraction in decimal)</span>
+<span>        @var currentUUID = Long(currentUUID - Long(Int(currentUUID / pow) * pow))</span>
+<span> </span>
+<span>    @done</span>
+<span>@done</span>
+<span> </span>
+<span>&num; UUIDs have dashes in them splitting the 32-character UUID into blocks of 8-4-4-4-12</span>
+<span>@define String stringifiedUUID = u[0] + u[1] + u[2] + u[3] + u[4] + u[5] + u[6] + u[7] + "-" + u[8] + u[9] + u[10] + u[11] + "-" + u[12] + u[13] + u[14] + u[15] + "-" + u[16] + u[17] + u[18] + u[19] + "-" + u[20] + u[21] + u[22] + u[23] + u[24] + u[25] + u[26] + u[27] + u[28] + u[29] + u[30] + u[31]</span>
+<span>@return Entity(stringifiedUUID)</span>
+</code>
+        </pre></p>
+<p>(You can also download it by clicking <a href="selectorToEntity.msc" download>here</a>.)</p>
+<p>Thanks for reading! UUIDs are pretty cool, but they're often weird and unintuitive, especially in the way Minecraft handles them. Hopefully this clears some of the weird behaviour up!</p>
+<p>If there are any errors here, or you have any questions, please let me know on <a href="https://discordapp.com/channels/@me/380805820415344644">Discord</a>!
+</p>
 
         </div>
         <h6 id="copyright">&#169; Avish Kumar 2024</h6>
