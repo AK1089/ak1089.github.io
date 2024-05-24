@@ -104,7 +104,7 @@ Well, let's make one!
 
 ## Creating a selector-to-Entity converter in MSC
 
-Okay, here's what we want our function to be able to do. Say we have a pig that's somewhere in the 20x20x20 cube centred at (123, 45, 678). There are a bunch of pigs there, but we specifically want one we've given the tag `piggy` to. We want to use it as an `Entity`, say to [eject all its passengers](!This is just a random example. Entity objects are pretty useful and this is just one of the methods on them.). This means we need a function which takes entity selectors (`@e[...]`) and returns `Entity` objects.
+Okay, here's what we want our function to be able to do. Say we have a pig that's somewhere in the 20x20x20 cube centred at (123, 45, 678). We want to use it as an `Entity`, say to [eject all its passengers](!This is just a random example. Entity objects are pretty useful and this is just one of the methods on them.). This means we need a function which takes entity selectors (`@e[...]`) and returns `Entity` objects.
 
 <ol>
 - We pass in a string like `type=pig,x=113,dx=20,y=35,dy=20,z=668`, and the world we want to search in (say `Theta`).
@@ -147,4 +147,57 @@ This should be good setup-wise. We have a function `aktools::selectorToUUID`. It
 10000000 (base 16) = 16^7 = 268435456
 ```
 
-Now, let's work with them. We need to get the cu
+Now, let's work with them. We need to get the UUID from the selector. We know from `/data get entity` earlier that this is stored as a four-part list, so we're going to have to get it with four commands. Let's begin writing this loop:
+
+```msc
+&num; UUIDs are stored as four decimal integers - this gets all of them one-by-one
+@for Int i in list::range(0, 4)
+ 
+    &num; minecraft command to get UUID - must be stored as a Long for further processing
+    @var currentUUID = Long(util::executeAndQueryResult("/execute in {{world}} run data get entity @e[{{selectorString}},limit=1] UUID[{{i}}]"))
+ 
+    &num; do some processing to convert them into hexadecimal...
+ 
+@done
+```
+
+We use `util::executeAndQueryResult` to steal a number from Minecraft's `/data get entity` and get it into MSC. The command we're using is
+
+```minecraft
+/execute in {{world}} run data get entity @e[{{selectorString}},limit=1] UUID[{{i}}]
+```
+
+which is exactly what we want, for each [\(i \in \{ 0, 1, 2, 3 \}\)](!This is what the list::range part does. We want to get the first to fourth number in the list, but as usual in programming the numbering starts from 0, so we want the four indices 0, 1, 2 and 3.)! It might look like
+
+```minecraft
+/execute in minecraft:theta run data get entity @e[type=pig,x=113,dx=20,y=35,dy=20,z=66,limit=1] UUID[0]
+```
+
+for the first number of the four. Now, let's work on converting it to hexadecimal. Do you remember the issue with negative numbers being \(2^32\) off where they needed to be? Well, this fixes that! We add \(4294967296\) to all negative numbers we get, to make them the corresponding positive number which we can then convert into hexadecimal as usual.
+
+```msc
+    &num; half the time, this number is negative due to integer overflows.
+    &num; this line makes it positive: 4294967296 is the unsigned 32-bit integer limit, equal to 2^32.
+    @if currentUUID < 0
+        @var currentUUID = Long(4294967296L + currentUUID)
+    @fi
+```
+
+How do we convert a `Long` into an eight-digit hexadecimal number? We uses the fact that a hexadecimal number like `27f6a0b7` is really
+
+```hexadecimal
+  (2 =  2) × (16^7 = 268435456) = 536870912
++ (7 =  7) × (16^6 =  16777216) = 117440512
++ (f = 15) × (16^5 =   1048576) =  15728640
++ (6 =  6) × (16^4 =     65536) =    393216
++ (a = 10) × (16^3 =      4096) =     40960
++ (0 =  0) × (16^2 =       256) =         0
++ (b = 11) × (16^1 =        16) =       176
++ (7 =  7) × (16^0 =         1) =         7
+-------------------------------------------
+                                = 670474423
+```
+
+and so by decomposing a number like 670474423 into the form
+\[\sum_{i=0}^7 a_i \cdot 16^i \quad a_i \in \{0, \, 1, \, \ldots, \, 15\}\]
+we can reverse this process and get the sequence of digits we need. We use a greedy algorithm

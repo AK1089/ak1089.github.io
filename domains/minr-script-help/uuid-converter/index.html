@@ -101,7 +101,7 @@
  
 Well, let's make one!</p>
 <p><h2 id="creating-a-selector-to-entity-converter-in-msc">Creating a selector-to-Entity converter in MSC</p></h2>
-<p>Okay, here's what we want our function to be able to do. Say we have a pig that's somewhere in the 20x20x20 cube centred at (123, 45, 678). There are a bunch of pigs there, but we specifically want one we've given the tag <code class="inline-code">piggy</code> to. We want to use it as an <code class="inline-code">Entity</code>, say to <span class="tooltip">eject all its passengers<span class="tooltiptext">This is just a random example. Entity objects are pretty useful and this is just one of the methods on them.</span></span>. This means we need a function which takes entity selectors (<code class="inline-code">@e[...]</code>) and returns <code class="inline-code">Entity</code> objects.</p>
+<p>Okay, here's what we want our function to be able to do. Say we have a pig that's somewhere in the 20x20x20 cube centred at (123, 45, 678). We want to use it as an <code class="inline-code">Entity</code>, say to <span class="tooltip">eject all its passengers<span class="tooltiptext">This is just a random example. Entity objects are pretty useful and this is just one of the methods on them.</span></span>. This means we need a function which takes entity selectors (<code class="inline-code">@e[...]</code>) and returns <code class="inline-code">Entity</code> objects.</p>
 <p><ol>
 <li>We pass in a string like <code class="inline-code">type=pig,x=113,dx=20,y=35,dy=20,z=668</code>, and the world we want to search in (say <code class="inline-code">Theta</code>).</li>
 <li>It returns an <code class="inline-code">Entity</code> object which corresponds to our pig.</li>
@@ -146,7 +146,65 @@ Well, let's make one!</p>
 <span>10000000 (base 16) = 16^7 = 268435456</span>
 </code>
         </pre></p>
-<p>Now, let's work with them. We need to get the cu</p>
+<p>Now, let's work with them. We need to get the UUID from the selector. We know from <code class="inline-code">/data get entity</code> earlier that this is stored as a four-part list, so we're going to have to get it with four commands. Let's begin writing this loop:</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>&num; UUIDs are stored as four decimal integers - this gets all of them one-by-one</span>
+<span>@for Int i in list::range(0, 4)</span>
+<span> </span>
+<span>    &num; minecraft command to get UUID - must be stored as a Long for further processing</span>
+<span>    @var currentUUID = Long(util::executeAndQueryResult("/execute in {{world}} run data get entity @e[{{selectorString}},limit=1] UUID[{{i}}]"))</span>
+<span> </span>
+<span>    &num; do some processing to convert them into hexadecimal...</span>
+<span> </span>
+<span>@done</span>
+</code>
+        </pre></p>
+<p>We use <code class="inline-code">util::executeAndQueryResult</code> to steal a number from Minecraft's <code class="inline-code">/data get entity</code> and get it into MSC. The command we're using is</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="minecraft" class="line-numbers"><span>/execute in {{world}} run data get entity @e[{{selectorString}},limit=1] UUID[{{i}}]</span>
+</code>
+        </pre></p>
+<p>which is exactly what we want, for each <span class="tooltip">\(i \in \{ 0, 1, 2, 3 \}\)<span class="tooltiptext">This is what the list::range part does. We want to get the first to fourth number in the list, but as usual in programming the numbering starts from 0, so we want the four indices 0, 1, 2 and 3.</span></span>! It might look like</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="minecraft" class="line-numbers"><span>/execute in minecraft:theta run data get entity @e[type=pig,x=113,dx=20,y=35,dy=20,z=66,limit=1] UUID[0]</span>
+</code>
+        </pre></p>
+<p>for the first number of the four. Now, let's work on converting it to hexadecimal. Do you remember the issue with negative numbers being \(2^32\) off where they needed to be? Well, this fixes that! We add \(4294967296\) to all negative numbers we get, to make them the corresponding positive number which we can then convert into hexadecimal as usual.</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="msc" class="line-numbers"><span>    &num; half the time, this number is negative due to integer overflows.</span>
+<span>    &num; this line makes it positive: 4294967296 is the unsigned 32-bit integer limit, equal to 2^32.</span>
+<span>    @if currentUUID < 0</span>
+<span>        @var currentUUID = Long(4294967296L + currentUUID)</span>
+<span>    @fi</span>
+</code>
+        </pre></p>
+<p>How do we convert a <code class="inline-code">Long</code> into an eight-digit hexadecimal number? We uses the fact that a hexadecimal number like <code class="inline-code">27f6a0b7</code> is really</p>
+<p>
+        <pre style="position: relative;">
+            <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            <code data-language="hexadecimal" class="line-numbers"><span>  (2 =  2) × (16^7 = 268435456) = 536870912</span>
+<span>+ (7 =  7) × (16^6 =  16777216) = 117440512</span>
+<span>+ (f = 15) × (16^5 =   1048576) =  15728640</span>
+<span>+ (6 =  6) × (16^4 =     65536) =    393216</span>
+<span>+ (a = 10) × (16^3 =      4096) =     40960</span>
+<span>+ (0 =  0) × (16^2 =       256) =         0</span>
+<span>+ (b = 11) × (16^1 =        16) =       176</span>
+<span>+ (7 =  7) × (16^0 =         1) =         7</span>
+<span>-------------------------------------------</span>
+<span>                                = 670474423</span>
+</code>
+        </pre></p>
+<p>and so by decomposing a number like 670474423 into the form
+\[\sum_{i=0}^7 a_i \cdot 16^i \quad a_i \in \{0, \, 1, \, \ldots, \, 15\}\]
+we can reverse this process and get the sequence of digits we need. We use a greedy algorithm</p>
 
         </div>
         <h6 id="copyright">&#169; Avish Kumar 2024</h6>
