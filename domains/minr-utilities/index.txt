@@ -11,6 +11,7 @@ Here are some useful ones:
 - [My MSC Tips Series](../minr-script-help), a series of writeups about different aspects of MSC
 <ul>
 - [Functions](../minr-script-help/functions), published 16/05/2024
+- [Let's Build a Selector-To-Entity Converter &lpar;or, All About UUIDs&rpar;](../minr-script-help/uuid-converter), published 24/05/2024
 </ul>
 - [Resource Pack Hosting](../minr-utilities/resource-packs), a full step-by-step guide to creating, hosting, and configuring a custom resource pack for a map
 </ol>
