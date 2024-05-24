@@ -1,5 +1,41 @@
 ## Let's Build a Selector-To-UUID Converter
 
-You're probably familiar with [UUIDs](!Short for *Universally Unique IDentifier*.) in Minecraft. They're the weird strings of numbers and letters that everyone seems to have associated with their username - you might have seen them on [NameMC](https://namemc.com/), for example. Mine is `e62bfa1e-f625-4ad3-9403-7e7f8e14d0f1`. In today's article, we're going to explore what these mean and why they're useful, and build a useful function which allows you to get them for arbitrary entities.
+You're probably familiar with UUIDs in Minecraft. They're the weird strings of numbers and letters that everyone seems to have associated with their username - you might have seen them on [NameMC](https://namemc.com/), for example. Mine is `e62bfa1e-f625-4ad3-9403-7e7f8e14d0f1`. In today's article, we're going to explore what these mean and why they're useful, and build a useful function which allows you to get them for arbitrary entities.
 
-First, what is a UUID? It's a 
+"""info #7F00B5 #EEEEEE
+__**Contents:**__
+<ul>
+- [What is a UUID?](#what-is-a-uuid)
+- [How does Minecraft use them?](#how-does-minecraft-use-uuids)
+- [What are we building and why?](#what-are-we-building-and-why)
+- [Let's make a function!](#creating-a-selector-to-uuid-converter-in-msc)
+</ul>
+"""
+
+## What is a UUID?
+
+A UUID, short for *__U__niversally __U__nique __ID__entifier*, is a 32-character long [hexadecimal](https://byjus.com/maths/hexadecimal-number-system/) number with dashes to separate it into blocks of `8-4-4-4-12`. Hexadecimal is a number system with 16 digits (hexa = 6, deci = 10), which are 0-9 then A-F. For example, the number `23` in hexadecimal represents what we would think of as 35, since 35 = 2 × 16 + 3 × 1.
+
+The "point" of UUIDs is that they really are unique, and you can (almost) guarantee this *without having to put in effort into ensuring it manually*. Why? Well, let's understand the structure of UUIDs to find out.
+
+```uuid-v4.1
+xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+```
+
+The `4` in position 13 represents the version of the UUID (since Minecraft uses version 4). The `y` in position 17 represents the variant: Minecraft uses variant 4.1, so [this digit can be `8`, `9`, `a`, or `b`](!The two most significant bits of the nibble corresponding to the 17th hexadecimal digit are set to 10, leaving the possible values as these four: 1000, 1001, 1010, 1011.). This specification is described in [Section 4.4 of the IETF's RFC4122 document](https://datatracker.ietf.org/doc/html/rfc4122#section-4.4) from 2005.
+
+**Every single other part of the UUID is generated completely at random.**
+
+Why is this unique? Well, probability!
+
+The 13th digit is always 4. The 17th digit can be any of 4 possibilities. The 30 other digits each have 16 possibilities. This means the number of total possible UUIDs is \( 4 \times 16^{30} = 2^{122} = 5,316,911,983,139,663,491,615,228,241,121,378,304 \), or over 5 billion billion billion billion. This is a mindblowingly large number. To put it in perspective, if you generated one UUID every second *since the dawn of the universe*, there would be an [over 98% chance](!\&#40; \mathbb{P}&#40;\text{collision}&#41; \approx 1 - e^{-t^2/2n} \\ = 1 - e^{-1.89 \cdot 10^{35} / 2^{123}} \approx 0.0176 \&#41;) that they were *all* unique!
+
+That's pretty useful! We can generate these things pretty easily and cheaply, and have a guarantee that they're unique, so we can use them as our internal references for things without worrying that something will break because we've given two things the same name.
+
+## How does Minecraft use UUIDs?
+
+Minecraft does this with every entity. This means every single entity (including players) has one of these unique codes.
+
+## What are we building and why?
+
+## Creating a selector-to-UUID converter in MSC

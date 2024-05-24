@@ -45,7 +45,7 @@
     @done
 @done
 
-    
+
 # vanilla UUIDs have dashes in them splitting the 32-character UUID into blocks of 8-4-4-4-12
 @define String stringifiedUUID = u[0] + u[1] + u[2] + u[3] + u[4] + u[5] + u[6] + u[7] + "-" + u[8] + u[9] + u[10] + u[11] + "-" + u[12] + u[13] + u[14] + u[15] + "-" + u[16] + u[17] + u[18] + u[19] + "-" + u[20] + u[21] + u[22] + u[23] + u[24] + u[25] + u[26] + u[27] + u[28] + u[29] + u[30] + u[31]
 @return Entity(stringifiedUUID)

@@ -100,7 +100,7 @@ A
 ```python
 >>> class MyClass:
 ...     &#95;&#95;init&#95;&#95; = print
-... 
+...
 >>> (obj := MyClass())
  
 <&#95;&#95;main&#95;&#95;.MyClass object at 0x1009caae0>

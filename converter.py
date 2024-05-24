@@ -45,7 +45,7 @@ def convert_markdown_to_html(input_file, output_file, depth):
         secondary_color = match.group(2)
         info_content = match.group(3)
         return f'<div class="info-box" style="--primary-color: #{primary_color}; --secondary-color: #{secondary_color};">{info_content}</div>'
-    
+
     content = re.sub(r'"""info #([A-Fa-f0-9]{6}) #([A-Fa-f0-9]{6})\n(.*?)\n"""', info_box_replacer, content, flags=re.DOTALL)
 
     # Code blocks
@@ -107,7 +107,7 @@ def process_modified_index_files(root_dir, all_files=False):
         relative_path = path.relpath(output_file, root_dir)
         depth = relative_path.count(sep)
         print(f"Successfully wrote to {relative_path}")
-        
+
         convert_markdown_to_html(input_file, output_file, depth)
 
 # Runs this on our root directory
