@@ -39,7 +39,7 @@ which can be numbered, like that, or
 It also supports <&red>coloured</&red> <&blue>text</&blue> and  `inline_code` blocks, as well as dynamically loaded content (eg. you loaded this page at ${current_date}).
 
 Thanks to the wonderful work of [KaTeX](https://katex.org/), it also supports beautiful LaTeX expressions, like 
-\[ \mathbb{P} \left( |X-\mu| \geq k \sigma \right) \leq \frac{1}{k^2} \quad \text{(Chebyshev's Inequality).}\]
+${mathematical_expression}
 
 """info #7F00B5 #EEEEEE
 The font used on this site is [ET Book](https://edwardtufte.github.io/et-book/) by Edward Tufte.
