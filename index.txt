@@ -5,18 +5,13 @@ Hey, I'm Avish, a [${current_age_in_years}](!${current_age_in_days}) year old fr
 In my free time, I enjoy programming, reading, making and solving puzzles, social deduction games, playing on [Minr](!zero.minr.org, a Minecraft server I'm a staff member on), and creating things. This is a website where I keep things I make, link to things I enjoy, or talk about things in a loosely structured forum.
 
 """info #7F00B5 #EEEEEE
-__**Jump to / visit:**__
+__**Jump to:**__
 <ul>
-- [About this website](#about-this-website)
-- [Useful things I've made for Minr](domains/minr-utilities/)
-- [Projects and other websites of mine](domains/projects/)
+- [Everything I have on here](#index)
+- [More about this website](#about-this-website)
 - [Links to my other accounts](#links-to-elsewhere)
-- [Interesting mathematical tidbits](domains/maths/)
-- [Everything to do with programming](domains/programming/)
 </ul>
 """
-
-<br>
 
 ## About This Website
 
@@ -41,9 +36,23 @@ It also supports <&red>coloured</&red> <&blue>text</&blue> and  `inline_code` bl
 Thanks to the wonderful work of [KaTeX](https://katex.org/), it also supports beautiful LaTeX expressions, like 
 ${mathematical_expression}
 
-"""info #7F00B5 #EEEEEE
 The font used on this site is [ET Book](https://edwardtufte.github.io/et-book/) by Edward Tufte.
+
+## Index
+
+Here is a list of most things on this website, up to the [first level of granularity](!Most of these are themselves index pages, and will link to yet more subpages.). On any other page, click the home button in the top left to return here.
+
+"""info #7F00B5 #EEEEEE
+<ul>
+- [Projects and other websites of mine](domains/projects/)
+- [Useful things I've made for Minr](domains/minr-utilities/)
+- [Interesting mathematical tidbits](domains/maths/)
+- [Everything to do with programming](domains/programming/)
+- [The technology and AI area](domains/tech/)
+- [Hub of miscellany](domains/miscellaneous)
+</ul>
 """
+
 
 <br>
 
@@ -86,3 +95,6 @@ These are the public accounts I regularly use online. Feel free to contact me at
 </p><a href="https://www.linkedin.com/in/avishkumar/" class="social-link"><div class="social-box">
     <div class="social-icon"><img src="images/social-media-sites/linkedin.png" alt="LinkedIn"></div>
     <div class="social-text">LinkedIn • Avish Kumar</div></div></a><p>
+
+
+    
