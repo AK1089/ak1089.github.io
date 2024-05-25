@@ -7,8 +7,8 @@ In my free time, I enjoy programming, reading, making and solving puzzles, socia
 """info #7F00B5 #EEEEEE
 __**Jump to:**__
 <ul>
+- [About this website](#about-this-website)
 - [Everything I have on here](#index)
-- [More about this website](#about-this-website)
 - [Links to my other accounts](#links-to-elsewhere)
 </ul>
 """
@@ -52,7 +52,6 @@ Here is a list of most things on this website, up to the [first level of granula
 - [Hub of miscellany](domains/miscellaneous)
 </ul>
 """
-
 
 <br>
 
