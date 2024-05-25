@@ -73,7 +73,7 @@ These are the public accounts I regularly use online. Feel free to contact me at
 
 </p><a href="https://www.last.fm/user/AK1089-" class="social-link"><div class="social-box">
     <div class="social-icon"><img src="images/social-media-sites/lastfm.png" alt="Last.FM"></div>
-    <div class="social-text">Last.fm • @_ak1089_</div></div></a><p>
+    <div class="social-text">Last.fm • AK1089-</div></div></a><p>
 
 </p><a href="https://open.spotify.com/user/bz1tyfsu1p40r48rte5eyyy7q?si=3badb1008433403b&nd=1&dlsi=07baf3f018954791" class="social-link"><div class="social-box">
     <div class="social-icon"><img src="images/social-media-sites/spotify.png" alt="Spotify"></div>
