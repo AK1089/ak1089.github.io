@@ -1,4 +1,3 @@
-<script src= "script.js"></script>
 ### Let's Build a Selector-To-Entity Converter (or, All About UUIDs)
 
 You're probably familiar with UUIDs in Minecraft. They're the weird strings of numbers and letters that everyone seems to have associated with their username - you might have seen them on [NameMC](https://namemc.com/), for example. Mine is `e62bfa1e-f625-4ad3-9403-7e7f8e14d0f1`. In today's article, we're going to explore what these mean and why they're useful, and build a useful function which allows you to get them for arbitrary entities.

@@ -1,4 +1,3 @@
-<script src= "script.js"></script>
 ## Creating and Hosting Minecraft Server Resource Packs
 
 This page is intended as a start-to-finish guide for hosting a basic Minecraft [resource pack](!Resource packs in Minecraft allow you to control the visuals, sounds, and other aesthetics for the game in a lot of detail.) and adding it to a map. Each section is self-contained: if a step doesn't apply to you, or you don't need help with it, feel free to skip any of them.
