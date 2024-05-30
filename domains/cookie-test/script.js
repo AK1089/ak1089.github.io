@@ -22,7 +22,7 @@ function getCookie(name) {
 }
 
 // Function to display the last visited time
-function on_body_load() {
+function local_on_body_load() {
     var lastVisitedTime = getCookie("lastVisitedTime");
     if (lastVisitedTime) {
         document.getElementById("lastVisited").textContent = "Last visited: " + lastVisitedTime;

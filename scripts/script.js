@@ -1,13 +1,39 @@
 // Copies code to the clipboard
 function copyToClipboard(button) {
     var codeBlock = button.nextElementSibling;
+    var code = codeBlock.textContent;
+    
+    // Remove leading ">>> " from the code
+    code = code.replace(/>>> /gm, '');
+    
+    // Create a temporary element to hold the modified code
+    var tempElement = document.createElement('pre');
+    tempElement.textContent = code;
+    
+    // Append the temporary element to the document
+    document.body.appendChild(tempElement);
+    
+    // Create a range and select the contents of the temporary element
     var range = document.createRange();
-    range.selectNode(codeBlock);
-    range.setEnd(codeBlock.lastChild, codeBlock.lastChild.textContent.length - 1);
+    range.selectNodeContents(tempElement);
+    
+    // Remove the last character from the selection
+    range.setEnd(tempElement, tempElement.textContent.length - 1);
+    
+    // Add the range to the selection
     window.getSelection().removeAllRanges();
     window.getSelection().addRange(range);
+    
+    // Copy the selected text to the clipboard
     document.execCommand('copy');
+    
+    // Clear the selection
     window.getSelection().removeAllRanges();
+    
+    // Remove the temporary element from the document
+    document.body.removeChild(tempElement);
+    
+    // Update the button text
     button.textContent = 'Copied!';
     setTimeout(() => {
         button.textContent = 'Copy';
@@ -15,7 +41,7 @@ function copyToClipboard(button) {
 }
 
 // Function to do startup things
-function on_window_load() {
+function on_body_load() {
 
     // I love my curious little developer buddies
     console.log("hiii fellow console enthusiast <3");
@@ -23,7 +49,7 @@ function on_window_load() {
     // If the script in the directory has defined a fill_out_variables method then use it
     try {
         const variables = fill_out_variables()
-        
+
         // Get the entire HTML content
         let html = document.body.innerHTML;
 
@@ -63,7 +89,10 @@ function on_window_load() {
             }
         }
     }
-}
 
-// Run the on_window_load function on page load
-window.onload = on_window_load;
+    // If the script in the directory has defined a local_on_body_load method then use it
+    try {
+        local_on_body_load()
+    } catch { }
+
+}
