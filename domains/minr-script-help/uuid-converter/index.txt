@@ -172,7 +172,7 @@ which is exactly what we want, for each [\(i \in \{ 0, 1, 2, 3 \}\)](!This is wh
 /execute in minecraft:theta run data get entity @e[type=pig,x=113,dx=20,y=35,dy=20,z=66,limit=1] UUID[0]
 ```
 
-for the first number of the four. Now, let's work on converting it to hexadecimal. Do you remember the issue with negative numbers being \(2^32\) off where they needed to be? Well, this fixes that! We add \(4294967296\) to all negative numbers we get, to make them the corresponding positive number which we can then convert into hexadecimal as usual.
+for the first number of the four. Now, let's work on converting it to hexadecimal. Do you remember the issue with negative numbers being \(2^{32}\) off where they needed to be? Well, this fixes that! We add \(4294967296\) to all negative numbers we get, to make them the corresponding positive number which we can then convert into hexadecimal as usual.
 
 ```msc
     &num; half the time, this number is negative due to integer overflows.
