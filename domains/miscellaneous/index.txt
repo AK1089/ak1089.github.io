@@ -1,3 +1,15 @@
 ## Miscellaneous Stuff
 
-Okay, you got me. I have nothing here.
+Okay, you got me. I have nothing here. Here's my to-do list for somewhat large-scale projects. It's "public" (though I expect very few people to actually read it) so I have some incentive to follow through on them, but there's no specific deadline for most of these nor are they in any coherent priority order.
+
+<ul>
+- Redo the templates and boilerplate for the website, to make it load faster and work better on mobile.
+- Completely rewrite [Spotify Scripting](!My custom scripting language designed to write hyper-custom nondeterministic Spotify playlists.). Possibly also integrate it with the digital cassette player, and make a webpage for it.
+- Make an [interactive autofilling map](!A map-like graphic which would show a directed graph of all the subpages of this website by which link to each other, with a fog-of-war effect whereby each page is partially revealed only once you visit a parent of it.) of this website
+- Add all the old projects like the Dijkstra's algorithm demonstration, word games, etc. onto this site.
+- Create [mini control boxes](!Tiny, unit-cheap boxes each with a button and a microphone which take instructions and do things with them.) for my house.
+- Make a mechanical table which can switch surfaces to be a dining table, board game area, crafts surface etc. simultaneously.
+- Finish the [in-progress Minr maps](!This list currently includes Claude, Task Mansion, Password Game, Samsara, Readme, Don't Look Back 2, Four, Murder Mystery, Interior Design, and Zura.), as well as possibly others.
+- Create and run that elaborate puzzle hunt I've been planning (no spoilers!)
+- Set up the perfect LaTeX boilerplate & environment for notes and problem sheets, and type up & publicise all of those for third year.
+</ul>
