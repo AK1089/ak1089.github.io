@@ -1,39 +1,19 @@
-// Copies code to the clipboard
+// Copies code from a code block to the clipboard
 function copyToClipboard(button) {
+
+    // Creates a range and sets it to the code block text (minus trailing newline)
     var codeBlock = button.nextElementSibling;
-    var code = codeBlock.textContent;
-    
-    // Remove leading ">>> " from the code
-    code = code.replace(/>>> /gm, '');
-    
-    // Create a temporary element to hold the modified code
-    var tempElement = document.createElement('pre');
-    tempElement.textContent = code;
-    
-    // Append the temporary element to the document
-    document.body.appendChild(tempElement);
-    
-    // Create a range and select the contents of the temporary element
     var range = document.createRange();
-    range.selectNodeContents(tempElement);
-    
-    // Remove the last character from the selection
-    range.setEnd(tempElement, tempElement.textContent.length - 1);
-    
-    // Add the range to the selection
+    range.selectNode(codeBlock);
+    range.setEnd(codeBlock.lastChild, codeBlock.lastChild.textContent.length - 1);
+
+    // Copies the range to the clipboard and deletes it
     window.getSelection().removeAllRanges();
     window.getSelection().addRange(range);
-    
-    // Copy the selected text to the clipboard
     document.execCommand('copy');
-    
-    // Clear the selection
     window.getSelection().removeAllRanges();
-    
-    // Remove the temporary element from the document
-    document.body.removeChild(tempElement);
-    
-    // Update the button text
+
+    // Animates the button
     button.textContent = 'Copied!';
     setTimeout(() => {
         button.textContent = 'Copy';
