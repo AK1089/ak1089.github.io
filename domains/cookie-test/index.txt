@@ -1,0 +1,7 @@
+## Cookie Test
+
+This is a quick test to see if cookies work. They work fine when running on `localhost`, but it might be different on GitHub Pages (the live / production domain). On page load, this displays the *last* time before now when you loaded this page in particular.
+
+<p id="lastVisited"></p>
+
+The one redeeming thing about the [tragedy in 2016](https://en.wikipedia.org/wiki/2016_United_Kingdom_European_Union_membership_referendum) is that I don't have to follow [GDPR](https://gdpr-info.eu/). If you really don't want cookies, then in future you probably shouldn't visit pages titled "Cookie Test". For now, no other pages on here track cookies. If I start doing this site-wide, I'll try and add an opt-out toggle.
