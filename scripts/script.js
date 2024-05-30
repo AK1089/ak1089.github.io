@@ -1,18 +1,14 @@
 // Copies code from a code block to the clipboard
 function copyToClipboard(button) {
-
-    // Creates a range and sets it to the code block text (minus trailing newline)
     var codeBlock = button.nextElementSibling;
-    var range = document.createRange();
-    range.selectNode(codeBlock);
-    range.setEnd(codeBlock.lastChild, codeBlock.lastChild.textContent.length - 1);
-
-    // Copies the range to the clipboard and deletes it
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(range);
-    document.execCommand('copy');
-    window.getSelection().removeAllRanges();
-
+    var code = codeBlock.textContent;
+    
+    // Remove leading and trailing newline characters
+    code = code.replace(/^\n|\n$/g, '');
+    code = code.replace(/>>> /g, '');
+    
+    navigator.clipboard.writeText(code);
+    
     // Animates the button
     button.textContent = 'Copied!';
     setTimeout(() => {
