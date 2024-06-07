@@ -1,0 +1,102 @@
+[
+    {
+        "name": "Home",
+        "url": "/",
+        "parent": null
+    },
+    {
+        "name": "Projects",
+        "url": "/domains/projects/",
+        "parent": "/"
+    },
+    {
+        "name": "MSC Help",
+        "url": "/domains/minr-script-help/",
+        "parent": "/"
+    },
+    {
+        "name": "Let's Build a UUID Converter",
+        "url": "/domains/minr-script-help/uuid-converter/",
+        "parent": "/domains/minr-script-help/"
+    },
+    {
+        "name": "All About Functions",
+        "url": "/domains/minr-script-help/functions/",
+        "parent": "/domains/minr-script-help/"
+    },
+    {
+        "name": "Miscellaneous",
+        "url": "/domains/miscellaneous/",
+        "parent": "/"
+    },
+    {
+        "name": "Cookie Test Page",
+        "url": "/domains/cookie-test/",
+        "parent": "/"
+    },
+    {
+        "name": "Programming",
+        "url": "/domains/programming/",
+        "parent": "/"
+    },
+    {
+        "name": "Python Quirks",
+        "url": "/domains/programming/python-quirks/",
+        "parent": "/domains/programming/"
+    },
+    {
+        "name": "Floating Points & 42",
+        "url": "/domains/programming/python-quirks/floating-points-and-42/",
+        "parent": "/domains/programming/"
+    },
+    {
+        "name": "Maths",
+        "url": "/domains/maths/",
+        "parent": "/"
+    },
+    {
+        "name": "Electromagnetism Notes",
+        "url": "/domains/maths/electromagnetism-notes/",
+        "parent": "/domains/maths/"
+    },
+    {
+        "name": "Primes & Irreducibles",
+        "url": "/domains/maths/primes-and-irreducibles/",
+        "parent": "/domains/maths/"
+    },
+    {
+        "name": "Markov Chain Convergence",
+        "url": "/domains/maths/markov-chains-converge-in-distribution/",
+        "parent": "/domains/maths/"
+    },
+    {
+        "name": "Minr Map Art Maker",
+        "url": "/domains/minr-map-art/",
+        "parent": "/"
+    },
+    {
+        "name": "Technology",
+        "url": "/domains/tech/",
+        "parent": "/"
+    },
+    {
+        "name": "Software I Like",
+        "url": "/domains/tech/good-software/",
+        "parent": "/domains/tech/"
+    },
+    {
+        "name": "Minr Utilities",
+        "url": "/domains/minr-utilities/",
+        "parent": "/"
+    },
+    {
+        "name": "Resource Pack Creation Guide",
+        "url": "/domains/minr-utilities/resource-packs/",
+        "parent": "/domains/minr-utilities/"
+    },
+    {
+        "name": "Site Map",
+        "url": "/map/",
+        "parent": "/"
+    }
+]
