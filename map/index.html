@@ -1,29 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AK1089's Website</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/styles.css">
-    <link rel="stylesheet" href= "styles.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="../scripts/script.js"></script>
-    <script src= "script.js"></script>
-    <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css">
-    <script src= "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" defer></script>
-    <script src= "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" defer></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" defer></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
 </head>
+
 <body onload="on_body_load()">
     <div id="content-container">
         <a href="../" id="home-icon">
-            <img src="../images/home.png" alt="Home" width="50" height="50" style="position: absolute; left: 6%; top: 60px;">
+            <img src="../images/home.png" alt="Home" width="50" height="50"
+                style="position: absolute; left: 6%; top: 60px;">
         </a>
         <div id="main-content">
             <h2>Site Map</h2>
-            <p>Here's a map of my site. Click on any of the nodes to go there. Only places you've already been or seen a link to are displayed, so click around to see more!</p>
+            <p>Here's a map of my site. Click on any of the nodes to go there. Only places you've already been or seen a
+                link to are displayed, so click around to see more!</p>
+            <span>
+                <p style="display: inline;">Sometimes, when using the back button, your browser won't reload the page.
+                    If that happens, click</p><button onclick="reloadMap()">here</button>
+                <p style="display: inline;">to refresh the map. You can also click</p><button
+                    onclick="resetVisitedPages()">here</button>
+                <p style="display: inline;">to reset your exploration progress!</p>
+            </span>
+            <br>
+            <br>
         </div>
         <h6 id="copyright">&#169; Avish Kumar 2024</h6>
     </div>
 </body>
+
 </html>
