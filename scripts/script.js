@@ -16,6 +16,18 @@ function copyToClipboard(button) {
     }, 2000);
 }
 
+function setVisitedPage(page) {
+    let visitedPages = JSON.parse(localStorage.getItem('visitedPages')) || [];
+    if (!visitedPages.includes(page)) {
+        visitedPages.push(page);
+        localStorage.setItem('visitedPages', JSON.stringify(visitedPages));
+    }
+}
+
+function getVisitedPages() {
+    return JSON.parse(localStorage.getItem('visitedPages')) || [];
+}
+
 // Function to do startup things
 function on_body_load() {
 
@@ -73,17 +85,4 @@ function on_body_load() {
 
     setVisitedPage(window.location.pathname);
 
-}
-
-
-function setVisitedPage(page) {
-    let visitedPages = JSON.parse(localStorage.getItem('visitedPages')) || [];
-    if (!visitedPages.includes(page)) {
-        visitedPages.push(page);
-        localStorage.setItem('visitedPages', JSON.stringify(visitedPages));
-    }
-}
-
-function getVisitedPages() {
-    return JSON.parse(localStorage.getItem('visitedPages')) || [];
 }
