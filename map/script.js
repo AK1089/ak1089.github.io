@@ -30,6 +30,7 @@ function buildHierarchy(siteMap, visitedPages) {
 
 // The filter matches pages which should be displayed
 function filterHierarchy(node, visitedPages) {
+    node.visited = visitedPages.includes(node.url);
 
     // Returns null if the parent exists (ie. not root), and neither the parent nor the URL has been visited
     if (!visitedPages.includes(node.url) && !visitedPages.includes(node.parent) && node.parent) {
@@ -88,7 +89,8 @@ function renderTree(data) {
     node.append('a')
         .attr('xlink:href', d => d.data.url)
         .append('circle')
-        .attr('r', 10);
+        .attr('r', 10)
+        .attr('class', d => d.data.visited ? 'visited' : 'not-visited');
 
     // Adds a label with the page name
     node.append('text')
@@ -97,6 +99,7 @@ function renderTree(data) {
         .style('text-anchor', d => d.children ? 'end' : 'start')
         .text(d => d.data.name);
 }
+
 
 // Reloads the image by getting the site schematic and the cookie then rendering the tree
 async function reloadMap() {

@@ -3,13 +3,27 @@
 }
 
 .node circle:hover {
-    fill: #d99;
+    fill: #8d9;
 }
 
 .node circle {
     fill: #fff;
-    stroke: steelblue;
     stroke-width: 1.5px;
+}
+
+.node circle.visited {
+    stroke: steelblue;
+}
+
+.node circle.not-visited {
+    stroke: red;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+      0% { transform: scale(1); }
+     50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
 .node text {
