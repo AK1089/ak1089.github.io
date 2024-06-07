@@ -19,12 +19,11 @@ function fill_out_variables() {
         "\\[ \\mathbb{P} \\left( |X-\\mu| \\geq k \\sigma \\right) \\leq \\frac{1}{k^2} \\quad \\text{(Chebyshev's Inequality).} \\]"
     ]
 
-    // Define your global variable dictionary
     const variables = {
         current_age_in_years: age.toString(),
         current_age_in_days: current_age_in_days.toString(),
         current_date: currentDate.toLocaleTimeString(),
-        mathematical_expression: expressions[Math.floor(Math.random()*expressions.length)]
+        mathematical_expression: expressions[Math.floor(Math.random() * expressions.length)]
     };
 
     return variables

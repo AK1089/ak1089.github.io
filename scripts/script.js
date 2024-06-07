@@ -2,13 +2,13 @@
 function copyToClipboard(button) {
     var codeBlock = button.nextElementSibling;
     var code = codeBlock.textContent;
-    
+
     // Remove leading and trailing newline characters
     code = code.replace(/^\n|\n$/g, '');
     code = code.replace(/>>> /g, '');
-    
+
     navigator.clipboard.writeText(code);
-    
+
     // Animates the button
     button.textContent = 'Copied!';
     setTimeout(() => {
@@ -71,4 +71,19 @@ function on_body_load() {
         local_on_body_load()
     } catch { }
 
+    setVisitedPage(window.location.pathname);
+
+}
+
+
+function setVisitedPage(page) {
+    let visitedPages = JSON.parse(localStorage.getItem('visitedPages')) || [];
+    if (!visitedPages.includes(page)) {
+        visitedPages.push(page);
+        localStorage.setItem('visitedPages', JSON.stringify(visitedPages));
+    }
+}
+
+function getVisitedPages() {
+    return JSON.parse(localStorage.getItem('visitedPages')) || [];
 }
