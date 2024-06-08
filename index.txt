@@ -40,16 +40,14 @@ The font used on this site is [ET Book](https://edwardtufte.github.io/et-book/) 
 
 ## Index
 
-Here is a list of most things on this website, up to the [first level of granularity](!Most of these are themselves index pages, and will link to yet more subpages.). On any other page, click the home button in the top left to return here.
+Here's a list of the main top-level areas on this website, up to the [first level of granularity](!Most of these are themselves index pages, and will link to yet more subpages.). On any other page, click the home button in the top left to return here.
+If you want to see *everything*, go to the [interactive site map](map), which is accessible from anywhere using the map icon.
 
 """info #7F00B5 #EEEEEE
 <ul>
 - [Projects and other websites of mine](domains/projects/)
 - [Useful things I've made for Minr](domains/minr-utilities/)
-- [Interesting mathematical tidbits](domains/maths/)
-- [Everything to do with programming](domains/programming/)
-- [The technology and AI area](domains/tech/)
-- [Hub of miscellany](domains/miscellaneous)
+- Everything to do with [programming](domains/programming/), [maths](domains/maths/), and [technology](domains/tech/)
 </ul>
 """
 
