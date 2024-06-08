@@ -50,9 +50,9 @@
         "parent": "/"
     },
     {
-        "name": "Cookie Test Page",
-        "url": "/domains/cookie-test/",
-        "parent": "/"
+        "name": "Cookies",
+        "url": "/domains/cookies/",
+        "parent": "/map/"
     },
     {
         "name": "Programming",

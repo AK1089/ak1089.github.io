@@ -103,6 +103,10 @@ function renderTree(data) {
 
 // Reloads the image by getting the site schematic and the cookie then rendering the tree
 async function reloadMap() {
+    if (getCookie("cookiePermissions") === "cookiesDisabled") {
+        localStorage.setItem('visitedPages', JSON.stringify([]));
+        return;
+    }
     const siteMap = await fetchSiteMap();
     const visitedPages = getVisitedPages();
     const hierarchy = buildHierarchy(siteMap, visitedPages);

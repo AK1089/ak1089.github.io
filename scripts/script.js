@@ -17,11 +17,22 @@ function copyToClipboard(button) {
 }
 
 function setVisitedPage(page) {
+    let visitedPages = JSON.parse(localStorage.getItem('visitedPages')) || [];
+
+    fetch('/map/siteMap.json')
+        .then(response => response.json())
+        .then(siteMap => {
+            let pageTitle = siteMap.find(p => p.url === page)?.name || 'Page';
+            document.title = `${pageTitle} | AK1089's Website`;
+        })
+        .catch(error => {
+            console.error('Error fetching site map:', error);
+        });
+
     if (getCookie("cookiePermissions") === "cookiesDisabled") {
         return;
     }
 
-    let visitedPages = JSON.parse(localStorage.getItem('visitedPages')) || [];
     if (!visitedPages.includes(page)) {
         visitedPages.push(page);
         localStorage.setItem('visitedPages', JSON.stringify(visitedPages));
