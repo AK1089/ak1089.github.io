@@ -34,6 +34,7 @@ def convert_markdown_to_html(input_file, output_file, depth):
     content = re.sub(r'\[\&(.+?)\]\((.+?)\)', r'<div class="image-container"><img src="\2" alt="\1"><div class="caption">\1</div></div>', content)
     content = re.sub(r'\[([^\]]*)\]\(!(.+?)\)', r'<span class="tooltip">\1<span class="tooltiptext">\2</span></span>', content)
     content = re.sub(r'\[([^\]]*)\]\((.*?)\)', r'<a href="\2">\1</a>', content)
+    content = re.sub(r'<slider-(on|off)\s+([^>]+)>', lambda m: f'<label class="switch"> <input type="checkbox" id="{m.group(2)}" onclick="on_slider_toggle(\'{m.group(2)}\')" {"checked" if m.group(1) == "on" else ""}> <span class="slider"></span> </label>', content)
 
     # Color tags
     for color, hex_value in color_dict.items():
