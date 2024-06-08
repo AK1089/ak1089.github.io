@@ -115,12 +115,15 @@ function doSpaceTask() {
 function handleKeyPress(event) {
     switch (event.key) {
         case 'ArrowUp':
+            event.preventDefault();
             doUpArrowTask();
             break;
         case 'ArrowDown':
+            event.preventDefault();
             doDownArrowTask();
             break;
         case ' ':
+            event.preventDefault();
             doSpaceTask()
             break;
     }
