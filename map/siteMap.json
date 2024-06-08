@@ -5,14 +5,34 @@
         "parent": null
     },
     {
+        "name": "Site Map",
+        "url": "/map/",
+        "parent": "/"
+    },
+    {
         "name": "Projects",
         "url": "/domains/projects/",
         "parent": "/"
     },
     {
+        "name": "Minr Utilities",
+        "url": "/domains/minr-utilities/",
+        "parent": "/"
+    },
+    {
+        "name": "Minr Map Art Makerº",
+        "url": "/domains/minr-map-art/",
+        "parent": "/domains/minr-utilities/"
+    },
+    {
+        "name": "Resource Pack Creation Guide",
+        "url": "/domains/minr-utilities/resource-packs/",
+        "parent": "/domains/minr-utilities/"
+    },
+    {
         "name": "MSC Help",
         "url": "/domains/minr-script-help/",
-        "parent": "/"
+        "parent": "/domains/minr-utilities/"
     },
     {
         "name": "Let's Build a UUID Converter",
@@ -70,11 +90,6 @@
         "parent": "/domains/maths/"
     },
     {
-        "name": "Minr Map Art Maker",
-        "url": "/domains/minr-map-art/",
-        "parent": "/"
-    },
-    {
         "name": "Technology",
         "url": "/domains/tech/",
         "parent": "/"
@@ -83,20 +98,5 @@
         "name": "Software I Like",
         "url": "/domains/tech/good-software/",
         "parent": "/domains/tech/"
-    },
-    {
-        "name": "Minr Utilities",
-        "url": "/domains/minr-utilities/",
-        "parent": "/"
-    },
-    {
-        "name": "Resource Pack Creation Guide",
-        "url": "/domains/minr-utilities/resource-packs/",
-        "parent": "/domains/minr-utilities/"
-    },
-    {
-        "name": "Site Map",
-        "url": "/map/",
-        "parent": "/"
     }
 ]
