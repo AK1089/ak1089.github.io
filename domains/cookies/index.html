@@ -22,10 +22,12 @@
             <img src="../../images/map.png" alt="Home" width="40" height="40" style="position: absolute; left: 7%; top: 120px;">
         </a>
         <div id="main-content">
-            <p><h2 id="cookie-test">Cookie Test</p></h2>
-<p>This is a quick test to see if cookies work. They work fine when running on <code class="inline-code">localhost</code>, but it might be different on GitHub Pages (the live / production domain). On page load, this displays the <em>last</em> time before now when you loaded this page in particular.</p>
-<p><p id="lastVisited"></p></p>
-<p>The one redeeming thing about the <a href="https://en.wikipedia.org/wiki/2016_United_Kingdom_European_Union_membership_referendum">tragedy in 2016</a> is that I don't have to follow <a href="https://gdpr-info.eu/">GDPR</a>. If you really don't want cookies, then in future you probably shouldn't visit pages titled "Cookie Test". For now, no other pages on here track cookies. If I start doing this site-wide, I'll try and add an opt-out toggle.</p>
+            <p><h2 id="cookies">Cookies</p></h2>
+<p>This page is a quick test to see if cookies work. On page load, this displays the <em>last</em> time before now when you loaded this page in particular.</p>
+<p><p id="lastVisited">You have cookies or JavaScript disabled!</p></p>
+<p>The one redeeming thing about the <a href="https://en.wikipedia.org/wiki/2016_United_Kingdom_European_Union_membership_referendum">tragedy of 2016</a> is that I don't have to follow <a href="https://gdpr-info.eu/">GDPR</a>. However, if you really want to disable them, here's a toggle:</p>
+<p><label class="switch"> <input type="checkbox" id="cookies-slider" onclick="on_slider_toggle('cookies-slider')" > <span class="slider"></span> </label> Allow Cookies?</p>
+<p>(Note: technically, turning this slider off does in fact set a cookie, which is called <code class="inline-code">cookiePermissions</code> and is set to <code class="inline-code">"cookiesDisabled"</code>. This is essential, for obvious reasons. Turning this setting off breaks a few parts of the website, most notably the <a href="../../map">site map</a>.)</p>
 
         </div>
         <h6 id="copyright">&#169; Avish Kumar 2024</h6>
