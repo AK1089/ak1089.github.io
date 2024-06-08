@@ -330,3 +330,40 @@ input:checked + .slider {
 input:checked + .slider:before {
     transform: translateX(25px);
 }
+
+
+/* Home and Map Icons */
+.icon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+}
+
+.home-icon {
+    left: 7%;
+    top: 70px;
+}
+
+.map-icon {
+    left: 7%;
+    top: 120px;
+}
+
+/* Icon adjustments for mobile */
+@media only screen and (max-width: 600px) {
+    .home-icon {
+        left: 7%;
+        top: 25px;
+    }
+
+    .map-icon {
+        left: 17%;
+        top: 25px;
+    }
+
+    body {
+        padding-top: 12%;
+        width: 90%;
+        margin: 1%;
+    }
+}
