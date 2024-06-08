@@ -75,9 +75,6 @@ def convert_markdown_to_html(input_file, output_file, depth):
     html_content = html_content.replace('src="', f'src="{"../" * depth}')
     html_content = html_content.replace('href="', f'href="{"../" * depth}')
 
-    if depth == 0:
-        html_content = html_content.replace('<img src="images/home.png" alt="Home" width="50" height="50" style="position: absolute; left: 6%; top: 60px;">', "")
-
     # Add all content to the template file and write it to the output
     html_content = html_content.replace("ALL_CONTENT_GOES_HERE", content)
     with open(output_file, 'w') as f:
