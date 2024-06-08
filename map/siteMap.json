@@ -20,7 +20,7 @@
         "parent": "/"
     },
     {
-        "name": "Minr Map Art Makerº",
+        "name": "Minr Map Art Maker\u00ba",
         "url": "/domains/minr-map-art/",
         "parent": "/domains/minr-utilities/"
     },
@@ -98,5 +98,25 @@
         "name": "Software I Like",
         "url": "/domains/tech/good-software/",
         "parent": "/domains/tech/"
+    },
+    {
+        "name": "Puzzles",
+        "url": "/domains/puzzles/",
+        "parent": "/"
+    },
+    {
+        "name": "Circular Train",
+        "url": "/domains/puzzles/circular-train/",
+        "parent": "/domains/puzzles/"
+    },
+    {
+        "name": "Solution",
+        "url": "/domains/puzzles/circular-train/solution/",
+        "parent": "/domains/puzzles/circular-train/"
+    },
+    {
+        "name": "Interactive Mode",
+        "url": "/domains/puzzles/circular-train/interactive/",
+        "parent": "/domains/puzzles/circular-train/"
     }
 ]

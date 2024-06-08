@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AK1089's Website</title>
+    <link rel="icon" type="image/x-icon" href="../../../images/favicon.ico">
+    <link rel="stylesheet" href="../../../styles/styles.css">
+    <link rel="stylesheet" href= "styles.css">
+    <script src="../../../scripts/script.js"></script>
+    <script src= "script.js"></script>
+    <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css">
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" defer></script>
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" defer></script>
+</head>
+<body onload="on_body_load()">
+    <div id="content-container">
+        <a href="../../../" id="home-icon">
+            <img src="../../../images/home.png" alt="Home" width="40" height="40" style="position: absolute; left: 7%; top: 70px;">
+        </a>
+        <a href="../../..//map" id="map-icon">
+            <img src="../../../images/map.png" alt="Home" width="40" height="40" style="position: absolute; left: 7%; top: 120px;">
+        </a>
+        <div id="main-content">
+            <p><h2 id="the-circular-train">The Circular Train</p></h2>
+<p><h4 id="puzzle">Puzzle</p></h4>
+<p>You are on a train with some finite but unknown number of identical carriages. Each carriage has a light, which is either on or off, and a switch, which allows you to toggle the state of the lights. At the start, all the lights are in some <span class="tooltip">random<span class="tooltiptext">This arrangement could be anything, including an adversarial one: your solution shouldn't rely on its behaviour.</span></span> configuration.</p>
+<p>You may explore the train and use the switches freely, but you cannot make any other marks. How do you determine <em>with certainty</em> the total number of carriages in the train?</p>
+<p><div class="image-container"><img src="summary.png" alt="A diagram explaining your situation. The start carriage is highlighted, but in reality it looks no different from any other carriage."><div class="caption">A diagram explaining your situation. The start carriage is highlighted, but in reality it looks no different from any other carriage.</div></div></p>
+<p><h4 id="hints">Hints</p></h4>
+<p>Don't hover over these until you've given the problem a go yourself!</p>
+<p>Hint 1: <span class="spoiler">You need to find a way of recognising when you've been in the same carriage twice on different laps of the train.</span></p>
+<p>Hint 2: <span class="spoiler">You can't know the number for sure unless you go <em>backwards</em> as well as forwards around the train.</span></p>
+<p>Hint 3: <span class="spoiler">How do you know there's more than one carriage? How do you know there are more than two?</span></p>
+<p>Hint 4: <span class="spoiler">If you change the light in one carriage, and it changes the light in the carriage 5 doors down...</span></p>
+<p>If you think you have a solution, you can test it out <a href="interactive">here</a> or read mine <a href="solution">here</a>.</p>
+
+        </div>
+        <h6 id="copyright">&#169; Avish Kumar 2024</h6>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AK1089's Website</title>
+    <link rel="icon" type="image/x-icon" href="../../../../images/favicon.ico">
+    <link rel="stylesheet" href="../../../../styles/styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="../../../../scripts/script.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" defer></script>
+</head>
+
+<body onload="on_body_load()">
+    <div id="content-container">
+        <a href="../../../../" id="home-icon">
+            <img src="../../../../images/home.png" alt="Home" width="40" height="40"
+                style="position: absolute; left: 7%; top: 70px;">
+        </a>
+        <a href="../../../..//map" id="map-icon">
+            <img src="../../../../images/map.png" alt="Home" width="40" height="40"
+                style="position: absolute; left: 7%; top: 120px;">
+        </a>
+        <div id="main-content">
+            <p>
+            <h2 id="the-circular-train-test-your-solution">The Circular Train - Test Your Solution</p>
+            </h2>
+            <p>You are on a train with some finite but unknown number of identical carriages. Each carriage has a light,
+                which is either on or off, and a switch, which allows you to toggle the state of the lights. At the
+                start, all the lights are in some <span class="tooltip">random<span class="tooltiptext">This arrangement
+                        could be anything, including an adversarial one: your solution shouldn't rely on its
+                        behaviour.</span></span> configuration.</p>
+            <p>You may explore the train and use the switches freely, but you cannot make any other marks.</p>
+
+            <p>Press the <a onclick="doUpArrowTask()">up</a> and <a onclick="doDownArrowTask()">down</a> arrow keys to
+                move along the train. Press <a onclick="doSpaceTask()">space</a> to toggle the lights. (If you're on
+                mobile, tap the words to simulate those keypresses.)</p>
+            <div id="train-container"></div>
+            <p>When you're certain you know the number of carriages, you can take a peek to see if you were right.</p>
+            <span id="answer" class="spoiler">ANSWER GOES HERE</span>
+        </div>
+        <h6 id="copyright">&#169; Avish Kumar 2024</h6>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+## Puzzles
+
+Some fun or interesting puzzles. A lot of them are interactive!
+
+<ol>
+- [The Circular Train](circular-train)
+</ol>
