@@ -133,5 +133,10 @@
         "name": "Colour Clusterer",
         "url": "/domains/utilities/colour-clusterer/",
         "parent": "/domains/utilities/#image-processing"
+    },
+    {
+        "name": "RCSA Chair Election",
+        "url": "/policy/",
+        "parent": "/"
     }
 ]
