@@ -30,10 +30,11 @@ function buildHierarchy(siteMap, visitedPages) {
 
 // The filter matches pages which should be displayed
 function filterHierarchy(node, visitedPages) {
-    node.visited = visitedPages.includes(node.url);
+    let sectionlessURL = node.url.split('#')[0];
+    node.visited = visitedPages.includes(sectionlessURL);
 
     // Returns null if the parent exists (ie. not root), and neither the parent nor the URL has been visited
-    if (!visitedPages.includes(node.url) && !visitedPages.includes(node.parent) && node.parent) {
+    if (node.parent && !visitedPages.includes(sectionlessURL) && !visitedPages.includes(node.parent.split('#')[0])) {
         return null;
     }
 

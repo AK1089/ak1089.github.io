@@ -118,5 +118,20 @@
         "name": "Interactive Mode",
         "url": "/domains/puzzles/circular-train/interactive/",
         "parent": "/domains/puzzles/circular-train/"
+    },
+    {
+        "name": "Utilities",
+        "url": "/domains/utilities/",
+        "parent": "/"
+    },
+    {
+        "name": "Image Processing",
+        "url": "/domains/utilities/#image-processing",
+        "parent": "/domains/utilities/"
+    },
+    {
+        "name": "Colour Clusterer",
+        "url": "/domains/utilities/colour-clusterer/",
+        "parent": "/domains/utilities/#image-processing"
     }
 ]
