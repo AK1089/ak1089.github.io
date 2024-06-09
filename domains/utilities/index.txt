@@ -1,0 +1,8 @@
+## Utilities
+
+Some resources, utilities, and other applets I've made which run in the browser, broken down by category.
+
+### Image Processing
+<ol>
+- [Image Colour K-Means Clustering](colour-clusterer) - edits an image to only use a certain number of colours (useful for denoising)
+</ol>
