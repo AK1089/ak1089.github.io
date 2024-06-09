@@ -43,6 +43,39 @@ function getVisitedPages() {
     return JSON.parse(localStorage.getItem('visitedPages')) || [];
 }
 
+
+function getHostname () {
+    const localRedirectUri = 'http://localhost:8000/';
+    const productionRedirectUri = 'https://ak1089.github.io/';
+
+    // Determine the current environment and set the appropriate redirect URI
+    const isLocalhost = (window.location.hostname === 'localhost');
+    return isLocalhost ? localRedirectUri : productionRedirectUri;
+}
+
+// Function to set a cookie
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+// Function to get a cookie value
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
 // Function to do startup things
 function on_body_load() {
 
@@ -100,27 +133,4 @@ function on_body_load() {
 
     setVisitedPage(window.location.pathname);
 
-}
-
-// Function to set a cookie
-function setCookie(name, value, days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
-}
-
-// Function to get a cookie value
-function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
 }
