@@ -6,4 +6,5 @@ Here's a list of some random mathematical things I've written up or otherwise fi
 - [Irreducible, aperiodic Markov Chains converge in distribution to their unique invariant distribution](markov-chains-converge-in-distribution)
 - [Electromagnetism Revision Notes](electromagnetism-notes)
 - [Primes are Irreducible, But Not Vice-Versa (Rings)](primes-and-irreducibles)
+- [Memorising the Gaussian (Normal) Distribution](memorising-the-gaussian)
 </ul>
