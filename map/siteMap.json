@@ -135,8 +135,23 @@
         "parent": "/domains/utilities/#image-processing"
     },
     {
-        "name": "RCSA Chair Election",
-        "url": "/policy/",
-        "parent": "/"
+        "name": "Mathematical",
+        "url": "/domains/utilities/#mathematical",
+        "parent": "/domains/utilities/"
+    },
+    {
+        "name": "Graph Maker",
+        "url": "/domains/utilities/graph-maker",
+        "parent": "/domains/utilities/#mathematical"
+    },
+    {
+        "name": "Memorising the Gaussian",
+        "url": "/domains/maths/memorising-the-gaussian/",
+        "parent": "/domains/maths/"
+    },
+    {
+        "name": "Discord",
+        "url": "/callbacks/discord/",
+        "parent": "/callbacks/"
     }
 ]
