@@ -20,6 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let panZoom;
     let panEnabled = true;
 
+    // faded line
+    let dragLine = draw.line().stroke({ width: 2, color: 'gray', opacity: 0.5 }).hide();
+    let startNode;
+
     function initializePanZoom() {
         panZoom = svgPanZoom('#canvas svg', {
             zoomEnabled: true, panEnabled: true,   // allow zooming
@@ -59,8 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     content.circle(5).fill('#444').center(x, y);
                 }
             }
-        
-        // triangular grids: draw a triangular lattice
+
+            // triangular grids: draw a triangular lattice
         } else if (gridType === 'triangular') {
             for (let x = 0; x <= 4000; x += gridSize) {
                 for (let y = 0; y <= 3000; y += gridSize) {
@@ -78,6 +82,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // gets the x and y position of the mouse relative to the image
+    function getMousePosition(event) {
+        const point = panZoom.getPan();
+        const zoom = panZoom.getZoom();
+        const x = (event.clientX - draw.node.getBoundingClientRect().left) / zoom - point.x / zoom;
+        const y = (event.clientY - draw.node.getBoundingClientRect().top) / zoom - point.y / zoom;
+        return { x, y };
+    }
+
     // get the closest lattice point for snapping purposes
     function closestLatticePoint(x, y) {
         let snappedX, snappedY;
@@ -87,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             snappedX = Math.round(x / gridSize) * gridSize;
             snappedY = Math.round(y / gridSize) * gridSize;
 
-        // for triangles, it's a bit more complex
+            // for triangles, it's a bit more complex
         } else if (gridType === 'triangular') {
             const col = Math.round(x / gridSize);
             snappedX = col * gridSize;
@@ -98,14 +111,24 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 snappedY = Math.floor(y / gridSize) * gridSize + gridSize / 2;
             }
-        
-        // if there's no grid, we don't need to do any snapping
+
+            // if there's no grid, we don't need to do any snapping
         } else {
             snappedX = x;
             snappedY = y;
         }
 
         return { x: snappedX, y: snappedY };
+    }
+
+    // gets the closest node to a point
+    function getClosestNode(closestPoint) {
+        for (let node of nodes) {
+            if (Math.hypot(node.x - closestPoint.x, node.y - closestPoint.y) < gridSize / 2) {
+                return node;
+            }
+        }
+        return null;
     }
 
     // toggles the grid on button press: adds this listener to the grid button
@@ -138,19 +161,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // gets the closest lattice point to where we've clicked
-        const point = panZoom.getPan();
-        const zoom = panZoom.getZoom();
-        const x = (event.clientX - draw.node.getBoundingClientRect().left) / zoom - point.x / zoom;
-        const y = (event.clientY - draw.node.getBoundingClientRect().top) / zoom - point.y / zoom;
+        const { x, y } = getMousePosition(event);
         const closestPoint = closestLatticePoint(x, y);
 
         // check if the click is on an existing node
-        const isOnNode = nodes.some(node => {
-            return Math.hypot(node.x - closestPoint.x, node.y - closestPoint.y) < gridSize;
-        });
+        const closestNode = getClosestNode(closestPoint);
 
         // if not, add a new node at the position given
-        if (!isOnNode) {
+        if (!closestNode) {
             nodes.push({ x: closestPoint.x, y: closestPoint.y, label: nextLabel });
             nextLabel = String.fromCharCode(nextLabel.charCodeAt(0) + 1);
             drawGrid();
@@ -161,22 +179,21 @@ document.addEventListener('DOMContentLoaded', () => {
     draw.on('mousedown', function (event) {
 
         // gets the closest lattice point to where we've clicked
-        const point = panZoom.getPan();
-        const zoom = panZoom.getZoom();
-        const x = (event.clientX - draw.node.getBoundingClientRect().left) / zoom - point.x / zoom;
-        const y = (event.clientY - draw.node.getBoundingClientRect().top) / zoom - point.y / zoom;
+        const { x, y } = getMousePosition(event);
         const closestPoint = closestLatticePoint(x, y);
 
-        // check if the mousedown is on an existing node
-        const isOnNode = nodes.some(node => {
-            return Math.hypot(node.x - closestPoint.x, node.y - closestPoint.y) < gridSize;
-        });
+        // check if the mousedown is on an existing node - if so, store its position
+        const closestNode = getClosestNode(closestPoint);
 
         // if so, we shouldn't let them drag the image
-        if (isOnNode) {
+        if (closestNode) {
+            panZoom.disablePan();
             mouseDownDraggingNotFromNode = false;
             isDraggingFromNode = true;
-            panZoom.disablePan();
+            startNode = closestNode
+
+            // show the faded line 
+            dragLine.plot(startNode.x, startNode.y, startNode.x, startNode.y).show();
         } else {
             mouseDownDraggingNotFromNode = true;
             isDraggingFromNode = false
@@ -184,21 +201,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // re-enables pan if necessary, and resets the dragging flags
-    draw.on('mouseup', function () {
+    draw.on('mouseup', function (event) {
+        const { x, y } = getMousePosition(event);
         mouseDownDraggingNotFromNode = false;
+
+        // if we've been dragging the line around, then hide it
+        if (isDraggingFromNode) {
+            dragLine.hide()
+
+            // get the closest node
+            const closestNode = getClosestNode(closestLatticePoint(x, y));
+            console.log(startNode);
+            console.log(closestNode);
+
+            // TODO - ADD A LINE BETWEEN startNode AND closestNode
+            // ...
+
+        }
+
+        // if pan is supposed to be enabled, re-enable it
         if (panEnabled) {
             panZoom.enablePan();
         }
     });
 
-    // if the user is dragging the image around, flag that it's been moved
+    // if the user is dragging around
     draw.on('mousemove', function (event) {
-        if (mouseDownDraggingNotFromNode) {
-            userMovedImageSinceMouseUp = true;
-        }
 
+        // if they're dragging from a node, update the position of the faded line
         if (isDraggingFromNode) {
-            console.log(event);
+            const { x, y } = getMousePosition(event);
+            dragLine.plot(startNode.x, startNode.y, x, y);
+
+        // otherwise, set the flag to note we've been actually moving the image position
+        } else if (mouseDownDraggingNotFromNode) {
+            userMovedImageSinceMouseUp = true;
         }
     });
 
