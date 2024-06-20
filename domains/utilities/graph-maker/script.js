@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const gridSize = 50;
     let gridType = 'square';
 
-    // the list of vertices of the graph, and how they should be labelled
+    // the list of vertices/edges of the graph, and how the nodes should be labelled
+    let edges = [];
     let nodes = [];
     let nextLabel = 'A';
 
@@ -51,10 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // creates the grid of lattice points 
     function drawGrid() {
-
         // clears the previous grid and draws a background
-        content.clear()
-        content.rect(4000, 3000).fill("#fff").center(2000, 1500)
+        content.clear();
+        content.rect(4000, 3000).fill("#fff").center(2000, 1500);
 
         // square grids: draw a square lattice (50x50, small circles)
         if (gridType === 'square') {
@@ -74,6 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // redraw existing edges
+        edges.forEach(edge => {
+            content.line(edge.start.x, edge.start.y, edge.end.x, edge.end.y)
+            .stroke({ color: 'black', width: 2 });
+        });
+
         // redraw existing nodes
         nodes.forEach(node => {
             const group = content.group();
@@ -81,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
             group.text(node.label).move(node.x, node.y - 10).font({ size: 16, anchor: 'middle' });
         });
     }
-
     // gets the x and y position of the mouse relative to the image
     function getMousePosition(event) {
         const point = panZoom.getPan();
@@ -214,8 +219,19 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(startNode);
             console.log(closestNode);
 
-            // TODO - ADD A LINE BETWEEN startNode AND closestNode
-            // ...
+            // check if closestNode exists and is not the same as startNode
+            if (closestNode && closestNode !== startNode) {
+
+                // create a new edge object
+                const edge = {
+                    start: startNode,
+                    end: closestNode
+                };
+
+                // Add the edge to the list of edges (assuming you have an array called 'edges')
+                edges.push(edge);
+                drawGrid();
+            }
 
         }
 
@@ -233,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const { x, y } = getMousePosition(event);
             dragLine.plot(startNode.x, startNode.y, x, y);
 
-        // otherwise, set the flag to note we've been actually moving the image position
+            // otherwise, set the flag to note we've been actually moving the image position
         } else if (mouseDownDraggingNotFromNode) {
             userMovedImageSinceMouseUp = true;
         }
@@ -251,6 +267,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('lock-viewport-button').textContent = 'Lock Viewport';
         }
         panEnabled = !panEnabled;
+        console.log(nodes);
+        console.log(edges);
     });
 
     // set up the image and centre the view
