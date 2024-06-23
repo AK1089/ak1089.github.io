@@ -120,6 +120,11 @@
         "parent": "/domains/puzzles/circular-train/"
     },
     {
+        "name": "Discord",
+        "url": "/callbacks/discord/",
+        "parent": "/callbacks/"
+    },
+    {
         "name": "Utilities",
         "url": "/domains/utilities/",
         "parent": "/"
@@ -150,8 +155,13 @@
         "parent": "/domains/maths/"
     },
     {
-        "name": "Discord",
-        "url": "/callbacks/discord/",
-        "parent": "/callbacks/"
+        "name": "Text Processing",
+        "url": "/domains/utilities/#text-processing",
+        "parent": "/domains/utilities/"
+    },
+    {
+        "name": "Text Editor",
+        "url": "/domains/utilities/text-editor/",
+        "parent": "/domains/utilities/#text-processing"
     }
 ]

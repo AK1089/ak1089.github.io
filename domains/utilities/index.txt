@@ -7,6 +7,11 @@ Some resources, utilities, and other applets I've made which run in the browser,
 - [Image Colour K-Means Clustering](colour-clusterer) - edits an image to only use a certain number of colours (useful for denoising)
 </ol>
 
+### Text Processing
+<ol>
+- [Text Editor](text-editor) - a really *really* basic text editor
+</ol>
+
 ### Mathematics
 <ol>
 - [Graph Maker](graph-maker) - a convenient and feature-filled designer for [graph](!The kind with vertices and edges, not plots.) diagrams
