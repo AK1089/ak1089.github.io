@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     // the SVG object on the canvas
     const draw = SVG().addTo('#canvas').size(800, 600);
-    const content = draw.group();
+    const backgroundLayer = draw.group();
+    const edgesLayer = draw.group();
+    const nodesLayer = draw.group();
 
     // handles the grid (50x50 square by default)
     const gridSize = 50;
@@ -51,42 +53,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // creates the grid of lattice points 
-    function drawGrid() {
-        // clears the previous grid and draws a background
-        content.clear();
-        content.rect(4000, 3000).fill("#fff").center(2000, 1500);
+    function drawBackground() {
+        backgroundLayer.clear();
+        backgroundLayer.rect(4000, 3000).fill("#fff").center(2000, 1500);
 
-        // square grids: draw a square lattice (50x50, small circles)
         if (gridType === 'square') {
             for (let x = 0; x <= 4000; x += gridSize) {
                 for (let y = 0; y <= 3000; y += gridSize) {
-                    content.circle(5).fill('#444').center(x, y);
+                    backgroundLayer.circle(5).fill('#444').center(x, y);
                 }
             }
-
-            // triangular grids: draw a triangular lattice
         } else if (gridType === 'triangular') {
             for (let x = 0; x <= 4000; x += gridSize) {
-                for (let y = 0; y <= 3000; y += gridSize) {
-                    const offset = (x / gridSize) % 2 === 0 ? 0 : gridSize / 2;
-                    content.circle(5).fill('#444').center(x, y + offset);
+                for (let y = 0; y <= 4000; y += gridSize) {
+                    const offset = (y / gridSize) % 2 === 0 ? 0 : gridSize / 2;
+                    backgroundLayer.circle(5).fill('#444').center(x + offset, y);
                 }
             }
         }
+    }
 
-        // redraw existing edges
+    function drawEdges() {
+        edgesLayer.clear();
         edges.forEach(edge => {
-            content.line(edge.start.x, edge.start.y, edge.end.x, edge.end.y)
-            .stroke({ color: 'black', width: 2 });
+            edgesLayer.line(edge.start.x, edge.start.y, edge.end.x, edge.end.y)
+                .stroke({ color: 'black', width: 2 });
         });
+    }
 
-        // redraw existing nodes
+    function drawNodes() {
+        nodesLayer.clear();
         nodes.forEach(node => {
-            const group = content.group();
+            const group = nodesLayer.group();
             group.circle(40).fill('lightblue').stroke({ width: 2, color: 'black' }).center(node.x, node.y);
             group.text(node.label).move(node.x, node.y - 10).font({ size: 16, anchor: 'middle' });
         });
     }
+
+    function draw(redrawBackground = false) {
+        if (redrawBackground) {
+            drawBackground();
+        }
+        drawEdges();
+        drawNodes();
+    }
+
     // gets the x and y position of the mouse relative to the image
     function getMousePosition(event) {
         const point = panZoom.getPan();
@@ -107,14 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // for triangles, it's a bit more complex
         } else if (gridType === 'triangular') {
-            const col = Math.round(x / gridSize);
-            snappedX = col * gridSize;
+            const row = Math.round(y / gridSize);
+            snappedY = row * gridSize;
 
             // for even columns, just do it as normal - for odd columns, we require an offset
-            if (col % 2 === 0) {
-                snappedY = Math.round(y / gridSize) * gridSize;
+            if (row % 2 === 0) {
+                snappedX = Math.round(x / gridSize) * gridSize;
             } else {
-                snappedY = Math.floor(y / gridSize) * gridSize + gridSize / 2;
+                snappedX = Math.floor(x / gridSize) * gridSize + gridSize / 2;
             }
 
             // if there's no grid, we don't need to do any snapping
@@ -138,8 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // toggles the grid on button press: adds this listener to the grid button
     document.getElementById('toggle-grid').addEventListener('click', () => {
-
-        // changes grid type and label
         if (gridType === 'square') {
             gridType = 'triangular';
             document.getElementById('toggle-grid').textContent = 'Grid: Triangular';
@@ -151,57 +160,44 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('toggle-grid').textContent = 'Grid: Square';
         }
 
-        // redraws the grid
-        drawGrid();
+        draw(true);  // Redraw everything, including the background
     });
 
     // runs when the user clicks on the SVG (technically at mouse up but after the mouseup event)
     draw.on('click', function (event) {
-
-        // if we've just dragged the viewport around, then ignore this event
         if (userMovedImageSinceMouseUp || isDraggingFromNode) {
             userMovedImageSinceMouseUp = false;
             isDraggingFromNode = false;
             return;
         }
 
-        // gets the closest lattice point to where we've clicked
         const { x, y } = getMousePosition(event);
         const closestPoint = closestLatticePoint(x, y);
-
-        // check if the click is on an existing node
         const closestNode = getClosestNode(closestPoint);
 
-        // if not, add a new node at the position given
         if (!closestNode) {
             nodes.push({ x: closestPoint.x, y: closestPoint.y, label: nextLabel });
             nextLabel = String.fromCharCode(nextLabel.charCodeAt(0) + 1);
-            drawGrid();
+            drawNodes();  // Only redraw nodes
         }
     });
 
     // runs when the user clicks their mouse down on the SVG
     draw.on('mousedown', function (event) {
-
-        // gets the closest lattice point to where we've clicked
         const { x, y } = getMousePosition(event);
         const closestPoint = closestLatticePoint(x, y);
-
-        // check if the mousedown is on an existing node - if so, store its position
         const closestNode = getClosestNode(closestPoint);
 
-        // if so, we shouldn't let them drag the image
         if (closestNode) {
             panZoom.disablePan();
             mouseDownDraggingNotFromNode = false;
             isDraggingFromNode = true;
-            startNode = closestNode
+            startNode = closestNode;
 
-            // show the faded line 
             dragLine.plot(startNode.x, startNode.y, startNode.x, startNode.y).show();
         } else {
             mouseDownDraggingNotFromNode = true;
-            isDraggingFromNode = false
+            isDraggingFromNode = false;
         }
     });
 
@@ -210,32 +206,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const { x, y } = getMousePosition(event);
         mouseDownDraggingNotFromNode = false;
 
-        // if we've been dragging the line around, then hide it
         if (isDraggingFromNode) {
-            dragLine.hide()
+            dragLine.hide();
 
-            // get the closest node
             const closestNode = getClosestNode(closestLatticePoint(x, y));
-            console.log(startNode);
-            console.log(closestNode);
 
-            // check if closestNode exists and is not the same as startNode
             if (closestNode && closestNode !== startNode) {
-
-                // create a new edge object
                 const edge = {
                     start: startNode,
                     end: closestNode
                 };
 
-                // Add the edge to the list of edges (assuming you have an array called 'edges')
                 edges.push(edge);
-                drawGrid();
+                drawEdges();  // Only redraw edges
             }
-
         }
 
-        // if pan is supposed to be enabled, re-enable it
         if (panEnabled) {
             panZoom.enablePan();
         }
@@ -243,13 +229,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // if the user is dragging around
     draw.on('mousemove', function (event) {
-
-        // if they're dragging from a node, update the position of the faded line
         if (isDraggingFromNode) {
             const { x, y } = getMousePosition(event);
             dragLine.plot(startNode.x, startNode.y, x, y);
-
-            // otherwise, set the flag to note we've been actually moving the image position
         } else if (mouseDownDraggingNotFromNode) {
             userMovedImageSinceMouseUp = true;
         }
@@ -267,12 +249,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('lock-viewport-button').textContent = 'Lock Viewport';
         }
         panEnabled = !panEnabled;
-        console.log(nodes);
-        console.log(edges);
     });
 
     // set up the image and centre the view
-    drawGrid();
+    draw(true);  // Initial draw with background
     initializePanZoom();
     panZoom.zoom(1);
     panZoom.pan({ x: -1600, y: -1200 });
