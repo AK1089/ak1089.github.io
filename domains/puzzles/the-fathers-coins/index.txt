@@ -1,0 +1,37 @@
+## The Father's Coins
+
+On your 18th birthday, your father tells you that before you were born, he was with two women simultaneously, named Harriet and Talia simultaneously. He decided he wanted to have children, but he didn't know whom with, or even how many. He decided to leave this all up to chance.
+
+He flipped two fair coins, and followed the procedure:
+- If the first coin comes up heads, have two children (one with each woman). Ignore the second coin.
+- If the first coin comes up tails, have only one child: the second coin decides whom with. Heads for Harriet, tails for Talia.
+
+(You were born via this process, but you never knew your mother; she died in childbirth. You don't even know her name.)
+
+### Questions
+
+**Note: these are all meant to be simple individually, but together lead to a weird conclusion. Don't overthink it!**
+
+Question 1: What is the chance that the first coin came up heads?
+
+Answer: [spoiler]Obviously 50% (it was a fair coin).[/spoiler]
+
+Question 2: You learn that your mother's name was Harriet. What is the chance you have a half-sibling?
+
+Answer: [spoiler]2/3: the coins came up HH, HT, or TH (not TT, as Harriet would not have had a child). In the first two cases, you have a half-sibling.[/spoiler]
+
+Question 3: Actually, you learn that your mother's name was Talia. Now, what is the chance you have a half-sibling?
+
+Answer: [spoiler]Still 2/3 - obviously, by the same logic, the chance has to be equal.[/spoiler]
+
+Question 4: You never learned your mother's name. What is the chance you have a half-sibling?
+
+Answer: [spoiler]Either way, it has to be 2/3.[/spoiler]
+
+Question 5: Under what circumstances do you have a half-sibling?
+
+Answer: [spoiler]You have a half-sibling \(\iff\) your father had both children \(\iff\) the first coin came up heads.[/spoiler]
+
+Question 6: What is the chance that the first coin came up heads?
+
+Answer: [spoiler]Obviously 2/3 (the same as the chance you have a half-sibling).[/spoiler]

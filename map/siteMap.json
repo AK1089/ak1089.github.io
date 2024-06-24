@@ -110,6 +110,11 @@
         "parent": "/domains/puzzles/"
     },
     {
+        "name": "The Father's Coins",
+        "url": "/domains/puzzles/the-fathers-coins/",
+        "parent": "/domains/puzzles/"
+    },
+    {
         "name": "Solution",
         "url": "/domains/puzzles/circular-train/solution/",
         "parent": "/domains/puzzles/circular-train/"

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AK1089's Website</title>
+    <link rel="icon" type="image/x-icon" href="../../../images/favicon.ico">
+    <link rel="stylesheet" href="../../../styles/styles.css">
+    <link rel="stylesheet" href= "styles.css">
+    <script src="../../../scripts/script.js"></script>
+    <script src= "script.js"></script>
+    <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css">
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" defer></script>
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" defer></script>
+</head>
+<body onload="on_body_load()">
+    <div id="content-container">
+        <a href="../../../" id="home-icon">
+            <img src="../../../images/home.png" alt="Home" width="40" height="40" class="icon home-icon">
+        </a>
+        <a href="../../..//map" id="map-icon">
+            <img src="../../../images/map.png" alt="Home" width="40" height="40" class="icon map-icon">
+        </a>
+        <div id="main-content">
+            <p><h2 id="the-father-s-coins">The Father's Coins</p></h2>
+<p>On your 18th birthday, your father tells you that before you were born, he was with two women simultaneously, named Harriet and Talia simultaneously. He decided he wanted to have children, but he didn't know whom with, or even how many. He decided to leave this all up to chance.</p>
+<p>He flipped two fair coins, and followed the procedure:
+<li>If the first coin comes up heads, have two children (one with each woman). Ignore the second coin.</li>
+<li>If the first coin comes up tails, have only one child: the second coin decides whom with. Heads for Harriet, tails for Talia.</p></li>
+<p>(You were born via this process, but you never knew your mother; she died in childbirth. You don't even know her name.)</p>
+<p><h3 id="questions">Questions</p></h3>
+<p><strong>Note: these are all meant to be simple individually, but together lead to a weird conclusion. Don't overthink it!</strong></p>
+<p>Question 1: What is the chance that the first coin came up heads?</p>
+<p>Answer: <span class="spoiler">Obviously 50% (it was a fair coin).</span></p>
+<p>Question 2: You learn that your mother's name was Harriet. What is the chance you have a half-sibling?</p>
+<p>Answer: <span class="spoiler">2/3: the coins came up HH, HT, or TH (not TT, as Harriet would not have had a child). In the first two cases, you have a half-sibling.</span></p>
+<p>Question 3: Actually, you learn that your mother's name was Talia. Now, what is the chance you have a half-sibling?</p>
+<p>Answer: <span class="spoiler">Still 2/3 - obviously, by the same logic, the chance has to be equal.</span></p>
+<p>Question 4: You never learned your mother's name. What is the chance you have a half-sibling?</p>
+<p>Answer: <span class="spoiler">Either way, it has to be 2/3.</span></p>
+<p>Question 5: Under what circumstances do you have a half-sibling?</p>
+<p>Answer: <span class="spoiler">You have a half-sibling \(\iff\) your father had both children \(\iff\) the first coin came up heads.</span></p>
+<p>Question 6: What is the chance that the first coin came up heads?</p>
+<p>Answer: <span class="spoiler">Obviously 2/3 (the same as the chance you have a half-sibling).</span></p>
+
+        </div>
+        <h6 id="copyright">&#169; Avish Kumar 2024</h6>
+    </div>
+</body>
+</html>
