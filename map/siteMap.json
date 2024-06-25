@@ -90,6 +90,11 @@
         "parent": "/domains/maths/"
     },
     {
+        "name": "Laplace's Rule of Succession",
+        "url": "/domains/maths/laplaces-rule-of-succession/",
+        "parent": "/domains/maths/"
+    },
+    {
         "name": "Technology",
         "url": "/domains/tech/",
         "parent": "/"

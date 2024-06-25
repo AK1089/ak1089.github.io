@@ -281,7 +281,7 @@ ol {
 }
 
 .image-container:hover img {
-    width: 100%;
+    width: 70%;
     filter: brightness(100%);
 }
 
