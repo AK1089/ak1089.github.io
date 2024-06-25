@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // the SVG object on the canvas
     const draw = SVG().addTo('#canvas').size(800, 600);
-    
+
     // Create separate layers for background, edges, and nodes
     const backgroundLayer = draw.group();
     const edgeLayer = draw.group();
@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let edges = [];
     let nodes = [];
     let nextLabel = 'A';
+    let distanceMatrix = [];
 
     // flags for the dragging and moving behaviour
     let mouseDownDraggingNotFromNode = false;
@@ -82,8 +83,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function drawEdges() {
         edgeLayer.clear();
         edges.forEach(edge => {
-            edgeLayer.line(edge.start.x, edge.start.y, edge.end.x, edge.end.y)
+            const line = edgeLayer.line(edge.start.x, edge.start.y, edge.end.x, edge.end.y)
                 .stroke({ color: 'black', width: 2 });
+
+            // Add edge length label
+            const midX = (edge.start.x + edge.end.x) / 2;
+            const midY = (edge.start.y + edge.end.y) / 2;
+            edgeLayer.text(edge.length.toString())
+                .move(midX, midY)
+                .font({ size: 14, anchor: 'middle' })
+                .fill('blue');
         });
     }
 
@@ -94,6 +103,70 @@ document.addEventListener('DOMContentLoaded', () => {
             group.circle(40).fill('lightblue').stroke({ width: 2, color: 'black' }).center(node.x, node.y);
             group.text(node.label).move(node.x, node.y - 10).font({ size: 16, anchor: 'middle' });
         });
+    }
+
+    // Function to update the distance matrix
+    function updateDistanceMatrix() {
+        const matrixDiv = document.getElementById('distance-matrix');
+        matrixDiv.innerHTML = '';
+
+        const table = document.createElement('table');
+        const headerRow = table.insertRow();
+        headerRow.insertCell(); // Empty cell for top-left corner
+
+        // Create header row
+        nodes.forEach((node, index) => {
+            const th = document.createElement('th');
+            th.textContent = node.label;
+            headerRow.appendChild(th);
+        });
+
+        // Create matrix rows
+        nodes.forEach((rowNode, rowIndex) => {
+            const row = table.insertRow();
+            const headerCell = row.insertCell();
+            headerCell.textContent = rowNode.label;
+            headerCell.style.fontWeight = 'bold';
+
+            nodes.forEach((colNode, colIndex) => {
+                const cell = row.insertCell();
+                if (rowIndex === colIndex) {
+                    cell.textContent = '0';
+                } else {
+                    const edge = edges.find(e =>
+                        (e.start === rowNode && e.end === colNode) ||
+                        (e.start === colNode && e.end === rowNode)
+                    );
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.min = '0';
+                    input.value = edge ? edge.length : '0';
+                    input.addEventListener('change', (event) => {
+                        const newLength = parseInt(event.target.value);
+                        if (newLength > 0) {
+                            if (edge) {
+                                edge.length = newLength;
+                            } else {
+                                edges.push({
+                                    start: rowNode,
+                                    end: colNode,
+                                    length: newLength
+                                });
+                            }
+                        } else {
+                            if (edge) {
+                                edges = edges.filter(e => e !== edge);
+                            }
+                        }
+                        drawEdges();
+                        updateDistanceMatrix();
+                    });
+                    cell.appendChild(input);
+                }
+            });
+        });
+
+        matrixDiv.appendChild(table);
     }
 
     // gets the x and y position of the mouse relative to the image
@@ -186,6 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nodes.push({ x: closestPoint.x, y: closestPoint.y, label: nextLabel });
             nextLabel = String.fromCharCode(nextLabel.charCodeAt(0) + 1);
             drawNodes();
+            updateDistanceMatrix();
         }
     });
 
@@ -237,9 +311,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     end: closestNode
                 };
 
-                // Add the edge to the list of edges (assuming you have an array called 'edges')
+                // Add the edge to the list of edges
                 edges.push(edge);
                 drawEdges();
+                updateDistanceMatrix();
             }
 
         }
@@ -284,6 +359,8 @@ document.addEventListener('DOMContentLoaded', () => {
     drawBackground();
     drawEdges();
     drawNodes();
+    updateDistanceMatrix();
+
     initializePanZoom();
     panZoom.zoom(1);
     panZoom.pan({ x: -1600, y: -1200 });

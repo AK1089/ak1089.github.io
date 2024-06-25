@@ -2,19 +2,49 @@ svg {
     border: 1px solid black;
     cursor: grab;
 }
+
 svg:active {
     cursor: grabbing;
 }
+
 .node {
     fill: lightblue;
     stroke: black;
     stroke-width: 1px;
 }
+
 .node-label {
     font-size: 12px;
     text-anchor: middle;
 }
+
 .grid-dot {
     fill: grey;
     stroke: none;
+}
+
+#canvas {
+    border: 1px solid black;
+    width: 800px;
+    height: 600px;
+}
+
+#distance-matrix {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+#distance-matrix table {
+    border-collapse: collapse;
+}
+
+#distance-matrix th,
+#distance-matrix td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+#distance-matrix input {
+    width: 10px;
 }
