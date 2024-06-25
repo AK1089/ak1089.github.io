@@ -44,6 +44,7 @@ def walk_directory(root_dir):
             "parent": parent_url
         })
     
+    entries = sorted(entries, key=lambda x: x["url"])
     return entries
 
 

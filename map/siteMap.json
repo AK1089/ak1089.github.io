@@ -5,28 +5,48 @@
         "parent": null
     },
     {
-        "name": "Site Map",
-        "url": "/map/",
+        "name": "Discord",
+        "url": "/callbacks/discord/",
+        "parent": "/callbacks/"
+    },
+    {
+        "name": "Cookies",
+        "url": "/domains/cookies/",
+        "parent": "/map/"
+    },
+    {
+        "name": "Maths",
+        "url": "/domains/maths/",
         "parent": "/"
     },
     {
-        "name": "Projects",
-        "url": "/domains/projects/",
-        "parent": "/"
+        "name": "Electromagnetism Notes",
+        "url": "/domains/maths/electromagnetism-notes/",
+        "parent": "/domains/maths/"
     },
     {
-        "name": "Minr Utilities",
-        "url": "/domains/minr-utilities/",
-        "parent": "/"
+        "name": "Laplace's Rule of Succession",
+        "url": "/domains/maths/laplaces-rule-of-succession/",
+        "parent": "/domains/maths/"
+    },
+    {
+        "name": "Markov Chain Convergence",
+        "url": "/domains/maths/markov-chains-converge-in-distribution/",
+        "parent": "/domains/maths/"
+    },
+    {
+        "name": "Memorising the Gaussian",
+        "url": "/domains/maths/memorising-the-gaussian/",
+        "parent": "/domains/maths/"
+    },
+    {
+        "name": "Primes & Irreducibles",
+        "url": "/domains/maths/primes-and-irreducibles/",
+        "parent": "/domains/maths/"
     },
     {
         "name": "Minr Map Art Maker\u00ba",
         "url": "/domains/minr-map-art/",
-        "parent": "/domains/minr-utilities/"
-    },
-    {
-        "name": "Resource Pack Creation Guide",
-        "url": "/domains/minr-utilities/resource-packs/",
         "parent": "/domains/minr-utilities/"
     },
     {
@@ -35,24 +55,29 @@
         "parent": "/domains/minr-utilities/"
     },
     {
-        "name": "Let's Build a UUID Converter",
-        "url": "/domains/minr-script-help/uuid-converter/",
-        "parent": "/domains/minr-script-help/"
-    },
-    {
         "name": "All About Functions",
         "url": "/domains/minr-script-help/functions/",
         "parent": "/domains/minr-script-help/"
     },
     {
-        "name": "Miscellaneous",
-        "url": "/domains/miscellaneous/",
+        "name": "Let's Build a UUID Converter",
+        "url": "/domains/minr-script-help/uuid-converter/",
+        "parent": "/domains/minr-script-help/"
+    },
+    {
+        "name": "Minr Utilities",
+        "url": "/domains/minr-utilities/",
         "parent": "/"
     },
     {
-        "name": "Cookies",
-        "url": "/domains/cookies/",
-        "parent": "/map/"
+        "name": "Resource Pack Creation Guide",
+        "url": "/domains/minr-utilities/resource-packs/",
+        "parent": "/domains/minr-utilities/"
+    },
+    {
+        "name": "Miscellaneous",
+        "url": "/domains/miscellaneous/",
+        "parent": "/"
     },
     {
         "name": "Programming",
@@ -70,39 +95,9 @@
         "parent": "/domains/programming/"
     },
     {
-        "name": "Maths",
-        "url": "/domains/maths/",
+        "name": "Projects",
+        "url": "/domains/projects/",
         "parent": "/"
-    },
-    {
-        "name": "Electromagnetism Notes",
-        "url": "/domains/maths/electromagnetism-notes/",
-        "parent": "/domains/maths/"
-    },
-    {
-        "name": "Primes & Irreducibles",
-        "url": "/domains/maths/primes-and-irreducibles/",
-        "parent": "/domains/maths/"
-    },
-    {
-        "name": "Markov Chain Convergence",
-        "url": "/domains/maths/markov-chains-converge-in-distribution/",
-        "parent": "/domains/maths/"
-    },
-    {
-        "name": "Laplace's Rule of Succession",
-        "url": "/domains/maths/laplaces-rule-of-succession/",
-        "parent": "/domains/maths/"
-    },
-    {
-        "name": "Technology",
-        "url": "/domains/tech/",
-        "parent": "/"
-    },
-    {
-        "name": "Software I Like",
-        "url": "/domains/tech/good-software/",
-        "parent": "/domains/tech/"
     },
     {
         "name": "Puzzles",
@@ -115,9 +110,9 @@
         "parent": "/domains/puzzles/"
     },
     {
-        "name": "The Father's Coins",
-        "url": "/domains/puzzles/the-fathers-coins/",
-        "parent": "/domains/puzzles/"
+        "name": "Interactive Mode",
+        "url": "/domains/puzzles/circular-train/interactive/",
+        "parent": "/domains/puzzles/circular-train/"
     },
     {
         "name": "Solution",
@@ -125,14 +120,19 @@
         "parent": "/domains/puzzles/circular-train/"
     },
     {
-        "name": "Interactive Mode",
-        "url": "/domains/puzzles/circular-train/interactive/",
-        "parent": "/domains/puzzles/circular-train/"
+        "name": "The Father's Coins",
+        "url": "/domains/puzzles/the-fathers-coins/",
+        "parent": "/domains/puzzles/"
     },
     {
-        "name": "Discord",
-        "url": "/callbacks/discord/",
-        "parent": "/callbacks/"
+        "name": "Technology",
+        "url": "/domains/tech/",
+        "parent": "/"
+    },
+    {
+        "name": "Software I Like",
+        "url": "/domains/tech/good-software/",
+        "parent": "/domains/tech/"
     },
     {
         "name": "Utilities",
@@ -145,24 +145,9 @@
         "parent": "/domains/utilities/"
     },
     {
-        "name": "Colour Clusterer",
-        "url": "/domains/utilities/colour-clusterer/",
-        "parent": "/domains/utilities/#image-processing"
-    },
-    {
         "name": "Mathematical",
         "url": "/domains/utilities/#mathematical",
         "parent": "/domains/utilities/"
-    },
-    {
-        "name": "Graph Maker",
-        "url": "/domains/utilities/graph-maker/",
-        "parent": "/domains/utilities/#mathematical"
-    },
-    {
-        "name": "Memorising the Gaussian",
-        "url": "/domains/maths/memorising-the-gaussian/",
-        "parent": "/domains/maths/"
     },
     {
         "name": "Text Processing",
@@ -170,8 +155,23 @@
         "parent": "/domains/utilities/"
     },
     {
+        "name": "Colour Clusterer",
+        "url": "/domains/utilities/colour-clusterer/",
+        "parent": "/domains/utilities/#image-processing"
+    },
+    {
+        "name": "Graph Maker",
+        "url": "/domains/utilities/graph-maker/",
+        "parent": "/domains/utilities/#mathematical"
+    },
+    {
         "name": "Text Editor",
         "url": "/domains/utilities/text-editor/",
         "parent": "/domains/utilities/#text-processing"
+    },
+    {
+        "name": "Site Map",
+        "url": "/map/",
+        "parent": "/"
     }
 ]
