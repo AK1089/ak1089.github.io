@@ -49,3 +49,29 @@ svg:active {
     width: 30px;
     height: 20px;
 }
+
+#styling-controls {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0px;
+    column-gap: 200px;
+    margin-right: 400px;
+}
+
+#styling-controls label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#styling-controls input[type="color"] {
+    width: 50px;
+    height: 25px;
+    padding: 0;
+    border: none;
+}
+
+#styling-controls input[type="range"] {
+    width: 100px;
+}

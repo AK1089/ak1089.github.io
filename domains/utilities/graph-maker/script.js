@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // the SVG object on the canvas
     const draw = SVG().addTo('#canvas').size(800, 600);
 
-    // Create separate layers for background, edges, and nodes
+    // create separate layers for background, edges, and nodes
     const backgroundLayer = draw.group();
     const edgeLayer = draw.group();
     const nodeLayer = draw.group();
@@ -59,13 +59,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function drawBackground() {
         // clears the previous grid and draws a background
         backgroundLayer.clear();
-        backgroundLayer.rect(4000, 3000).fill("#fff").center(2000, 1500);
+        const backgroundColor = document.getElementById('background-color').value;
+        const gridDotColor = document.getElementById('grid-dot-color').value;
+        backgroundLayer.rect(4000, 3000).fill(backgroundColor).center(2000, 1500);
 
         // square grids: draw a square lattice (50x50, small circles)
         if (gridType === 'square') {
             for (let x = 0; x <= 4000; x += gridSize) {
                 for (let y = 0; y <= 3000; y += gridSize) {
-                    backgroundLayer.circle(5).fill('#444').center(x, y);
+                    backgroundLayer.circle(5).fill(gridDotColor).center(x, y);
                 }
             }
 
@@ -74,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let x = 0; x <= 4000; x += gridSize) {
                 for (let y = 0; y <= 3000; y += gridSize) {
                     const offset = (x / gridSize) % 2 === 0 ? 0 : gridSize / 2;
-                    backgroundLayer.circle(5).fill('#444').center(x, y + offset);
+                    backgroundLayer.circle(5).fill(gridDotColor).center(x, y + offset);
                 }
             }
         }
@@ -85,19 +87,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // clear the previous edges
         edgeLayer.clear();
+        const edgeColor = document.getElementById('edge-color').value;
+        const edgeWidth = document.getElementById('edge-width').value;
+        const edgeLabelSize = document.getElementById('edge-label-size').value;
+        const edgeLabelColor = document.getElementById('edge-label-color').value;
 
         // draw each edge
         edges.forEach(edge => {
             const line = edgeLayer.line(edge.start.x, edge.start.y, edge.end.x, edge.end.y)
-                .stroke({ color: 'black', width: 2 });
+                .stroke({ color: edgeColor, width: edgeWidth });
 
-            // add edge length label
+            // add the length of the edge in the middle
             const midX = (edge.start.x + edge.end.x) / 2;
             const midY = (edge.start.y + edge.end.y) / 2;
             edgeLayer.text(edge.length.toString())
                 .move(midX, midY)
-                .font({ size: 14, anchor: 'middle' })
-                .fill('blue');
+                .font({ size: edgeLabelSize, anchor: 'middle' })
+                .fill(edgeLabelColor);
         });
     }
 
@@ -106,12 +112,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // clear the previous nodes
         nodeLayer.clear();
+        const nodeColor = document.getElementById('node-color').value;
+        const nodeBorderColor = document.getElementById('node-border-color').value;
+        const nodeSize = document.getElementById('node-size').value;
+        const nodeBorderWidth = document.getElementById('node-border-width').value;
+        const nodeLabelSize = document.getElementById('node-label-size').value;
+        const nodeLabelColor = document.getElementById('node-label-color').value;
 
         // draw each node
         nodes.forEach(node => {
             const group = nodeLayer.group();
-            group.circle(40).fill('lightblue').stroke({ width: 2, color: 'black' }).center(node.x, node.y);
-            group.text(node.label).move(node.x, node.y - 10).font({ size: 16, anchor: 'middle' });
+            group.circle(nodeSize).fill(nodeColor).stroke({ width: nodeBorderWidth, color: nodeBorderColor }).center(node.x, node.y);
+            group.text(node.label).move(node.x, node.y - 10).font({ size: nodeLabelSize, anchor: 'middle' }).fill(nodeLabelColor);
         });
     }
 
@@ -196,6 +208,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // add the table to the div
         matrixDiv.appendChild(table);
     }
+
+    // function to update styles based on user input
+    function updateStyles() {
+        drawBackground();
+        drawEdges();
+        drawNodes();
+    }
+
+    // add event listeners to styling controls
+    document.querySelectorAll('#styling-controls input').forEach(input => {
+        input.addEventListener('change', updateStyles);
+    });
 
     // gets the x and y position of the mouse relative to the image
     function getMousePosition(event) {
@@ -340,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     length: 1
                 };
 
-                // Add the edge to the list of edges
+                // add the edge to the list of edges
                 edges.push(edge);
                 drawEdges();
                 updateDistanceMatrix();
@@ -382,6 +406,20 @@ document.addEventListener('DOMContentLoaded', () => {
         panEnabled = !panEnabled;
         console.log(nodes);
         console.log(edges);
+    });
+
+    // toggle styling controls visibility
+    const toggleStylingButton = document.getElementById('toggle-styling');
+    const stylingControls = document.getElementById('styling-controls');
+
+    toggleStylingButton.addEventListener('click', () => {
+        if (stylingControls.style.display === 'none') {
+            stylingControls.style.display = 'grid';
+            toggleStylingButton.textContent = 'Hide Styling Controls';
+        } else {
+            stylingControls.style.display = 'none';
+            toggleStylingButton.textContent = 'Show Styling Controls';
+        }
     });
 
     // set up the image and centre the view

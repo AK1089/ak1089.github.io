@@ -20,8 +20,28 @@
         </a>
         <div id="main-content">
             <h2 id="graph-maker">Graph Maker</h2>
-            <button id="toggle-grid">Grid: Square</button>
-            <button id="lock-viewport-button">Lock Viewport</button> <br>
+            <div id="main-controls">
+                <button id="toggle-grid">Grid: Square</button>
+                <button id="lock-viewport-button">Lock Viewport</button>
+                <button id="toggle-styling">Show Styling Controls</button>
+            </div>
+            <div id="styling-controls" style="display: none;">
+                <h3>Custom Styling</h3>
+                <br>
+                <label>Background Color: <input type="color" id="background-color" value="#ffffff"></label>
+                <label>Grid Dot Color: <input type="color" id="grid-dot-color" value="#444444"></label>
+                <label>Node Color: <input type="color" id="node-color" value="#add8e6"></label>
+                <label>Node Border Color: <input type="color" id="node-border-color" value="#000000"></label>
+                <label>Edge Color: <input type="color" id="edge-color" value="#000000"></label>
+                <label>Node Size: <input type="range" id="node-size" min="20" max="80" value="40"></label>
+                <label>Node Border Width: <input type="range" id="node-border-width" min="0" max="10" value="2"></label>
+                <label>Edge Width: <input type="range" id="edge-width" min="1" max="10" value="2"></label>
+                <label>Node Label Size: <input type="range" id="node-label-size" min="8" max="24" value="16"></label>
+                <label>Node Label Color: <input type="color" id="node-label-color" value="#000000"></label>
+                <label>Edge Label Size: <input type="range" id="edge-label-size" min="8" max="24" value="14"></label>
+                <label>Edge Label Color: <input type="color" id="edge-label-color" value="#0000ff"></label>
+                <br>
+            </div>
             <div id="canvas"></div>
             <div id="distance-matrix"></div>
         </div>
