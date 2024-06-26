@@ -56,7 +56,7 @@ svg:active {
     grid-template-columns: repeat(2, 1fr);
     gap: 0px;
     column-gap: 200px;
-    margin-right: 400px;
+    margin-right: 25%;
 }
 
 #styling-controls label {

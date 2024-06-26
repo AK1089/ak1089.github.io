@@ -84,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // function to draw the edges of the graph
     function drawEdges() {
-
         // clear the previous edges
         edgeLayer.clear();
         const edgeColor = document.getElementById('edge-color').value;
@@ -92,18 +91,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const edgeLabelSize = document.getElementById('edge-label-size').value;
         const edgeLabelColor = document.getElementById('edge-label-color').value;
 
+        // check if all edges have a weight of 1
+        const allEdgesWeightOne = edges.every(edge => edge.length === 1);
+
         // draw each edge
         edges.forEach(edge => {
             const line = edgeLayer.line(edge.start.x, edge.start.y, edge.end.x, edge.end.y)
                 .stroke({ color: edgeColor, width: edgeWidth });
 
-            // add the length of the edge in the middle
-            const midX = (edge.start.x + edge.end.x) / 2;
-            const midY = (edge.start.y + edge.end.y) / 2;
-            edgeLayer.text(edge.length.toString())
-                .move(midX, midY)
-                .font({ size: edgeLabelSize, anchor: 'middle' })
-                .fill(edgeLabelColor);
+            // add the length of the edge in the middle only if not all edges have weight 1
+            if (!allEdgesWeightOne) {
+                const midX = (edge.start.x + edge.end.x) / 2;
+                const midY = (edge.start.y + edge.end.y) / 2;
+                edgeLayer.text(edge.length.toString())
+                    .move(midX, midY)
+                    .font({ size: edgeLabelSize, anchor: 'middle' })
+                    .fill(edgeLabelColor);
+            }
         });
     }
 
@@ -122,9 +126,42 @@ document.addEventListener('DOMContentLoaded', () => {
         // draw each node
         nodes.forEach(node => {
             const group = nodeLayer.group();
-            group.circle(nodeSize).fill(nodeColor).stroke({ width: nodeBorderWidth, color: nodeBorderColor }).center(node.x, node.y);
-            group.text(node.label).move(node.x, node.y - 10).font({ size: nodeLabelSize, anchor: 'middle' }).fill(nodeLabelColor);
+            const circle = group.circle(nodeSize)
+                .fill(nodeColor)
+                .stroke({ width: nodeBorderWidth, color: nodeBorderColor })
+                .center(node.x, node.y);
+
+            // add the label of the node
+            const text = group.text(node.label)
+                .move(node.x, node.y - 10)
+                .font({ size: nodeLabelSize, anchor: 'middle' })
+                .fill(nodeLabelColor);
+
+            // add context menu event listener
+            circle.on('contextmenu', (event) => {
+                event.preventDefault();
+                deleteNode(node);
+            });
+
+            // add context menu event listener
+            text.on('contextmenu', (event) => {
+                event.preventDefault();
+                deleteNode(node);
+            });
         });
+    }
+
+    function deleteNode(nodeToDelete) {
+        // remove the node from the nodes array
+        nodes = nodes.filter(node => node !== nodeToDelete);
+
+        // remove all edges connected to this node
+        edges = edges.filter(edge => edge.start !== nodeToDelete && edge.end !== nodeToDelete);
+
+        // redraw the graph
+        drawNodes();
+        drawEdges();
+        updateDistanceMatrix();
     }
 
     // function to update the distance matrix
@@ -317,6 +354,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // runs when the user clicks their mouse down on the SVG
     draw.on('mousedown', function (event) {
+
+        // ignore right-clicks
+        if (event.button === 2) return;
 
         // gets the closest lattice point to where we've clicked
         const { x, y } = getMousePosition(event);
