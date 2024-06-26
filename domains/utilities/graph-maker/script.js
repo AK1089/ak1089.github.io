@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let edges = [];
     let nodes = [];
     let nextLabel = 'A';
-    let distanceMatrix = [];
 
     // flags for the dragging and moving behaviour
     let mouseDownDraggingNotFromNode = false;
@@ -30,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let dragLine = draw.line().stroke({ width: 2, color: 'gray', opacity: 0.5 }).hide();
     let startNode;
 
+    // initialises the pan and zoom functionality
     function initializePanZoom() {
         panZoom = svgPanZoom('#canvas svg', {
             zoomEnabled: true, panEnabled: true,   // allow zooming
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             zoomScaleSensitivity: 0.2,
             dblClickZoomEnabled: false,
 
-            // calculates what to do when panning (resets likmits)
+            // calculates what to do when panning (resets limits)
             beforePan: function (oldPan, newPan) {
                 const sizes = this.getSizes();
                 const leftLimit = -((sizes.viewBox.width * sizes.realZoom) - sizes.width);
@@ -80,13 +80,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // function to draw the edges of the graph
     function drawEdges() {
+
+        // clear the previous edges
         edgeLayer.clear();
+
+        // draw each edge
         edges.forEach(edge => {
             const line = edgeLayer.line(edge.start.x, edge.start.y, edge.end.x, edge.end.y)
                 .stroke({ color: 'black', width: 2 });
 
-            // Add edge length label
+            // add edge length label
             const midX = (edge.start.x + edge.end.x) / 2;
             const midY = (edge.start.y + edge.end.y) / 2;
             edgeLayer.text(edge.length.toString())
@@ -96,8 +101,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // function to draw the nodes of the graph
     function drawNodes() {
+
+        // clear the previous nodes
         nodeLayer.clear();
+
+        // draw each node
         nodes.forEach(node => {
             const group = nodeLayer.group();
             group.circle(40).fill('lightblue').stroke({ width: 2, color: 'black' }).center(node.x, node.y);
@@ -105,47 +115,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to update the distance matrix
+    // function to update the distance matrix
     function updateDistanceMatrix() {
         const matrixDiv = document.getElementById('distance-matrix');
         matrixDiv.innerHTML = '';
 
         const table = document.createElement('table');
         const headerRow = table.insertRow();
-        headerRow.insertCell(); // Empty cell for top-left corner
+        headerRow.insertCell(); // empty cell for top-left corner
 
-        // Create header row
+        // create header row
         nodes.forEach((node, index) => {
             const th = document.createElement('th');
             th.textContent = node.label;
             headerRow.appendChild(th);
         });
 
-        // Create matrix rows
+        // create matrix rows
         nodes.forEach((rowNode, rowIndex) => {
             const row = table.insertRow();
             const headerCell = row.insertCell();
             headerCell.textContent = rowNode.label;
             headerCell.style.fontWeight = 'bold';
 
+            // for each node, create a cell in the row
             nodes.forEach((colNode, colIndex) => {
                 const cell = row.insertCell();
+
+                // nodes can't have an edge to themselves
                 if (rowIndex === colIndex) {
-                    cell.textContent = '0';
+                    cell.textContent = '';
+
+                    // find the edge between the two nodes
                 } else {
                     const edge = edges.find(e =>
                         (e.start === rowNode && e.end === colNode) ||
                         (e.start === colNode && e.end === rowNode)
                     );
+
+                    // create an input for the user to add or edit the node
                     const input = document.createElement('input');
                     input.type = 'number';
                     input.min = '0';
                     input.value = edge ? edge.length : '0';
+
+                    // when the user changes the value, update the edge
                     input.addEventListener('change', (event) => {
                         const newLength = parseInt(event.target.value);
+
+                        // if the length is positive, update the edge
                         if (newLength > 0) {
                             if (edge) {
                                 edge.length = newLength;
+
+                                // if the edge doesn't exist, create it
                             } else {
                                 edges.push({
                                     start: rowNode,
@@ -153,11 +176,15 @@ document.addEventListener('DOMContentLoaded', () => {
                                     length: newLength
                                 });
                             }
+
+                            // if the length is 0, remove the edge
                         } else {
                             if (edge) {
                                 edges = edges.filter(e => e !== edge);
                             }
                         }
+
+                        // redraw the edges and update the matrix
                         drawEdges();
                         updateDistanceMatrix();
                     });
@@ -166,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        // add the table to the div
         matrixDiv.appendChild(table);
     }
 
@@ -308,7 +336,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // create a new edge object
                 const edge = {
                     start: startNode,
-                    end: closestNode
+                    end: closestNode,
+                    length: 1
                 };
 
                 // Add the edge to the list of edges
@@ -357,9 +386,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // set up the image and centre the view
     drawBackground();
-    drawEdges();
-    drawNodes();
-    updateDistanceMatrix();
 
     initializePanZoom();
     panZoom.zoom(1);

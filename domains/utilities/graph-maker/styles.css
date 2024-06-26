@@ -46,5 +46,6 @@ svg:active {
 }
 
 #distance-matrix input {
-    width: 10px;
+    width: 30px;
+    height: 20px;
 }
