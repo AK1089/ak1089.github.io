@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AK1089's Website</title>
+    <link rel="icon" type="image/x-icon" href="../../../images/favicon.ico">
+    <link rel="stylesheet" href="../../../styles/styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="../../../scripts/script.js"></script>
+</head>
+
+<body onload="on_body_load()">
+    <div id="content-container">
+        <a href="../../../" id="home-icon">
+            <img src="../../../images/home.png" alt="Home" width="40" height="40" class="icon home-icon">
+        </a>
+        <a href="../../..//map" id="map-icon">
+            <img src="../../../images/map.png" alt="Home" width="40" height="40" class="icon map-icon">
+        </a>
+        <div id="main-content">
+            <h1>Subitizing Trainer</h1>
+            <div id="game-area">
+                <div id="session-controls">
+                    <label for="min-dots">Min Dots:</label>
+                    <input type="number" id="min-dots" min="1" max="20" value="1">
+                    <label for="max-dots">Max Dots:</label>
+                    <input type="number" id="max-dots" min="1" max="20" value="20">
+                    <label for="trial-count">Trials per number:</label>
+                    <input type="number" id="trial-count" min="1" max="10" value="3">
+                </div>
+                <div id="dot-container"></div>
+                <div id="message">Press Start to begin</div>
+                <button id="start-button">Start</button>
+                <button id="stats-button">Show Stats</button>
+                <button id="export-button">Export Statistics</button>
+                <div id="progress-container">
+                    <div id="progress-bar"></div>
+                </div>
+            </div>
+            <div id="text-area">
+                <br>
+                <h3>What is this?</h3>
+                <p>
+                    When you see 8-10 objects, or dots, you don't usually know how many there are until you count them.
+                    Maybe you can count them quickly, or use tricks like grouping them, but you still need to count. But
+                    when there are only 2-4 objects, or dots, you don't need to! You intuitively know how many there are.
+                    This process of implicitly counting is called subitizing. This game will help you practice this
+                    process, until recognising 17 objects is as intuitive to you as recognising 3 is.
+                </p>
+                <p>
+                    I designed this game primarily as an experiment, to see if subitizing was a trainable skill. The
+                    existing research shows that young children get better at subitizing with practice, on small numbers
+                    (up to 3). But I wanted to see if adults could get better at subitizing larger numbers (up to 20) with
+                    deliberate practice. Plus, I thought it would be cool to be able to look at a group of objects, and
+                    immediately declare "16", while everyone else struggles to count it out explicitly.
+                </p>
+                <p>
+                    The game is simple. You set the range of numbers you want to practice with, and the number of trials
+                    you want to do for each number. Then you press Start, and the game will show you a number of dots
+                    between the range you set. You have to intuit how many there are as quickly as possible, and the game
+                    will tell you the correct answer. Each count comes up a fixed number of times, as given by
+                    "Trials per number".
+                </p>
+                <p>
+                    <u>You only press the last digit of the number of dots.</u> So if you see 8 dots, you press 8. If
+                    you see 12 dots, you press 2. The game will be generous, and assume you mistook 18 dots for 17 (not 7).
+                </p>
+                <p>
+                    Keep track of your progress with the progress bar, and see your stats at the end of a session.
+                     You can also export your stats to a CSV file, to keep track of your progress over time.
+                </p>
+            </div>
+        </div>
+        <h6 id="copyright">&#169; Avish Kumar 2024</h6>
+        <script src="script.js"></script>
+    </div>
+</body>
+
+</html>

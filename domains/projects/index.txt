@@ -1,18 +1,25 @@
-# Projects
+## Projects
 
-## Physical Projects
-
-<ul>
-- Coming soon...
-</ul>
-
-## Software-Only Projects
+### Physical Projects
 
 <ul>
 - Coming soon...
 </ul>
 
-## Microsites
+### Software-Only Projects
+
+<ul>
+- Coming soon...
+</ul>
+
+### Games
+
+I make games sometimes, usually for my own purposes. But anyone is free to play them.
+<ul>
+- [Subitizing Trainer](subitizing) (published 03/07/2024): a minigame which trains your ability to recognise counts without explicit enumeration.
+</ul>
+
+### Microsites
 
 I like making mini websites which accomplish random tasks, display cool things, or host minigames. These are often not very polished, but work to fulfil their purpose!
 
