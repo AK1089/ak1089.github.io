@@ -45,7 +45,15 @@
 \]</p>
 <p>Okay, so we need to multiply everything by \(n+1\). This means our expression is
 \[f(p) = (n+1) \cdot p^r \cdot (1-p)^{n-r} \cdot \binom{n}{r}\]
-where \(f\) is our credence function.</p>
+where \(f\) is our credence function. Looking more closely at this function, we notice it takes the former
+\[
+    \begin{align*}
+    f(p) &= p^r \cdot (1-p)^{n-r} \cdot \frac{n! \cdot (n+1)}{r! \cdot (n-r)!} \\
+    f(p) &= p^r \cdot (1-p)^{n-r} \cdot \frac{\Gamma\left(n+2\right)}{\Gamma\left(r+1\right)\Gamma\left(n-r+1\right)} \\
+    f(p) &= p^{(r+1)-1} \cdot (1-p)^{(n-r+1)-1} \cdot B\left(r+1,\ n-r+1\right)
+    \end{align*}    
+\]
+which is precisely the form of the <a href="../all-probability-distributions#the-beta-distribution">Beta distribution</a> with parameters \(r+1\) and \(n-r+1\).</p>
 <p><h3 id="estimating-and-predicting">Estimating and Predicting</p></h3>
 <p>And now, you say, we find the maximum likelihood estimator, ie. the maximum of this function \(f\). This occurs when the derivative \(\frac{df}{dp} = 0\). Luckily, for this constraint we can take out constant factors, and find the stationary points of \(p^{r} \cdot (1-p)^{n-r} \) instead. Let's do that.
 \[
@@ -62,7 +70,7 @@ The first term is zero only when \(p\) is at an extreme, ie. \(0\) or \(1\). How
 Whew! But wait a second, this is what we had at the beginning, and we said it was wrong! Where has the mistake come from?</p>
 <p>It was actually in the very last step. Our Bayesian update was right, our credence function is right, and our maximum likelihood estimator for \(p\) is right. But we're not looking to guess the value of \(p\), we're looking to guess the <em>probability the coin comes up heads next</em>.</p>
 <p>Yes, of course this is equal to \(p\), but there's a subtle difference. When guessing the former, we want the modal value of \(p\) (to maximise our chance of getting our guess right). And when we're guessing the probability of the coin coming up heads, this is a meaningless quantity! What we instead want is the <em>expected value</em> of \(p\).</p>
-<p>This is, of course, found by integrating \(\int_0^1 p \cdot f(p) \, \text{d}p\) I'll spare you the tedious calculation, but it comes out as
+<p>This is, of course, found by integrating \(\int_0^1 p \cdot f(p) \, \text{d}p\). I'll spare you the tedious calculation, but it comes out as
 \[ \mathbb{P}[\text{heads}] = \mathbb{E}[p] = \int_0^1 p \cdot f(p) \, \text{d}p = \int_0^1 p \cdot (n+1) \cdot p^r \cdot (1-p)^{n-r} \cdot \binom{n}{r} \, \text{d}p = \frac{\left(n+1\right)!}{r!\cdot\left(n-r\right)!}\int_{0}^{1}p^{r+1}\cdot\left(1-p\right)^{n-r} \, \text{d}p = \frac{r+1}{n+2}\]</p>
 <p>Okay! Well, that's a neat result. In fact, this is precisely Laplace's rule of succession.</p>
 <p><div class="image-container"><img src="original-essay.png" alt="An excerpt from <em>Essai philosophique sur les probabilités</em>, written by Laplace in 1840."><div class="caption">An excerpt from <em>Essai philosophique sur les probabilités</em>, written by Laplace in 1840.</div></div></p>

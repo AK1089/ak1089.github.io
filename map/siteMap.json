@@ -20,6 +20,11 @@
         "parent": "/"
     },
     {
+        "name": "A Guide To Probability Distributions",
+        "url": "/domains/maths/all-probability-distributions/",
+        "parent": "/domains/maths/"
+    },
+    {
         "name": "Electromagnetism Notes",
         "url": "/domains/maths/electromagnetism-notes/",
         "parent": "/domains/maths/"
@@ -100,7 +105,7 @@
         "parent": "/"
     },
     {
-        "name": "subitizing",
+        "name": "Subitizing Trainer",
         "url": "/domains/projects/subitizing/",
         "parent": "/domains/projects/"
     },
