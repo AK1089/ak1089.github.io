@@ -30,7 +30,8 @@ Jump to the section on any distribution here:
 
 For an explanation of the terms used here, see here:
 <ul>
-- also coming soon!
+- [Types of Tails](#types-of-tails)
+- more coming soon!
 </ul>
 """
 
@@ -342,6 +343,17 @@ Suppose \(X\) follows a beta distribution with parameters \(\alpha\) and \(\beta
 """
 
 The beta distribution frequently arises in Bayesian inference as a [conjugate prior](https://en.wikipedia.org/wiki/Conjugate_prior) for binomial and Bernoulli distributions. For more on this, see my article on [Laplace's Rule of Succession](../laplaces-rule-of-succession). It's used to model the distribution of probabilities, proportions, and random variables limited to intervals of finite length. For example, it can model the distribution of the proportion of time a machine is in use during a day, or the distribution of allele frequencies in population genetics. 
+
+<br>
+[↑ back to top](#a-guide-to-continuous-probability-distributions)
+<hr>
+<br>
+
+### Types of Tails
+
+The *tails* of a distribution describe the limiting behaviour of the distribution function \(f(x)\) for really large \(x\). There are many different types of tails, each given a special name. The definitions given here describe the "right tail" of the distribution: that is, the behaviour for \(x \to \infty\). Clearly, a distribution \(f(x)\) has a &#60;property&#62; left tail if the distribution \(g(x) = f(-x)\) has a &#60;property&#62; right tail. (Substitute "&#60;property&#62;" for fat, heavy, long, etc.).
+
+#### 
 
 <br>
 [↑ back to top](#a-guide-to-continuous-probability-distributions)
