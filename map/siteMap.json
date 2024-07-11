@@ -165,6 +165,11 @@
         "parent": "/domains/utilities/"
     },
     {
+        "name": "Financial",
+        "url": "/domains/utilities/#financial",
+        "parent": "/domains/utilities/"
+    },
+    {
         "name": "Colour Clusterer",
         "url": "/domains/utilities/colour-clusterer/",
         "parent": "/domains/utilities/#image-processing"
@@ -173,6 +178,11 @@
         "name": "Graph Maker",
         "url": "/domains/utilities/graph-maker/",
         "parent": "/domains/utilities/#mathematical"
+    },
+    {
+        "name": "Simulated Trading",
+        "url": "/domains/utilities/simulated-trading/",
+        "parent": "/domains/utilities/#financial"
     },
     {
         "name": "Text Editor",

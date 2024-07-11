@@ -1,0 +1,67 @@
+#payoff-graphs {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 20px;
+    width: 100%;
+    height: 400px;
+}
+
+.graph-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.graph-container h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.graph-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#order-book {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#order-book table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+#order-book th,
+#order-book td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+#order-book th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+#order-book th.bought {
+    background-color: #e6ffe6;
+}
+
+#order-book th.sold {
+    background-color: #ffe6e6;
+}
+
+#order-book th.price {
+    background-color: #e6f2ff;
+}
+
+#order-book tr {
+    background-color: #f0f0f0;
+}
+
+#order-book-table {
+    border: 2px solid black;
+}
