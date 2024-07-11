@@ -250,6 +250,8 @@ function buyProduct(type, values, quantity, onlyConsidering) {
         case 'stock':
             addOption('call', price, quantity, onlyConsidering);
             addOption('put', price, -quantity, onlyConsidering);
+            if (onlyConsidering) { considerationCash = 0; }
+            else { portfolioCash += price * quantity; }
             break;
         case 'call-option':
             addOption('call', values[0], quantity, onlyConsidering);
