@@ -268,9 +268,17 @@ function buyProduct(type, values, quantity, onlyConsidering) {
             addOption('call', values[0], quantity, onlyConsidering);
             addOption('call', values[1], -quantity, onlyConsidering);
             break;
-        case 'risk-reversal':
+        case 'put-spread':
+            addOption('put', values[0], -quantity, onlyConsidering);
+            addOption('put', values[1], quantity, onlyConsidering);
+            break;
+        case 'call-risk-reversal':
             addOption('call', values[1], quantity, onlyConsidering);
             addOption('put', values[0], -quantity, onlyConsidering);
+            break;
+        case 'put-risk-reversal':
+            addOption('call', values[1], -quantity, onlyConsidering);
+            addOption('put', values[0], quantity, onlyConsidering);
             break;
         case 'call-butterfly':
             addOption('call', values[0], quantity, onlyConsidering);
@@ -340,7 +348,9 @@ function changeInstrumentType() {
             break;
         case 'strangle':
         case 'call-spread':
-        case 'risk-reversal':
+        case 'put-spread':
+        case 'call-risk-reversal':
+        case 'put-risk-reversal':
             inputHTML = 'with strikes of <input type="number" class="strike-input"> and <input type="number" class="strike-input"> for a premium of <input type="number" class="strike-input">.';
             break;
         case 'call-butterfly':
