@@ -248,7 +248,8 @@ function buyProduct(type, values, quantity, onlyConsidering) {
 
     switch (type) {
         case 'stock':
-            addOption('call', 0, quantity, onlyConsidering);
+            addOption('call', price, quantity, onlyConsidering);
+            addOption('put', price, -quantity, onlyConsidering);
             break;
         case 'call-option':
             addOption('call', values[0], quantity, onlyConsidering);
