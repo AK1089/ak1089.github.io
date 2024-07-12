@@ -4,8 +4,7 @@ let considerationList = [];
 let portfolioCash = 0;
 let considerationCash = 0;
 let graphsCreated = false;
-let buyOrders = [];
-let sellOrders = [];
+let allOrders = [];
 
 function resetEverything() {
     // Clear the portfolios and cash
@@ -15,8 +14,7 @@ function resetEverything() {
     considerationCash = 0;
 
     // Clear the order book
-    buyOrders = [];
-    sellOrders = [];
+    allOrders = [];
 
     // Clear input fields
     document.querySelectorAll('#instrument-values input').forEach(input => {
@@ -382,12 +380,7 @@ function addToOrderBook(type, values, isBuy) {
     const name = `${nameValues} ${typeName}`;
 
     const order = { name, price };
-
-    if (isBuy) {
-        buyOrders.push(order);
-    } else {
-        sellOrders.push(order);
-    }
+    allOrders.push(order);
 
     displayOrderBook();
 }
@@ -395,9 +388,6 @@ function addToOrderBook(type, values, isBuy) {
 function displayOrderBook() {
     const orderBookBody = document.getElementById('order-book-body');
     orderBookBody.innerHTML = ''; // Clear existing rows
-
-    // Combine buy and sell orders
-    const allOrders = [...buyOrders, ...sellOrders];
 
     allOrders.forEach(order => {
         const row = document.createElement('tr');
