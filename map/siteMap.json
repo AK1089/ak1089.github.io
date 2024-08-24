@@ -70,6 +70,11 @@
         "parent": "/domains/minr-script-help/"
     },
     {
+        "name": "Yeroc% Patch Guide",
+        "url": "/domains/minr-script-help/yeroc-patch-guide/",
+        "parent": "/domains/minr-utilities/"
+    },
+    {
         "name": "Minr Utilities",
         "url": "/domains/minr-utilities/",
         "parent": "/"

@@ -14,4 +14,5 @@ Here are some useful ones:
 - [Let's Build a Selector-To-Entity Converter &lpar;or, All About UUIDs&rpar;](../minr-script-help/uuid-converter), published 24/05/2024
 </ul>
 - [Resource Pack Hosting](../minr-utilities/resource-packs), a full step-by-step guide to creating, hosting, and configuring a custom resource pack for a map
+- [Yeroc% Patch Guide](../minr-script-help/yeroc-patch-guide), a namespace for patching a common timer-based exploit in maps which is often annoying to prevent
 </ol>
