@@ -1,29 +1,17 @@
 ## Some Software I Like Using
 
-This is a pretty incomplete list of software I think is [extremely good](!I use all of these pretty regularly, and I think those that are paid are well worth the money.). I've tried to stay away from social-media style uses and just "nice websites" - these are mostly utility-based tools. You'll probably know most of these. They're not in any particular order.
+This is a pretty incomplete list of software I think is [extremely good](!I use all of these pretty regularly, and I think those that are paid are well worth the money.). I've tried to stay away from social-media style uses and just "nice websites" - these are mostly utility-based tools. The idea is to list pieces of software which have unusually good user experiences, effectiveness, or features you can't get anywhere else.
 
 <ul>
-- [Opera GX](https://www.opera.com/gx) - Browser with control over RAM limits, cache usage, and a helpful sidebar
-- [OpenAI's GPT-4](https://chatgpt.com/) - AI assistant which is smart and good with technical stuff
-- [Anthropic's Claude 3 Opus](https://claude.ai/chats) - AI assistant which is much more personable and friendly
-- [Spotify](https://open.spotify.com/) - Enables access to pretty much the entire human library of music available to stream
+- [The Browser Company's Arc](https://arc.net/) - A browser made by people with attention to detail who care about user experience
+- [Anthropic's Claude 3 Opus](https://claude.ai/chats) - AI assistant with fantastic design which is smart and personable
 - [Last.fm](https://www.last.fm/) - Tracks every song you listen to and displays summary statistics
 - [Ground News](https://ground.news/) - Groups news articles from many sources with bias ratings for each
-- [InoReader](https://www.inoreader.com/) - Simple RSS reader with good feed organisation and control
-- [GitHub](https://github.com/) - Keeps all your code safe, tracks all edits to it, hosts this site, and helps collaboration
-- [Visual Studio Code](https://code.visualstudio.com/) - My favourite IDE for writing code of pretty much any language
-- [TEXMaker](https://www.xm1math.net/texmaker/) - A powerful LaTeX editor with integrated PDF viewer
+- [TEXMaker](https://www.xm1math.net/texmaker/) - A powerful LaTeX editor with an integrated PDF viewer
 - [KeyBR](https://keybr.com) - Website which allows you to practice typing and improve your speed
-- [Google Sheets](https://sheets.new) - In-browser spreadsheet with most powerful features and easy formatting
 - [Excalidraw](https://excalidraw.com/) - Online drawing tool with useful features and a nice aesthetic
-- [Dingboard](https://dingboard.com/) - Fast AI-powered easy image editing within the browser
 - [Fusion 360](https://www.autodesk.com/products/fusion-360/) - Easy and powerful CAD software for designing 3D prints
 - [Cold Turkey Blocker](https://getcoldturkey.com/) - The most effective website and distraction blocker I've used
 - [One Sec](https://one-sec.app/) - An app blocker for phones which makes you wait before opening apps
-- [Forfeit](https://www.forfeit.app/) - An app which forces you to commit to things under monetary penalty
 - [Alarmy](https://alar.my/) - Alarm which forces you to complete various tasks in order to turn it off
 </ul>
-
-
-
-

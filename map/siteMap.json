@@ -150,6 +150,11 @@
         "parent": "/"
     },
     {
+        "name": "Financial",
+        "url": "/domains/utilities/#financial",
+        "parent": "/domains/utilities/"
+    },
+    {
         "name": "Image Processing",
         "url": "/domains/utilities/#image-processing",
         "parent": "/domains/utilities/"
@@ -162,11 +167,6 @@
     {
         "name": "Text Processing",
         "url": "/domains/utilities/#text-processing",
-        "parent": "/domains/utilities/"
-    },
-    {
-        "name": "Financial",
-        "url": "/domains/utilities/#financial",
         "parent": "/domains/utilities/"
     },
     {
