@@ -1,0 +1,126 @@
+@font-face {
+    font-family: 'ETBook';
+    src: url('etbookot.woff2') format('woff2'),
+}
+
+strong { font-weight: bolder; }
+em { font-style: italic; }
+u { text-decoration: underline; }
+
+body {
+    font-family: 'ETBook', serif;
+    line-height: 1.5;
+    margin: 20px auto;
+    width: 75%;
+    background-color: rgb(233, 225, 212);;
+    padding: 20px;
+}
+
+/* Headers and body */
+h1, h2, h3, h4, h5, h6 {
+    margin: 20px 0 10px;
+}
+
+h1 { font-size: 36pt; }
+h2 { font-size: 28pt; }
+h3 { font-size: 18pt; }
+h4 { font-size: 16pt; }
+h5 { font-size: 14pt; }
+h6 { font-size:  9pt; }
+
+p {
+    font-family: 'ETBook', serif;
+    margin: 10px 0;
+    font-size: 12pt;
+}
+
+/* Home and Map Icons */
+.icon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+}
+
+.home-icon {
+    left: 7%;
+    top: 70px;
+}
+
+.map-icon {
+    left: 7%;
+    top: 120px;
+}
+
+@font-face {
+    font-family: 'Minecraft';
+    src: url('minecraft.woff') format('woff'),
+}
+
+#module-selector {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.editor-container {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.formatting-options {
+    display: flex;
+    gap: 10px;
+}
+
+.editor-options {
+    display: flex;
+    gap: 10px;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+}
+
+.option-button {
+    height: 28px;
+    width: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: 3px;
+    border: 1px solid #d1d8db;
+    background-color: #ffffff;
+    outline: none;
+    color: #020929;
+    cursor: pointer;
+}
+
+.option-button:hover {
+    border: 2px solid #020929;
+}
+
+.active {
+    background-color: #e0e9ff;
+}
+
+.text-input {
+    padding: 10px;
+    height: 30px;
+    overflow-y: auto;
+    background-color: #333;
+    font-family: 'Minecraft', sans-serif;
+    color: #fff;
+}
+
+.text-input:focus {
+    outline: none;
+}

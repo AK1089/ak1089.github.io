@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AK1089's Website</title>
+    <link rel="icon" type="image/x-icon" href="../../../images/favicon.ico">
+    <script src="../../../scripts/script.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div id="content-container">
+        <a href="../../../" id="home-icon">
+            <img src="../../../images/home.png" alt="Home" width="40" height="40" class="icon home-icon">
+        </a>
+        <a href="../../..//map" id="map-icon">
+            <img src="../../../images/map.png" alt="Home" width="40" height="40" class="icon map-icon">
+        </a>
+        <div id="main-content">
+            <h2 id="dialogue-script-builder">Dialogue Script Builder</h2>
+            <p>This is a tool for generating basic dialogue scripts. These are useful for letting the player talk to
+                NPCs, providing exposition / explanation for new sections, allowing players to input answers to riddles,
+                and so on.</p>
+
+            <select id="module-selector">
+                <option value="">Add a script component</option>
+                <option value="Dialogue">Dialogue</option>
+                <option value="Prompt">Prompt</option>
+                <option value="Delay">Delay</option>
+                <option value="Variable">Variable</option>
+                <option value="Branch">Branch</option>
+                <option value="End Script">End Script</option>
+            </select>
+
+            <div id="script-content"></div>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>
