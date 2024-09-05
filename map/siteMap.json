@@ -60,6 +60,11 @@
         "parent": "/domains/minr-utilities/"
     },
     {
+        "name": "Dialogue Script Builder",
+        "url": "/domains/minr-script-help/dialogue-builder/",
+        "parent": "/domains/minr-script-help/"
+    },
+    {
         "name": "All About Functions",
         "url": "/domains/minr-script-help/functions/",
         "parent": "/domains/minr-script-help/"
