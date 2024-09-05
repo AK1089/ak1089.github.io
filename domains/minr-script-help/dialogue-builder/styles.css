@@ -55,6 +55,8 @@ p {
 /* Each section */
 .editor-container {
     border-radius: 8px;
+    display: block;
+    padding: 10px;
 }
 
 /* Toolbar and toolbar buttons */
@@ -122,7 +124,7 @@ p {
 /* Colour Palette */
 .color-palette {
     position: absolute;
-    background: white;
+    background: #ddd;
     border: 1px solid #ccc;
     padding: 5px;
     z-index: 1000;
@@ -139,11 +141,14 @@ p {
     height: 32px;
     margin-right: 5px;
     cursor: pointer;
+    transition: border-radius 0.6s ease, opacity 0.3s ease, filter 0.3s ease;
+    border-radius: 6px;
 }
 
 .color-square:hover {
-    opacity: 0.9;
-    filter: brightness(90%);
+    opacity: 0.8;
+    filter: brightness(80%);
+    border-radius: 4px;
 }
 
 .add-color {
@@ -152,4 +157,12 @@ p {
     max-width: 32px;
     max-height: 32px;
     margin-right: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.add-color:hover {
+    opacity: 0.8;
+    filter: brightness(80%);
 }

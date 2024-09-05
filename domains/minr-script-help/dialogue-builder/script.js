@@ -113,23 +113,6 @@ function createDialogueModule() {
     editorContainer.appendChild(textInput);
     scriptContent.appendChild(editorContainer);
 
-    // the colour palette open button and the palette itself
-    const colorSelector = editorContainer.querySelector('#insertColor');
-    const colorPalette = createColorPalette(editorContainer);
-    toolbar.appendChild(colorPalette);
-
-    // open the colour palette when the button is clicked
-    colorSelector.addEventListener('click', () => {
-        colorPalette.style.display = colorPalette.style.display === 'none' ? 'block' : 'none';
-    });
-
-    // close color palette when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!colorSelector.contains(e.target) && !colorPalette.contains(e.target)) {
-            colorPalette.style.display = 'none';
-        }
-    });
-
     updateFormatButtons(editorContainer);
     attachEditorEventListeners(editorContainer);
 }
@@ -200,6 +183,12 @@ function handleKeyboardShortcuts(event) {
                 event.preventDefault();
                 duplicateEditor(event.target.closest('.editor-container'));
                 break;
+            case 'p':
+                event.preventDefault();
+                const editorContainer = event.target.closest('.editor-container');
+                const colorPalette = editorContainer.querySelector('.color-palette');
+                colorPalette.style.display = colorPalette.style.display === 'none' ? 'block' : 'none';
+                break;
             case 'arrowup':
                 event.preventDefault();
                 moveEditorUp(event.target.closest('.editor-container'));
@@ -227,10 +216,15 @@ function deleteEditor(editorContainer) {
 // move the current box up one position
 function moveEditorUp(editorContainer) {
     const previousSibling = editorContainer.previousElementSibling;
+    const nextSibling = editorContainer.nextElementSibling;
 
     // if there is a preceding sibling that is an editor container, move the current one before it
     if (previousSibling && previousSibling.classList.contains('editor-container')) {
-        editorContainer.parentNode.insertBefore(editorContainer, previousSibling);
+        if (nextSibling && nextSibling.classList.contains('editor-container')) {
+            editorContainer.parentNode.insertBefore(previousSibling, nextSibling);
+        } else {
+            editorContainer.parentNode.appendChild(previousSibling);
+        }
     }
 }
 
@@ -255,7 +249,8 @@ function attachEditorEventListeners(editorContainer) {
     // add event listeners for formatting buttons
     const formatButtons = editorContainer.querySelectorAll(".format");
     formatButtons.forEach((button) => {
-        button.addEventListener("click", () => {
+        button.addEventListener("mousedown", (e) => {
+            e.preventDefault();
             toggleFormat(button.id, editorContainer);
         });
     });
@@ -277,10 +272,27 @@ function attachEditorEventListeners(editorContainer) {
     deleteButton.addEventListener('click', () => deleteEditor(editorContainer));
     moveUpButton.addEventListener('click', () => moveEditorUp(editorContainer));
     moveDownButton.addEventListener('click', () => moveEditorDown(editorContainer));
+
+    // the colour palette open button and the palette itself
+    const colorSelector = editorContainer.querySelector('#insertColor');
+    const colorPalette = createColorPalette(editorContainer);
+    editorContainer.appendChild(colorPalette);
+
+    // listener to open the colour palette when the button is clicked
+    colorSelector.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        colorPalette.style.display = colorPalette.style.display === 'none' ? 'block' : 'none';
+    });
 }
 
 // create and manage the color palette
 function createColorPalette(editorContainer) {
+    const colorPalettes = editorContainer.getElementsByClassName('color-palette');
+
+    while (colorPalettes.length > 0) {
+        colorPalettes[0].remove();
+    }
+    
     const colorPalette = document.createElement('div');
     colorPalette.className = 'color-palette';
     colorPalette.style.display = 'none';
@@ -322,7 +334,8 @@ function createColorSquare(color, editorContainer) {
     const colorSquare = document.createElement('div');
     colorSquare.className = 'color-square';
     colorSquare.style.backgroundColor = color;
-    colorSquare.addEventListener('click', () => {
+    colorSquare.addEventListener('mousedown', (e) => {
+        e.preventDefault();
         document.execCommand('foreColor', false, color);
         editorContainer.querySelector('.color-palette').style.display = 'none';
     });
@@ -347,7 +360,7 @@ function addCustomColor(customColorRow, editorContainer) {
 
         // limit the number of custom colors to the number of base colors minus one
         if (customColors.length > BASE_COLORS.length - 1) {
-            customColors = customColors.slice(-BASE_COLORS.length+1);
+            customColors = customColors.slice(-BASE_COLORS.length + 1);
         }
 
         // display the updated custom colors and save them to local storage
@@ -364,7 +377,10 @@ function displayCustomColors(customColors, customColorRow, editorContainer) {
     // first, create a button to add a custom color
     const addColorButton = document.createElement('button');
     addColorButton.innerHTML = '<i class="fas fa-plus"></i>';
-    addColorButton.addEventListener('click', () => addCustomColor(customColorRow, editorContainer));
+    addColorButton.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        addCustomColor(customColorRow, editorContainer);
+    });
     addColorButton.className = 'add-color';
     customColorRow.appendChild(addColorButton);
 
