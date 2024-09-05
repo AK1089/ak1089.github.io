@@ -117,12 +117,12 @@ function createDialogueModule() {
 function toggleFormat(format, editorContainer) {
     document.execCommand(format, false, null);
     updateFormatButtons(editorContainer);
-    
+
     // find the text input area within the editor container and focus on it
     const textInput = editorContainer.querySelector('.text-input');
     if (textInput) {
         textInput.focus();
-        
+
         // restore the selection if it was lost
         const selection = window.getSelection();
         if (selection.rangeCount === 0) {
@@ -141,7 +141,7 @@ function updateFormatButtons(editorContainer) {
     if (!editorContainer || !(editorContainer instanceof Element)) {
         editorContainer = document.activeElement.closest('.editor-container');
     }
-    
+
     // If we still don't have a valid editorContainer, exit the function
     if (!editorContainer || !(editorContainer instanceof Element)) {
         console.warn('No valid editor container found');
@@ -174,6 +174,22 @@ function handleKeyboardShortcuts(event) {
             case 'u':
                 event.preventDefault();
                 toggleFormat('underline', event.target.closest('.editor-container'));
+                break;
+            case 'd':
+                event.preventDefault();
+                duplicateEditor(event.target.closest('.editor-container'));
+                break;
+            case 'backspace':
+                event.preventDefault();
+                deleteEditor(event.target.closest('.editor-container'));
+                break;
+            case 'arrowup':
+                event.preventDefault();
+                moveEditorUp(event.target.closest('.editor-container'));
+                break;
+            case 'arrowdown':
+                event.preventDefault();
+                moveEditorDown(event.target.closest('.editor-container'));
                 break;
         }
     }

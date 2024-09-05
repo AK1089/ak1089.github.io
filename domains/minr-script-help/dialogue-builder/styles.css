@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'ETBook';
-    src: url('etbookot.woff2') format('woff2'),
+    src: url('../../../styles/fonts/etbookot.woff2') format('woff2'),
 }
 
 strong { font-weight: bolder; }
