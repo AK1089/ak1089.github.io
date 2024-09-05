@@ -118,3 +118,38 @@ p {
 .text-input:focus {
     outline: none;
 }
+
+/* Colour Palette */
+.color-palette {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+    z-index: 1000;
+    border-radius: 4px;
+}
+
+.color-row {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.color-square {
+    width: 32px;
+    height: 32px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.color-square:hover {
+    opacity: 0.9;
+    filter: brightness(90%);
+}
+
+.add-color {
+    width: 32px;
+    height: 32px;
+    max-width: 32px;
+    max-height: 32px;
+    margin-right: 5px;
+}
