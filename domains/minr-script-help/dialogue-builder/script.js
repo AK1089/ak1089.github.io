@@ -179,10 +179,6 @@ function handleKeyboardShortcuts(event) {
                 event.preventDefault();
                 duplicateEditor(event.target.closest('.editor-container'));
                 break;
-            case 'backspace':
-                event.preventDefault();
-                deleteEditor(event.target.closest('.editor-container'));
-                break;
             case 'arrowup':
                 event.preventDefault();
                 moveEditorUp(event.target.closest('.editor-container'));

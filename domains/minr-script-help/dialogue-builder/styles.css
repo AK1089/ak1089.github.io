@@ -1,35 +1,27 @@
+/* Main font for the text (website default) */
 @font-face {
     font-family: 'ETBook';
     src: url('../../../styles/fonts/etbookot.woff2') format('woff2'),
 }
 
-strong { font-weight: bolder; }
-em { font-style: italic; }
-u { text-decoration: underline; }
-
+/* Inherited from rest of website */
 body {
     font-family: 'ETBook', serif;
     line-height: 1.5;
     margin: 20px auto;
     width: 75%;
-    background-color: rgb(233, 225, 212);;
+    background-color: rgb(233, 225, 212);
+    ;
     padding: 20px;
 }
 
-/* Headers and body */
-h1, h2, h3, h4, h5, h6 {
+/* Headers and paragraph */
+h2 {
     margin: 20px 0 10px;
+    font-size: 28pt;
 }
 
-h1 { font-size: 36pt; }
-h2 { font-size: 28pt; }
-h3 { font-size: 18pt; }
-h4 { font-size: 16pt; }
-h5 { font-size: 14pt; }
-h6 { font-size:  9pt; }
-
 p {
-    font-family: 'ETBook', serif;
     margin: 10px 0;
     font-size: 12pt;
 }
@@ -51,11 +43,7 @@ p {
     top: 120px;
 }
 
-@font-face {
-    font-family: 'Minecraft';
-    src: url('minecraft.woff') format('woff'),
-}
-
+/* Dropdown */
 #module-selector {
     width: 100%;
     padding: 10px;
@@ -64,23 +52,12 @@ p {
     border-radius: 4px;
 }
 
+/* Each section */
 .editor-container {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 20px;
+    border-radius: 8px;
 }
 
-.formatting-options {
-    display: flex;
-    gap: 10px;
-}
-
-.editor-options {
-    display: flex;
-    gap: 10px;
-}
-
+/* Toolbar and toolbar buttons */
 .options {
     display: flex;
     flex-wrap: wrap;
@@ -89,8 +66,17 @@ p {
     padding: 10px;
     background-color: #f9f9f9;
     border-bottom: 1px solid #ddd;
+    border-radius: 8px 8px 0px 0px;
 }
 
+.formatting-options,
+.editor-options {
+    display: flex;
+    gap: 10px;
+    float: right;
+}
+
+/* Formatting for the buttons themselves */
 .option-button {
     height: 28px;
     width: 28px;
@@ -104,6 +90,7 @@ p {
     cursor: pointer;
 }
 
+/* Highlight the buttons when moused over / active */
 .option-button:hover {
     border: 2px solid #020929;
 }
@@ -112,13 +99,20 @@ p {
     background-color: #e0e9ff;
 }
 
+/* Text input should use Minecraft font and be one line tall */
+@font-face {
+    font-family: 'Minecraft';
+    src: url('minecraft.woff') format('woff'),
+}
+
 .text-input {
     padding: 10px;
     height: 30px;
     overflow-y: auto;
     background-color: #333;
-    font-family: 'Minecraft', sans-serif;
+    font-family: 'Minecraft', serif;
     color: #fff;
+    border-radius: 0px 0px 8px 8px;
 }
 
 .text-input:focus {
