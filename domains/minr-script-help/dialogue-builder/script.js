@@ -1,4 +1,4 @@
-// store the colours
+// store the colors
 const BASE_COLORS = ["#AA0000", "#FF5555", "#FFAA00", "#FFFF55", "#00AA00", "#55FF55", "#55FFFF", "#00AAAA", "#0000AA", "#5555FF", "#FF55FF", "#AA00AA", "#FFFFFF", "#AAAAAA", "#555555", "#000000"];
 const CUSTOM_COLORS_KEY = 'customColors';
 
@@ -23,14 +23,15 @@ moduleSelector.addEventListener('change', function () {
             break;
     }
 
-    // reset the selector
+    // reset the selector and apply conditional indentation
     this.value = '';
     applyConditionalIndentation()
 });
 
-function createModule(moduleName) {
+// create a module of the given type
+function createModule(moduleType) {
 
-    // create a container for the editor
+    // create a container for the module
     const editorContainer = document.createElement('div');
     editorContainer.className = 'editor-container';
 
@@ -41,119 +42,90 @@ function createModule(moduleName) {
     // add a title
     const title = document.createElement('span');
     title.className = 'editor-title';
-    title.textContent = moduleName;
     toolbar.appendChild(title);
-    editorContainer.dataset.moduleType = moduleName;
 
-    // create formatting options container
-    const formattingOptions = document.createElement('div');
-    formattingOptions.className = 'formatting-options';
+    // set the title and module type to the provided module type
+    title.textContent = moduleType;
+    editorContainer.dataset.moduleType = moduleType;
 
-    // all buttons: four formatting toggles, the colour menu, and undo/redo
+    // create containers for formatting (module-specific) and editor (global) buttons
+    const moduleSpecificOptions = document.createElement('div');
+    const editorOptions = document.createElement('div');
+    moduleSpecificOptions.className = 'formatting-options';
+    editorOptions.className = 'editor-options';
+
+    // all formatting (module-specific) buttons and the modules they are available for
     const buttons = [
-        { id: 'bold', icon: 'fa-bold' },
-        { id: 'italic', icon: 'fa-italic' },
-        { id: 'underline', icon: 'fa-underline' },
-        { id: 'strikethrough', icon: 'fa-strikethrough' },
-        { id: 'insertColor', icon: 'fa-palette' },
-        { id: 'undo', icon: 'fa-rotate-left' },
-        { id: 'redo', icon: 'fa-rotate-right' }
+        { id: 'bold', icon: 'fa-bold', availableFor: 'Dialogue', mode: 'toggle' },
+        { id: 'italic', icon: 'fa-italic', availableFor: 'Dialogue', mode: 'toggle' },
+        { id: 'underline', icon: 'fa-underline', availableFor: 'Dialogue', mode: 'toggle' },
+        { id: 'strikethrough', icon: 'fa-strikethrough', availableFor: 'Dialogue', mode: 'toggle' },
+        { id: 'insertColor', icon: 'fa-palette', availableFor: 'Dialogue', mode: 'toggle' },
+
+        { id: 'collapseConditional', icon: 'fa-circle-chevron-up', availableFor: 'Start of Conditional', mode: 'none' },
+        { id: 'addCondition', icon: 'fa-plus', availableFor: 'Start of Conditional, Extra Conditional Branch', mode: 'none' },
+
+        { id: 'undo', icon: 'fa-rotate-left', availableFor: 'Dialogue, Start of Conditional, Extra Conditional Branch', mode: 'none' },
+        { id: 'redo', icon: 'fa-rotate-right', availableFor: 'Dialogue, Start of Conditional, Extra Conditional Branch', mode: 'none' },
+
+        { id: 'duplicate', icon: 'fa-copy', title: 'Duplicate', availableFor: 'all', mode: 'editor' },
+        { id: 'delete', icon: 'fa-trash', title: 'Delete', availableFor: 'all', mode: 'editor' },
+        { id: 'moveUp', icon: 'fa-arrow-up', title: 'Move Up', availableFor: 'all', mode: 'editor' },
+        { id: 'moveDown', icon: 'fa-arrow-down', title: 'Move Down', availableFor: 'all', mode: 'editor' }
     ];
 
     // create a button object for each option with the given ID
     buttons.forEach(button => {
-        if (moduleName != 'Dialogue') {
-            return;
-        }
 
+        // create a button element with the given ID and FontAwesome icon
         const btn = document.createElement('button');
         btn.id = button.id;
         btn.className = 'option-button';
+        btn.innerHTML = `<i class="fa-solid ${button.icon}"></i>`;
 
-        // add the format class to the four formatting buttons
-        if (['bold', 'italic', 'underline', 'strikethrough'].includes(button.id)) {
+        // add the format class to the buttons which are toggles
+        if (button.mode.includes('toggle')) {
             btn.classList.add('format');
         }
 
-        // add the FontAwesome icon to the button
-        btn.innerHTML = `<i class="fa-solid ${button.icon}"></i>`;
-        formattingOptions.appendChild(btn);
+        // add the button to the formatting options if it is available for the current module type
+        if (button.availableFor.split(', ').includes(moduleType) || button.availableFor === 'all') {
+            if (button.mode.includes('editor')) {
+                editorOptions.appendChild(btn);
+            } else {
+                moduleSpecificOptions.appendChild(btn);
+            }
+        };
     });
 
-    if (moduleName == 'Start of Conditional') {
-        const btn1 = document.createElement('button');
-        btn1.id = 'addCondition';
-        btn1.className = 'option-button';
-
-        const btn2 = document.createElement('button');
-        btn2.id = 'collapseConditional';
-        btn2.className = 'option-button';
-
-        // add the FontAwesome icon to the button
-        btn1.innerHTML = `<i class="fas fa-plus"></i>`;
-        formattingOptions.appendChild(btn1);
-        btn1.addEventListener('click', () => {
-            const newBranch = (createModule('Extra Conditional Branch'));
-            editorContainer.parentNode.insertBefore(newBranch, editorContainer.nextSibling);
-        });
-
-        // add the FontAwesome icon to the button
-        btn2.innerHTML = `<i class="fa-solid fa-circle-chevron-up"></i>`;
-        formattingOptions.appendChild(btn2);
-        btn2.addEventListener('click', () => {
-            editorContainer.dataset.collapsed = editorContainer.dataset.collapsed === 'true' ? 'false' : 'true';
-            applyConditionalIndentation();
-        });
-    }
-
-    toolbar.appendChild(formattingOptions);
-
-    // create the editor options container
-    const editorOptions = document.createElement('div');
-    editorOptions.className = 'editor-options';
-
-    // all buttons for editor options: duplicate, delete, move up / down
-    const editorButtons = [
-        { id: 'duplicate', icon: 'fa-copy', title: 'Duplicate' },
-        { id: 'delete', icon: 'fa-trash', title: 'Delete' },
-        { id: 'moveUp', icon: 'fa-arrow-up', title: 'Move Up' },
-        { id: 'moveDown', icon: 'fa-arrow-down', title: 'Move Down' }
-    ];
-
-    // create a button object for each option with the given ID
-    editorButtons.forEach(button => {
-        const btn = document.createElement('button');
-        btn.id = button.id;
-        btn.className = 'option-button';
-        btn.title = button.title;
-        btn.innerHTML = `<i class="fa-solid ${button.icon}"></i>`;
-        editorOptions.appendChild(btn);
-    });
-
-    // add the editor options to the toolbar and the toolbar to the container
+    // add these button groups to the toolbar and add the toolbar to the editor container
+    toolbar.appendChild(moduleSpecificOptions);
     toolbar.appendChild(editorOptions);
     editorContainer.appendChild(toolbar);
 
-    if (moduleName == 'Dialogue') {
-        // create a text editor element
+    // create a text editor element in either rich or basic text mode depending on the module type
+    if (moduleType == 'Dialogue') {
         const textInput = document.createElement('div');
         textInput.id = 'text-input';
         textInput.className = 'text-input';
         textInput.contentEditable = true;
         editorContainer.appendChild(textInput);
-    } else if (moduleName == 'Extra Conditional Branch' || moduleName == 'Start of Conditional') {
-        // create a text editor element
+    } else if (moduleType == 'Extra Conditional Branch' || moduleType == 'Start of Conditional') {
         const textInput = document.createElement('div');
         textInput.id = 'text-input-basic';
         textInput.className = 'text-input-basic';
         textInput.contentEditable = true;
         editorContainer.appendChild(textInput);
     } else {
+        // round the bottom corners for consistency
         toolbar.style.borderRadius = '8px';
     }
 
+    // set up all the buttons with starter highlights and event listeners
     updateFormatButtons(editorContainer);
     attachEditorEventListeners(editorContainer);
+
+    // return the editor container
     return editorContainer;
 }
 
@@ -181,12 +153,13 @@ function toggleFormat(format, editorContainer) {
 
 // set the buttons of the relevant text editor to the correct active state
 function updateFormatButtons(editorContainer) {
-    // If editorContainer is not provided or is not an element, try to find it
+
+    // if editorContainer is not provided or is not an element, try to find it
     if (!editorContainer || !(editorContainer instanceof Element)) {
         editorContainer = document.activeElement.closest('.editor-container');
     }
 
-    // If we still don't have a valid editorContainer, exit the function
+    // if we still don't have a valid editorContainer, exit the function
     if (!editorContainer || !(editorContainer instanceof Element)) {
         return;
     }
@@ -200,42 +173,55 @@ function updateFormatButtons(editorContainer) {
         const isActive = document.queryCommandState(format);
         button.classList.toggle('active', isActive);
     });
+
+    // get the color selector and palette
+    const colorSelector = editorContainer.querySelector('#insertColor');
+    const colorPalette = editorContainer.querySelector('.color-palette');
+
+    // if the color selector and palette exist, toggle the active state based on the current display state
+    if (colorSelector && colorPalette) {
+        colorSelector.classList.toggle('active', colorPalette.style.display === 'block');
+    }
 }
 
 // enable keyboard shortcuts for formatting
 function handleKeyboardShortcuts(event) {
+
+    // if the control/command key is pressed, prevent the default action and handle the key press
     if (event.ctrlKey || event.metaKey) {
         switch (event.key.toLowerCase()) {
+
+            // handle the key press for each shortcut: bold, italic, underline
             case 'b':
-                event.preventDefault();
-                toggleFormat('bold', event.target.closest('.editor-container'));
-                break;
+                event.preventDefault(); toggleFormat('bold', event.target.closest('.editor-container')); break;
             case 'i':
-                event.preventDefault();
-                toggleFormat('italic', event.target.closest('.editor-container'));
-                break;
+                event.preventDefault(); toggleFormat('italic', event.target.closest('.editor-container')); break;
             case 'u':
-                event.preventDefault();
-                toggleFormat('underline', event.target.closest('.editor-container'));
-                break;
+                event.preventDefault(); toggleFormat('underline', event.target.closest('.editor-container')); break;
+
+            // duplicate the current module
             case 'd':
-                event.preventDefault();
-                duplicateEditor(event.target.closest('.editor-container'));
-                break;
+                event.preventDefault(); duplicateEditor(event.target.closest('.editor-container')); break;
+
+            // open/close the color palette selector
             case 'p':
+
+                // prevent the default action and get the color selector and palette
                 event.preventDefault();
                 const editorContainer = event.target.closest('.editor-container');
                 const colorPalette = editorContainer.querySelector('.color-palette');
+                const colorSelector = editorContainer.querySelector('#insertColor');
+
+                // toggle the active state of the color selector and display style of the palette
                 colorPalette.style.display = colorPalette.style.display === 'none' ? 'block' : 'none';
+                colorSelector.classList.toggle('active', colorPalette.style.display === 'block');
                 break;
+
+            // move the current editor up or down
             case 'arrowup':
-                event.preventDefault();
-                moveEditorUp(event.target.closest('.editor-container'));
-                break;
+                event.preventDefault(); moveEditorUp(event.target.closest('.editor-container')); break;
             case 'arrowdown':
-                event.preventDefault();
-                moveEditorDown(event.target.closest('.editor-container'));
-                break;
+                event.preventDefault(); moveEditorDown(event.target.closest('.editor-container')); break;
         }
     }
 }
@@ -245,11 +231,13 @@ function duplicateEditor(editorContainer) {
     const newEditor = editorContainer.cloneNode(true);
     editorContainer.parentNode.insertBefore(newEditor, editorContainer.nextSibling);
     attachEditorEventListeners(newEditor);
+    applyConditionalIndentation()
 }
 
 // delete the current box
 function deleteEditor(editorContainer) {
     editorContainer.remove();
+    applyConditionalIndentation()
 }
 
 // move the current box up one position
@@ -279,6 +267,7 @@ function moveEditorDown(editorContainer) {
     applyConditionalIndentation()
 }
 
+// add event listeners to each button in an editor container
 function attachEditorEventListeners(editorContainer) {
 
     // handle keyboard shortcuts for formatting
@@ -293,10 +282,12 @@ function attachEditorEventListeners(editorContainer) {
     // add event listeners for formatting buttons
     const formatButtons = editorContainer.querySelectorAll(".format");
     formatButtons.forEach((button) => {
-        button.addEventListener("mousedown", (e) => {
-            e.preventDefault();
-            toggleFormat(button.id, editorContainer);
-        });
+        if (button.id != 'insertColor') {
+            button.addEventListener("mousedown", (e) => {
+                e.preventDefault();
+                toggleFormat(button.id, editorContainer);
+            });
+        }
     });
 
     // get the undo and redo buttons and add event listeners to them
@@ -320,38 +311,63 @@ function attachEditorEventListeners(editorContainer) {
     moveUpButton.addEventListener('click', () => moveEditorUp(editorContainer));
     moveDownButton.addEventListener('click', () => moveEditorDown(editorContainer));
 
-    // the colour palette open button and the palette itself
+    // get the color palette open button
     const colorSelector = editorContainer.querySelector('#insertColor');
 
+    // if the color selector exists, create and display the color palette
     if (colorSelector) {
         const colorPalette = createColorPalette(editorContainer);
         editorContainer.appendChild(colorPalette);
 
-        // listener to open the colour palette when the button is clicked
+        // add a listener to open the color palette when the button is clicked
         colorSelector.addEventListener('mousedown', (e) => {
             e.preventDefault();
+            colorSelector.classList.toggle('active', colorPalette.style.display === 'none');
             colorPalette.style.display = colorPalette.style.display === 'none' ? 'block' : 'none';
         });
     }
+
+    // get the buttons which exist only for conditional modules
+    const addConditionButton = editorContainer.querySelector('#addCondition');
+    const collapseConditionalButton = editorContainer.querySelector('#collapseConditional');
+
+    // if they exist, add event listeners to them
+    if (addConditionButton) {
+        addConditionButton.addEventListener('click', () => {
+            const newBranch = (createModule('Extra Conditional Branch'));
+            editorContainer.parentNode.insertBefore(newBranch, editorContainer.nextSibling);
+        });
+    }
+
+    if (collapseConditionalButton) {
+        collapseConditionalButton.addEventListener('click', () => {
+            editorContainer.dataset.collapsed = editorContainer.dataset.collapsed === 'true' ? 'false' : 'true';
+            applyConditionalIndentation();
+        });
+    }
+
 }
 
 // create and manage the color palette
 function createColorPalette(editorContainer) {
-    const colorPalettes = editorContainer.getElementsByClassName('color-palette');
 
+    // remove any existing color palettes
+    const colorPalettes = editorContainer.getElementsByClassName('color-palette');
     while (colorPalettes.length > 0) {
         colorPalettes[0].remove();
     }
 
+    // create the color palette container and make it invisible
     const colorPalette = document.createElement('div');
     colorPalette.className = 'color-palette';
     colorPalette.style.display = 'none';
+    colorPalette.style.padding = '10px';
 
     // create titles for each of the two rows of colors
     const baseColorTitle = document.createElement('div');
-    baseColorTitle.textContent = 'Default Minecraft Colours';
+    baseColorTitle.textContent = 'Default Minecraft colors';
     const customColorTitle = document.createElement('div');
-    customColorTitle.textContent = 'Custom Colours';
+    customColorTitle.textContent = 'Custom colors';
 
     // create the row of default color squares
     const baseColorRow = document.createElement('div');
@@ -369,37 +385,48 @@ function createColorPalette(editorContainer) {
     let customColors = JSON.parse(localStorage.getItem(CUSTOM_COLORS_KEY)) || [];
     displayCustomColors(customColors, customColorRow, editorContainer);
 
+    // add the titles and rows to the color palette separated by a line
     colorPalette.appendChild(baseColorTitle);
     colorPalette.appendChild(baseColorRow);
     colorPalette.appendChild(document.createElement('hr'));
     colorPalette.appendChild(customColorTitle);
     colorPalette.appendChild(customColorRow);
 
-    colorPalette.style.padding = '10px';
+    // return the color palette
     return colorPalette;
 }
 
 // create a color square for the color palette
 function createColorSquare(color, editorContainer) {
+
+    // add a solid box with the given color
     const colorSquare = document.createElement('div');
     colorSquare.className = 'color-square';
     colorSquare.style.backgroundColor = color;
+
+    // add an event listener to apply the color to the selected text and hide the color palette
     colorSquare.addEventListener('mousedown', (e) => {
         e.preventDefault();
         document.execCommand('foreColor', false, color);
         editorContainer.querySelector('.color-palette').style.display = 'none';
     });
+
+    // return the color square
     return colorSquare;
 }
 
 // add a custom color to the color palette
 function addCustomColor(customColorRow, editorContainer) {
+
+    // create an input element to select a custom color
     const colorInput = document.createElement('input');
     colorInput.type = 'color';
     colorInput.style.display = 'none';
     customColorRow.appendChild(colorInput);
     colorInput.click();
 
+
+    // add an event listener to apply the custom color to the selected text and save it
     colorInput.addEventListener('change', (e) => {
         const newColor = e.target.value;
         colorInput.remove();
@@ -441,20 +468,21 @@ function displayCustomColors(customColors, customColorRow, editorContainer) {
     });
 }
 
+// apply conditional indentation to each module in the script content
 function applyConditionalIndentation() {
+
+    // set the initial indentation level and collapse level
     let indentationLevel = 0;
     const modules = scriptContent.children;
     let collapseIndentationLevel = -1;
 
+    // iterate through each module and apply indentation
     for (let i = 0; i < modules.length; i++) {
         const module = modules[i];
         const moduleType = module.dataset.moduleType;
 
-        if (collapseIndentationLevel > -1) {
-            module.style.display = 'none';
-        } else {
-            module.style.display = 'block';
-        }
+        // if we're in "collapse mode" (when collapseIndentationLevel isn't -1) hide the module
+        module.style.display = (collapseIndentationLevel > -1) ? 'none' : 'block';
 
         if (moduleType === "Start of Conditional") {
             if (module.dataset.collapsed === 'true') {
