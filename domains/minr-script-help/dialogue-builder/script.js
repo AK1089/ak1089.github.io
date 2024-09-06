@@ -12,7 +12,12 @@ moduleSelector.addEventListener('change', function () {
     // get the value of the selector and create the appropriate module
     switch (this.value.toLowerCase()) {
         case 'dialogue':
-            createDialogueModule();
+            scriptContent.appendChild(createModule('Dialogue'));
+            break;
+        case 'conditional':
+            scriptContent.appendChild(createModule('Start of Conditional'));
+            scriptContent.appendChild(createModule('Default Branch'));
+            scriptContent.appendChild(createModule('End of Conditional'));
             break;
         default:
             break;
@@ -20,9 +25,10 @@ moduleSelector.addEventListener('change', function () {
 
     // reset the selector
     this.value = '';
+    applyConditionalIndentation()
 });
 
-function createDialogueModule() {
+function createModule(moduleName) {
 
     // create a container for the editor
     const editorContainer = document.createElement('div');
@@ -35,8 +41,9 @@ function createDialogueModule() {
     // add a title
     const title = document.createElement('span');
     title.className = 'editor-title';
-    title.textContent = 'Dialogue';
+    title.textContent = moduleName;
     toolbar.appendChild(title);
+    editorContainer.dataset.moduleType = moduleName;
 
     // create formatting options container
     const formattingOptions = document.createElement('div');
@@ -55,6 +62,10 @@ function createDialogueModule() {
 
     // create a button object for each option with the given ID
     buttons.forEach(button => {
+        if (moduleName != 'Dialogue') {
+            return;
+        }
+
         const btn = document.createElement('button');
         btn.id = button.id;
         btn.className = 'option-button';
@@ -68,6 +79,32 @@ function createDialogueModule() {
         btn.innerHTML = `<i class="fa-solid ${button.icon}"></i>`;
         formattingOptions.appendChild(btn);
     });
+
+    if (moduleName == 'Start of Conditional') {
+        const btn1 = document.createElement('button');
+        btn1.id = 'addCondition';
+        btn1.className = 'option-button';
+
+        const btn2 = document.createElement('button');
+        btn2.id = 'collapseConditional';
+        btn2.className = 'option-button';
+
+        // add the FontAwesome icon to the button
+        btn1.innerHTML = `<i class="fas fa-plus"></i>`;
+        formattingOptions.appendChild(btn1);
+        btn1.addEventListener('click', () => {
+            const newBranch = (createModule('Extra Conditional Branch'));
+            editorContainer.parentNode.insertBefore(newBranch, editorContainer.nextSibling);
+        });
+
+        // add the FontAwesome icon to the button
+        btn2.innerHTML = `<i class="fa-solid fa-circle-chevron-up"></i>`;
+        formattingOptions.appendChild(btn2);
+        btn2.addEventListener('click', () => {
+            editorContainer.dataset.collapsed = editorContainer.dataset.collapsed === 'true' ? 'false' : 'true';
+            applyConditionalIndentation();
+        });
+    }
 
     toolbar.appendChild(formattingOptions);
 
@@ -97,24 +134,27 @@ function createDialogueModule() {
     toolbar.appendChild(editorOptions);
     editorContainer.appendChild(toolbar);
 
-    // create a text editor element
-    const textInput = document.createElement('div');
-    textInput.id = 'text-input';
-    textInput.className = 'text-input';
-    textInput.contentEditable = true;
-
-    // handle keyboard shortcuts for formatting
-    textInput.addEventListener('keydown', handleKeyboardShortcuts);
-    textInput.addEventListener('mouseup', updateFormatButtons);
-    textInput.addEventListener('keyup', updateFormatButtons);
-
-    // add the toolbar and editor to the container and add the container to the script content
-    editorContainer.appendChild(toolbar);
-    editorContainer.appendChild(textInput);
-    scriptContent.appendChild(editorContainer);
+    if (moduleName == 'Dialogue') {
+        // create a text editor element
+        const textInput = document.createElement('div');
+        textInput.id = 'text-input';
+        textInput.className = 'text-input';
+        textInput.contentEditable = true;
+        editorContainer.appendChild(textInput);
+    } else if (moduleName == 'Extra Conditional Branch' || moduleName == 'Start of Conditional') {
+        // create a text editor element
+        const textInput = document.createElement('div');
+        textInput.id = 'text-input-basic';
+        textInput.className = 'text-input-basic';
+        textInput.contentEditable = true;
+        editorContainer.appendChild(textInput);
+    } else {
+        toolbar.style.borderRadius = '8px';
+    }
 
     updateFormatButtons(editorContainer);
     attachEditorEventListeners(editorContainer);
+    return editorContainer;
 }
 
 // toggle the format of the selected text and return focus to the editor
@@ -148,7 +188,6 @@ function updateFormatButtons(editorContainer) {
 
     // If we still don't have a valid editorContainer, exit the function
     if (!editorContainer || !(editorContainer instanceof Element)) {
-        console.warn('No valid editor container found');
         return;
     }
 
@@ -226,6 +265,7 @@ function moveEditorUp(editorContainer) {
             editorContainer.parentNode.appendChild(previousSibling);
         }
     }
+    applyConditionalIndentation()
 }
 
 // move the current box down one position
@@ -236,15 +276,19 @@ function moveEditorDown(editorContainer) {
     if (nextSibling && nextSibling.classList.contains('editor-container')) {
         editorContainer.parentNode.insertBefore(nextSibling, editorContainer);
     }
+    applyConditionalIndentation()
 }
 
 function attachEditorEventListeners(editorContainer) {
 
     // handle keyboard shortcuts for formatting
     const textInput = editorContainer.querySelector('#text-input');
-    textInput.addEventListener('keydown', handleKeyboardShortcuts);
-    textInput.addEventListener('mouseup', updateFormatButtons);
-    textInput.addEventListener('keyup', updateFormatButtons);
+
+    if (textInput) {
+        textInput.addEventListener('keydown', handleKeyboardShortcuts);
+        textInput.addEventListener('mouseup', updateFormatButtons);
+        textInput.addEventListener('keyup', updateFormatButtons);
+    }
 
     // add event listeners for formatting buttons
     const formatButtons = editorContainer.querySelectorAll(".format");
@@ -258,8 +302,11 @@ function attachEditorEventListeners(editorContainer) {
     // get the undo and redo buttons and add event listeners to them
     const undoButton = editorContainer.querySelector('#undo');
     const redoButton = editorContainer.querySelector('#redo');
-    undoButton.addEventListener("click", () => document.execCommand('undo', false, null));
-    redoButton.addEventListener("click", () => document.execCommand('redo', false, null));
+
+    if (undoButton && redoButton) {
+        undoButton.addEventListener("click", () => document.execCommand('undo', false, null));
+        redoButton.addEventListener("click", () => document.execCommand('redo', false, null));
+    }
 
     // get the editor option buttons
     const duplicateButton = editorContainer.querySelector('#duplicate');
@@ -275,14 +322,17 @@ function attachEditorEventListeners(editorContainer) {
 
     // the colour palette open button and the palette itself
     const colorSelector = editorContainer.querySelector('#insertColor');
-    const colorPalette = createColorPalette(editorContainer);
-    editorContainer.appendChild(colorPalette);
 
-    // listener to open the colour palette when the button is clicked
-    colorSelector.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        colorPalette.style.display = colorPalette.style.display === 'none' ? 'block' : 'none';
-    });
+    if (colorSelector) {
+        const colorPalette = createColorPalette(editorContainer);
+        editorContainer.appendChild(colorPalette);
+
+        // listener to open the colour palette when the button is clicked
+        colorSelector.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            colorPalette.style.display = colorPalette.style.display === 'none' ? 'block' : 'none';
+        });
+    }
 }
 
 // create and manage the color palette
@@ -292,7 +342,7 @@ function createColorPalette(editorContainer) {
     while (colorPalettes.length > 0) {
         colorPalettes[0].remove();
     }
-    
+
     const colorPalette = document.createElement('div');
     colorPalette.className = 'color-palette';
     colorPalette.style.display = 'none';
@@ -391,3 +441,49 @@ function displayCustomColors(customColors, customColorRow, editorContainer) {
     });
 }
 
+function applyConditionalIndentation() {
+    let indentationLevel = 0;
+    const modules = scriptContent.children;
+    let collapseIndentationLevel = -1;
+
+    for (let i = 0; i < modules.length; i++) {
+        const module = modules[i];
+        const moduleType = module.dataset.moduleType;
+
+        if (collapseIndentationLevel > -1) {
+            module.style.display = 'none';
+        } else {
+            module.style.display = 'block';
+        }
+
+        if (moduleType === "Start of Conditional") {
+            if (module.dataset.collapsed === 'true') {
+                collapseIndentationLevel = indentationLevel;
+                module.querySelector('#collapseConditional').innerHTML = `<i class="fa-solid fa-circle-chevron-down"></i>`;
+            } else {
+                module.querySelector('#collapseConditional').innerHTML = `<i class="fa-solid fa-circle-chevron-up"></i>`;
+            }
+        }
+
+        if (moduleType === "End of Conditional" && (collapseIndentationLevel == (indentationLevel - 1))) {
+            collapseIndentationLevel = -1;
+        }
+
+        if (moduleType === "End of Conditional" || moduleType.includes("Branch")) {
+            indentationLevel--;
+        }
+
+        // Apply indentation
+        if (indentationLevel > 0) {
+            module.classList.add('indented-module');
+            module.style.marginLeft = `${indentationLevel * 20}px`;
+        } else {
+            module.classList.remove('indented-module');
+            module.style.marginLeft = '0';
+        }
+
+        if (moduleType === "Start of Conditional" || moduleType.includes("Branch")) {
+            indentationLevel++;
+        }
+    }
+}

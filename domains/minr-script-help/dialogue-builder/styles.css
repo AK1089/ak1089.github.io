@@ -3,6 +3,10 @@
     font-family: 'ETBook';
     src: url('../../../styles/fonts/etbookot.woff2') format('woff2'),
 }
+@font-face {
+    font-family: 'Monaco';
+    src: url('../../../styles/fonts/monaco.woff') format('woff'),
+}
 
 /* Inherited from rest of website */
 body {
@@ -54,7 +58,6 @@ p {
 
 /* Each section */
 .editor-container {
-    border-radius: 8px;
     display: block;
     padding: 10px;
 }
@@ -71,11 +74,16 @@ p {
     border-radius: 8px 8px 0px 0px;
 }
 
-.formatting-options,
+.formatting-options {
+    display: flex;
+    gap: 10px;
+    margin-right: auto;
+}
+
 .editor-options {
     display: flex;
     gap: 10px;
-    float: right;
+    margin-left: auto;
 }
 
 /* Formatting for the buttons themselves */
@@ -121,10 +129,24 @@ p {
     outline: none;
 }
 
+.text-input-basic {
+    padding: 10px;
+    height: 30px;
+    overflow-y: auto;
+    background-color: #ddd;
+    font-family: 'Monaco', 'Courier New', Courier, monospace;
+    color: #000;
+    border-radius: 0px 0px 8px 8px;
+}
+
+.text-input-basic:focus {
+    outline: none;
+}
+
 /* Colour Palette */
 .color-palette {
     position: absolute;
-    background: #ddd;
+    background: #ddf;
     border: 1px solid #ccc;
     padding: 5px;
     z-index: 1000;
@@ -165,4 +187,8 @@ p {
 .add-color:hover {
     opacity: 0.8;
     filter: brightness(80%);
+}
+
+.indented-module {
+    border-left: 2px solid #666;
 }
