@@ -15,7 +15,6 @@ body {
     margin: 20px auto;
     width: 75%;
     background-color: rgb(233, 225, 212);
-    ;
     padding: 20px;
 }
 
@@ -49,7 +48,7 @@ p {
 
 /* Dropdown */
 #module-selector {
-    width: 100%;
+    width: auto;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
@@ -72,6 +71,7 @@ p {
     background-color: #f9f9f9;
     border-bottom: 1px solid #ddd;
     border-radius: 8px 8px 0px 0px;
+    font-size: 14pt;
 }
 
 .formatting-options {
@@ -123,6 +123,9 @@ p {
     font-family: 'Minecraft', serif;
     color: #fff;
     border-radius: 0px 0px 8px 8px;
+    white-space: 'nowrap';
+    overflow: 'hidden';
+    text-overflow: 'ellipsis';
 }
 
 .text-input:focus {
@@ -137,6 +140,9 @@ p {
     font-family: 'Monaco', 'Courier New', Courier, monospace;
     color: #000;
     border-radius: 0px 0px 8px 8px;
+    white-space: 'nowrap';
+    overflow: 'hidden';
+    text-overflow: 'ellipsis';
 }
 
 .text-input-basic:focus {
@@ -191,4 +197,33 @@ p {
 
 .indented-module {
     border-left: 2px solid #666;
+}
+.prompt-name,
+.prompt-timeout {
+    height: 28px;
+    font-size: 12pt;
+    font-family: 'Monaco', 'Courier New', Courier, monospace;
+    background-color: #f7f7f7;
+    margin-left: 2px;
+    border-radius: 4px;
+    border: 1px solid #999;
+}
+
+.prompt-name {
+    width: auto;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.prompt-timeout {
+    width: 50px;
+    background-color: #f7f7f7;
+}
+
+.time-unit-dropdown {
+    font-family: 'Monaco', 'Courier New', Courier, monospace;
+    background-color: #f7f7f7;
+    width: 80px;
+    border-radius: 4px;
+    border: 1px solid #999;
 }

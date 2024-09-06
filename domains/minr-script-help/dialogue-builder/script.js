@@ -6,6 +6,16 @@ const CUSTOM_COLORS_KEY = 'customColors';
 const moduleSelector = document.getElementById('module-selector');
 const scriptContent = document.getElementById('script-content');
 
+/* <select id="module-selector">
+<option value="">Add a script component</option>
+<option value="dialogue">Dialogue: display some text to the player</option>
+<option value="prompt">Prompt: get chat input from the player</option>
+<option value="delay">Delay: pause the script for a short time</option>
+<option value="variable">Variable: set a variable to some value</option>
+<option value="conditional">Conditional: do different things based on variables</option>
+<option value="return">Return: end the script early</option>
+</select> */
+
 // when the module selector is modified, create the appropriate module
 moduleSelector.addEventListener('change', function () {
 
@@ -18,6 +28,18 @@ moduleSelector.addEventListener('change', function () {
             scriptContent.appendChild(createModule('Start of Conditional'));
             scriptContent.appendChild(createModule('Default Branch'));
             scriptContent.appendChild(createModule('End of Conditional'));
+            break;
+        case 'return':
+            scriptContent.appendChild(createModule('End Script Execution'));
+            break;
+        case 'delay':
+            scriptContent.appendChild(createModule('Delay'));
+            break;
+        case 'prompt':
+            scriptContent.appendChild(createModule('Prompt'));
+            break;
+        case 'variable':
+            scriptContent.appendChild(createModule('Variable'));
             break;
         default:
             break;
@@ -62,6 +84,9 @@ function createModule(moduleType) {
         { id: 'strikethrough', icon: 'fa-strikethrough', availableFor: 'Dialogue', mode: 'toggle' },
         { id: 'insertColor', icon: 'fa-palette', availableFor: 'Dialogue', mode: 'toggle' },
 
+        { id: 'promptDetails', icon: 'fa-font', availableFor: 'Prompt', mode: 'none' },
+        { id: 'timeOutDetails', icon: 'fa-font', availableFor: 'Prompt, Delay', mode: 'none' },
+
         { id: 'collapseConditional', icon: 'fa-circle-chevron-down', availableFor: 'Start of Conditional', mode: 'none' },
         { id: 'addCondition', icon: 'fa-plus', availableFor: 'Start of Conditional, Extra Conditional Branch', mode: 'none' },
 
@@ -76,6 +101,39 @@ function createModule(moduleType) {
 
     // create a button object for each option with the given ID
     buttons.forEach(button => {
+
+        if (button.id === 'promptDetails' && button.availableFor.split(', ').includes(moduleType)) {
+            const variableName = document.createElement('input');
+            variableName.type = 'text';
+            variableName.placeholder = 'Variable Name';
+            variableName.className = 'prompt-name';
+            moduleSpecificOptions.appendChild(variableName);
+            return;
+        }
+
+        if (button.id === 'timeOutDetails' && button.availableFor.split(', ').includes(moduleType)) {
+            const timeOut = document.createElement('input');
+            timeOut.type = 'text';
+            timeOut.placeholder = 'Time';
+            timeOut.className = 'prompt-timeout';
+            moduleSpecificOptions.appendChild(timeOut);
+
+            const timeUnitDropdown = document.createElement('select');
+            timeUnitDropdown.className = 'time-unit-dropdown';
+
+            const secondsOption = document.createElement('option');
+            secondsOption.value = 'seconds';
+            secondsOption.textContent = 'Seconds';
+            timeUnitDropdown.appendChild(secondsOption);
+
+            const ticksOption = document.createElement('option');
+            ticksOption.value = 'ticks';
+            ticksOption.textContent = 'Ticks';
+            timeUnitDropdown.appendChild(ticksOption);
+
+            moduleSpecificOptions.appendChild(timeUnitDropdown);
+            return;
+        }
 
         // create a button element with the given ID and FontAwesome icon
         const btn = document.createElement('button');
@@ -115,6 +173,13 @@ function createModule(moduleType) {
         textInput.id = 'text-input-basic';
         textInput.className = 'text-input-basic';
         textInput.contentEditable = true;
+
+        textInput.addEventListener('paste', function(e) {
+            e.preventDefault();
+            var text = e.clipboardData.getData('text/plain');
+            document.execCommand('insertText', false, text);
+        });
+
         editorContainer.appendChild(textInput);
     } else {
         // round the bottom corners for consistency
@@ -124,6 +189,29 @@ function createModule(moduleType) {
     // set up all the buttons with starter highlights and event listeners
     updateFormatButtons(editorContainer);
     attachEditorEventListeners(editorContainer);
+
+    if (moduleType == 'Start of Conditional') {
+        editorContainer.dataset.collapsed = 'false';
+    }
+
+    switch (moduleType) {
+        case 'End Script Execution':
+            toolbar.style.backgroundColor = '#FFF3F3';
+            toolbar.style.border = '1px solid #222222';
+            break;
+        case 'Delay':
+            toolbar.style.backgroundColor = '#F3FFF3';
+            toolbar.style.border = '1px solid #222222';
+            break;
+        case 'Prompt':
+            toolbar.style.backgroundColor = '#FFFFF3';
+            toolbar.style.border = '1px solid #222222';
+            break;
+        case 'Variable':
+            toolbar.style.backgroundColor = '#F3F3FF';
+            toolbar.style.border = '1px solid #222222';
+            break;
+    }
 
     // return the editor container
     return editorContainer;
@@ -199,10 +287,6 @@ function handleKeyboardShortcuts(event) {
             case 'u':
                 event.preventDefault(); toggleFormat('underline', event.target.closest('.editor-container')); break;
 
-            // duplicate the current module
-            case 'd':
-                event.preventDefault(); duplicateEditor(event.target.closest('.editor-container')); break;
-
             // open/close the color palette selector
             case 'p':
 
@@ -222,6 +306,10 @@ function handleKeyboardShortcuts(event) {
                 event.preventDefault(); moveEditorUp(event.target.closest('.editor-container')); break;
             case 'arrowdown':
                 event.preventDefault(); moveEditorDown(event.target.closest('.editor-container')); break;
+            
+            // duplicate the current module
+            case 'd':
+                event.preventDefault(); duplicateEditor(event.target.closest('.editor-container')); break;
         }
     }
 }
@@ -286,13 +374,9 @@ function moveEditorDown(editorContainer) {
 function attachEditorEventListeners(editorContainer) {
 
     // handle keyboard shortcuts for formatting
-    const textInput = editorContainer.querySelector('#text-input');
-
-    if (textInput) {
-        textInput.addEventListener('keydown', handleKeyboardShortcuts);
-        textInput.addEventListener('mouseup', updateFormatButtons);
-        textInput.addEventListener('keyup', updateFormatButtons);
-    }
+    editorContainer.addEventListener('keydown', handleKeyboardShortcuts);
+    editorContainer.addEventListener('mouseup', updateFormatButtons);
+    editorContainer.addEventListener('keyup', updateFormatButtons);
 
     // add event listeners for formatting buttons
     const formatButtons = editorContainer.querySelectorAll(".format");
