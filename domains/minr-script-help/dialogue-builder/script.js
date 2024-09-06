@@ -62,16 +62,16 @@ function createModule(moduleType) {
         { id: 'strikethrough', icon: 'fa-strikethrough', availableFor: 'Dialogue', mode: 'toggle' },
         { id: 'insertColor', icon: 'fa-palette', availableFor: 'Dialogue', mode: 'toggle' },
 
-        { id: 'collapseConditional', icon: 'fa-circle-chevron-up', availableFor: 'Start of Conditional', mode: 'none' },
+        { id: 'collapseConditional', icon: 'fa-circle-chevron-down', availableFor: 'Start of Conditional', mode: 'none' },
         { id: 'addCondition', icon: 'fa-plus', availableFor: 'Start of Conditional, Extra Conditional Branch', mode: 'none' },
 
         { id: 'undo', icon: 'fa-rotate-left', availableFor: 'Dialogue, Start of Conditional, Extra Conditional Branch', mode: 'none' },
         { id: 'redo', icon: 'fa-rotate-right', availableFor: 'Dialogue, Start of Conditional, Extra Conditional Branch', mode: 'none' },
 
+        { id: 'moveUp', icon: 'fa-arrow-up', title: 'Move Up', availableFor: 'all', mode: 'editor' },
+        { id: 'moveDown', icon: 'fa-arrow-down', title: 'Move Down', availableFor: 'all', mode: 'editor' },
         { id: 'duplicate', icon: 'fa-copy', title: 'Duplicate', availableFor: 'all', mode: 'editor' },
         { id: 'delete', icon: 'fa-trash', title: 'Delete', availableFor: 'all', mode: 'editor' },
-        { id: 'moveUp', icon: 'fa-arrow-up', title: 'Move Up', availableFor: 'all', mode: 'editor' },
-        { id: 'moveDown', icon: 'fa-arrow-down', title: 'Move Down', availableFor: 'all', mode: 'editor' }
     ];
 
     // create a button object for each option with the given ID
@@ -253,6 +253,12 @@ function moveEditorUp(editorContainer) {
             editorContainer.parentNode.appendChild(previousSibling);
         }
     }
+
+    // if this is the start of a conditional block, uncollapse it
+    if (editorContainer.dataset.moduleType === 'Start of Conditional') {
+        editorContainer.dataset.collapsed = 'false';
+    }
+
     applyConditionalIndentation()
 }
 
@@ -264,6 +270,15 @@ function moveEditorDown(editorContainer) {
     if (nextSibling && nextSibling.classList.contains('editor-container')) {
         editorContainer.parentNode.insertBefore(nextSibling, editorContainer);
     }
+
+    // if this is the start of a conditional block or is moving into one, uncollapse it
+    if (editorContainer.dataset.moduleType === 'Start of Conditional') {
+        editorContainer.dataset.collapsed = 'false';
+    }
+    if (nextSibling.dataset.moduleType === 'Start of Conditional') {
+        nextSibling.dataset.collapsed = 'false';
+    }
+
     applyConditionalIndentation()
 }
 
@@ -474,42 +489,50 @@ function applyConditionalIndentation() {
     // set the initial indentation level and collapse level
     let indentationLevel = 0;
     const modules = scriptContent.children;
-    let collapseIndentationLevel = -1;
+    let collapseIndentationLevel = [];
 
     // iterate through each module and apply indentation
     for (let i = 0; i < modules.length; i++) {
         const module = modules[i];
         const moduleType = module.dataset.moduleType;
 
-        // if we're in "collapse mode" (when collapseIndentationLevel isn't -1) hide the module
-        module.style.display = (collapseIndentationLevel > -1) ? 'none' : 'block';
+        // if we're in "collapse mode" (when collapseIndentationLevel isn't empty) hide the module
+        module.style.display = (collapseIndentationLevel.length > 0) ? 'none' : 'block';
 
+        // if the module is the start of a conditional block, set whether its children are collapsed
         if (moduleType === "Start of Conditional") {
+
+            // if they are, then add the current indentation level to the collapse stack and set the icon
             if (module.dataset.collapsed === 'true') {
-                collapseIndentationLevel = indentationLevel;
-                module.querySelector('#collapseConditional').innerHTML = `<i class="fa-solid fa-circle-chevron-down"></i>`;
-            } else {
+                collapseIndentationLevel.push(indentationLevel);
                 module.querySelector('#collapseConditional').innerHTML = `<i class="fa-solid fa-circle-chevron-up"></i>`;
+            } else {
+                module.querySelector('#collapseConditional').innerHTML = `<i class="fa-solid fa-circle-chevron-down"></i>`;
             }
         }
 
-        if (moduleType === "End of Conditional" && (collapseIndentationLevel == (indentationLevel - 1))) {
-            collapseIndentationLevel = -1;
+        // if the module is the end of a conditional block, remove the last indentation level from the stack
+        if (moduleType === "End of Conditional" && (collapseIndentationLevel[collapseIndentationLevel.length - 1] == (indentationLevel - 1))) {
+            collapseIndentationLevel.pop();
         }
 
+        // if the module is the end of a conditional block, dedent 1 level
+        // if it's a branch, also dedent 1 level (this will be temporary)
         if (moduleType === "End of Conditional" || moduleType.includes("Branch")) {
             indentationLevel--;
         }
 
-        // Apply indentation
+        // apply the actual indentation
         if (indentationLevel > 0) {
             module.classList.add('indented-module');
-            module.style.marginLeft = `${indentationLevel * 20}px`;
+            module.style.marginLeft = `${indentationLevel * 30}px`;
         } else {
             module.classList.remove('indented-module');
             module.style.marginLeft = '0';
         }
 
+        // if the module is the start of a conditional block, indent 1 level
+        // if it's a branch, indent back 1 level (this fixes the temporary dedent)
         if (moduleType === "Start of Conditional" || moduleType.includes("Branch")) {
             indentationLevel++;
         }
