@@ -93,6 +93,7 @@ function createModule(moduleType) {
         { id: 'undo', icon: 'fa-rotate-left', availableFor: 'Dialogue, Start of Conditional, Extra Conditional Branch', mode: 'none' },
         { id: 'redo', icon: 'fa-rotate-right', availableFor: 'Dialogue, Start of Conditional, Extra Conditional Branch', mode: 'none' },
 
+        { id: 'export', icon: 'fa-arrow-up-right-from-square', title: 'Export', availableFor: 'all', mode: 'editor' },
         { id: 'moveUp', icon: 'fa-arrow-up', title: 'Move Up', availableFor: 'all', mode: 'editor' },
         { id: 'moveDown', icon: 'fa-arrow-down', title: 'Move Down', availableFor: 'all', mode: 'editor' },
         { id: 'duplicate', icon: 'fa-copy', title: 'Duplicate', availableFor: 'all', mode: 'editor' },
@@ -102,6 +103,7 @@ function createModule(moduleType) {
     // create a button object for each option with the given ID
     buttons.forEach(button => {
 
+        // if the button is for prompt details, add a text input for the variable name
         if (button.id === 'promptDetails' && button.availableFor.split(', ').includes(moduleType)) {
             const variableName = document.createElement('input');
             variableName.type = 'text';
@@ -111,23 +113,28 @@ function createModule(moduleType) {
             return;
         }
 
+        // if the button is for time out details, add an input for the time out value
         if (button.id === 'timeOutDetails' && button.availableFor.split(', ').includes(moduleType)) {
+
+            // create a text input for the time out value quantity
             const timeOut = document.createElement('input');
             timeOut.type = 'text';
             timeOut.placeholder = 'Time';
             timeOut.className = 'prompt-timeout';
             moduleSpecificOptions.appendChild(timeOut);
 
+            // create a dropdown for the time unit
             const timeUnitDropdown = document.createElement('select');
             timeUnitDropdown.className = 'time-unit-dropdown';
 
+            // add options for each time unit available (seconds, ticks)
             const secondsOption = document.createElement('option');
-            secondsOption.value = 'seconds';
+            secondsOption.value = 's';
             secondsOption.textContent = 'Seconds';
             timeUnitDropdown.appendChild(secondsOption);
 
             const ticksOption = document.createElement('option');
-            ticksOption.value = 'ticks';
+            ticksOption.value = '';
             ticksOption.textContent = 'Ticks';
             timeUnitDropdown.appendChild(ticksOption);
 
@@ -168,17 +175,13 @@ function createModule(moduleType) {
         textInput.className = 'text-input';
         textInput.contentEditable = true;
         editorContainer.appendChild(textInput);
-    } else if (moduleType == 'Extra Conditional Branch' || moduleType == 'Start of Conditional') {
-        const textInput = document.createElement('div');
+    } else if (moduleType == 'Extra Conditional Branch' || moduleType == 'Start of Conditional' || moduleType == 'Variable') {
+        const textInput = document.createElement('textarea');
         textInput.id = 'text-input-basic';
         textInput.className = 'text-input-basic';
-        textInput.contentEditable = true;
-
-        textInput.addEventListener('paste', function(e) {
-            e.preventDefault();
-            var text = e.clipboardData.getData('text/plain');
-            document.execCommand('insertText', false, text);
-        });
+        textInput.rows = 1; // Restrict to one row
+        textInput.style.resize = 'none'; // Prevent resizing
+        editorContainer.appendChild(textInput);
 
         editorContainer.appendChild(textInput);
     } else {
@@ -200,7 +203,7 @@ function createModule(moduleType) {
             toolbar.style.border = '1px solid #222222';
             break;
         case 'Delay':
-            toolbar.style.backgroundColor = '#F3FFF3';
+            toolbar.style.backgroundColor = '#F3F3FF';
             toolbar.style.border = '1px solid #222222';
             break;
         case 'Prompt':
@@ -208,8 +211,7 @@ function createModule(moduleType) {
             toolbar.style.border = '1px solid #222222';
             break;
         case 'Variable':
-            toolbar.style.backgroundColor = '#F3F3FF';
-            toolbar.style.border = '1px solid #222222';
+            toolbar.style.backgroundColor = '#F3FFF3';
             break;
     }
 
@@ -310,6 +312,13 @@ function handleKeyboardShortcuts(event) {
             // duplicate the current module
             case 'd':
                 event.preventDefault(); duplicateEditor(event.target.closest('.editor-container')); break;
+            
+            // export the current module
+            case 'e':
+                event.preventDefault();
+                const result = exportModule(event.target.closest('.editor-container'));
+                navigator.clipboard.writeText(result);
+                break;
         }
     }
 }
@@ -399,12 +408,14 @@ function attachEditorEventListeners(editorContainer) {
     }
 
     // get the editor option buttons
+    const exportButton = editorContainer.querySelector('#export');
     const duplicateButton = editorContainer.querySelector('#duplicate');
     const deleteButton = editorContainer.querySelector('#delete');
     const moveUpButton = editorContainer.querySelector('#moveUp');
     const moveDownButton = editorContainer.querySelector('#moveDown');
 
     // add event listeners to them
+    exportButton.addEventListener('click', () => navigator.clipboard.writeText(exportModule(editorContainer)));
     duplicateButton.addEventListener('click', () => duplicateEditor(editorContainer));
     deleteButton.addEventListener('click', () => deleteEditor(editorContainer));
     moveUpButton.addEventListener('click', () => moveEditorUp(editorContainer));
@@ -621,4 +632,53 @@ function applyConditionalIndentation() {
             indentationLevel++;
         }
     }
+}
+
+// generate a script line based on the contents of the provided module
+function exportModule(editorContainer) {
+
+    // get the module type and return the appropriate script line
+    switch (editorContainer.dataset.moduleType) {
+
+        // for dialogue, handle everything in a specific function
+        case 'Dialogue':
+            return parseRichTextSyntax(editorContainer.querySelector('.text-input').innerHTML);
+
+        // for prompts, get the appropriate syntax based on the items in the prompt specifier
+        case 'Prompt':
+            const promptTimeOut = editorContainer.querySelector(".prompt-timeout").value;
+            const promptTimeOutUnits = editorContainer.querySelector(".time-unit-dropdown").value;
+            const promptVariableName = editorContainer.querySelector(".prompt-name").value;
+            return `@prompt ${promptTimeOut}${promptTimeOutUnits} ${promptVariableName} Prompt expired.`;
+
+        // for delays, do the same
+        case 'Delay':
+            const delayTimeOut = editorContainer.querySelector(".prompt-timeout").value;
+            const delayTimeOutUnits = editorContainer.querySelector(".time-unit-dropdown").value;
+            return `@delay ${delayTimeOut}${delayTimeOutUnits}`;
+
+        // for variables, we just use @var and then the specified content: defines will come later
+        case 'Variable':
+            return '@var ' + editorContainer.querySelector(".text-input-basic").value;
+
+        // if and elseif use the raw condition provided in brackets
+        case 'Start of Conditional':
+            return '@if (' + editorContainer.querySelector(".text-input-basic").value + ')';
+        case 'Extra Conditional Branch':
+            return '@elseif (' + editorContainer.querySelector(".text-input-basic").value + ')';
+
+        // the other three types of module are always the same since they have no specific data
+        case 'Default Branch':
+            return '@else';
+        case 'End of Conditional':
+            return '@fi';
+        case 'End Script Execution':
+            return '@return';
+        default:
+            return '';
+    }
+}
+
+function parseRichTextSyntax(text) {
+    return '@player ' + text;
 }

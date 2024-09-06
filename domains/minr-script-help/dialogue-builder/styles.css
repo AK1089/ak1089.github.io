@@ -134,7 +134,7 @@ p {
 
 .text-input-basic {
     padding: 10px;
-    height: 30px;
+    height: 50px;
     overflow-y: auto;
     background-color: #ddd;
     font-family: 'Monaco', 'Courier New', Courier, monospace;
@@ -143,6 +143,12 @@ p {
     white-space: 'nowrap';
     overflow: 'hidden';
     text-overflow: 'ellipsis';
+    font-size: 12pt;
+    line-height: 1.5;
+    width: 100%; /* Make it full width */
+    box-sizing: border-box; /* Include padding in width calculation */
+    display: block; /* Ensure it's treated as a block element */
+    border: none; /* Remove the default textarea border */
 }
 
 .text-input-basic:focus {
