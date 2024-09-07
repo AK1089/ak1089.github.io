@@ -88,7 +88,7 @@ function createModule(moduleType) {
         { id: 'loopIteration', icon: 'fa-font', availableFor: 'Start of Loop', mode: 'none' },
 
         { id: 'collapseConditional', icon: 'fa-circle-chevron-down', availableFor: 'Start of Conditional, Start of Loop', mode: 'none' },
-        { id: 'addCondition', icon: 'fa-plus', availableFor: 'Start of Conditional, Extra Conditional Branch, Start of Loop', mode: 'none' },
+        { id: 'addCondition', icon: 'fa-plus', availableFor: 'Start of Conditional, Extra Conditional Branch', mode: 'none' },
 
         { id: 'undo', icon: 'fa-rotate-left', availableFor: 'Dialogue, Start of Conditional, Extra Conditional Branch, Minecraft Command, Variable', mode: 'none' },
         { id: 'redo', icon: 'fa-rotate-right', availableFor: 'Dialogue, Start of Conditional, Extra Conditional Branch, Minecraft Command, Variable', mode: 'none' },
@@ -802,9 +802,20 @@ function exportScript() {
 
     // get the script content and create an array to store the lines
     const scriptContent = document.getElementById('script-content');
-    let scriptText = '# This script was generated using AK\'s Script Builder tool\n\n§VARIABLES\n';
+    let scriptText = '# This script was generated using AK\'s Script Builder tool\n';
     let scriptVariables = [];
     let newScriptLine = '';
+
+    // add a cooldown if the toggle is checked and a time is provided
+    const cooldownToggle = document.getElementById('cooldown-toggle');
+    const timeInput = document.getElementById('cooldown-time').value;
+
+    if (cooldownToggle.checked && timeInput) {
+        scriptText += `${document.getElementById('cooldown-mode').value} ${timeInput}${document.getElementById('cooldown-unit').value}\n`;
+    }
+
+    // add a section for variables
+    scriptText += '\n§VARIABLES\n';
 
     // control indentation levels
     let indentationLevel = 0;
@@ -877,3 +888,28 @@ function exportScript() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
+
+// bind the elements of the cooldown panel to have listeners
+function setupCooldownControls() {
+
+    // get the elements of the cooldown panel
+    const cooldownToggle = document.getElementById('cooldown-toggle');
+    const cooldownModeDropdown = document.getElementById('cooldown-mode');
+    const timeInput = document.getElementById('cooldown-time');
+    const timeUnitDropdown = document.getElementById('cooldown-unit');
+
+    // add an event listener to toggle additional controls
+    cooldownToggle.addEventListener('change', function () {
+        cooldownModeDropdown.style.display = this.checked ? 'inline-block' : 'none';
+        timeInput.style.display = this.checked ? 'inline-block' : 'none';
+        timeUnitDropdown.style.display = this.checked ? 'inline-block' : 'none';
+    });
+
+    // set the initial state of the controls
+    cooldownToggle.checked = false;
+    cooldownModeDropdown.style.display = 'none';
+    timeInput.style.display = 'none';
+    timeUnitDropdown.style.display = 'none';
+}
+
+setupCooldownControls()

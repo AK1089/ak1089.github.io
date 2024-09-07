@@ -50,10 +50,14 @@ p {
 /* Dropdown */
 #module-selector {
     width: auto;
+    height: 50px;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 12pt;
 }
 
 /* Each section */
@@ -147,13 +151,9 @@ p {
     font-size: 12pt;
     line-height: 1.5;
     width: 100%;
-    /* Make it full width */
     box-sizing: border-box;
-    /* Include padding in width calculation */
     display: block;
-    /* Ensure it's treated as a block element */
     border: none;
-    /* Remove the default textarea border */
 }
 
 .text-input-basic:focus {
@@ -250,4 +250,104 @@ p {
     width: 80px;
     border-radius: 4px;
     border: 1px solid #999;
+}
+
+.cooldown-controls {
+    height: 30px;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    align-items: center;
+    display: inline-flex;
+    font-family: 'Arial', sans-serif;
+    font-size: 12pt;
+}
+
+#cooldown-time {
+    height: 30px;
+    font-size: 11pt;
+    font-family: 'Monaco', 'Courier New', Courier, monospace;
+    background-color: #f7f7f7;
+    margin-left: 2px;
+    border-radius: 4px;
+    border: 1px solid #999;
+    margin-right: 10px;
+    width: 50px;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 17px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #4CAF50;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #4CAF50;
+}
+
+input:checked+.slider:before {
+    transform: translateX(13px);
+}
+
+#cooldown-mode, #cooldown-unit {
+    width: auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    gap: 10px;
+    margin-right: 10px;
+}
+
+#export-script {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #444;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #23bb0f;
+    height: 50px;
+    font-family: 'Arial', sans-serif;
+    font-size: 12pt;
+    color: #fff;
+}
+
+#export-script:hover {
+    background-color: #1e9c0d;
 }

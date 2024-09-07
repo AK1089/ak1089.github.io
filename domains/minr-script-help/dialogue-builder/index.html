@@ -27,18 +27,39 @@
                 and so on.</p>
 
             <div id="control-panel">
-            <select id="module-selector">
-                <option value="">Add a script component</option>
-                <option value="dialogue">Dialogue: display some text to the player</option>
-                <option value="prompt">Prompt: get chat input from the player</option>
-                <option value="delay">Delay: pause the script for a short time</option>
-                <option value="command">Command: execute a Minecraft command</option>
-                <option value="variable">Variable: set a variable to some value</option>
-                <option value="conditional">Conditional: do different things based on variables</option>
-                <option value="loop">Loop: execute a block of code multiple times</option>
-                <option value="return">Return: end the script early</option>
-            </select>
-            <button id="export-script">Export Script</button>
+                <button id="export-script">Export Script</button>
+                <select id="module-selector">
+                    <option value="">Add a script component</option>
+                    <option value="dialogue">Dialogue: display some text to the player</option>
+                    <option value="prompt">Prompt: get chat input from the player</option>
+                    <option value="delay">Delay: pause the script for a short time</option>
+                    <option value="command">Command: execute a Minecraft command</option>
+                    <option value="variable">Variable: set a variable to some value</option>
+                    <option value="conditional">Conditional: do different things based on variables</option>
+                    <option value="loop">Loop: execute a block of code multiple times</option>
+                    <option value="return">Return: end the script early</option>
+                </select>
+                <span id="cooldown-container" class="cooldown-controls">
+                    <span style="margin-right: 10px;">Cooldown</span>
+                    <label class="toggle-switch" for="cooldown-toggle" style="margin-right: 10px;">
+                        <input type="checkbox" id="cooldown-toggle">
+                        <span class="slider"></span>
+                    </label>
+
+                    <select id="cooldown-mode">
+                        <option value="@cooldown">Per Player</option>
+                        <option value="@global_cooldown">Global</option>
+                    </select>
+
+                    <input type="text" id="cooldown-time" placeholder="Time">
+
+                    <select id="cooldown-unit">
+                        <option value="s">Seconds</option>
+                        <option value="">Ticks</option>
+                        <option value="m">Minutes</option>
+                        <option value="h">Hours</option>
+                    </select>
+                </span>
             </div>
 
             <div id="script-content"></div>
