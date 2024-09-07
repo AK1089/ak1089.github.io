@@ -3,6 +3,7 @@
     font-family: 'ETBook';
     src: url('../../../styles/fonts/etbookot.woff2') format('woff2'),
 }
+
 @font-face {
     font-family: 'Monaco';
     src: url('../../../styles/fonts/monaco.woff') format('woff'),
@@ -145,10 +146,14 @@ p {
     text-overflow: 'ellipsis';
     font-size: 12pt;
     line-height: 1.5;
-    width: 100%; /* Make it full width */
-    box-sizing: border-box; /* Include padding in width calculation */
-    display: block; /* Ensure it's treated as a block element */
-    border: none; /* Remove the default textarea border */
+    width: 100%;
+    /* Make it full width */
+    box-sizing: border-box;
+    /* Include padding in width calculation */
+    display: block;
+    /* Ensure it's treated as a block element */
+    border: none;
+    /* Remove the default textarea border */
 }
 
 .text-input-basic:focus {
@@ -204,6 +209,8 @@ p {
 .indented-module {
     border-left: 2px solid #666;
 }
+
+.loop-counter,
 .prompt-name,
 .prompt-timeout {
     height: 28px;
@@ -215,6 +222,12 @@ p {
     border: 1px solid #999;
 }
 
+.loop-counter:focus,
+.prompt-name:focus,
+.prompt-timeout:focus {
+    outline: 1px solid #222;
+}
+
 .prompt-name {
     width: auto;
     margin-right: 10px;
@@ -223,6 +236,11 @@ p {
 
 .prompt-timeout {
     width: 50px;
+    background-color: #f7f7f7;
+}
+
+.loop-counter {
+    width: 80px;
     background-color: #f7f7f7;
 }
 

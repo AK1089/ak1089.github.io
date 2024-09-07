@@ -1,20 +1,10 @@
 // store the colors
-const BASE_COLORS = ["#AA0000", "#FF5555", "#FFAA00", "#FFFF55", "#00AA00", "#55FF55", "#55FFFF", "#00AAAA", "#0000AA", "#5555FF", "#FF55FF", "#AA00AA", "#FFFFFF", "#AAAAAA", "#555555", "#000000"];
+const BASE_COLORS = ['#AA0000', '#FF5555', '#FFAA00', '#FFFF55', '#00AA00', '#55FF55', '#55FFFF', '#00AAAA', '#0000AA', '#5555FF', '#FF55FF', '#AA00AA', '#FFFFFF', '#AAAAAA', '#555555', '#000000'];
 const CUSTOM_COLORS_KEY = 'customColors';
 
-// the "add a new module" selector and the div to hold components
+// the 'add a new module' selector and the div to hold components
 const moduleSelector = document.getElementById('module-selector');
 const scriptContent = document.getElementById('script-content');
-
-/* <select id="module-selector">
-<option value="">Add a script component</option>
-<option value="dialogue">Dialogue: display some text to the player</option>
-<option value="prompt">Prompt: get chat input from the player</option>
-<option value="delay">Delay: pause the script for a short time</option>
-<option value="variable">Variable: set a variable to some value</option>
-<option value="conditional">Conditional: do different things based on variables</option>
-<option value="return">Return: end the script early</option>
-</select> */
 
 // when the module selector is modified, create the appropriate module
 moduleSelector.addEventListener('change', function () {
@@ -28,6 +18,10 @@ moduleSelector.addEventListener('change', function () {
             scriptContent.appendChild(createModule('Start of Conditional'));
             scriptContent.appendChild(createModule('Default Branch'));
             scriptContent.appendChild(createModule('End of Conditional'));
+            break;
+        case 'loop':
+            scriptContent.appendChild(createModule('Start of Loop'));
+            scriptContent.appendChild(createModule('End of Loop'));
             break;
         case 'return':
             scriptContent.appendChild(createModule('End Script Execution'));
@@ -86,9 +80,10 @@ function createModule(moduleType) {
 
         { id: 'promptDetails', icon: 'fa-font', availableFor: 'Prompt', mode: 'none' },
         { id: 'timeOutDetails', icon: 'fa-font', availableFor: 'Prompt, Delay', mode: 'none' },
+        { id: 'loopIteration', icon: 'fa-font', availableFor: 'Start of Loop', mode: 'none' },
 
-        { id: 'collapseConditional', icon: 'fa-circle-chevron-down', availableFor: 'Start of Conditional', mode: 'none' },
-        { id: 'addCondition', icon: 'fa-plus', availableFor: 'Start of Conditional, Extra Conditional Branch', mode: 'none' },
+        { id: 'collapseConditional', icon: 'fa-circle-chevron-down', availableFor: 'Start of Conditional, Start of Loop', mode: 'none' },
+        { id: 'addCondition', icon: 'fa-plus', availableFor: 'Start of Conditional, Extra Conditional Branch, Start of Loop', mode: 'none' },
 
         { id: 'undo', icon: 'fa-rotate-left', availableFor: 'Dialogue, Start of Conditional, Extra Conditional Branch', mode: 'none' },
         { id: 'redo', icon: 'fa-rotate-right', availableFor: 'Dialogue, Start of Conditional, Extra Conditional Branch', mode: 'none' },
@@ -142,6 +137,25 @@ function createModule(moduleType) {
             return;
         }
 
+        // if the button is for counting loop iterations, add a text input for the number
+        if (button.id === 'loopIteration' && button.availableFor.split(', ').includes(moduleType)) {
+
+            // create a text input for the name of the iteration variable
+            const variableName = document.createElement('input');
+            variableName.type = 'text';
+            variableName.placeholder = 'Variable Name';
+            variableName.className = 'prompt-name';
+            moduleSpecificOptions.appendChild(variableName);
+
+            // create a text input for the number of iterations
+            const loopCounter = document.createElement('input');
+            loopCounter.type = 'text';
+            loopCounter.placeholder = 'Repeats';
+            loopCounter.className = 'loop-counter';
+            moduleSpecificOptions.appendChild(loopCounter);
+            return;
+        }
+
         // create a button element with the given ID and FontAwesome icon
         const btn = document.createElement('button');
         btn.id = button.id;
@@ -179,8 +193,8 @@ function createModule(moduleType) {
         const textInput = document.createElement('textarea');
         textInput.id = 'text-input-basic';
         textInput.className = 'text-input-basic';
-        textInput.rows = 1; // Restrict to one row
-        textInput.style.resize = 'none'; // Prevent resizing
+        textInput.rows = 1;
+        textInput.style.resize = 'none';
         editorContainer.appendChild(textInput);
 
         editorContainer.appendChild(textInput);
@@ -193,7 +207,7 @@ function createModule(moduleType) {
     updateFormatButtons(editorContainer);
     attachEditorEventListeners(editorContainer);
 
-    if (moduleType == 'Start of Conditional') {
+    if (moduleType == 'Start of Conditional' || moduleType == 'Start of Loop') {
         editorContainer.dataset.collapsed = 'false';
     }
 
@@ -255,7 +269,7 @@ function updateFormatButtons(editorContainer) {
     }
 
     // get the format buttons in the toolbar of the editor container
-    const formatButtons = editorContainer.querySelectorAll(".format");
+    const formatButtons = editorContainer.querySelectorAll('.format');
 
     // for each format button, toggle the active state based on the current
     formatButtons.forEach((button) => {
@@ -308,11 +322,11 @@ function handleKeyboardShortcuts(event) {
                 event.preventDefault(); moveEditorUp(event.target.closest('.editor-container')); break;
             case 'arrowdown':
                 event.preventDefault(); moveEditorDown(event.target.closest('.editor-container')); break;
-            
+
             // duplicate the current module
             case 'd':
                 event.preventDefault(); duplicateEditor(event.target.closest('.editor-container')); break;
-            
+
             // export the current module
             case 'e':
                 event.preventDefault();
@@ -388,10 +402,10 @@ function attachEditorEventListeners(editorContainer) {
     editorContainer.addEventListener('keyup', updateFormatButtons);
 
     // add event listeners for formatting buttons
-    const formatButtons = editorContainer.querySelectorAll(".format");
+    const formatButtons = editorContainer.querySelectorAll('.format');
     formatButtons.forEach((button) => {
         if (button.id != 'insertColor') {
-            button.addEventListener("mousedown", (e) => {
+            button.addEventListener('mousedown', (e) => {
                 e.preventDefault();
                 toggleFormat(button.id, editorContainer);
             });
@@ -403,8 +417,8 @@ function attachEditorEventListeners(editorContainer) {
     const redoButton = editorContainer.querySelector('#redo');
 
     if (undoButton && redoButton) {
-        undoButton.addEventListener("click", () => document.execCommand('undo', false, null));
-        redoButton.addEventListener("click", () => document.execCommand('redo', false, null));
+        undoButton.addEventListener('click', () => document.execCommand('undo', false, null));
+        redoButton.addEventListener('click', () => document.execCommand('redo', false, null));
     }
 
     // get the editor option buttons
@@ -595,7 +609,7 @@ function applyConditionalIndentation() {
         module.style.display = (collapseIndentationLevel.length > 0) ? 'none' : 'block';
 
         // if the module is the start of a conditional block, set whether its children are collapsed
-        if (moduleType === "Start of Conditional") {
+        if (moduleType === 'Start of Conditional' || moduleType === 'Start of Loop') {
 
             // if they are, then add the current indentation level to the collapse stack and set the icon
             if (module.dataset.collapsed === 'true') {
@@ -607,13 +621,13 @@ function applyConditionalIndentation() {
         }
 
         // if the module is the end of a conditional block, remove the last indentation level from the stack
-        if (moduleType === "End of Conditional" && (collapseIndentationLevel[collapseIndentationLevel.length - 1] == (indentationLevel - 1))) {
+        if ((moduleType === 'End of Conditional' || moduleType === 'End of Loop') && (collapseIndentationLevel[collapseIndentationLevel.length - 1] == (indentationLevel - 1))) {
             collapseIndentationLevel.pop();
         }
 
         // if the module is the end of a conditional block, dedent 1 level
         // if it's a branch, also dedent 1 level (this will be temporary)
-        if (moduleType === "End of Conditional" || moduleType.includes("Branch")) {
+        if (moduleType === 'End of Conditional' || moduleType === 'End of Loop' || moduleType.includes('Branch')) {
             indentationLevel--;
         }
 
@@ -628,7 +642,7 @@ function applyConditionalIndentation() {
 
         // if the module is the start of a conditional block, indent 1 level
         // if it's a branch, indent back 1 level (this fixes the temporary dedent)
-        if (moduleType === "Start of Conditional" || moduleType.includes("Branch")) {
+        if (moduleType === 'Start of Conditional' || moduleType === 'Start of Loop' || moduleType.includes('Branch')) {
             indentationLevel++;
         }
     }
@@ -646,32 +660,40 @@ function exportModule(editorContainer) {
 
         // for prompts, get the appropriate syntax based on the items in the prompt specifier
         case 'Prompt':
-            const promptTimeOut = editorContainer.querySelector(".prompt-timeout").value;
-            const promptTimeOutUnits = editorContainer.querySelector(".time-unit-dropdown").value;
-            const promptVariableName = editorContainer.querySelector(".prompt-name").value;
+            const promptTimeOut = editorContainer.querySelector('.prompt-timeout').value;
+            const promptTimeOutUnits = editorContainer.querySelector('.time-unit-dropdown').value;
+            const promptVariableName = editorContainer.querySelector('.prompt-name').value;
             return `@prompt ${promptTimeOut}${promptTimeOutUnits} ${promptVariableName} Prompt expired.`;
 
         // for delays, do the same
         case 'Delay':
-            const delayTimeOut = editorContainer.querySelector(".prompt-timeout").value;
-            const delayTimeOutUnits = editorContainer.querySelector(".time-unit-dropdown").value;
+            const delayTimeOut = editorContainer.querySelector('.prompt-timeout').value;
+            const delayTimeOutUnits = editorContainer.querySelector('.time-unit-dropdown').value;
             return `@delay ${delayTimeOut}${delayTimeOutUnits}`;
 
         // for variables, we just use @var and then the specified content: defines will come later
         case 'Variable':
-            return '@var ' + editorContainer.querySelector(".text-input-basic").value;
+            return '@var ' + editorContainer.querySelector('.text-input-basic').value;
 
         // if and elseif use the raw condition provided in brackets
         case 'Start of Conditional':
-            return '@if (' + editorContainer.querySelector(".text-input-basic").value + ')';
+            return '@if (' + editorContainer.querySelector('.text-input-basic').value + ')';
         case 'Extra Conditional Branch':
-            return '@elseif (' + editorContainer.querySelector(".text-input-basic").value + ')';
+            return '@elseif (' + editorContainer.querySelector('.text-input-basic').value + ')';
 
-        // the other three types of module are always the same since they have no specific data
+        // loops use the variable name and iteration counts
+        case 'Start of Loop':
+            const loopVariableName = editorContainer.querySelector('.prompt-name').value || 'i';
+            const loopCounter = editorContainer.querySelector('.loop-counter').value;
+            return `@for Int ${loopVariableName} in list::range(0, ${loopCounter})`;
+
+        // the other four types of module are always the same since they have no specific data
         case 'Default Branch':
             return '@else';
         case 'End of Conditional':
             return '@fi';
+        case 'End of Loop':
+            return '@done';
         case 'End Script Execution':
             return '@return';
         default:
@@ -730,7 +752,7 @@ function parseRichTextSyntax(html) {
         // if the node is a text node, add its content to the result
         if (node.nodeType === Node.TEXT_NODE) {
             result += node.textContent;
-        
+
         } else if (node.nodeType === Node.ELEMENT_NODE) {
 
             // otherwise apply formatting and parse its children
@@ -758,7 +780,7 @@ function parseRichTextSyntax(html) {
 
     // replace the standard Minecraft colors with their shorthand values
     for (let i = 0; i < BASE_COLORS.length; i++) {
-        result = result.replaceAll("&" + BASE_COLORS[i].toLowerCase(), "&" + "4c6e2ab319d5f780".substring(i, i + 1));
+        result = result.replaceAll('&' + BASE_COLORS[i].toLowerCase(), '&' + '4c6e2ab319d5f780'.substring(i, i + 1));
     }
 
     return result;
