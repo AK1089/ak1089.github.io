@@ -1,6 +1,7 @@
 // store the colors
 const BASE_COLORS = ['#AA0000', '#FF5555', '#FFAA00', '#FFFF55', '#00AA00', '#55FF55', '#55FFFF', '#00AAAA', '#0000AA', '#5555FF', '#FF55FF', '#AA00AA', '#FFFFFF', '#AAAAAA', '#555555', '#000000'];
 const CUSTOM_COLORS_KEY = 'customColors';
+const SCRIPT_SAVE_KEY = 'scriptSave';
 
 // the 'add a new module' selector and the div to hold components
 const moduleSelector = document.getElementById('module-selector');
@@ -800,6 +801,9 @@ function parseRichTextSyntax(html) {
 // export the script to a file 
 function exportScript() {
 
+    // also save it
+    saveScript();
+
     // get the script content and create an array to store the lines
     const scriptContent = document.getElementById('script-content');
     let scriptText = '# This script was generated using AK\'s Script Builder tool\n';
@@ -889,6 +893,24 @@ function exportScript() {
     URL.revokeObjectURL(url);
 }
 
+// save the script content to local storage
+function saveScript() {
+    const scriptContent = document.getElementById('script-content').innerHTML;
+    localStorage.setItem(SCRIPT_SAVE_KEY, scriptContent);
+}
+
+// load the script content from local storage
+function loadScript() {
+    const scriptContent = document.getElementById('script-content');
+    scriptContent.innerHTML = localStorage.getItem(SCRIPT_SAVE_KEY) || '';
+
+    // configure each module to have the correct buttons and listeners
+    for (let editorContainer of scriptContent.children) {
+        attachEditorEventListeners(editorContainer);
+    }
+    applyConditionalIndentation();
+}
+
 // bind the elements of the cooldown panel to have listeners
 function setupCooldownControls() {
 
@@ -912,4 +934,5 @@ function setupCooldownControls() {
     timeUnitDropdown.style.display = 'none';
 }
 
-setupCooldownControls()
+setupCooldownControls();
+loadScript();

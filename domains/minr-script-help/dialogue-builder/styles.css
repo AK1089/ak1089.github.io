@@ -335,6 +335,7 @@ input:checked+.slider:before {
     margin-right: 10px;
 }
 
+#save-script,
 #export-script {
     padding: 10px;
     background-color: #f9f9f9;
@@ -348,6 +349,7 @@ input:checked+.slider:before {
     color: #fff;
 }
 
+#save-script:hover,
 #export-script:hover {
     background-color: #1e9c0d;
 }
