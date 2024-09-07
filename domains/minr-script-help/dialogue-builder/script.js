@@ -6,6 +6,8 @@ const CUSTOM_COLORS_KEY = 'customColors';
 const moduleSelector = document.getElementById('module-selector');
 const scriptContent = document.getElementById('script-content');
 
+document.getElementById('export-script').addEventListener('click', exportScript);
+
 // when the module selector is modified, create the appropriate module
 moduleSelector.addEventListener('change', function () {
 
@@ -34,6 +36,9 @@ moduleSelector.addEventListener('change', function () {
             break;
         case 'variable':
             scriptContent.appendChild(createModule('Variable'));
+            break;
+        case 'command':
+            scriptContent.appendChild(createModule('Minecraft Command'));
             break;
         default:
             break;
@@ -85,8 +90,8 @@ function createModule(moduleType) {
         { id: 'collapseConditional', icon: 'fa-circle-chevron-down', availableFor: 'Start of Conditional, Start of Loop', mode: 'none' },
         { id: 'addCondition', icon: 'fa-plus', availableFor: 'Start of Conditional, Extra Conditional Branch, Start of Loop', mode: 'none' },
 
-        { id: 'undo', icon: 'fa-rotate-left', availableFor: 'Dialogue, Start of Conditional, Extra Conditional Branch', mode: 'none' },
-        { id: 'redo', icon: 'fa-rotate-right', availableFor: 'Dialogue, Start of Conditional, Extra Conditional Branch', mode: 'none' },
+        { id: 'undo', icon: 'fa-rotate-left', availableFor: 'Dialogue, Start of Conditional, Extra Conditional Branch, Minecraft Command, Variable', mode: 'none' },
+        { id: 'redo', icon: 'fa-rotate-right', availableFor: 'Dialogue, Start of Conditional, Extra Conditional Branch, Minecraft Command, Variable', mode: 'none' },
 
         { id: 'export', icon: 'fa-arrow-up-right-from-square', title: 'Export', availableFor: 'all', mode: 'editor' },
         { id: 'moveUp', icon: 'fa-arrow-up', title: 'Move Up', availableFor: 'all', mode: 'editor' },
@@ -189,14 +194,13 @@ function createModule(moduleType) {
         textInput.className = 'text-input';
         textInput.contentEditable = true;
         editorContainer.appendChild(textInput);
-    } else if (moduleType == 'Extra Conditional Branch' || moduleType == 'Start of Conditional' || moduleType == 'Variable') {
+
+    } else if ('Start of Conditional, Extra Conditional Branch, Variable, Minecraft Command'.split(', ').includes(moduleType)) {
         const textInput = document.createElement('textarea');
         textInput.id = 'text-input-basic';
         textInput.className = 'text-input-basic';
         textInput.rows = 1;
         textInput.style.resize = 'none';
-        editorContainer.appendChild(textInput);
-
         editorContainer.appendChild(textInput);
     } else {
         // round the bottom corners for consistency
@@ -226,6 +230,9 @@ function createModule(moduleType) {
             break;
         case 'Variable':
             toolbar.style.backgroundColor = '#F3FFF3';
+            break;
+        case 'Minecraft Command':
+            toolbar.style.backgroundColor = '#F3FFFF';
             break;
     }
 
@@ -675,6 +682,10 @@ function exportModule(editorContainer) {
         case 'Variable':
             return '@var ' + editorContainer.querySelector('.text-input-basic').value;
 
+        // for Minecraft commands, we just use the raw content provided
+        case 'Minecraft Command':
+            return '@bypass ' + editorContainer.querySelector('.text-input-basic').value;
+
         // if and elseif use the raw condition provided in brackets
         case 'Start of Conditional':
             return '@if (' + editorContainer.querySelector('.text-input-basic').value + ')';
@@ -784,4 +795,85 @@ function parseRichTextSyntax(html) {
     }
 
     return result;
+}
+
+// export the script to a file 
+function exportScript() {
+
+    // get the script content and create an array to store the lines
+    const scriptContent = document.getElementById('script-content');
+    let scriptText = '# This script was generated using AK\'s Script Builder tool\n\n§VARIABLES\n';
+    let scriptVariables = [];
+    let newScriptLine = '';
+
+    // control indentation levels
+    let indentationLevel = 0;
+
+    // for each module in the script content, export the module
+    for (let module of scriptContent.children) {
+        newScriptLine = exportModule(module);
+
+        // if the module is the end of a conditional block, dedent 1 level
+        if (newScriptLine.startsWith('@fi') || newScriptLine.startsWith('@done') || newScriptLine.startsWith('@else') || newScriptLine.startsWith('@elseif')) {
+            indentationLevel--;
+        }
+
+        // add the variable to the script text if it is a prompt
+        if (newScriptLine.startsWith("@prompt")) {
+            scriptVariables.push({ name: newScriptLine.split(' ')[2], type: 'String' });
+        }
+
+        // add the variable to the script text if it is a variable declaration
+        if (newScriptLine.startsWith("@var")) {
+            const varDeclarationRegex = /^@var\s+([A-Z][a-zA-Z]*)\s+([a-z][a-zA-Z0-9_]*)\s*=\s*(.+)$/;
+            const match = newScriptLine.match(varDeclarationRegex);
+
+            // if this matches a declaration, then add the variable to the list and replace the line with just the assignment
+            if (match) {
+                const [, type, name, value] = match;
+                scriptVariables.push({ name, type });
+                newScriptLine = `@var ${name} = ${value}`;
+            }
+        }
+
+        // line breaks for readability
+        if (newScriptLine.startsWith('@if') || newScriptLine.startsWith('@for')) {
+            scriptText += '\n';
+        }
+
+        // add the line to the script text with the appropriate indentation
+        scriptText += '  '.repeat(Math.max(0, indentationLevel)) + newScriptLine + '\n';
+
+        // more line breaks for readability
+        if (newScriptLine.startsWith('@fi') || newScriptLine.startsWith('@done')) {
+            scriptText += '\n';
+        }
+
+        // if the module is the start of a conditional block, indent 1 level
+        if (newScriptLine.startsWith('@if') || newScriptLine.startsWith('@for') || newScriptLine.startsWith('@else') || newScriptLine.startsWith('@elseif')) {
+            indentationLevel++;
+        }
+    }
+
+    // insert the variable definitions into the script text
+    if (scriptVariables.length > 0) {
+        const variableDefinitions = scriptVariables.map(v => `@define ${v.type} ${v.name}`).join('\n');
+        scriptText = scriptText.replace('§VARIABLES\n', `${variableDefinitions}\n\n`);
+    } else {
+        scriptText = scriptText.replace('§VARIABLES\n', '');
+    }
+
+    // replace superfluous line breaks
+    scriptText = scriptText.replace(/\n{3,}/g, '\n\n');
+
+    // create a download link for the script text and click it
+    const blob = new Blob([scriptText], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'script.msc';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
