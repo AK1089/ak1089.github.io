@@ -679,6 +679,87 @@ function exportModule(editorContainer) {
     }
 }
 
-function parseRichTextSyntax(text) {
-    return '@player ' + text;
+// turns HTML of rich text into an @player string
+function parseRichTextSyntax(html) {
+
+    // create a temporary div to parse the HTML and copy the contents over
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+
+    // create a result string and an object to store the current formatting
+    let result = '@player ';
+    let currentFormatting = {
+        bold: false,
+        italic: false,
+        underline: false,
+        strikethrough: false,
+        color: null
+    };
+
+    // function to apply formatting to a node and return the appropriate string
+    function applyFormatting(node) {
+        let formatString = '';
+        let newFormatting = { ...currentFormatting };
+
+        // apply formatting based on the node type
+        if (node.nodeName === 'B' || node.nodeName === 'STRONG') newFormatting.bold = true;
+        if (node.nodeName === 'I' || node.nodeName === 'EM') newFormatting.italic = true;
+        if (node.nodeName === 'U') newFormatting.underline = true;
+        if (node.nodeName === 'STRIKE' || node.nodeName === 'S') newFormatting.strikethrough = true;
+        if (node.nodeName === 'FONT' && node.color) newFormatting.color = node.color;
+
+        // apply color first as it resets other formatting
+        if (newFormatting.color !== currentFormatting.color) {
+            formatString += `&#${newFormatting.color.substring(1)}`;
+            currentFormatting = { bold: false, italic: false, underline: false, strikethrough: false, color: newFormatting.color };
+        }
+
+        // apply other formatting
+        if (newFormatting.bold && !currentFormatting.bold) formatString += '&l';
+        if (newFormatting.strikethrough && !currentFormatting.strikethrough) formatString += '&m';
+        if (newFormatting.underline && !currentFormatting.underline) formatString += '&n';
+        if (newFormatting.italic && !currentFormatting.italic) formatString += '&o';
+
+        // return the format string and update the current formatting
+        currentFormatting = newFormatting;
+        return formatString;
+    }
+
+    // function to recursively parse a node and its children
+    function parseNode(node) {
+        // if the node is a text node, add its content to the result
+        if (node.nodeType === Node.TEXT_NODE) {
+            result += node.textContent;
+        
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+
+            // otherwise apply formatting and parse its children
+            result += applyFormatting(node);
+            for (let child of node.childNodes) {
+                parseNode(child);
+            }
+
+            // then reset the formatting after processing all children
+            if (node.nodeName !== 'FONT') {
+                result += '&r';
+                currentFormatting = { bold: false, italic: false, underline: false, strikethrough: false, color: null };
+            }
+        }
+    }
+
+    // parse each child of the temporary div
+    for (let child of tempDiv.childNodes) {
+        parseNode(child);
+    }
+
+    // remove trailing and duplicate reset symbols and return the result
+    result = result.replaceAll(/(&r)*\s*$/g, '');
+    result = result.replaceAll(/(&r)+/g, '&r');
+
+    // replace the standard Minecraft colors with their shorthand values
+    for (let i = 0; i < BASE_COLORS.length; i++) {
+        result = result.replaceAll("&" + BASE_COLORS[i].toLowerCase(), "&" + "4c6e2ab319d5f780".substring(i, i + 1));
+    }
+
+    return result;
 }
