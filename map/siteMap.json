@@ -190,6 +190,11 @@
         "parent": "/domains/utilities/#mathematical"
     },
     {
+        "name": "LaTeX Renderer",
+        "url": "/domains/utilities/latex-renderer/",
+        "parent": "/domains/utilities/#mathematical"
+    },
+    {
         "name": "Simulated Trading",
         "url": "/domains/utilities/simulated-trading/",
         "parent": "/domains/utilities/#financial"

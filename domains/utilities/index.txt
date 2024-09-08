@@ -15,4 +15,10 @@ Some resources, utilities, and other applets I've made which run in the browser,
 ### Mathematics
 <ol>
 - [Graph Maker](graph-maker) - a convenient and feature-filled designer for [graph](!The kind with vertices and edges, not plots.) diagrams
+- [LaTeX Renderer](latex-renderer) - a real time browser-based renderer for basic LaTeX snippets
+</ol>
+
+### Financial
+<ol>
+- [Options Payoff Graph](simulated-trading) - an order book and payoff graph set for trading games, allowing you to trade all sorts of structures
 </ol>
