@@ -7,6 +7,7 @@ const SCRIPT_SAVE_KEY = 'scriptSave';
 const moduleSelector = document.getElementById('module-selector');
 const scriptContent = document.getElementById('script-content');
 
+document.getElementById('download-script').addEventListener('click', downloadScript);
 document.getElementById('export-script').addEventListener('click', exportScript);
 
 // when the module selector is modified, create the appropriate module
@@ -798,8 +799,8 @@ function parseRichTextSyntax(html) {
     return result;
 }
 
-// export the script to a file 
-function exportScript() {
+// create the actual script content from the modules
+function getScriptAsText() {
 
     // also save it
     saveScript();
@@ -880,6 +881,12 @@ function exportScript() {
 
     // replace superfluous line breaks
     scriptText = scriptText.replace(/\n{3,}/g, '\n\n');
+    return scriptText;
+}
+
+// download script to a file
+function downloadScript() {
+    const scriptText = getScriptAsText();
 
     // create a download link for the script text and click it
     const blob = new Blob([scriptText], { type: 'text/plain' });
@@ -891,6 +898,14 @@ function exportScript() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+}
+
+// write script to clipboard and open paste.minr.org
+function exportScript() {
+    const scriptText = getScriptAsText();
+    navigator.clipboard.writeText(scriptText);
+    window.open("https://paste.minr.org", target="_blank")
+
 }
 
 // save the script content to local storage

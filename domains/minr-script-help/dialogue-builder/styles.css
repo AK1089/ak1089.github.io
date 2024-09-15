@@ -335,6 +335,7 @@ input:checked+.slider:before {
     margin-right: 10px;
 }
 
+#download-script,
 #save-script,
 #export-script {
     padding: 10px;
