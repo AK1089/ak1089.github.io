@@ -15,4 +15,5 @@ Here are some useful ones:
 </ul>
 - [Resource Pack Hosting](../minr-utilities/resource-packs), a full step-by-step guide to creating, hosting, and configuring a custom resource pack for a map
 - [Yeroc% Patch Guide](../minr-script-help/yeroc-patch-guide), a namespace for patching a common timer-based exploit in maps which is often annoying to prevent
+- [Dialogue Script Builder](../minr-script-help/dialogue-builder), a browser-based tool which builds simple scripts for you without you writing any code
 </ol>
