@@ -1,8 +1,0 @@
-## Puzzles
-
-Some fun or interesting puzzles. A lot of them are interactive!
-
-<ol>
-- [The Circular Train](circular-train)
-- [The Father's Coins](the-fathers-coins)
-</ol>

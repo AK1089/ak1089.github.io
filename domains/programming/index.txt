@@ -1,8 +1,0 @@
-## The Programming Section
-
-Here's where I put everything on here to do with programming, in no particular order. Mostly about Python.
-
-<ul>
-- [Weird Python Quirks and Oddities](python-quirks) - Some ostensibly bizarre behaviours of Python that I find interesting
-- [Where The Hell Does 42 Come From?](python-quirks/floating-points-and-42) - An investigation into a floating-point error
-</ul>

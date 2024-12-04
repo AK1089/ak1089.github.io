@@ -1,8 +1,0 @@
-## The MSC Tips Series
-
-Here's a collection of expositionary pieces I've written about various aspects of MSC. They try to assume fairly little general programming knowledge, and the parts of MSC knowledge they require is (hopefully) clearly scoped. If you find any mistakes in these, or want to request another topic, please message me on [Discord](https://discordapp.com/channels/@me/380805820415344644).
-
-<ul>
-- [Functions](functions), published 16/05/2024
-- [Let's Build a Selector-To-Entity Converter &lpar;or, All About UUIDs&rpar;](uuid-converter), published 24/05/2024
-</ul>
