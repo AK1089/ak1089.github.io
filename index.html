@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Default header, with a title. Links to the main stylesheet. -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home </title>
-    <link rel="stylesheet" href="styles/base.css">
+    <title>Home | AK1089's Site</title>
+    <link rel="stylesheet" href="/styles/base.css">
 </head>
+
+<!-- The body: the layout-container div contains all the content -->
 
 <body>
     <div class="layout-container">
+
+        <!-- Padding on the left -->
         <div class="spacing-left"></div>
 
+        <!-- The sidebar on the left, with the site title and navigation links -->
         <div class="sidebar-left">
+
+            <!-- Header with the site title and a link to the map page -->
             <div class="sidebar-header">
                 <a href="/" class="site-title">AK1089's Site</a>
                 <a href="/map" class="map-link">
@@ -22,6 +31,7 @@
                 </a>
             </div>
 
+            <!-- Primary navigation bar: links to the main sections of the site -->
             <nav>
                 <ul class="nav-list">
                     <li class="nav-item">
@@ -37,7 +47,8 @@
                         <a href="/puzzles" class="nav-link" style="border-left: 3px solid var(--purple);">puzzles</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/programming" class="nav-link" style="border-left: 3px solid var(--maroon);">programming</a>
+                        <a href="/programming" class="nav-link"
+                            style="border-left: 3px solid var(--maroon);">programming</a>
                     </li>
                     <li class="nav-item">
                         <a href="/maths" class="nav-link" style="border-left: 3px solid var(--teal);">maths</a>
@@ -52,12 +63,11 @@
             </nav>
         </div>
 
+        <!-- Spacing between the sidebar and the main content -->
         <div class="spacing-middle-left"></div>
 
+        <!-- The main content of the page: this is changed per-page and contains the actual content -->
         <main class="main-content">
-            <div class="placeholder"></div>
-            <div class="placeholder"></div>
-            <div class="placeholder"></div>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu tempor elit. Curabitur tristique enim
                 gravida efficitur interdum. Quisque euismod eleifend tempus. Nam non porta est. Nulla at rhoncus risus.
                 Integer neque risus, aliquet sed ante in, tincidunt consectetur enim. Vivamus dictum tellus vel nunc
@@ -97,13 +107,14 @@
                 metus, id facilisis augue molestie ac.</p>
         </main>
 
+        <!-- Spacing between the sidebar and the main content -->
         <div class="spacing-middle-right"></div>
 
+        <!-- The sidebar on the right -->
         <aside class="sidebar-right">
-            <div class="placeholder"></div>
-            <div class="placeholder"></div>
         </aside>
 
+        <!-- Padding on the right -->
         <div class="spacing-right"></div>
     </div>
 </body>
