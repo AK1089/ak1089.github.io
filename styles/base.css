@@ -1,0 +1,205 @@
+/* Reset defaults */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Load in the custom font (Garamond) from the file */
+@font-face {
+    font-family: "Garamond";
+    src: url("../garamond.woff2") format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Set up the base styles */
+body {
+    /* Ensure the body takes up the full height of the viewport */
+    min-height: 100vh;
+    /* Use the custom font */
+    font-family: "Garamond", sans-serif;
+    font-size: 18px;
+    color: var(--text);
+}
+
+:root {
+    --rose: #dc8a78;
+    --pink: #e67bca;
+    --purple: #9f7aea;
+    --red: #c70b34;
+    --maroon: #e74b58;
+    --peach: #fd6b16;
+    --yellow: #ed8936;
+    --green: #40a02b;
+    --lime: #48bb78;
+    --teal: #179299;
+    --blue: #04a5e5;
+    --aqua: #209fb5;
+    --darkblue: #1e66f5;
+    --text: #4c4f69;
+    --subtext-b: #5c5f77;
+    --subtext-a: #6c6f85;
+    --overlay-c: #7c7f93;
+    --overlay-b: #8c8fa1;
+    --overlay-a: #9ca0b0;
+    --surface-c: #acb0be;
+    --surface-b: #bcc0cc;
+    --surface-a: #ccd0da;
+    --base: hsl(40, 23%, 97%);
+    --mantle: hsl(40, 22%, 95%);
+    --crust: hsl(40, 21%, 92%);
+}
+
+.nav-link.utilities { border-left: 3px solid var(--blue); }
+.nav-link.projects { border-left: 3px solid var(--lime); }
+.nav-link.blog { border-left: 3px solid var(--peach); }
+.nav-link.puzzles { border-left: 3px solid var(--purple); }
+.nav-link.programming { border-left: 3px solid var(--maroon); }
+.nav-link.maths { border-left: 3px solid var(--teal); }
+.nav-link.minr { border-left: 3px solid var(--yellow); }
+.nav-link.other { border-left: 3px solid var(--subtext-b); }
+
+p {
+    display: inline;
+}
+
+/* Main layout container */
+.layout-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    background: var(--base);
+}
+
+/* Fixed widths for the two sidebars */
+.sidebar-left,
+.sidebar-right {
+    width: 288px;
+    flex-shrink: 0;
+    padding: 1rem;
+    min-height: 100vh;
+    background: var(--crust);
+}
+
+.main-content {
+    width: 768px;
+    flex-shrink: 0;
+    background: var(--base);
+    border-radius: 8px;
+    padding: 2rem;
+    height: fit-content;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Spacing containers */
+.spacing-left,
+.spacing-right {
+    flex: 1;
+    /* Minimum padding before layout changes */
+    min-width: 8px;
+    background: var(--crust);
+}
+
+.spacing-middle-left,
+.spacing-middle-right {
+    flex: 1;
+    /* Minimum padding before layout changes */
+    min-width: 18px;
+    background: var(--crust);
+}
+
+/* Hide sidebars when screen gets too narrow */
+@media (max-width: 1439px) {
+
+    /* Hide the sidebars and spacing containers */
+    .sidebar-left,
+    .sidebar-right,
+    .spacing-middle-left,
+    .spacing-middle-right {
+        display: none;
+    }
+
+    /* 36px padding on each side for main content */
+    .spacing-left,
+    .spacing-right {
+        flex: 0;
+        width: 36px;
+    }
+
+    .main-content {
+        width: calc(100% - 72px);
+        max-width: 768px;
+    }
+
+    .body {
+        padding: 0 1rem;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 840px) {
+    body {
+        /* Smaller font size for narrower devices */
+        font-size: 16px;
+    }
+}
+
+/* Placeholder content for visualization */
+.placeholder {
+    width: 100%;
+    height: 100px;
+    background: var(--mantle);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+/* CSS */
+.sidebar-header {
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.site-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2d3748;
+    text-decoration: none;
+}
+
+.map-link {
+    color: #718096;
+    transition: color 0.2s ease;
+}
+
+.map-link:hover {
+    color: #4a5568;
+}
+
+.nav-list {
+    list-style: none;
+}
+
+.nav-item {
+    margin-bottom: 0.75rem;
+}
+
+.nav-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: #4a5568;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.nav-link:hover {
+    background-color: #f7fafc;
+    color: #2d3748;
+    transform: translateX(4px);
+}
+
