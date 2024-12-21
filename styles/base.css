@@ -35,12 +35,84 @@
     --crust: hsl(40, 21%, 92%);
 }
 
-/* Load in the custom font (Garamond) from the file */
 @font-face {
     font-family: "Garamond";
-    src: url("../garamond.woff2") format('woff2');
-    font-weight: normal;
+    src: url("/assets/fonts/EB Garamond Regular.woff2") format('woff2');
+    font-weight: 400;
     font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Garamond";
+    src: url("/assets/fonts/EB Garamond Italic.woff2") format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Garamond";
+    src: url("/assets/fonts/EB Garamond Medium.woff2") format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Garamond";
+    src: url("/assets/fonts/EB Garamond Medium Italic.woff2") format('woff2');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Garamond";
+    src: url("/assets/fonts/EB Garamond SemiBold.woff2") format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Garamond";
+    src: url("/assets/fonts/EB Garamond SemiBold Italic.woff2") format('woff2');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Garamond";
+    src: url("/assets/fonts/EB Garamond Bold.woff2") format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Garamond";
+    src: url("/assets/fonts/EB Garamond Bold Italic.woff2") format('woff2');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Garamond";
+    src: url("/assets/fonts/EB Garamond Extra Bold.woff2") format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Garamond";
+    src: url("/assets/fonts/EB Garamond Extra Bold Italic.woff2") format('woff2');
+    font-weight: 800;
+    font-style: italic;
+    font-display: swap;
 }
 
 /* Set up the base styles */
@@ -48,7 +120,7 @@ body {
     /* Ensure the body takes up the full height of the viewport */
     min-height: 100vh;
     /* Use the custom font */
-    font-family: "Garamond", sans-serif;
+    font-family: "Garamond", serif;
     font-size: 18px;
     color: var(--text);
 }
