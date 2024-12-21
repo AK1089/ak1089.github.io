@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="map" viewBox="0 0 24 24">
+        <g stroke="currentColor" fill="none" stroke-width="1" stroke-miterlimit="10">
+            <polygon points="1,5 1,23 8,19 15,23 22,19 22,1 15,5 8,1"/>
+            <line x1="8" y1="1" x2="8" y2="19"/>
+            <line x1="15" y1="5" x2="15" y2="23"/>
+        </g>
+    </symbol>
+</svg>
