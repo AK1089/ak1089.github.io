@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Default header, with a title. Links to the main stylesheet. -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | AK1089's Site</title>
+    <link rel="stylesheet" href="/styles/base.css">
+</head>
+
+<!-- The body: the layout-container div contains all the content -->
+
+<body>
+    <div class="layout-container">
+
+        <!-- Padding on the left -->
+        <div class="spacing-left"></div>
+
+        <!-- The sidebar on the left, with the site title and navigation links -->
+        <div class="sidebar-left">
+
+            <!-- Header with the site title and a link to the map page -->
+            <div class="sidebar-header">
+                <a href="/" class="site-title">AK1089's Site</a>
+                <a href="/map" class="map-link">
+                    <svg class="icon">
+                        <use href="/assets/icons/sprite.svg#map"></use>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Primary navigation bar: links to the main sections of the site -->
+            <nav>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="/utilities" class="nav-link" style="border-left: 3px solid var(--blue);">utilities</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/projects" class="nav-link" style="border-left: 3px solid var(--lime);">projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/blog" class="nav-link" style="border-left: 3px solid var(--peach);">blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/puzzles" class="nav-link" style="border-left: 3px solid var(--purple);">puzzles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/tech" class="nav-link" style="border-left: 3px solid var(--maroon);">tech</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/maths" class="nav-link" style="border-left: 3px solid var(--teal);">maths</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/minr" class="nav-link" style="border-left: 3px solid var(--yellow);">minr</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/other" class="nav-link" style="border-left: 3px solid var(--subtext-b);">other</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Spacing between the sidebar and the main content -->
+        <div class="spacing-middle-left"></div>
+
+        <!-- The main content of the page: this is changed per-page and contains the actual content -->
+        <main class="main-content">
+
+            <header class="page-header">
+                <div class="header-container">
+                    <div class="path">
+
+                    </div>
+                    <h1 class="title">AK1089's Site</h1>
+                    <div class="metadata">
+                        <span class="published-date">published December 21, 2024</span><span class="updated-date">,
+                            updated December 21, 2024</span>
+                    </div>
+                </div>
+            </header>
+            <p>Hey, I'm Avish, a 20 year old from London, and this is my personal site! I go by AK1089 on the internet,
+                after my initials and <a href="https://en.wikipedia.org/wiki/1089_%28number%29#In_magic">my favourite
+                    number</a>. I'm currently an undergraduate maths student at the University of Cambridge, in the UK.
+            </p>
+            <p>Yay</p>
+        </main>
+
+        <!-- Spacing between the sidebar and the main content -->
+        <div class="spacing-middle-right"></div>
+
+        <!-- The sidebar on the right -->
+        <aside class="sidebar-right">
+        </aside>
+
+        <!-- Padding on the right -->
+        <div class="spacing-right"></div>
+    </div>
+</body>
+
+</html>
