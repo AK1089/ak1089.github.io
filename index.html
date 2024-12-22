@@ -7,6 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home | AK1089's Site</title>
     <link rel="stylesheet" href="/styles/base.css" />
+    <script>
+      function copyCode(button) {
+        const pre = button.parentElement;
+        const code = pre.querySelector("code");
+        const text = code.innerText;
+
+        navigator.clipboard.writeText(text);
+
+        button.classList.add("copied");
+        const originalIcon = button.innerHTML;
+        button.innerHTML = `
+            <svg class="icon icon--stroke" width="24" height="24">
+                <use href="/assets/icons/sprite.svg#check"></use>
+            </svg>
+        `;
+
+        setTimeout(() => {
+          button.classList.remove("copied");
+          button.innerHTML = originalIcon;
+        }, 1000);
+      }
+    </script>
   </head>
 
   <!-- The body: the layout-container div contains all the content -->
@@ -183,6 +205,19 @@
             >favourite number</a
           >.
         </p>
+        <pre
+          data-language="python"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-python"><span># Let's do a code block!</span><span>def function(x: int):</span><span>    return x + 5</span></code></pre>
+        <h2>Bullet Points</h2>
+        <p>Let's do it!</p>
+        <ol>
+          <li>here's an idea</li>
+          <li>and another one</li>
+          <li>yay</li>
+          <li>???</li>
+        </ol>
+        <h2>Block Quotes</h2>
+        <blockquote><p>Is this it?New lineYEAHHHHH</p></blockquote>
       </main>
 
       <!-- Spacing between the sidebar and the main content -->
