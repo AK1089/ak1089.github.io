@@ -21,6 +21,7 @@
     --aqua: #209fb5;
     --darkblue: #1e66f5;
     --black: #000000;
+    --grey: #262525;
     --text: #4c4f69;
     --subtext-b: #5c5f77;
     --subtext-a: #6c6f85;
@@ -112,6 +113,15 @@
     src: url("/assets/fonts/EB Garamond Extra Bold Italic.woff2") format('woff2');
     font-weight: 800;
     font-style: italic;
+    font-display: swap;
+}
+
+/* Custom monospace font */
+@font-face {
+    font-family: 'Cascadia Code';
+    src: url('/assets/fonts/CascadiaMono.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
     font-display: swap;
 }
 
@@ -414,7 +424,6 @@ a:hover {
 /* General container styling */
 .header-container {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    /* Mimics the playful font in the image */
     color: #333;
     line-height: 1.5;
     margin-bottom: 1.6rem;
@@ -494,4 +503,114 @@ a:hover {
     stroke-width: 2;
     stroke: none;
     fill: currentColor;
+}
+
+/* Base code block container */
+pre {
+    --code-base: #1e1e2e;
+    --code-text: #dee2f2;
+    --code-line: #6c7086;
+    --code-surf: #585b70;
+    position: relative;
+    background: var(--code-base);
+    margin: 1.5rem 0;
+    padding: 1rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Horizontal scroll container */
+pre > code {
+    display: block;
+    padding: 0 1rem 1rem 3rem;  
+    margin-bottom: -0.5rem;
+    color: var(--code-text);
+    font-family: "Cascadia Code", monospace;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    tab-size: 4;
+    overflow-x: auto;
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Line numbers */
+pre > code {
+    counter-reset: line;
+}
+
+pre > code > span {
+    display: block;
+    position: relative;
+    line-height: 1.2;
+    padding: 0.1rem 0;
+}
+
+pre > code > span::before {
+    counter-increment: line;
+    content: counter(line);
+    position: absolute;
+    left: -3rem;
+    width: 2rem;
+    color: var(--code-line);
+    text-align: right;
+    user-select: none;
+}
+
+/* Language badge */
+pre::after {
+    content: attr(data-language);
+    position: absolute;
+    top: 0;
+    right: 3.5rem;
+    color: var(--surface-a);
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.5rem;
+    background: var(--text);
+    border-radius: 0 0 4px 4px;
+}
+
+/* Selection highlighting */
+pre code ::selection {
+    background: rgba(147, 153, 178, 0.3);
+}
+
+/* Copy button styling */
+.copy-button {
+    position: absolute;
+    top: 0rem;
+    right: 1rem;
+    padding: 0.3rem 0.2rem 0.1rem;
+    background: var(--text);
+    border: none;
+    border-radius: 0px 0px 4px 4px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.1s ease, background-color 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-button .icon {
+    color: var(--surface-a);
+    transition: color 0.2s ease;
+}
+
+pre:hover .copy-button {
+    opacity: 1;
+}
+
+.copy-button:hover {
+    background: #45475a;
+}
+
+.copy-button:hover .icon {
+    color: #cdd6f4;
+}
+
+.copy-button.copied .icon {
+    color: #a6e3a1;
 }

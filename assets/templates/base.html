@@ -7,6 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home | AK1089's Site</title>
     <link rel="stylesheet" href="/styles/base.css" />
+    <script>
+      function copyCode(button) {
+        const pre = button.parentElement;
+        const code = pre.querySelector("code");
+        const text = code.innerText;
+
+        navigator.clipboard.writeText(text);
+
+        button.classList.add("copied");
+        const originalIcon = button.innerHTML;
+        button.innerHTML = `
+            <svg class="icon icon--stroke" width="24" height="24">
+                <use href="/assets/icons/sprite.svg#check"></use>
+            </svg>
+        `;
+
+        setTimeout(() => {
+          button.classList.remove("copied");
+          button.innerHTML = originalIcon;
+        }, 1000);
+      }
+    </script>
   </head>
 
   <!-- The body: the layout-container div contains all the content -->
