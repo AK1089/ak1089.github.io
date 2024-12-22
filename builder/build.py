@@ -130,6 +130,7 @@ if __name__ == "__main__":
     md = markdown.Markdown(extensions=[
         "fenced_code",
         "tables",
+        "nl2br",
         "sane_lists",
         CodeFormatter(),
         ImageFormatter()
