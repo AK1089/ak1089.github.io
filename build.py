@@ -117,7 +117,7 @@ def build_file(template: str, md_path: Path, force: bool = False) -> bool:
 if __name__ == "__main__":
     md = markdown.Markdown(extensions=["fenced_code", "tables"])
     
-    if len(argv) == 0:
+    if len(argv) == 1:
         build_site()
         
     else:
