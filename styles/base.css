@@ -359,9 +359,14 @@ h4 {
     font-weight: 700;
 }
 
-h5,
+h5 {
+    font-size: 0.833rem;
+    font-weight: 600;
+    color: var(--subtext-a);
+}
+
 h6 {
-    font-size: 1rem;
+    font-size: 0.694rem;
     font-weight: 500;
     color: var(--subtext-a);
 }
@@ -369,4 +374,65 @@ h6 {
 /* First heading on a page gets special treatment */
 h1:first-child {
     margin-top: 0;
+}
+
+a {
+    color: var(--darkblue);
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+/* General container styling */
+.header-container {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    /* Mimics the playful font in the image */
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 1.6rem;
+}
+
+/* Path (breadcrumb) styling */
+.path {
+    font-size: 14px;
+    color: #555;
+}
+
+.path-link {
+    text-decoration: none;
+    color: #007bff;
+    /* A nice blue for links */
+    font-weight: bold;
+}
+
+.path-link:hover {
+    text-decoration: underline;
+}
+
+.separator {
+    margin: 0 5px;
+    color: var(--overlay-a);
+}
+
+/* Title styling */
+.title {
+    font-size: 2.441rem;
+    font-weight: bold;
+    margin: 6px 0;
+    padding-top: 6px;
+}
+
+/* Metadata styling */
+.metadata {
+    font-size: 12px;
+    color: var(--overlay-b)
+}
+
+.metadata .published-date,
+.metadata .updated-date {
+    font-style: italic;
 }
