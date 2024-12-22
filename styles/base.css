@@ -264,6 +264,11 @@ p {
     font-weight: 600;
     color: var(--text);
     text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.site-title:hover {
+    color: var(--black);
 }
 
 /* The button to go to the map */
@@ -296,6 +301,7 @@ p {
     display: block;
     padding: 0.5rem 0.75rem;
     color: var(--text);
+    background-color: var(--mantle);
     text-decoration: none;
     border-radius: 6px;
     transition: all 0.15s ease;
@@ -307,6 +313,7 @@ p {
 .nav-link:hover {
     background-color: var(--base);
     color: var(--black);
+    filter: brightness(1.1);
     transform: translateX(2%);
 }
 
@@ -452,4 +459,39 @@ a:hover {
 .metadata .published-date,
 .metadata .updated-date {
     font-style: italic;
+}
+
+
+/* Social icons row */
+.social-icons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 0;
+}
+
+/* Individual social icon styling */
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    color: var(--overlay-c);
+    transition: color 0.2s ease, transform 0.2s ease;
+    border-radius: 12px;
+}
+
+.social-icon:hover {
+    color: var(--text);
+    transform: translateY(-2px);
+    filter: drop-shadow(0 0 2px var(--surface-a));
+}
+
+.social-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+    stroke: none;
+    fill: currentColor;
 }
