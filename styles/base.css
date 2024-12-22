@@ -34,6 +34,7 @@
     --base: hsl(40, 23%, 97%);
     --mantle: hsl(40, 22%, 95%);
     --crust: hsl(40, 21%, 92%);
+    --text-sans: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 @font-face {
@@ -423,8 +424,8 @@ a:hover {
 
 /* General container styling */
 .header-container {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: #333;
+    font-family: var(--text-sans);
+    color: var(--grey);
     line-height: 1.5;
     margin-bottom: 1.6rem;
 }
@@ -645,4 +646,92 @@ figcaption {
     font-size: 0.9rem;
     margin-top: 0.5rem;
     font-style: italic;
+}
+
+
+.file-download {
+    font-family: var(--text-sans);
+    display: flex;
+    width: 16rem;
+    height: 4rem;
+    border: 1px solid var(--surface-a);
+    background-color: var(--base);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+    padding: 0.75rem 1rem 0.75rem 4rem;
+}
+
+.file-download:hover {
+    border-color: var(--green);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Icon container */
+.file-download::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4rem;
+    height: 100%;
+    background-color: var(--mantle);
+}
+
+.file-download svg {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    width: 2rem;
+    height: 2rem;
+    stroke: #4b5563;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* The SVG icon itself */
+.file-download::after {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    width: 2rem;
+    height: 2rem;
+    mask: url("/assets/icons/sprite.svg#document");
+    mask-size: cover;
+    padding-left: 1rem;
+}
+
+/* Filename container */
+.file-download span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+    padding-left: 1rem;
+}
+
+/* Filename text */
+.file-download span::before {
+    content: attr(data-filename);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+/* Download text */
+.file-download span::after {
+    content: 'click to download';
+    font-size: 0.75rem;
+    color: var(--overlay-a);
+}
+
+.downloads-row {
+    display: flex;
+    gap: 1rem;  /* Space between items */
 }
