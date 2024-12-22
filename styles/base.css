@@ -315,7 +315,9 @@ p {
     width: 24px;
     height: 24px;
     display: inline-block;
-    color: currentColor;
+    stroke-miterlimit: 10;
+    stroke: currentColor;
+    fill: currentColor;
 }
 
 .icon--sm {
@@ -326,6 +328,21 @@ p {
 .icon--lg {
     width: 48px;
     height: 48px;
+}
+
+/* For stroke-based icons only */
+.icon--stroke {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* For fill-based icons only */
+.icon--fill {
+    stroke: none;
+    fill: currentColor;
 }
 
 h1,
