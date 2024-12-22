@@ -3,6 +3,7 @@ import markdown
 import yaml
 from sys import argv
 from extensions.code import CodeFormatter
+from extensions.image import ImageFormatter
 
 
 class HeaderMetadata:
@@ -126,7 +127,13 @@ def build_file(template: str, md_path: Path, force: bool = False) -> bool:
 
 # run the build_site function if this script is run
 if __name__ == "__main__":
-    md = markdown.Markdown(extensions=["fenced_code", "tables", "sane_lists", CodeFormatter()])
+    md = markdown.Markdown(extensions=[
+        "fenced_code",
+        "tables",
+        "sane_lists",
+        CodeFormatter(),
+        ImageFormatter()
+    ])
 
     if len(argv) == 1:
         build_site()
