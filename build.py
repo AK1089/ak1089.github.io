@@ -17,7 +17,7 @@ class HeaderMetadata:
         # create breadcrumb path (excluding the file itself)
         self.path_parts = []
         current = path.parent
-        root = Path(".")
+        root = Path(__file__).resolve().parent
         parts = []
 
         # traverse up the path until we reach the root
