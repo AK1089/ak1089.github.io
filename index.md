@@ -2,6 +2,7 @@
 title: Home
 date: 2024-04-19
 updated: 2024-12-22
+address_bar_title: Home | AK1089's Site
 ---
 
 Welcome! My name is Avish, and this is my personal site for things I make or find interesting. I'm 20 years old, born and raised in London, and am currently in my final year of pursuing an undergraduate degree in mathematics at the University of Cambridge.

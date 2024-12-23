@@ -16,6 +16,7 @@ class HeaderMetadata:
             if "updated" in frontmatter
             else None
         )
+        self.address_bar_title = frontmatter.get("address_bar_title", self.title)
 
         # create breadcrumb path (excluding the file itself)
         self.path_parts = []
@@ -116,6 +117,7 @@ def build_file(template: str, md_path: Path, force: bool = False) -> bool:
 
     # insert into template
     full_page = template.replace("<!-- CONTENT_GOES_HERE -->", page_html)
+    full_page = full_page.replace("<!-- TITLE_GOES_HERE -->", metadata.address_bar_title)
 
     # write to a .html file in the same location
     with open(html_path, "w") as f:
