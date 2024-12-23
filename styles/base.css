@@ -31,6 +31,10 @@
     --surface-c: #acb0be;
     --surface-b: #bcc0cc;
     --surface-a: #ccd0da;
+    --code-base: #1e1e2e;
+    --code-text: #dee2f2;
+    --code-line: #6c7086;
+    --code-surf: #585b70;
     --base: hsl(40, 23%, 97%);
     --mantle: hsl(40, 22%, 95%);
     --crust: hsl(40, 21%, 92%);
@@ -506,12 +510,18 @@ a:hover {
     fill: currentColor;
 }
 
+/* code not pre */
+:not(pre) > code {
+    font-family: "Cascadia Code", monospace;
+    font-size: 0.9rem;
+    background-color: var(--crust);
+    padding: 0 0.2rem;
+    border-radius: 4px;
+    color: var(--text);
+}
+
 /* Base code block container */
 pre {
-    --code-base: #1e1e2e;
-    --code-text: #dee2f2;
-    --code-line: #6c7086;
-    --code-surf: #585b70;
     position: relative;
     background: var(--code-base);
     margin: 1.5rem 0;
@@ -665,7 +675,7 @@ figcaption {
 }
 
 .file-download:hover {
-    border-color: var(--green);
+    border-color: var(--lime);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
 }
