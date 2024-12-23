@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    overflow: hidden;
+    height: 100%;
+}
+
 /* Set up the colour palette */
 :root {
     --rose: #dc8a78;
@@ -146,11 +152,13 @@ p {
 
 /* Main layout container */
 .layout-container {
+    position: relative;
     display: flex;
     justify-content: center;
     width: 100%;
     min-height: 100vh;
     background: var(--crust);
+    overflow-y: hidden;
 }
 
 /* Fixed widths for the two sidebars by default */
@@ -165,12 +173,13 @@ p {
 
 /* Main  */
 .main-content {
+    overflow-y: scroll;
+    height: 100vh;
     width: 768px;
     flex-shrink: 0;
     background: var(--base);
-    border-radius: 8px;
+    border-radius: 0 0 8px 8px;
     padding: 2rem;
-    height: fit-content;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     min-height: 100vh;
 }
@@ -511,7 +520,7 @@ a:hover {
 }
 
 /* code not pre */
-:not(pre) > code {
+:not(pre)>code {
     font-family: "Cascadia Code", monospace;
     font-size: 0.9rem;
     background-color: var(--crust);
@@ -532,9 +541,9 @@ pre {
 }
 
 /* Horizontal scroll container */
-pre > code {
+pre>code {
     display: block;
-    padding: 0 1rem 1rem 3rem;  
+    padding: 0 1rem 1rem 3rem;
     margin-bottom: -0.5rem;
     color: var(--code-text);
     font-family: "Cascadia Code", monospace;
@@ -547,18 +556,18 @@ pre > code {
 }
 
 /* Line numbers */
-pre > code {
+pre>code {
     counter-reset: line;
 }
 
-pre > code > span {
+pre>code>span {
     display: block;
     position: relative;
     line-height: 1.2;
     padding: 0.1rem 0;
 }
 
-pre > code > span::before {
+pre>code>span::before {
     counter-increment: line;
     content: counter(line);
     position: absolute;
@@ -743,5 +752,6 @@ figcaption {
 
 .downloads-row {
     display: flex;
-    gap: 1rem;  /* Space between items */
+    gap: 1rem;
+    /* Space between items */
 }
