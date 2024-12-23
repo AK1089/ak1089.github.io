@@ -19,17 +19,15 @@ class HeaderMetadata:
 
         # create breadcrumb path (excluding the file itself)
         self.path_parts = []
-        current = path.parent
         root = Path(__file__).resolve().parent.parent
-        parts = []
 
-        # traverse up the path until we reach the root
-        while current != root and current != Path("/"):
-            parts.append(current)
-            current = current.parent
-
-        # reverse the parts so we start from the root
-        self.path_parts = [(p.name, "/".join(p.parts)) for p in reversed(parts)]
+        relative_path = path.relative_to(root)
+                
+        # Create breadcrumb path (excluding the file itself)
+        self.path_parts = [
+            (p.name, f"/{p}") for p in relative_path.parents if p != Path(".")
+        ]
+        self.path_parts.reverse()  # Ensure parts are in the correct order
 
 
 # helper function to parse frontmatter from markdown content
@@ -46,16 +44,16 @@ def parse_markdown_with_frontmatter(content: str):
 
 # helper function to create the header HTML
 def create_header_html(metadata: HeaderMetadata) -> str:
-    breadcrumb_html = '<span class="separator"> • </span>'.join(
+    breadcrumb_html = '<span class="separator"> / </span>'.join(
         [
-            f'<a href="/{path_url}" class="path-link">{name}</a>'
+            f'<a href="{path_url}" class="path-link">{name}</a>'
             for name, path_url in metadata.path_parts
         ]
     )
 
     if breadcrumb_html:
         breadcrumb_html = (
-            f'<a href="/" class="path-link">home</a> <span class="separator"> • </span>'
+            f'<a href="/" class="path-link">home</a> <span class="separator"> / </span>'
             + breadcrumb_html
         )
 
@@ -133,6 +131,7 @@ if __name__ == "__main__":
         "tables",
         "nl2br",
         "sane_lists",
+        "smarty",
         CodeFormatter(),
         ImageFormatter(),
         DownloadFormatter()
