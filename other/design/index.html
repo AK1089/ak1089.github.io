@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+  <!-- Default header, with a title. Links to the main stylesheet. -->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home | AK1089's Site</title>
+    <link rel="stylesheet" href="/styles/base.css" />
+    <script>
+      function copyCode(button) {
+        const pre = button.parentElement;
+        const code = pre.querySelector("code");
+        const text = code.innerText;
+
+        navigator.clipboard.writeText(text);
+
+        button.classList.add("copied");
+        const originalIcon = button.innerHTML;
+        button.innerHTML = `
+            <svg class="icon icon--stroke" width="24" height="24">
+                <use href="/assets/icons/sprite.svg#check"></use>
+            </svg>
+        `;
+
+        setTimeout(() => {
+          button.classList.remove("copied");
+          button.innerHTML = originalIcon;
+        }, 1000);
+      }
+    </script>
+  </head>
+
+  <!-- The body: the layout-container div contains all the content -->
+
+  <body>
+    <div class="layout-container">
+      <!-- Padding on the left -->
+      <div class="spacing-left"></div>
+
+      <!-- The sidebar on the left, with the site title and navigation links -->
+      <div class="sidebar-left">
+        <!-- Header with the site title and a link to the map page -->
+        <div class="sidebar-header">
+          <a href="/" class="site-title">AK1089's Site</a>
+          <a href="/map" class="map-link">
+            <svg class="icon icon--stroke">
+              <use href="/assets/icons/sprite.svg#map"></use>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Primary navigation bar: links to the main sections of the site -->
+        <nav>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a
+                href="/utilities"
+                class="nav-link"
+                style="border-left: 3px solid var(--blue)"
+                >utilities</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/projects"
+                class="nav-link"
+                style="border-left: 3px solid var(--lime)"
+                >projects</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/blog"
+                class="nav-link"
+                style="border-left: 3px solid var(--peach)"
+                >blog</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/puzzles"
+                class="nav-link"
+                style="border-left: 3px solid var(--purple)"
+                >puzzles</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/tech"
+                class="nav-link"
+                style="border-left: 3px solid var(--maroon)"
+                >tech</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/maths"
+                class="nav-link"
+                style="border-left: 3px solid var(--teal)"
+                >maths</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/minr"
+                class="nav-link"
+                style="border-left: 3px solid var(--yellow)"
+                >minr</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/other"
+                class="nav-link"
+                style="border-left: 3px solid var(--subtext-b)"
+                >other</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <div class="social-icons">
+          <a
+            href="https://x.com/_AK1089_"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#twitter"></use>
+            </svg>
+          </a>
+          <a
+            href="https://github.com/ak1089/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#github"></use>
+            </svg>
+          </a>
+          <a
+            href="https://discord.com/users/380805820415344644"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#discord"></use>
+            </svg>
+          </a>
+          <a
+            href="https://steamcommunity.com/profiles/76561198281258106/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#steam"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.last.fm/user/AK1089-"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#lastfm"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/avishkumar/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#linkedin"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-left"></div>
+
+      <!-- The main content of the page: this is changed per-page and contains the actual content -->
+      <main class="main-content">
+        <header class="page-header">
+          <div class="header-container">
+            <div class="path">
+              <a href="/" class="path-link">home</a>
+              <span class="separator"> / </span
+              ><a href="/other" class="path-link">other</a
+              ><span class="separator"> / </span
+              ><a href="/other/design" class="path-link">design</a>
+            </div>
+            <h1 class="title">This Website's Design</h1>
+            <div class="metadata">
+              <span class="published-date">published December 22, 2024</span>
+            </div>
+          </div>
+        </header>
+        <p>
+          <strong
+            >All the code for this website is available
+            <a href="https://github.com/AK1089/ak1089.github.io">here</a
+            >.</strong
+          >
+        </p>
+        <p>
+          I first developed this website in April of 2024, with close to zero
+          web-development experience. Having created around 40 pages from then
+          until September before taking a break from new content, I became
+          unhappy with the design of the site. The aesthetics seemed
+          underdeveloped compared to the beauty of many other sites, while the
+          &ldquo;framework&rdquo; I was using was sloppy and built on hacks. For
+          example, I&rsquo;d written a basic Markdown-like parser from scratch
+          Python myself rather than using the existing one, which led to things
+          like code comments being given a <code>&lt;h1&gt;</code> tag due to
+          the <code>#</code> present.
+        </p>
+        <p>
+          In December, I decided to rewrite the website from scratch. The new
+          version of the site has sidebars, a new colour scheme, faster load
+          times, and my own icons. What it doesn&rsquo;t have it deliberate
+          errors thrown to make development easier or broken and mismatched tags
+          from botched automatic generation.
+        </p>
+        <figure>
+          <img
+            alt="The old version of my site, as it appeared shortly before this total redesign"
+            src="old-site.avif"
+          />
+          <figcaption>
+            The old version of my site, as it appeared shortly before this total
+            redesign
+          </figcaption>
+        </figure>
+        <p>
+          I was heavily inspired by Alex Turner (TurnTrout)&rsquo;s website
+          <a href="https://turntrout.com/launch">The Pond</a>. Alex is an
+          alignment researcher who has written extensively about power-seeking
+          AI and impact measures, and I highly recommend checking out his work.
+          He is also a fantastic web designer, and many of the choices he
+          details in his
+          <a href="https://turntrout.com/design">design post</a> are echoed
+          here. I am also a fan of <a href="https://gwern.net/">gwern.net</a>,
+          run by writer and polymath Gwern Branwen.
+        </p>
+        <h2>Typography</h2>
+        <p>
+          This site uses the font
+          <a href="https://fonts.google.com/specimen/EB+Garamond">EB Garamond</a
+          >, an open-source web font based on Claude Garamond&rsquo;s original
+          design of the 1592 Egenolff–Berner specimen. The sans-serif typeface
+          is
+          <span style="font-family: var(--text-sans); font-size: 0.9rem"
+            >Lucida Sans</span
+          >, which is used for the header and various other components, while
+          the monospace typeface is <code>Cascadia Code</code>, a pretty
+          &ldquo;nerd font&rdquo; originally designed for Windows.
+        </p>
+        <p>
+          I use the <em>major third</em> scale for resizing other fonts, which
+          scales each successive header by a factor of 1.25. Garamond typically
+          sets smaller than other typefaces at the same nominal font size, which
+          means other fonts are scaled to compensate.
+        </p>
+        <h2>Colours</h2>
+        <p>
+          The primary palette used on this site is based on
+          <a href="https://catppuccin.com/palette">Catppuccin Latte</a>. I
+          prefer warmer tones on websites, so I changed the hue of the base
+          background colours to have a yellower rather than bluer tint. I varied
+          many of the other colours to clash less with my changes and to fit
+          into specific aesthetic requirements, then added others to fill in the
+          gaps (like a <span style="color: var(--lime)">lighter green</span>).
+        </p>
+        <h2>Components and Icons</h2>
+        <p>
+          I&rsquo;ve made several individual components for this website to
+          display things I need frequently. For example, I write a lot of code,
+          and it helps to be able to display this neatly in code blocks:
+        </p>
+        <pre
+          data-language="python"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-python"><span># Let's do a code block!</span><span>def function(x: int):</span><span>    return x + 5</span></code></pre>
+        <p>
+          For hosting files on here, I like having pretty download links.
+          <code>&lt;​download example.pdf&gt;</code> expands to:
+        </p>
+        <p>
+          <a href="example.pdf" download class="file-download"
+            ><br />
+            <svg><use href="/assets/icons/sprite.svg#document"></use></svg
+            ><br />
+            <span data-filename="example.pdf"></span><br
+          /></a>
+        </p>
+        <p>
+          Here, this will be a blank download, but in general it will download
+          the specified file.
+        </p>
+        <p>
+          I also started using SVG icons, built off a single spritesheet. These
+          are all stored in a single place at
+          <code>/assets/icons/sprite.svg</code>, and accessed when needed with
+          the <code>&lt;​use&gt;</code> tag. This is extremely efficient thanks
+          to modern browsers caching SVGs aggressively.
+        </p>
+        <h2>Folder Structure</h2>
+        <p>
+          A lot of personal websites place each page at the root directory of
+          the site, often with pithy identifiers. Paul Graham&rsquo;s website is
+          a fantastic example of this: the link to almost every essay looks
+          something like
+          <a href="https://www.paulgraham.com/best.html"
+            >www.paulgraham.com/best.html</a
+          >. While this style works for some, I&rsquo;m not a huge fan of it
+          myself: I prefer deep nested organisation. All the link paths on my
+          website reflect the actual directory structure of
+          <a href="https://github.com/AK1089/ak1089.github.io">my repository</a
+          >, which I keep organised in the way I find most intuitive.
+        </p>
+        <p>
+          The folders on the left the only ones with content. The other
+          directories in the repository are for development purposes.
+          <code>assets</code> holds content which needs to be loaded from all
+          across the site, like fonts and icons. <code>builder</code> stores my
+          build scripts, including my custom Markdown extensions. Finally,
+          <code>scripts</code> and <code>styles</code> hold all the basic
+          JavaScript and CSS used hroughout the site.
+        </p>
+        <figure>
+          <img
+            alt="A graphical hierarchical view of the folder structure of this website"
+            src="folder-viewer.avif"
+          />
+          <figcaption>
+            A graphical hierarchical view of the folder structure of this
+            website
+          </figcaption>
+        </figure>
+        <p>
+          (This view is from my <code>folder-graph-viewer</code>
+          <a href="https://github.com/AK1089/folder-graph-viewer">repository</a
+          >, which I absolutely love. It shows all of your files and subfiles
+          dynamically, spread out with control over the display and which
+          folders are active.)
+        </p>
+        <h2>Build Process</h2>
+        <p>
+          While static site generators like
+          <a href="https://quartz.jzhao.xyz/">Quartz</a> and
+          <a href="https://gohugo.io/">Hugo</a> are cool, I find they add too
+          much bloat to a project which I want to be simple. I prefer having
+          full control over everything in my project, and thorough understanding
+          of every single file in my repository (plus, it feels nice having
+          created everything myself!)
+        </p>
+        <p>
+          The <code>builder</code> directory in my repository is the home of the
+          Markdown parser. I use Python&rsquo;s <code>markdown</code> package,
+          and traverse the project tree. Each Markdown file is built into an
+          HTML file with the same name in the same location. To avoid
+          overwriting manual edits, the traversal skips processing Markdown
+          files which were last edited before their HTML counterparts. I use the
+          <code>fenced_code</code>, <code>tables</code>, <code>nl2br</code>,
+          <code>sane_lists</code>, and <code>smarty</code> plugins, as well as a
+          few plugins I composed myself to deal with my custom HTML (like my own
+          image syntax, for example).
+        </p>
+        <p>
+          The HTML generated by this build script is then injected into a
+          template document, which holds the sidebars and inline scripts. This
+          makes the sidebar content consistent across pages while still editable
+          in one place.
+        </p>
+        <p>
+          To make development easier, I added a keyboard shortcut in VSCode that
+          force-builds the currently focused Markdown file into HTML. This meant
+          I don&rsquo;t have to run the site-wide build process every time I
+          want to see my changes.
+        </p>
+        <h2>Performance</h2>
+        <p>
+          I have tried to maximise performance on this site, which mainly comes
+          in the form of minimising the number and size of files loaded.
+          Additionally, I have tried to reduce the JavaScript immensely,
+          especially considered to the original version of this site (which used
+          massive amounts of JavaScript upon every page load). The only code
+          which is regularly used is the <code>Copy to Clipboard</code> button
+          in the top right of code blocks: this is added inline in the HTML
+          template.
+        </p>
+        <pre
+          data-language="demo"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-demo"><span># Hover over me to see the copy button appear!</span></code></pre>
+        <p>
+          When a page is loaded, only the HTML, CSS, and icon sheet are loaded.
+          The CSS triggers only the correct subset of fonts to be requested.
+          Font and icon caching are usually extremely efficient on modern
+          browsers, which means only two significant files are loaded. To
+          minimise file sizes, I use AVIF files to store images, which are
+          surprisingly well-compressed (typically a 90% space saving over PNG).
+        </p>
+        <h2>Other</h2>
+        <p>
+          This site is still a work in progress, and there are many things which
+          I want to edit. I&rsquo;ll update this page as I make more changes and
+          improvements!
+        </p>
+      </main>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-right"></div>
+
+      <!-- The sidebar on the right -->
+      <aside class="sidebar-right"></aside>
+
+      <!-- Padding on the right -->
+      <div class="spacing-right"></div>
+    </div>
+  </body>
+</html>
