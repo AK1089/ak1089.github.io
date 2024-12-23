@@ -9,7 +9,7 @@ I first developed this website in April of 2024, with close to zero web-developm
 
 In December, I decided to rewrite the website from scratch. The new version of the site has sidebars, a new colour scheme, faster load times, and my own icons. What it doesn't have it deliberate errors thrown to make development easier or broken and mismatched tags from botched automatic generation.
 
-![The old version of my site, as it appeared shortly before this total redesign](old-site.avif)
+![The old version of my site, as it appeared shortly before this total redesign](design/old-site.avif)
 
 I was heavily inspired by Alex Turner (TurnTrout)'s website [The Pond](https://turntrout.com/launch). Alex is an alignment researcher who has written extensively about power-seeking AI and impact measures, and I highly recommend checking out his work. He is also a fantastic web designer, and many of the choices he details in his [design post](https://turntrout.com/design) are echoed here. I am also a fan of [gwern.net](https://gwern.net/), run by writer and polymath Gwern Branwen.
 
@@ -47,7 +47,7 @@ A lot of personal websites place each page at the root directory of the site, of
 
 The folders on the left the only ones with content. The other directories in the repository are for development purposes. `assets` holds content which needs to be loaded from all across the site, like fonts and icons. `builder` stores my build scripts, including my custom Markdown extensions. Finally, `scripts` and `styles` hold all the basic JavaScript and CSS used hroughout the site.
 
-![A graphical hierarchical view of the folder structure of this website](folder-viewer.avif)
+![A graphical hierarchical view of the folder structure of this website](design/folder-viewer.avif)
 
 (This view is from my `folder-graph-viewer` [repository](https://github.com/AK1089/folder-graph-viewer), which I absolutely love. It shows all of your files and subfiles dynamically, spread out with control over the display and which folders are active.)
 
