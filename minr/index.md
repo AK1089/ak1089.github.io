@@ -14,8 +14,10 @@ One of the biggest features of the server is a completely custom plugin, which i
 
 ## Links to External Resources
 
-Some of these links to the forums are restricted to <span style="color: var(--lime)">Greenies</span> and above.
+Some links to the Minr forums are restricted to <span style="color: var(--lime)">Greenies</span> and above.
 
+- Eszes Bálint's [BDStudio](https://eszesbalint.github.io/bdstudio/editor) is a powerful GUI editor for working with block displays.
+- [MCStacker](https://mcstacker.net/) is an incredibly capable custom command builder which requires very little knowledge of commands.
 - The [official MSC documentation](https://msc-documentation.readthedocs.io/en/latest/) is worth reading if you are starting out with scripting.
 - `Lightwood13` has developed a [VSCode extension](https://marketplace.visualstudio.com/items?itemName=Lightwood13.msc) which helps with writing MSC scripts. I think it's fantastic, and well worth the setup investment.
 - `rmanimal` wrote [Scripts with rman](https://forums.minr.org/threads/scripts-with-rman-1-basic-script-understanding.3193/) in 2018, and it still holds up as the canonical tutorial-style introduction to scripting.

@@ -20,4 +20,4 @@ I've been a hobby programmer since I was around 12. I mostly write code in Pytho
 
 ## Everything Else
 
-🚧 This section is under construction!
+- Here's a list of [software I especially like](good-software).
