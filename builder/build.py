@@ -5,6 +5,7 @@ from sys import argv
 from extensions.code import CodeFormatter
 from extensions.image import ImageFormatter
 from extensions.downloads import DownloadFormatter
+from extensions.spoiler import SpoilerFormatter
 
 
 class HeaderMetadata:
@@ -137,7 +138,8 @@ if __name__ == "__main__":
         "markdown_katex",
         CodeFormatter(),
         ImageFormatter(),
-        DownloadFormatter()
+        DownloadFormatter(),
+        SpoilerFormatter()
     ])
 
     if len(argv) == 1:

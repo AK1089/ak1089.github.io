@@ -840,3 +840,37 @@ figcaption {
     content: counter(subitem, lower-alpha) ".";
     font-size: 0.9rem;
 }
+
+.spoiler {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.spoiler span {
+    filter: blur(6px) brightness(0.8);
+    transition: 0.2s;
+    min-width: 50px;
+    display: inline-block;
+    color: var(--subtext-a);
+}
+
+.spoiler::before {
+    content: "hover";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8em;
+    color: var(--overlay-b);
+}
+
+.spoiler:hover span {
+    filter: blur(0) brightness(1);
+}
+
+.spoiler:hover::before {
+    display: none;
+}
