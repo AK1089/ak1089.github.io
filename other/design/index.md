@@ -53,7 +53,7 @@ Previously, I would have used client-side rendering for mathematical content, du
 
 A lot of personal websites place each page at the root directory of the site, often with pithy identifiers. Paul Graham's website is a fantastic example of this: the link to almost every essay looks something like [www.paulgraham.com/best.html](https://www.paulgraham.com/best.html). While this style works for some, I'm not a huge fan of it myself: I prefer deep nested organisation. All the link paths on my website reflect the actual directory structure of [my repository](https://github.com/AK1089/ak1089.github.io), which I keep organised in the way I find most intuitive.
 
-The folders on the left the only ones with content. The other directories in the repository are for development purposes. `assets` holds content which needs to be loaded from all across the site, like fonts and icons. `builder` stores my build scripts, including my custom Markdown extensions. Finally, `scripts` and `styles` hold all the basic JavaScript and CSS used hroughout the site.
+The folders on the left the only ones with content. The other directories in the repository are for development purposes. `assets` holds content which needs to be loaded from all across the site, like fonts and icons. `builder` stores my build scripts, including my custom Markdown extensions. Finally, `scripts` and `styles` hold all the basic JavaScript and CSS used throughout the site.
 
 ![A graphical hierarchical view of the folder structure of this website](folder-viewer.avif)
 
