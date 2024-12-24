@@ -6,6 +6,7 @@ from extensions.code import CodeFormatter
 from extensions.image import ImageFormatter
 from extensions.downloads import DownloadFormatter
 from extensions.spoiler import SpoilerFormatter
+from extensions.blockquote import BlockquoteFormatter
 
 
 class HeaderMetadata:
@@ -136,6 +137,7 @@ if __name__ == "__main__":
         "sane_lists",
         "smarty",
         "markdown_katex",
+        BlockquoteFormatter(),
         CodeFormatter(),
         ImageFormatter(),
         DownloadFormatter(),

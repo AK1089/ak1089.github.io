@@ -49,6 +49,10 @@ Thanks to the wonderful work of [KaTeX](https://katex.org/) and specifically the
 
 Previously, I would have used client-side rendering for mathematical content, due to my lack of care for scripts. This is a lot nicer!
 
+```quote-success
+I also have a few blockquote styles, like this! They are highlighted blocks which come with icons. This one is called "success".
+```
+
 ## Folder Structure
 
 A lot of personal websites place each page at the root directory of the site, often with pithy identifiers. Paul Graham's website is a fantastic example of this: the link to almost every essay looks something like [www.paulgraham.com/best.html](https://www.paulgraham.com/best.html). While this style works for some, I'm not a huge fan of it myself: I prefer deep nested organisation. All the link paths on my website reflect the actual directory structure of [my repository](https://github.com/AK1089/ak1089.github.io), which I keep organised in the way I find most intuitive.

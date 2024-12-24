@@ -525,7 +525,7 @@ a:hover {
     font-size: 0.9rem;
     background-color: var(--crust);
     padding: 0 0.2rem;
-    border-radius: 4px;
+    border-radius: 8px;
     color: var(--text);
 }
 
@@ -675,7 +675,7 @@ figcaption {
     height: 4rem;
     border: 1px solid var(--surface-a);
     background-color: var(--base);
-    border-radius: 0.5rem;
+    border-radius: 8px;
     overflow: hidden;
     text-decoration: none;
     transition: all 0.2s ease;
@@ -873,4 +873,98 @@ figcaption {
 
 .spoiler:hover::before {
     display: none;
+}
+
+blockquote {
+    --quote-fg: var(--red);
+    --quote-bg: #FFF6F6;
+    --info-fg: var(--darkblue);
+    --info-bg: #F0F4FF;
+    --success-fg: var(--green);
+    --success-bg: #F1FFF8;
+    --warning-fg: var(--yellow);
+    --warning-bg: #FFF9DA;
+}
+
+/* Base blockquote styles */
+blockquote[class^="quote-"] {
+    position: relative;
+    margin: 1rem 0;
+    padding: 1rem 1rem 1rem 3.5rem;
+    border-radius: 8px;
+    color: var(--subtext-b);
+}
+
+/* Left border */
+blockquote[class^="quote-"]::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0.25rem;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+
+/* Images */
+blockquote > svg {
+    position: absolute;
+    align-items: baseline;
+    left: 1rem;
+    top: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* Quote variant */
+.quote-quote {
+    background-color: var(--quote-bg);
+}
+
+.quote-quote::before {
+    background-color: var(--quote-fg);
+}
+
+.quote-quote svg {
+    color: var(--quote-fg)
+}
+
+/* Info variant */
+.quote-info {
+    background-color: var(--info-bg);
+}
+
+.quote-info::before {
+    background-color: var(--info-fg);
+}
+
+.quote-info svg {
+    color: var(--info-fg);
+}
+
+/* Warning variant */
+.quote-warning {
+    background-color: var(--warning-bg);
+}
+
+.quote-warning::before {
+    background-color: var(--warning-fg);
+}
+
+.quote-warning svg {
+    color: var(--warning-fg);
+}
+
+/* Success variant */
+.quote-success {
+    background-color: var(--success-bg);
+}
+
+.quote-success::before {
+    background-color: var(--success-fg);
+}
+
+.quote-success svg {
+    color: var(--success-fg);
 }
