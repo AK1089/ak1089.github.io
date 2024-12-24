@@ -9,13 +9,13 @@ I first developed this website in April of 2024, with close to zero web-developm
 
 In December, I decided to rewrite the website from scratch. The new version of the site has sidebars, a new colour scheme, faster load times, and my own icons. What it doesn't have it deliberate errors thrown to make development easier or broken and mismatched tags from botched automatic generation.
 
-![The old version of my site, as it appeared shortly before this total redesign](design/old-site.avif)
+![The old version of my site, as it appeared shortly before this total redesign](old-site.avif)
 
 I was heavily inspired by Alex Turner (TurnTrout)'s website [The Pond](https://turntrout.com/launch). Alex is an alignment researcher who has written extensively about power-seeking AI and impact measures, and I highly recommend checking out his work. He is also a fantastic web designer, and many of the choices he details in his [design post](https://turntrout.com/design) are echoed here. I am also a fan of [gwern.net](https://gwern.net/), run by writer and polymath Gwern Branwen.
 
 ## Typography
 
-This site uses the font [EB Garamond](https://fonts.google.com/specimen/EB+Garamond), an open-source web font based on Claude Garamond's original design of the 1592 Egenolff–Berner specimen. The sans-serif typeface is <span style="font-family: var(--text-sans); font-size: 0.9rem;">Lucida Sans</span>, which is used for the header and various other components, while the monospace typeface is `Cascadia Code`, a pretty "nerd font" originally designed for Windows.
+This site uses the font [EB Garamond](https://fonts.google.com/specimen/EB+Garamond), an open-source web font based on Claude Garamond's original design of the 1592 Egenolff-Berner specimen. The sans-serif typeface is <span style="font-family: var(--text-sans); font-size: 0.9rem;">Lucida Sans</span>, which is used for the header and various other components, while the monospace typeface is `Cascadia Code`, a pretty "nerd font" originally designed for Windows.
 
 I use the *major third* scale for resizing other fonts, which scales each successive header by a factor of 1.25. Garamond typically sets smaller than other typefaces at the same nominal font size, which means other fonts are scaled to compensate.
 
@@ -41,13 +41,21 @@ Here, this will be a blank download, but in general it will download the specifi
 
 I also started using SVG icons, built off a single spritesheet. These are all stored in a single place at `/assets/icons/sprite.svg`, and accessed when needed with the `<​use>` tag. This is extremely efficient thanks to modern browsers caching SVGs aggressively.
 
+Thanks to the wonderful work of [KaTeX](https://katex.org/) and specifically the `markdown-katex` [Python library](https://pypi.org/project/markdown-katex/), this site serves fast and beautiful LaTeX prerendered by the server.
+
+```math
+\oint_{C} (P \, dx + Q \, dy) = \iint_{D} \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) \, dA \quad \text{(Green's Theorem).}
+```
+
+Previously, I would have used client-side rendering for mathematical content, due to my lack of care for scripts. This is a lot nicer!
+
 ## Folder Structure
 
 A lot of personal websites place each page at the root directory of the site, often with pithy identifiers. Paul Graham's website is a fantastic example of this: the link to almost every essay looks something like [www.paulgraham.com/best.html](https://www.paulgraham.com/best.html). While this style works for some, I'm not a huge fan of it myself: I prefer deep nested organisation. All the link paths on my website reflect the actual directory structure of [my repository](https://github.com/AK1089/ak1089.github.io), which I keep organised in the way I find most intuitive.
 
 The folders on the left the only ones with content. The other directories in the repository are for development purposes. `assets` holds content which needs to be loaded from all across the site, like fonts and icons. `builder` stores my build scripts, including my custom Markdown extensions. Finally, `scripts` and `styles` hold all the basic JavaScript and CSS used hroughout the site.
 
-![A graphical hierarchical view of the folder structure of this website](design/folder-viewer.avif)
+![A graphical hierarchical view of the folder structure of this website](folder-viewer.avif)
 
 (This view is from my `folder-graph-viewer` [repository](https://github.com/AK1089/folder-graph-viewer), which I absolutely love. It shows all of your files and subfiles dynamically, spread out with control over the display and which folders are active.)
 

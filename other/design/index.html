@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home | AK1089's Site</title>
+    <title>This Website's Design</title>
     <link rel="stylesheet" href="/styles/base.css" />
     <script>
       function copyCode(button) {
@@ -198,6 +198,23 @@
             </div>
           </div>
         </header>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"
+          integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs"
+          crossorigin="anonymous"
+        />
+
+        <style type="text/css">
+          .katex img {
+            object-fit: fill;
+            padding: unset;
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: inherit;
+          }
+        </style>
         <p>
           <strong
             >All the code for this website is available
@@ -227,7 +244,7 @@
         <figure>
           <img
             alt="The old version of my site, as it appeared shortly before this total redesign"
-            src="design/old-site.avif"
+            src="old-site.avif"
           />
           <figcaption>
             The old version of my site, as it appeared shortly before this total
@@ -250,7 +267,7 @@
           This site uses the font
           <a href="https://fonts.google.com/specimen/EB+Garamond">EB Garamond</a
           >, an open-source web font based on Claude Garamond&rsquo;s original
-          design of the 1592 Egenolff–Berner specimen. The sans-serif typeface
+          design of the 1592 Egenolff-Berner specimen. The sans-serif typeface
           is
           <span style="font-family: var(--text-sans); font-size: 0.9rem"
             >Lucida Sans</span
@@ -306,6 +323,267 @@
           the <code>&lt;​use&gt;</code> tag. This is extremely efficient thanks
           to modern browsers caching SVGs aggressively.
         </p>
+        <p>
+          Thanks to the wonderful work of
+          <a href="https://katex.org/">KaTeX</a> and specifically the
+          <code>markdown-katex</code>
+          <a href="https://pypi.org/project/markdown-katex/">Python library</a>,
+          this site serves fast and beautiful LaTeX prerendered by the server.
+        </p>
+        <p>
+          <span class="katex-display"
+            ><span class="katex"
+              ><span class="katex-mathml"
+                ><math
+                  xmlns="http://www.w3.org/1998/Math/MathML"
+                  display="block"
+                  ><semantics
+                    ><mrow
+                      ><msub><mo>∮</mo><mi>C</mi></msub
+                      ><mo stretchy="false">(</mo><mi>P</mi><mtext> </mtext
+                      ><mi>d</mi><mi>x</mi><mo>+</mo><mi>Q</mi><mtext> </mtext
+                      ><mi>d</mi><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo
+                      ><msub><mo>∬</mo><mi>D</mi></msub
+                      ><mrow
+                        ><mo fence="true">(</mo
+                        ><mfrac
+                          ><mrow><mi mathvariant="normal">∂</mi><mi>Q</mi></mrow
+                          ><mrow
+                            ><mi mathvariant="normal">∂</mi><mi>x</mi></mrow
+                          ></mfrac
+                        ><mo>−</mo
+                        ><mfrac
+                          ><mrow><mi mathvariant="normal">∂</mi><mi>P</mi></mrow
+                          ><mrow
+                            ><mi mathvariant="normal">∂</mi><mi>y</mi></mrow
+                          ></mfrac
+                        ><mo fence="true">)</mo></mrow
+                      ><mtext> </mtext><mi>d</mi><mi>A</mi
+                      ><mspace width="1em" /><mtext
+                        >(Green’s Theorem).</mtext
+                      ></mrow
+                    ><annotation encoding="application/x-tex">
+                      \oint_{C} (P \, dx + Q \, dy) = \iint_{D} \left(
+                      \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial
+                      y} \right) \, dA \quad \text{(Green&#x27;s Theorem).}
+                    </annotation></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span
+                    class="strut"
+                    style="height: 2.2719em; vertical-align: -0.9119em"
+                  ></span
+                  ><span class="mop"
+                    ><span
+                      class="mop op-symbol large-op"
+                      style="
+                        margin-right: 0.44445em;
+                        position: relative;
+                        top: -0.0011em;
+                      "
+                      >∮</span
+                    ><span class="msupsub"
+                      ><span class="vlist-t vlist-t2"
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: -0.4336em"
+                            ><span
+                              style="
+                                top: -1.7881em;
+                                margin-left: -0.4445em;
+                                margin-right: 0.05em;
+                              "
+                              ><span class="pstrut" style="height: 2.7em"></span
+                              ><span class="sizing reset-size6 size3 mtight"
+                                ><span class="mord mtight"
+                                  ><span
+                                    class="mord mathnormal mtight"
+                                    style="margin-right: 0.07153em"
+                                    >C</span
+                                  ></span
+                                ></span
+                              ></span
+                            ></span
+                          ><span class="vlist-s">​</span></span
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: 0.9119em"
+                            ><span></span></span></span></span></span></span
+                  ><span class="mopen">(</span
+                  ><span class="mord mathnormal" style="margin-right: 0.13889em"
+                    >P</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord mathnormal">d</span
+                  ><span class="mord mathnormal">x</span
+                  ><span class="mspace" style="margin-right: 0.2222em"></span
+                  ><span class="mbin">+</span
+                  ><span
+                    class="mspace"
+                    style="margin-right: 0.2222em"
+                  ></span></span
+                ><span class="base"
+                  ><span
+                    class="strut"
+                    style="height: 1em; vertical-align: -0.25em"
+                  ></span
+                  ><span class="mord mathnormal">Q</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord mathnormal">d</span
+                  ><span class="mord mathnormal" style="margin-right: 0.03588em"
+                    >y</span
+                  ><span class="mclose">)</span
+                  ><span class="mspace" style="margin-right: 0.2778em"></span
+                  ><span class="mrel">=</span
+                  ><span
+                    class="mspace"
+                    style="margin-right: 0.2778em"
+                  ></span></span
+                ><span class="base"
+                  ><span
+                    class="strut"
+                    style="height: 2.4em; vertical-align: -0.95em"
+                  ></span
+                  ><span class="mop"
+                    ><span
+                      class="mop op-symbol large-op"
+                      style="
+                        margin-right: 0.44445em;
+                        position: relative;
+                        top: -0.001em;
+                      "
+                      >∬</span
+                    ><span class="msupsub"
+                      ><span class="vlist-t vlist-t2"
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: -0.4334em"
+                            ><span
+                              style="
+                                top: -1.7883em;
+                                margin-left: -0.4445em;
+                                margin-right: 0.05em;
+                              "
+                              ><span class="pstrut" style="height: 2.7em"></span
+                              ><span class="sizing reset-size6 size3 mtight"
+                                ><span class="mord mtight"
+                                  ><span
+                                    class="mord mathnormal mtight"
+                                    style="margin-right: 0.02778em"
+                                    >D</span
+                                  ></span
+                                ></span
+                              ></span
+                            ></span
+                          ><span class="vlist-s">​</span></span
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: 0.9117em"
+                            ><span></span></span></span></span></span></span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="minner"
+                    ><span class="mopen delimcenter" style="top: 0em"
+                      ><span class="delimsizing size3">(</span></span
+                    ><span class="mord"
+                      ><span class="mopen nulldelimiter"></span
+                      ><span class="mfrac"
+                        ><span class="vlist-t vlist-t2"
+                          ><span class="vlist-r"
+                            ><span class="vlist" style="height: 1.3714em"
+                              ><span style="top: -2.314em"
+                                ><span class="pstrut" style="height: 3em"></span
+                                ><span class="mord"
+                                  ><span
+                                    class="mord"
+                                    style="margin-right: 0.05556em"
+                                    >∂</span
+                                  ><span class="mord mathnormal">x</span></span
+                                ></span
+                              ><span style="top: -3.23em"
+                                ><span class="pstrut" style="height: 3em"></span
+                                ><span
+                                  class="frac-line"
+                                  style="border-bottom-width: 0.04em"
+                                ></span></span
+                              ><span style="top: -3.677em"
+                                ><span class="pstrut" style="height: 3em"></span
+                                ><span class="mord"
+                                  ><span
+                                    class="mord"
+                                    style="margin-right: 0.05556em"
+                                    >∂</span
+                                  ><span class="mord mathnormal">Q</span></span
+                                ></span
+                              ></span
+                            ><span class="vlist-s">​</span></span
+                          ><span class="vlist-r"
+                            ><span class="vlist" style="height: 0.686em"
+                              ><span></span></span></span></span></span
+                      ><span class="mclose nulldelimiter"></span></span
+                    ><span class="mspace" style="margin-right: 0.2222em"></span
+                    ><span class="mbin">−</span
+                    ><span class="mspace" style="margin-right: 0.2222em"></span
+                    ><span class="mord"
+                      ><span class="mopen nulldelimiter"></span
+                      ><span class="mfrac"
+                        ><span class="vlist-t vlist-t2"
+                          ><span class="vlist-r"
+                            ><span class="vlist" style="height: 1.3714em"
+                              ><span style="top: -2.314em"
+                                ><span class="pstrut" style="height: 3em"></span
+                                ><span class="mord"
+                                  ><span
+                                    class="mord"
+                                    style="margin-right: 0.05556em"
+                                    >∂</span
+                                  ><span
+                                    class="mord mathnormal"
+                                    style="margin-right: 0.03588em"
+                                    >y</span
+                                  ></span
+                                ></span
+                              ><span style="top: -3.23em"
+                                ><span class="pstrut" style="height: 3em"></span
+                                ><span
+                                  class="frac-line"
+                                  style="border-bottom-width: 0.04em"
+                                ></span></span
+                              ><span style="top: -3.677em"
+                                ><span class="pstrut" style="height: 3em"></span
+                                ><span class="mord"
+                                  ><span
+                                    class="mord"
+                                    style="margin-right: 0.05556em"
+                                    >∂</span
+                                  ><span
+                                    class="mord mathnormal"
+                                    style="margin-right: 0.13889em"
+                                    >P</span
+                                  ></span
+                                ></span
+                              ></span
+                            ><span class="vlist-s">​</span></span
+                          ><span class="vlist-r"
+                            ><span class="vlist" style="height: 0.8804em"
+                              ><span></span></span></span></span></span
+                      ><span class="mclose nulldelimiter"></span></span
+                    ><span class="mclose delimcenter" style="top: 0em"
+                      ><span class="delimsizing size3">)</span></span
+                    ></span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord mathnormal">d</span
+                  ><span class="mord mathnormal">A</span
+                  ><span class="mspace" style="margin-right: 1em"></span
+                  ><span class="mord text"
+                    ><span class="mord">(Green’s Theorem).</span></span
+                  ></span
+                ></span
+              ></span
+            ></span
+          >
+        </p>
+        <p>
+          Previously, I would have used client-side rendering for mathematical
+          content, due to my lack of care for scripts. This is a lot nicer!
+        </p>
         <h2>Folder Structure</h2>
         <p>
           A lot of personal websites place each page at the root directory of
@@ -332,7 +610,7 @@
         <figure>
           <img
             alt="A graphical hierarchical view of the folder structure of this website"
-            src="design/folder-viewer.avif"
+            src="folder-viewer.avif"
           />
           <figcaption>
             A graphical hierarchical view of the folder structure of this

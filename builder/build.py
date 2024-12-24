@@ -134,6 +134,7 @@ if __name__ == "__main__":
         "nl2br",
         "sane_lists",
         "smarty",
+        "markdown_katex",
         CodeFormatter(),
         ImageFormatter(),
         DownloadFormatter()
