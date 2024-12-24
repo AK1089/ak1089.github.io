@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laplace's Rule of Succession</title>
+  </head>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      min-height: 100vh;
+      background-color: hsl(40, 21%, 92%);
+    }
+
+    .header {
+      width: 100%;
+      padding: 20px;
+      position: relative;
+      text-align: center;
+    }
+
+    .title {
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      font-size: 2.5rem;
+      color: #262525;
+      margin: 0;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 20px;
+      left: 40px;
+      width: 32px;
+      height: 32px;
+      background-color: #666;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .close-button:hover {
+      background-color: #333;
+    }
+
+    .desmos-graph {
+      border: 2px solid #666;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+  </style>
+
+  <body>
+    <div class="header">
+      <button class="close-button" onclick="window.location='../'">×</button>
+      <h1 class="title">Laplace's Rule of Succession</h1>
+    </div>
+    <iframe
+      src="https://www.desmos.com/calculator/b4lbmtm4ks?embed"
+      class="desmos-graph"
+      width="1080"
+      height="784"
+    ></iframe>
+  </body>
+</html>

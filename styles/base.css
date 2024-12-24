@@ -661,7 +661,7 @@ figure img {
 /* Caption */
 figcaption {
     text-align: center;
-    color: #666;
+    color: var(--subtext-a);
     font-size: 0.9rem;
     margin-top: 0.5rem;
     font-style: italic;
@@ -908,7 +908,7 @@ blockquote[class^="quote-"]::before {
 }
 
 /* Images */
-blockquote > svg {
+blockquote>svg {
     position: absolute;
     align-items: baseline;
     left: 1rem;
@@ -967,4 +967,37 @@ blockquote > svg {
 
 .quote-success svg {
     color: var(--success-fg);
+}
+
+.katex {
+    font-size: 1em !important;
+    padding: 2px;
+}
+
+.katex-display {
+    margin: -0.5rem 0 -1.5rem 0 !important;
+}
+
+.graph-container {
+    width: 100%;
+    position: relative;
+}
+
+.desmos-graph {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.desmos-graph:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.desmos-graph.expanded {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1080px !important;
+    height: 768px !important;
+    z-index: 1000;
 }
