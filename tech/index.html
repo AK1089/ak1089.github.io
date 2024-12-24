@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+  <!-- Default header, with a title. Links to the main stylesheet. -->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tech | AK1089's Site</title>
+    <link rel="stylesheet" href="/styles/base.css" />
+    <script>
+      function copyCode(button) {
+        const pre = button.parentElement;
+        const code = pre.querySelector("code");
+        const text = code.innerText;
+
+        navigator.clipboard.writeText(text);
+
+        button.classList.add("copied");
+        const originalIcon = button.innerHTML;
+        button.innerHTML = `
+            <svg class="icon icon--stroke" width="24" height="24">
+                <use href="/assets/icons/sprite.svg#check"></use>
+            </svg>
+        `;
+
+        setTimeout(() => {
+          button.classList.remove("copied");
+          button.innerHTML = originalIcon;
+        }, 1000);
+      }
+    </script>
+  </head>
+
+  <!-- The body: the layout-container div contains all the content -->
+
+  <body>
+    <div class="layout-container">
+      <!-- Padding on the left -->
+      <div class="spacing-left"></div>
+
+      <!-- The sidebar on the left, with the site title and navigation links -->
+      <div class="sidebar-left">
+        <!-- Header with the site title and a link to the map page -->
+        <div class="sidebar-header">
+          <a href="/" class="site-title">AK1089's Site</a>
+          <a href="/map" class="map-link">
+            <svg class="icon icon--stroke">
+              <use href="/assets/icons/sprite.svg#map"></use>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Primary navigation bar: links to the main sections of the site -->
+        <nav>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a
+                href="/utilities"
+                class="nav-link"
+                style="border-left: 3px solid var(--blue)"
+                >utilities</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/projects"
+                class="nav-link"
+                style="border-left: 3px solid var(--lime)"
+                >projects</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/blog"
+                class="nav-link"
+                style="border-left: 3px solid var(--peach)"
+                >blog</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/puzzles"
+                class="nav-link"
+                style="border-left: 3px solid var(--purple)"
+                >puzzles</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/tech"
+                class="nav-link"
+                style="border-left: 3px solid var(--maroon)"
+                >tech</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/maths"
+                class="nav-link"
+                style="border-left: 3px solid var(--teal)"
+                >maths</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/minr"
+                class="nav-link"
+                style="border-left: 3px solid var(--yellow)"
+                >minr</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/other"
+                class="nav-link"
+                style="border-left: 3px solid var(--subtext-b)"
+                >other</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <div class="social-icons">
+          <a
+            href="https://x.com/_AK1089_"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#twitter"></use>
+            </svg>
+          </a>
+          <a
+            href="https://github.com/ak1089/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#github"></use>
+            </svg>
+          </a>
+          <a
+            href="https://discord.com/users/380805820415344644"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#discord"></use>
+            </svg>
+          </a>
+          <a
+            href="https://steamcommunity.com/profiles/76561198281258106/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#steam"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.last.fm/user/AK1089-"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#lastfm"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/avishkumar/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#linkedin"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-left"></div>
+
+      <!-- The main content of the page: this is changed per-page and contains the actual content -->
+      <main class="main-content">
+        <header class="page-header">
+          <div class="header-container">
+            <div class="path">
+              <a href="/" class="path-link">home</a>
+              <span class="separator"> / </span
+              ><a href="/tech" class="path-link">tech</a>
+            </div>
+            <h1 class="title">Technology and Programming</h1>
+            <div class="metadata">
+              <span class="published-date">published December 24, 2024</span>
+            </div>
+          </div>
+        </header>
+        <p>
+          I&rsquo;ve been a hobby programmer since I was around 12. I mostly
+          write code in Python, with some JavaScript on the side. I&rsquo;m also
+          a huge technology enthusiast, and believe in the power of accelerating
+          technological progress to elevate humanity to new heights. This
+          section of the site is focused on everything to do with technology,
+          both on the software and the hardware side.
+        </p>
+        <h2>Python and Other Programming</h2>
+        <p>🚧 This section is under construction!</p>
+        <h2>AI and Machine Learning</h2>
+        <p>🚧 This section is under construction!</p>
+        <h2>Engineering and Hardware</h2>
+        <p>🚧 This section is under construction!</p>
+        <h2>Everything Else</h2>
+        <p>🚧 This section is under construction!</p>
+      </main>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-right"></div>
+
+      <!-- The sidebar on the right -->
+      <aside class="sidebar-right"></aside>
+
+      <!-- Padding on the right -->
+      <div class="spacing-right"></div>
+    </div>
+  </body>
+</html>
