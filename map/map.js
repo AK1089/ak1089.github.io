@@ -56,17 +56,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     root.descendants().forEach(node => {
         const nodeGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
         nodeGroup.setAttribute("class", "sitemap-node");
+        if (visitedUrls.has(node.data.url)) {
+            nodeGroup.classList.add('visited');
+        }
         nodeGroup.setAttribute("transform", `translate(${node.y},${node.x})`);
 
         // Add circle
         const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        circle.setAttribute("r", "4");
+        if (visitedUrls.has(node.data.url)) {
+            circle.classList.add('visited');
+        }
         nodeGroup.appendChild(circle);
 
         // Add text
         const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
         text.setAttribute("dy", "0.31em");
-        text.setAttribute("x", node.children ? -8 : 8);
+        text.setAttribute("x", node.children ? -12 : 12);
         text.setAttribute("text-anchor", node.children ? "end" : "start");
         text.textContent = node.data.name;
         nodeGroup.appendChild(text);
