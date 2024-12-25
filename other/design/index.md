@@ -75,11 +75,15 @@ To make development easier, I added a keyboard shortcut in VSCode that force-bui
 
 ## Performance
 
-I have tried to maximise performance on this site, which mainly comes in the form of minimising the number and size of files loaded. Additionally, I have tried to reduce the JavaScript immensely, especially considered to the original version of this site (which used massive amounts of JavaScript upon every page load). The only code which is regularly used is the `Copy to Clipboard` button in the top right of code blocks: this is added inline in the HTML template.
+I have tried to maximise performance on this site, which mainly comes in the form of minimising the number and size of files loaded. Additionally, I have tried to reduce the JavaScript immensely, especially considered to the original version of this site (which used massive amounts of JavaScript upon every page load).
+
+There are two pieces of code which are regularly used on this site. The first is the `Copy to Clipboard` button in the top right of code blocks: this is added inline in the HTML template.
 
 ```demo
 # Hover over me to see the copy button appear!
 ```
+
+Secondly, there is the script which saves that you have read a particular page before. This is used in the [site map](/map) to display your exploration progress. This is also added inline in the template.
 
 When a page is loaded, only the HTML, CSS, and icon sheet are loaded. The CSS triggers only the correct subset of fonts to be requested. Font and icon caching are usually extremely efficient on modern browsers, which means only two significant files are loaded. To minimise file sizes, I use AVIF files to store images, which are surprisingly well-compressed (typically a 90% space saving over PNG).
 

@@ -676,14 +676,22 @@
           in the form of minimising the number and size of files loaded.
           Additionally, I have tried to reduce the JavaScript immensely,
           especially considered to the original version of this site (which used
-          massive amounts of JavaScript upon every page load). The only code
-          which is regularly used is the <code>Copy to Clipboard</code> button
-          in the top right of code blocks: this is added inline in the HTML
-          template.
+          massive amounts of JavaScript upon every page load).
+        </p>
+        <p>
+          There are two pieces of code which are regularly used on this site.
+          The first is the <code>Copy to Clipboard</code> button in the top
+          right of code blocks: this is added inline in the HTML template.
         </p>
         <pre
           data-language="demo"
         ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-demo"><span># Hover over me to see the copy button appear!</span></code></pre>
+        <p>
+          Secondly, there is the script which saves that you have read a
+          particular page before. This is used in the
+          <a href="/map">site map</a> to display your exploration progress. This
+          is also added inline in the template.
+        </p>
         <p>
           When a page is loaded, only the HTML, CSS, and icon sheet are loaded.
           The CSS triggers only the correct subset of fonts to be requested.
@@ -709,6 +717,8 @@
       <!-- Padding on the right -->
       <div class="spacing-right"></div>
     </div>
+
+    <!-- Load the map script -->
     <script>
       // Load visited URLs from localStorage
       let visitedUrls = new Set();

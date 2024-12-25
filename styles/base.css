@@ -975,7 +975,7 @@ blockquote>svg {
 }
 
 .katex-display {
-    margin: -0.5rem 0 -1.5rem 0 !important;
+    margin: 0rem 0 -0.5rem 0 !important;
 }
 
 .graph-container {
