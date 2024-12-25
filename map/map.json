@@ -78,6 +78,12 @@
     "display": true
   },
   {
+    "name": "Python Quirks",
+    "url": "/tech/python-quirks",
+    "parent": "/tech",
+    "display": true
+  },
+  {
     "name": "Interactive Model",
     "url": "/maths/laplaces-rule-of-succession/interactive",
     "parent": "/maths/laplaces-rule-of-succession",

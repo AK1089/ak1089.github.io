@@ -844,7 +844,7 @@ figcaption {
 .spoiler {
     position: relative;
     cursor: pointer;
-    display: inline-block;
+    display: flexbox;
     text-align: center;
     padding: 0.5rem;
 }

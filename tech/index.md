@@ -8,7 +8,7 @@ I've been a hobby programmer since I was around 12. I mostly write code in Pytho
 
 ## Python and Other Programming
 
-🚧 This section is under construction!
+- Some fun [quirks](python-quirks) of Python programming.
 
 ## AI and Machine Learning
 

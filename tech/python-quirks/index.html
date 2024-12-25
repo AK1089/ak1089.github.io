@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+  <!-- Default header, with a title. Links to the main stylesheet. -->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python Quirks</title>
+    <link rel="stylesheet" href="/styles/base.css" />
+    <script>
+      function copyCode(button) {
+        const pre = button.parentElement;
+        const code = pre.querySelector("code");
+        const text = code.innerText;
+
+        navigator.clipboard.writeText(text);
+
+        button.classList.add("copied");
+        const originalIcon = button.innerHTML;
+        button.innerHTML = `
+            <svg class="icon icon--stroke" width="24" height="24">
+                <use href="/assets/icons/sprite.svg#check"></use>
+            </svg>
+        `;
+
+        setTimeout(() => {
+          button.classList.remove("copied");
+          button.innerHTML = originalIcon;
+        }, 1000);
+      }
+    </script>
+  </head>
+
+  <!-- The body: the layout-container div contains all the content -->
+
+  <body>
+    <div class="layout-container">
+      <!-- Padding on the left -->
+      <div class="spacing-left"></div>
+
+      <!-- The sidebar on the left, with the site title and navigation links -->
+      <div class="sidebar-left">
+        <!-- Header with the site title and a link to the map page -->
+        <div class="sidebar-header">
+          <a href="/" class="site-title">AK1089's Site</a>
+          <a href="/map" class="map-link">
+            <svg class="icon icon--stroke">
+              <use href="/assets/icons/sprite.svg#map"></use>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Primary navigation bar: links to the main sections of the site -->
+        <nav>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a
+                href="/utilities"
+                class="nav-link"
+                style="border-left: 3px solid var(--blue)"
+                >utilities</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/projects"
+                class="nav-link"
+                style="border-left: 3px solid var(--lime)"
+                >projects</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/blog"
+                class="nav-link"
+                style="border-left: 3px solid var(--peach)"
+                >blog</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/puzzles"
+                class="nav-link"
+                style="border-left: 3px solid var(--purple)"
+                >puzzles</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/tech"
+                class="nav-link"
+                style="border-left: 3px solid var(--maroon)"
+                >tech</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/maths"
+                class="nav-link"
+                style="border-left: 3px solid var(--teal)"
+                >maths</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/minr"
+                class="nav-link"
+                style="border-left: 3px solid var(--yellow)"
+                >minr</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/other"
+                class="nav-link"
+                style="border-left: 3px solid var(--subtext-b)"
+                >other</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <div class="social-icons">
+          <a
+            href="https://x.com/_AK1089_"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#twitter"></use>
+            </svg>
+          </a>
+          <a
+            href="https://github.com/ak1089/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#github"></use>
+            </svg>
+          </a>
+          <a
+            href="https://discord.com/users/380805820415344644"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#discord"></use>
+            </svg>
+          </a>
+          <a
+            href="https://steamcommunity.com/profiles/76561198281258106/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#steam"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.last.fm/user/AK1089-"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#lastfm"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/avishkumar/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#linkedin"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-left"></div>
+
+      <!-- The main content of the page: this is changed per-page and contains the actual content -->
+      <main class="main-content">
+        <header class="page-header">
+          <div class="header-container">
+            <div class="path">
+              <a href="/" class="path-link">home</a>
+              <span class="separator"> / </span
+              ><a href="/tech" class="path-link">tech</a
+              ><span class="separator"> / </span
+              ><a href="/tech/python-quirks" class="path-link">python-quirks</a>
+            </div>
+            <h1 class="title">Python Quirks</h1>
+            <div class="metadata">
+              <span class="published-date">published December 24, 2024</span>
+            </div>
+          </div>
+        </header>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"
+          integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs"
+          crossorigin="anonymous"
+        />
+
+        <style type="text/css">
+          .katex img {
+            object-fit: fill;
+            padding: unset;
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: inherit;
+          }
+        </style>
+        <p>
+          Here&rsquo;s a catalogue of some fun &ldquo;unintuitive&rdquo;
+          behaviour in Python.
+        </p>
+        <h3>Integer Memory Preallocation</h3>
+        <pre
+          data-language="python"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-python"><span>256 is int(&quot;256&quot;)</span><span>257 is int(&quot;257&quot;)</span></code></pre>
+        <p>
+          This is because Python
+          <span class="spoiler"
+            ><span
+              >preallocates the integers from -5 to 256 at initialisation,
+              meaning they are always at the same address in memory, while
+              integers beyond this range can have multiple different
+              references.</span
+            ></span
+          >
+        </p>
+        <h3>Floating Point Weirdness</h3>
+        <pre
+          data-language="python"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-python"><span>int((3.0 * 0.1 - 0.3) ** (-0.1))</span></code></pre>
+        <p>
+          This maps to an integer, despite the fact that
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo stretchy="false">(</mo><mn>3</mn><mo>×</mo><mn>0.1</mn
+                    ><mo>−</mo><mn>0.3</mn
+                    ><msup
+                      ><mo stretchy="false">)</mo
+                      ><mrow><mo>−</mo><mn>0.1</mn></mrow></msup
+                    ><mo>=</mo
+                    ><msup
+                      ><mn>0</mn><mrow><mo>−</mo><mn>0.1</mn></mrow></msup
+                    ></mrow
+                  ><annotation encoding="application/x-tex"
+                    >(3 \times 0.1 - 0.3)^{-0.1} = 0^{-0.1}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">(</span><span class="mord">3</span
+                ><span class="mspace" style="margin-right: 0.2222em"></span
+                ><span class="mbin">×</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2222em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7278em; vertical-align: -0.0833em"
+                ></span
+                ><span class="mord">0.1</span
+                ><span class="mspace" style="margin-right: 0.2222em"></span
+                ><span class="mbin">−</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2222em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1.0641em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">0.3</span
+                ><span class="mclose"
+                  ><span class="mclose">)</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.8141em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight"
+                                ><span class="mord mtight">−</span
+                                ><span class="mord mtight">0.1</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.8141em"></span
+                ><span class="mord"
+                  ><span class="mord">0</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.8141em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight"
+                                ><span class="mord mtight">−</span
+                                ><span class="mord mtight">0.1</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            ></span
+          >
+          is undefined. Can you guess the integer?
+        </p>
+        <p>
+          In fact, it is
+          <span class="spoiler"
+            ><span
+              >forty-two (42). This is because <code>0.3</code> is not
+              representable exactly in binary.</span
+            ></span
+          >
+        </p>
+        <h3>Lambda Arguments Are Captured at Definition Time</h3>
+        <pre
+          data-language="python"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-python"><span>funcs = [(lambda: i) for i in range(3)]</span><span>[f() for f in funcs]</span><span># [2, 2, 2] rather than [0, 1, 2]</span></code></pre>
+        <p>
+          The <code>i</code> in the lambda definition references the variable,
+          rather than its value at that point in time!
+        </p>
+        <h3>Default Arguments Can Be Mutated</h3>
+        <pre
+          data-language="python"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-python"><span>def append_to_list(item, my_list=[]):</span><span>    my_list.append(item)</span><span>    return my_list</span><span># now run the function twice</span><span>append_to_list(1)  # [1] as expected</span><span>append_to_list(2)  # [1, 2] rather than [2]</span></code></pre>
+        <p>
+          The list <code>my_list=[]</code> in the function definition defines an
+          empty list. Since lists are mutable, the first time we call the
+          function, <code>1</code> is appended to this default list, and remains
+          there indefinitely.
+        </p>
+        <h3>Attributes Have Their Name Mangled</h3>
+        <pre
+          data-language="python"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-python"><span>class MyClass:</span><span>    def __init__(self):</span><span>        self.__private = 42</span><span># create a member of the class</span><span>obj = MyClass()</span><span>obj.__private</span><span># AttributeError: 'MyClass' object has no attribute '__private'</span><span>obj._MyClass__private  # 42</span></code></pre>
+        <p>
+          When beginning attribute names with a double underscore, their names
+          are mangled to mark them as private.
+        </p>
+        <h3>And / Or</h3>
+        <pre
+          data-language="python"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-python"><span>'a' and 'b'  # 'b'</span><span>'a' or 'b'   # 'a'</span></code></pre>
+        <p>
+          In Python, <code>left and right</code> is actually equivalent to
+          <code>right if left else left</code>: it returns the first false-like
+          argument or the last true argument. Conversely,
+          <code>left or right</code> is equivalent to
+          <code>left if left else right</code>.
+        </p>
+        <h3>String Interning</h3>
+        <pre
+          data-language="python"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-python"><span>a = &quot;hello&quot;</span><span>b = &quot;hello&quot;</span><span>a is b  # True</span><span>a = &quot;hello world&quot;</span><span>b = &quot;hello world&quot;</span><span>a is b  # False</span></code></pre>
+        <p>
+          As an optimisation technique, Python stores single words and other
+          short strings in a string intern pool to re-use their addresses in
+          memory.
+        </p>
+        <h3>Bonus Quirk: JavaScript</h3>
+        <pre
+          data-language="javascript"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-javascript"><span>['0'].map(parseInt)</span><span>['1', '0'].map(parseInt)</span><span>['2', '1', '0'].map(parseInt)</span><span>['3', '2', '1', '0'].map(parseInt)</span><span>['4', '3', '2', '1', '0'].map(parseInt)</span><span>['5', '4', '3', '2', '1', '0'].map(parseInt)</span><span>['6', '5', '4', '3', '2', '1', '0'].map(parseInt)</span><span>['7', '6', '5', '4', '3', '2', '1', '0'].map(parseInt)</span></code></pre>
+        <p>
+          Try these in turn, trying to predict each before you do it. You can
+          look at the previous results before guessing. They map to:
+        </p>
+        <p>
+          <span class="spoiler"
+            ><span><code>[0]</code></span></span
+          >
+          for just 0<br /><span class="spoiler"
+            ><span><code>[1, NaN]</code></span></span
+          >
+          for 1 down to 0<br /><span class="spoiler"
+            ><span><code>[2, NaN, 0]</code></span></span
+          >
+          for 2 down to 0<br /><span class="spoiler"
+            ><span><code>[3, NaN, 1, 0]</code></span></span
+          >
+          for 3 down to 0<br /><span class="spoiler"
+            ><span><code>[4, NaN, NaN, 1, 0]</code></span></span
+          >
+          for 4 down to 0<br /><span class="spoiler"
+            ><span><code>[5, NaN, NaN, 2, 1, 0]</code></span></span
+          >
+          for 5 down to 0<br /><span class="spoiler"
+            ><span><code>[6, NaN, NaN, NaN, 2, 1, 0]</code></span></span
+          >
+          for 6 down to 0<br /><span class="spoiler"
+            ><span><code>[7, NaN, NaN, NaN, 3, 2, 1, 0]</code></span></span
+          >
+          for 7 down to 0
+        </p>
+        <p>
+          This is because <code>parseInt</code>
+          <span class="spoiler"
+            ><span
+              >takes a second argument for the radix (base): by default the list
+              index.</span
+            ></span
+          >
+        </p>
+      </main>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-right"></div>
+
+      <!-- The sidebar on the right -->
+      <aside class="sidebar-right"></aside>
+
+      <!-- Padding on the right -->
+      <div class="spacing-right"></div>
+    </div>
+
+    <!-- Load the map script -->
+    <script>
+      // Load visited URLs from localStorage
+      let visitedUrls = new Set();
+      const storedVisited = localStorage.getItem("visitedPages");
+      if (storedVisited) {
+        visitedUrls = new Set(JSON.parse(storedVisited));
+      }
+
+      // Log current page visit
+      const currentPath = window.location.pathname.replace(/\/$/, "");
+      visitedUrls.add(currentPath);
+      localStorage.setItem(
+        "visitedPages",
+        JSON.stringify(Array.from(visitedUrls)),
+      );
+    </script>
+  </body>
+</html>
