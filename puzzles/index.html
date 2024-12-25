@@ -218,5 +218,21 @@
       <!-- Padding on the right -->
       <div class="spacing-right"></div>
     </div>
+    <script>
+      // Load visited URLs from localStorage
+      let visitedUrls = new Set();
+      const storedVisited = localStorage.getItem("visitedPages");
+      if (storedVisited) {
+        visitedUrls = new Set(JSON.parse(storedVisited));
+      }
+
+      // Log current page visit
+      const currentPath = window.location.pathname.replace(/\/$/, "");
+      visitedUrls.add(currentPath);
+      localStorage.setItem(
+        "visitedPages",
+        JSON.stringify(Array.from(visitedUrls)),
+      );
+    </script>
   </body>
 </html>
