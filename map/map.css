@@ -1,0 +1,34 @@
+.sitemap-container {
+    width: 100%;
+    height: 480px;
+    background: white;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid var(--overlay-a);
+}
+
+.sitemap-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.sitemap-link {
+    fill: #ccc;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+}
+
+.sitemap-node circle {
+    fill: #555;
+    transition: all 0.2s ease;
+}
+
+.sitemap-node text {
+    font-size: 14px;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.sitemap-node:hover circle {
+    fill: #007AFF;
+    r: 6;
+}

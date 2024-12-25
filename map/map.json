@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Home",
+    "url": "/",
+    "parent": null,
+    "display": true
+  },
+  {
+    "name": "Blog",
+    "url": "/blog",
+    "parent": "/",
+    "display": true
+  },
+  {
+    "name": "Map",
+    "url": "/map",
+    "parent": "/",
+    "display": true
+  },
+  {
+    "name": "Maths",
+    "url": "/maths",
+    "parent": "/",
+    "display": true
+  },
+  {
+    "name": "Minr",
+    "url": "/minr",
+    "parent": "/",
+    "display": true
+  },
+  {
+    "name": "Other",
+    "url": "/other",
+    "parent": "/",
+    "display": true
+  },
+  {
+    "name": "Projects",
+    "url": "/projects",
+    "parent": "/",
+    "display": true
+  },
+  {
+    "name": "Puzzles",
+    "url": "/puzzles",
+    "parent": "/",
+    "display": true
+  },
+  {
+    "name": "Tech",
+    "url": "/tech",
+    "parent": "/",
+    "display": true
+  },
+  {
+    "name": "Utilities",
+    "url": "/utilities",
+    "parent": "/",
+    "display": true
+  },
+  {
+    "name": "Laplace's Rule Of Succession",
+    "url": "/maths/laplaces-rule-of-succession",
+    "parent": "/maths",
+    "display": true
+  },
+  {
+    "name": "Website Design",
+    "url": "/other/design",
+    "parent": "/other",
+    "display": true
+  },
+  {
+    "name": "Good Software",
+    "url": "/tech/good-software",
+    "parent": "/tech",
+    "display": true
+  },
+  {
+    "name": "Interactive Model",
+    "url": "/maths/laplaces-rule-of-succession/interactive",
+    "parent": "/maths/laplaces-rule-of-succession",
+    "display": false
+  }
+]
