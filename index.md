@@ -1,7 +1,7 @@
 ---
 title: Home
 date: 2024-04-19
-updated: 2024-12-22
+updated: 2024-12-24
 address_bar_title: Home | AK1089's Site
 ---
 
@@ -20,3 +20,5 @@ Some design features available include <span style="color: var(--red)">coloured 
 def function(x: int):
     return x + 5
 ```
+
+There is also an [interactive site map](/map), which is always available from the sidebar. I hope you enjoy your stay!
