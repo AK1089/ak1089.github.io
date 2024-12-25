@@ -71,8 +71,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Add text
         const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
         text.setAttribute("dy", "0.31em");
-        text.setAttribute("x", node.children ? -12 : 12);
-        text.setAttribute("text-anchor", node.children ? "end" : "start");
+        // text.setAttribute("x", node.children ? -12 : 12);
+        text.setAttribute("y", "1.5em");
+        text.setAttribute("x", 0);
+        // text.setAttribute("text-anchor", node.children ? "end" : "start");
+        text.setAttribute("text-anchor", "middle");
         text.textContent = node.data.name;
         nodeGroup.appendChild(text);
 

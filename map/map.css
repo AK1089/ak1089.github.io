@@ -23,15 +23,37 @@
     transition: stroke 0.2s ease, stroke-width 0.2s ease;
 }
 
-/* Base node styles */
 .sitemap-node {
     cursor: pointer;
 }
 
 .sitemap-node circle {
-    fill: var(--code-text);
+    fill: #ffecec;
+    stroke: #ff8080;
+    stroke-width: 2px;
     r: 7;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        r: 7;
+        stroke-width: 2px;
+        fill: #ffecec;
+    }
+
+    50% {
+        r: 8;
+        stroke-width: 3px;
+        fill: #ffe0e0;
+    }
+
+    100% {
+        r: 7;
+        stroke-width: 2px;
+        fill: #ffecec;
+    }
 }
 
 .sitemap-node text {
@@ -43,9 +65,11 @@
     user-select: none;
 }
 
-/* Visited state */
 .sitemap-node.visited circle {
-    fill: var(--surface-c);
+    fill: #f5f5f5;
+    stroke: #888888;
+    stroke-width: 2px;
+    animation: none;
 }
 
 .sitemap-node.visited text {
@@ -56,7 +80,9 @@
 .sitemap-node:hover circle {
     fill: #007AFF;
     r: 10;
+    stroke: #0056b3;
     filter: drop-shadow(0 0 2px rgba(0, 122, 255, 0.3));
+    animation: none;
 }
 
 .sitemap-node:hover text {
@@ -64,14 +90,12 @@
     font-weight: 500;
 }
 
-/* Hover effects for connected links */
-.sitemap-node:hover + .sitemap-link,
+.sitemap-node:hover+.sitemap-link,
 .sitemap-link:hover {
     stroke: #007AFF;
     stroke-width: 3px;
 }
 
-/* Active state for clicking feedback */
 .sitemap-node:active circle {
     r: 12;
     transition: all 0.1s ease;
