@@ -10,7 +10,7 @@ One of the biggest features of the server is a completely custom plugin, which i
 
 ## My Tools
 
-🚧 This section is under construction!
+- My [map art creator](map-art) allows you to upload images and view them as custom maps in game.
 
 ## Links to External Resources
 
@@ -22,12 +22,12 @@ Some links to the Minr forums are restricted to <span style="color: var(--lime)"
 - `Lightwood13` has developed a [VSCode extension](https://marketplace.visualstudio.com/items?itemName=Lightwood13.msc) which helps with writing MSC scripts. I think it's fantastic, and well worth the setup investment.
 - `rmanimal` wrote [Scripts with rman](https://forums.minr.org/threads/scripts-with-rman-1-basic-script-understanding.3193/) in 2018, and it still holds up as the canonical tutorial-style introduction to scripting.
 - `egabbac` maintains a [collection of resources](https://forums.minr.org/threads/compilation-of-mapmaking-resources.7331/) which aim to help with mapmaking.
-- On the server, you can `/warp teleport mapmaking` for a guide to many aspects of creating maps.
+- On the server, `/warp teleport mapmaking` has a guide to many aspects of creating maps.
 
-## Example Scripts
+## My Guides to Scripting & Mapmaking
 
 🚧 This section is under construction!
 
-## My Guides to Scripting & Mapmaking
+## Example Scripts
 
 🚧 This section is under construction!

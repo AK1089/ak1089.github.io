@@ -41,6 +41,7 @@ body {
     --code-text: #dee2f2;
     --code-line: #6c7086;
     --code-surf: #585b70;
+    --off-white: #f7f7f7;
     --base: hsl(40, 23%, 97%);
     --mantle: hsl(40, 22%, 95%);
     --crust: hsl(40, 21%, 92%);
@@ -564,7 +565,7 @@ pre>code>span {
     display: block;
     position: relative;
     line-height: 1.2;
-    padding: 0.1rem 0;
+    padding: 1rem 0 0.2rem 0;
 }
 
 pre>code>span::before {
@@ -586,10 +587,11 @@ pre::after {
     right: 3.5rem;
     color: var(--surface-a);
     font-family: system-ui, -apple-system, sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     padding: 0.3rem 0.5rem;
     background: var(--text);
     border-radius: 0 0 4px 4px;
+    overflow: hidden;
 }
 
 /* Selection highlighting */
@@ -603,7 +605,7 @@ pre code ::selection {
     top: 0;
     right: 1rem;
     padding: 0.3rem;
-    height: 2rem;
+    height: 1.8rem;
     background: var(--text);
     border: none;
     border-radius: 0 0 4px 4px;
@@ -617,6 +619,8 @@ pre code ::selection {
 }
 
 .copy-button .icon {
+    width: 24px;
+    height: 24px;
     color: var(--surface-a);
     stroke: none;
     fill: var(--surface-a);

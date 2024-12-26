@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Minr | AK1089's Site</title>
+    <title>Map Art Maker</title>
     <link rel="stylesheet" href="/styles/base.css" />
     <script>
       function copyCode(button) {
@@ -29,6 +29,62 @@
         }, 1000);
       }
     </script>
+    <script src="script.js" defer></script>
+    <style>
+      .upload-section {
+        background-color: var(--offwhite);
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        max-width: 500px;
+        margin: 2rem auto;
+        font-family: var(--text-sans);
+        font-size: 14px;
+      }
+
+      .file-upload-row {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .file-upload-label {
+        background-color: #e5e7eb;
+        color: var(--subtext-b);
+        padding: 0.8rem 1.2rem;
+        border-radius: 4px;
+        cursor: pointer;
+        flex: 1;
+        text-align: center;
+      }
+
+      .upload-section button {
+        background-color: var(--darkblue);
+        color: white;
+        border: none;
+        padding: 0.8rem 1.2rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        font-family: var(--text-sans);
+        font-size: 14px;
+      }
+
+      .upload-section button:hover {
+        background-color: var(--blue);
+      }
+
+      #map-image {
+        display: block;
+        margin: 0 auto;
+        max-width: 75%;
+        cursor: pointer;
+      }
+    </style>
   </head>
 
   <!-- The body: the layout-container div contains all the content -->
@@ -188,100 +244,45 @@
             <div class="path">
               <a href="/" class="path-link">home</a>
               <span class="separator"> / </span
-              ><a href="/minr" class="path-link">minr</a>
+              ><a href="/minr" class="path-link">minr</a
+              ><span class="separator"> / </span
+              ><a href="/minr/map-art" class="path-link">map-art</a>
             </div>
-            <h1 class="title">Minr</h1>
+            <h1 class="title">Custom Minr Map Art Tool</h1>
             <div class="metadata">
-              <span class="published-date">published December 24, 2024</span>
+              <span class="published-date">published November 26, 2021</span
+              ><span class="updated-date">, updated December 26, 2024</span>
             </div>
           </div>
         </header>
-        <p>
-          I spend a lot of time on
-          <a href="https://forums.minr.org/">Zero.Minr.Org</a>, one of the
-          oldest Minecraft servers around (since 2010). It&rsquo;s a challenge
-          server, designed for mapmakers to build puzzles, mazes, parkour, and
-          adventure maps. I&rsquo;ve been around on the server since June 2020,
-          and have been a staff member since February 2022. The server IP is
-          <code>zero.minr.org</code> and the
-          <a href="https://discord.com/invite/minr">Discord</a> is
-          <code>discord.gg/minr</code>.
-        </p>
-        <p>
-          One of the biggest features of the server is a completely custom
-          plugin, which includes Minr Script Code: a full programming language
-          built into Minecraft to facilitate mapmaking. This is an extremely
-          powerful tool, and I&rsquo;ve done a lot of interesting things with
-          it. Most of the pages under this section are devoted to scripting,
-          including some guides I&rsquo;ve written, links to useful resources,
-          example scripts, and other tools I&rsquo;ve created to help with
-          mapmaking.
-        </p>
-        <h2>My Tools</h2>
-        <ul>
-          <li>
-            My <a href="map-art">map art creator</a> allows you to upload images
-            and view them as custom maps in game.
-          </li>
-        </ul>
-        <h2>Links to External Resources</h2>
-        <p>
-          Some links to the Minr forums are restricted to
-          <span style="color: var(--lime)">Greenies</span> and above.
-        </p>
-        <ul>
-          <li>
-            Eszes Bálint&rsquo;s
-            <a href="https://eszesbalint.github.io/bdstudio/editor">BDStudio</a>
-            is a powerful GUI editor for working with block displays.
-          </li>
-          <li>
-            <a href="https://mcstacker.net/">MCStacker</a> is an incredibly
-            capable custom command builder which requires very little knowledge
-            of commands.
-          </li>
-          <li>
-            The
-            <a href="https://msc-documentation.readthedocs.io/en/latest/"
-              >official MSC documentation</a
+
+        <div class="upload-section">
+          <div class="file-upload-row">
+            <label for="imageUpload" class="file-upload-label"
+              >Choose File</label
             >
-            is worth reading if you are starting out with scripting.
-          </li>
-          <li>
-            <code>Lightwood13</code> has developed a
-            <a
-              href="https://marketplace.visualstudio.com/items?itemName=Lightwood13.msc"
-              >VSCode extension</a
-            >
-            which helps with writing MSC scripts. I think it&rsquo;s fantastic,
-            and well worth the setup investment.
-          </li>
-          <li>
-            <code>rmanimal</code> wrote
-            <a
-              href="https://forums.minr.org/threads/scripts-with-rman-1-basic-script-understanding.3193/"
-              >Scripts with rman</a
-            >
-            in 2018, and it still holds up as the canonical tutorial-style
-            introduction to scripting.
-          </li>
-          <li>
-            <code>egabbac</code> maintains a
-            <a
-              href="https://forums.minr.org/threads/compilation-of-mapmaking-resources.7331/"
-              >collection of resources</a
-            >
-            which aim to help with mapmaking.
-          </li>
-          <li>
-            On the server, <code>/warp teleport mapmaking</code> has a guide to
-            many aspects of creating maps.
-          </li>
-        </ul>
-        <h2>My Guides to Scripting &amp; Mapmaking</h2>
-        <p>🚧 This section is under construction!</p>
-        <h2>Example Scripts</h2>
-        <p>🚧 This section is under construction!</p>
+            <input type="file" id="imageUpload" accept="image/*" />
+            <button onclick="processImage()">Upload</button>
+          </div>
+        </div>
+
+        <div id="output" class="output-section" style="display: none">
+          <p class="command-explanation">
+            Copy the string below and paste it when prompted at the map hub.
+          </p>
+          <pre
+            data-language="hover to copy"
+          ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-python"><span id="command-text"> </span></code></pre>
+          <p></p>
+          <p class="command-explanation">
+            This is what your map will look like in Minecraft:
+          </p>
+          <img
+            id="map-image"
+            alt="Generated Image"
+            style="display: block; margin: 0 auto"
+          />
+        </div>
       </main>
 
       <!-- Spacing between the sidebar and the main content -->
