@@ -162,7 +162,7 @@ async function createCommand(pixels, filename, channels, baseBlock = 'glass') {
 
         // starting commands - fills the map area with the base block
         let command = `@fast\n@bypass /fill ${startX} ${startY - 1} ${startZ} ${startX + 127} ${startY} ${startZ + 127} ${baseBlock}\n` +
-            `@bypass /tellraw {{player}} ["",{"text":"Successfully built map art from ","color":"dark_green"},{"text":"${filename}","color":"blue"},{"text":"!","color":"dark_green"}]\n`;
+            `@player &#acb0be[&#936be5Map Art Hub&#acb0be] &#40a02bSuccessfully built map art!\n`;
         let teleportNeeded = false;
 
         // for each row of the map image (so we can optimise using /fill)
@@ -228,12 +228,13 @@ async function createCommand(pixels, filename, channels, baseBlock = 'glass') {
         // if there's transparency, then move the player over, give them a map, and move them back
         if (teleportNeeded) {
             command += '\n' + [
-                '@bypass /tellraw {{player}} ["",{"text":"Hold still, this will only take a second...","color":"dark_green"}]',
+                '@player &#acb0be[&#936be5Map Art Hub&#acb0be] &#ed8936Hold on, this will only take a second...',
                 '@bypass /teleport {{player}} -3200.5 142.0 -1532.5 180 20',
                 '@bypass /clone -3392 139 -1600 -3265 139 -1473 -3264 139 -1600',
                 '@bypass /clone -3392 140 -1600 -3265 140 -1473 -3264 140 -1600',
                 '@bypass /item replace entity {{player}} weapon.mainhand with minecraft:filled_map{map:12372}',
-                '@delay 20\n@bypass /teleport {{player}} -3328.5 119.0 -1532.5 180 20'
+                '@delay 20',
+                '@bypass /teleport {{player}} -3328.5 119.0 -1532.5 180 20'
             ].join('\n');
         }
 
@@ -283,10 +284,8 @@ async function processImage() {
             let filename = file.name;
             const channels = pixels.length / 16384
 
-            // trim the filename to format it correctly 
+            // format the filename
             filename = filename.split('/').pop().split('.')[0];
-            filename = filename.replace(/[^a-zA-Z0-9_]/g, '');
-            filename = filename.slice(0, 12);
             if (filename === "") {
                 filename = "unknown_img";
             }
@@ -321,23 +320,19 @@ async function processImage() {
             const generatedImageURL = generatedCanvas.toDataURL();
 
             try {
-
-                console.log(command);
-                // // post this script using the process-text endpoint
-                // const response = await axios.post('/process-text', {
-                //     username: username,
-                //     text: command
-                // });
-                const response = {
-                    data: {
-                        key: "key",
-                        uuid: "uuid"
-                    }
-                };
+                const response = await fetch('https://paste.minr.org/documents', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: command
+                });
+                const data = await response.json();
+                const key = data.key;
 
                 // put the command in the text box, and the image in the image box
-                document.getElementById('command-text').innerHTML = `/func execute akmap::add("${response.data.key}", "${response.data.uuid}", "${filename}")`;
-                
+                document.getElementById('command-text').innerHTML = btoa(`${key}/${filename}`);
+
                 const mapImage = document.getElementById('map-image')
                 mapImage.src = generatedImageURL;
                 mapImage.onclick = function () {

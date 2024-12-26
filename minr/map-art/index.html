@@ -37,7 +37,7 @@
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         max-width: 500px;
-        margin: 2rem auto;
+        margin: 1rem auto 2rem auto;
         font-family: var(--text-sans);
         font-size: 14px;
       }
@@ -256,6 +256,9 @@
           </div>
         </header>
 
+        <p>
+          For best results, choose an image with a resolution of 128x128 pixels.
+        </p>
         <div class="upload-section">
           <div class="file-upload-row">
             <label for="imageUpload" class="file-upload-label"
@@ -268,7 +271,8 @@
 
         <div id="output" class="output-section" style="display: none">
           <p class="command-explanation">
-            Copy the string below and paste it when prompted at the map hub.
+            Use <code>/warp tp akmaphub</code> to go to the map hub. Copy the
+            string below and paste it when prompted.
           </p>
           <pre
             data-language="hover to copy"
@@ -277,11 +281,7 @@
           <p class="command-explanation">
             This is what your map will look like in Minecraft:
           </p>
-          <img
-            id="map-image"
-            alt="Generated Image"
-            style="display: block; margin: 0 auto"
-          />
+          <img id="map-image" alt="Generated Image" />
         </div>
       </main>
 
