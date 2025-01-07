@@ -530,94 +530,6 @@ a:hover {
     color: var(--text);
 }
 
-/* Base code block container */
-pre {
-    position: relative;
-    background: var(--code-base);
-    margin: 1.5rem 0;
-    padding: 1rem 0;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Horizontal scroll container */
-pre>code {
-    display: block;
-    padding: 0 1rem 1rem 3rem;
-    margin-bottom: -0.5rem;
-    color: var(--code-text);
-    font-family: "Cascadia Code", monospace;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    tab-size: 4;
-    overflow-x: auto;
-    min-width: 100%;
-    box-sizing: border-box;
-}
-
-/* Line numbers */
-pre>code {
-    counter-reset: line;
-}
-
-pre>code>span {
-    display: block;
-    position: relative;
-    line-height: 1.2;
-    padding: 1rem 0 0.2rem 0;
-}
-
-pre>code>span::before {
-    counter-increment: line;
-    content: counter(line);
-    position: absolute;
-    left: -3rem;
-    width: 2rem;
-    color: var(--code-line);
-    text-align: right;
-    user-select: none;
-}
-
-/* Language badge */
-pre::after {
-    content: attr(data-language);
-    position: absolute;
-    top: 0;
-    right: 3.5rem;
-    color: var(--surface-a);
-    font-family: system-ui, -apple-system, sans-serif;
-    font-size: 0.7rem;
-    padding: 0.3rem 0.5rem;
-    background: var(--text);
-    border-radius: 0 0 4px 4px;
-    overflow: hidden;
-}
-
-/* Selection highlighting */
-pre code ::selection {
-    background: rgba(147, 153, 178, 0.3);
-}
-
-/* Copy button styling */
-.copy-button {
-    position: absolute;
-    top: 0;
-    right: 1rem;
-    padding: 0.3rem;
-    height: 1.8rem;
-    background: var(--text);
-    border: none;
-    border-radius: 0 0 4px 4px;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.1s ease, background-color 0.1s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-}
-
 .copy-button .icon {
     width: 24px;
     height: 24px;
@@ -1004,4 +916,143 @@ blockquote>svg {
     width: 1080px !important;
     height: 768px !important;
     z-index: 1000;
+}
+
+/* Base code block container */
+pre {
+    position: relative;
+    background: var(--code-base);
+    margin: 2rem 0;
+    padding: 1.5rem 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Horizontal scroll container */
+pre>code {
+    display: block;
+    padding: 0.25rem 1.5rem 0.5rem 3.5rem;
+    margin-bottom: -0.5rem;
+    color: var(--code-text);
+    font-family: "Cascadia Code", ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.925rem;
+    line-height: 1.2;
+    tab-size: 2;
+    overflow-x: auto;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scrollbar-color: var(--scrollbar) transparent;
+    margin-right: 1rem;
+}
+
+pre>code::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+pre>code::-webkit-scrollbar-thumb {
+    background: var(--scrollbar);
+    border-radius: 3px;
+}
+
+/* Line numbers */
+pre>code {
+    counter-reset: line;
+}
+
+pre>code>span {
+    display: block;
+    position: relative;
+    line-height: 1.0;
+    padding: 0.25rem 0;
+    min-height: 1.6em;
+    margin-right: 1rem;
+}
+
+pre>code>span::before {
+    counter-increment: line;
+    content: counter(line);
+    position: absolute;
+    left: -3rem;
+    width: 2rem;
+    font-size: 0.925rem;
+    color: var(--code-line);
+    text-align: right;
+    user-select: none;
+    opacity: 0.5;
+}
+
+/* Language badge */
+pre::after {
+    content: attr(data-language);
+    position: absolute;
+    top: 0;
+    right: 4rem;
+    color: var(--surface-a);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    background: var(--text);
+    border-radius: 0 0 0.25rem 0.25rem;
+}
+
+/* Selection highlighting */
+pre code ::selection {
+    background: var(--selection-bg, rgba(147, 153, 178, 0.3));
+    color: var(--selection-text, inherit);
+}
+
+/* Copy button styling */
+pre .copy-button {
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    padding: 0.25rem 0.25rem;
+    height: 2rem;
+    background: var(--text);
+    border: none;
+    border-radius: 0 0 0.25rem 0.25rem;
+    cursor: pointer;
+    opacity: 0;
+    transition:
+        opacity 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    user-select: none;
+}
+
+pre:hover .copy-button {
+    opacity: 1;
+}
+
+pre .copy-button:hover {
+    background: var(--text-hover, var(--text));
+    transform: translateY(1px);
+}
+
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    pre {
+        margin: 1.5rem -1rem;
+        border-radius: 0;
+    }
+
+    pre>code {
+        font-size: 0.8125rem;
+        padding-left: 3.5rem;
+    }
+
+    pre>code>span::before {
+        left: -2.5rem;
+    }
 }
