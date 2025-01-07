@@ -172,6 +172,10 @@ p {
     background: var(--crust);
 }
 
+.sidebar-left {
+    user-select: none;
+}
+
 /* Main  */
 .main-content {
     overflow-y: scroll;
