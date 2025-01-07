@@ -1,6 +1,7 @@
 ---
 title: Minr
 date: 2024-12-24
+updated: 2025-01-07
 address_bar_title: Minr | AK1089's Site
 ---
 
@@ -26,7 +27,7 @@ Some links to the Minr forums are restricted to <span style="color: var(--lime)"
 
 ## My Guides to Scripting & Mapmaking
 
-🚧 This section is under construction!
+- An explanation of [functions](functions).
 
 ## Example Scripts
 
