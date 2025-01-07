@@ -55,15 +55,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Add the nodes
     root.descendants().forEach(node => {
         const nodeGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+        // URL ignoring hash fragments
+        let url = node.data.url;
+        if (url.includes('#')) {
+            url = url.split('#')[0];
+        }
+
         nodeGroup.setAttribute("class", "sitemap-node");
-        if (visitedUrls.has(node.data.url)) {
+        if (visitedUrls.has(url)) {
             nodeGroup.classList.add('visited');
         }
         nodeGroup.setAttribute("transform", `translate(${node.y},${node.x})`);
 
         // Add circle
         const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        if (visitedUrls.has(node.data.url)) {
+        if (visitedUrls.has(url)) {
             circle.classList.add('visited');
         }
         nodeGroup.appendChild(circle);
@@ -81,9 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Add click handler
         nodeGroup.addEventListener('click', () => {
-            if (node.data.url) {
-                window.location.href = node.data.url;
-            }
+            window.location.href = url;
         });
 
         // Add hover handlers for path highlighting

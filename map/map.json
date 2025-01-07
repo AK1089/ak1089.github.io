@@ -30,6 +30,18 @@
     "display": true
   },
   {
+    "name": "Utilities",
+    "url": "/minr#utilities",
+    "parent": "/minr",
+    "display": true
+  },
+  {
+    "name": "Guides",
+    "url": "/minr#guides",
+    "parent": "/minr",
+    "display": true
+  },
+  {
     "name": "Other",
     "url": "/other",
     "parent": "/",
@@ -63,6 +75,18 @@
     "name": "Laplace's Rule Of Succession",
     "url": "/maths/laplaces-rule-of-succession",
     "parent": "/maths",
+    "display": true
+  },
+  {
+    "name": "Functions",
+    "url": "/minr/functions",
+    "parent": "/minr#guides",
+    "display": true
+  },
+  {
+    "name": "Map Art",
+    "url": "/minr/map-art",
+    "parent": "/minr#utilities",
     "display": true
   },
   {
