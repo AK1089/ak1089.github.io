@@ -30,14 +30,14 @@
     "display": true
   },
   {
-    "name": "Utilities",
-    "url": "/minr#utilities",
+    "name": "Guides",
+    "url": "/minr#guides",
     "parent": "/minr",
     "display": true
   },
   {
-    "name": "Guides",
-    "url": "/minr#guides",
+    "name": "Utilities",
+    "url": "/minr#utilities",
     "parent": "/minr",
     "display": true
   },
@@ -93,6 +93,18 @@
     "name": "Website Design",
     "url": "/other/design",
     "parent": "/other",
+    "display": true
+  },
+  {
+    "name": "Anthropics",
+    "url": "/puzzles/anthropics",
+    "parent": "/puzzles",
+    "display": true
+  },
+  {
+    "name": "Ten Numbers",
+    "url": "/puzzles/ten-numbers",
+    "parent": "/puzzles#maths",
     "display": true
   },
   {

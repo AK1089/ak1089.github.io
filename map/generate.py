@@ -62,9 +62,24 @@ def generate_flat_sitemap(start_path):
                 "name": name,
                 "url": url,
                 "parent": get_parent_url(url),
-                "display": True,  # Default to displaying new nodes
+                "display": True
             }
         )
+        
+    # get the actual urls which are still in use
+    valid_base_urls = [page["url"] for page in results]
+        
+    # scan through the previous items for purely organisational branches which aren't pages
+    for url, data in existing_map.items():
+        
+        # ignore ones which are actual pages
+        if "#" not in url:
+            continue
+        
+        # get the actual page url: if it is still a valid page, use it
+        if url.split("#")[0] in valid_base_urls:
+            results.append(data)
+        
 
     # Sort results by URL length (shorter URLs first) and then alphabetically
     results.sort(key=lambda x: (len(x["url"].split("/")), x["url"]))
