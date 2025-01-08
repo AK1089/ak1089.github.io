@@ -772,8 +772,6 @@ figcaption {
 .spoiler span {
     filter: blur(6px) brightness(0.8);
     transition: 0.2s;
-    min-width: 50px;
-    display: inline-block;
     color: var(--subtext-a);
 }
 
