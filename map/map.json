@@ -60,6 +60,18 @@
     "display": true
   },
   {
+    "name": "Logic",
+    "url": "/puzzles#logic",
+    "parent": "/puzzles",
+    "display": true
+  },
+  {
+    "name": "Probability",
+    "url": "/puzzles#probability",
+    "parent": "/puzzles",
+    "display": true
+  },
+  {
     "name": "Tech",
     "url": "/tech",
     "parent": "/",
@@ -98,13 +110,13 @@
   {
     "name": "Anthropics",
     "url": "/puzzles/anthropics",
-    "parent": "/puzzles",
+    "parent": "/puzzles#probability",
     "display": true
   },
   {
     "name": "Ten Numbers",
     "url": "/puzzles/ten-numbers",
-    "parent": "/puzzles#maths",
+    "parent": "/puzzles#logic",
     "display": true
   },
   {

@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Create tree layout
     const treeLayout = d3.tree()
-        .size([height, width]);
+        .size([height, width])
+        .separation((a, b) => 2.5);
 
     treeLayout(root);
 
@@ -36,8 +37,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             g.setAttribute('transform', `translate(${event.transform.x},${event.transform.y}) scale(${event.transform.k})`);
         });
 
-    svg.addEventListener('wheel', (e) => e.preventDefault());
+    svg.addEventListener('wheel', (e) => e.preventDefault(), { passive: false });
     d3.select(svg).call(zoom);
+
+    const initialTransform = d3.zoomIdentity.translate(50, 10).scale(1);
+    d3.select(svg).call(zoom.transform, initialTransform);
 
     // g.setAttribute("transform", `translate(${margin.left},${margin.top})`);
     svg.appendChild(g);
