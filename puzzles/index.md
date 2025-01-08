@@ -8,7 +8,8 @@ I am a huge fan of all sorts of puzzles, with a special fondness for logic puzzl
 
 ## Puzzles Hosted Here
 
-🚧 This section is under construction!
+- A difficult logic puzzle based on finding [ten numbers](ten-numbers) given some constraints.
+- Some easy probability puzzles about [anthropics](anthropics).
 
 ## External Links
 
