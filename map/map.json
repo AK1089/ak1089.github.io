@@ -72,6 +72,12 @@
     "display": true
   },
   {
+    "name": "State Exploration",
+    "url": "/puzzles#state-exploration",
+    "parent": "/puzzles",
+    "display": true
+  },
+  {
     "name": "Tech",
     "url": "/tech",
     "parent": "/",
@@ -111,6 +117,12 @@
     "name": "Anthropics",
     "url": "/puzzles/anthropics",
     "parent": "/puzzles#probability",
+    "display": true
+  },
+  {
+    "name": "Circular Train",
+    "url": "/puzzles/circular-train",
+    "parent": "/puzzles#state-exploration",
     "display": true
   },
   {

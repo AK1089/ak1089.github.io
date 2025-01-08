@@ -576,6 +576,15 @@ figure img {
     height: auto;
     border-radius: 8px;
     margin: 0;
+    width: 100%;
+}
+
+.main-content img {
+    max-width: 90%;
+    height: auto;
+    border-radius: 8px;
+    margin: 0;
+    width: 90%;
 }
 
 /* Caption */
