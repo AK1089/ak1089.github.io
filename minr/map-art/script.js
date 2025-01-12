@@ -12,7 +12,7 @@ const colours = {
     "clay": [164, 168, 184],
     "dirt": [151, 109, 77],
     "stone": [112, 112, 112],
-    "water": [64, 64, 225],
+    "oak_leaves[waterlogged=true]": [64, 64, 225],
     "oak_planks": [143, 119, 72],
     "acacia_planks": [216, 127, 51],
     "magenta_wool": [178, 76, 216],
