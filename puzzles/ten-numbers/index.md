@@ -5,7 +5,7 @@ date: 2025-01-08
 
 Here are ten questions. The answer to each is a single integer from 1--9 inclusive.
 
-1. What is the number of the only question whose number is the answer to this question and this question alone?
+1. What is the number of the only question whose number is the answer to this question and this question alone and whose answer is less than double its number?
 2. What is one more than the answer to the only question whose answer equals its number and does not equal the answer of any other question?
 3. What is the number of the only question whose number is the number of this question?
 4. What is two more than the only answer shared by more than one question?
