@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+  <!-- Default header, with a title. Links to the main stylesheet. -->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Five Locks</title>
+    <link rel="stylesheet" href="/styles/base.css" />
+    <script>
+      function copyCode(button) {
+        const pre = button.parentElement;
+        const code = pre.querySelector("code");
+        const text = code.innerText;
+
+        navigator.clipboard.writeText(text);
+
+        button.classList.add("copied");
+        const originalIcon = button.innerHTML;
+        button.innerHTML = `
+            <svg class="icon icon--stroke" width="24" height="24">
+                <use href="/assets/icons/sprite.svg#check"></use>
+            </svg>
+        `;
+
+        setTimeout(() => {
+          button.classList.remove("copied");
+          button.innerHTML = originalIcon;
+        }, 1000);
+      }
+    </script>
+  </head>
+
+  <!-- The body: the layout-container div contains all the content -->
+
+  <body>
+    <div class="layout-container">
+      <!-- Padding on the left -->
+      <div class="spacing-left"></div>
+
+      <!-- The sidebar on the left, with the site title and navigation links -->
+      <div class="sidebar-left">
+        <!-- Header with the site title and a link to the map page -->
+        <div class="sidebar-header">
+          <a href="/" class="site-title">AK1089's Site</a>
+          <a href="/map" class="map-link">
+            <svg class="icon icon--stroke">
+              <use href="/assets/icons/sprite.svg#map"></use>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Primary navigation bar: links to the main sections of the site -->
+        <nav>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a
+                href="/utilities"
+                class="nav-link"
+                style="border-left: 3px solid var(--blue)"
+                >utilities</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/projects"
+                class="nav-link"
+                style="border-left: 3px solid var(--lime)"
+                >projects</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/blog"
+                class="nav-link"
+                style="border-left: 3px solid var(--peach)"
+                >blog</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/puzzles"
+                class="nav-link"
+                style="border-left: 3px solid var(--purple)"
+                >puzzles</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/tech"
+                class="nav-link"
+                style="border-left: 3px solid var(--maroon)"
+                >tech</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/maths"
+                class="nav-link"
+                style="border-left: 3px solid var(--teal)"
+                >maths</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/minr"
+                class="nav-link"
+                style="border-left: 3px solid var(--yellow)"
+                >minr</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/other"
+                class="nav-link"
+                style="border-left: 3px solid var(--subtext-b)"
+                >other</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <div class="social-icons">
+          <a
+            href="https://x.com/_AK1089_"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#twitter"></use>
+            </svg>
+          </a>
+          <a
+            href="https://github.com/ak1089/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#github"></use>
+            </svg>
+          </a>
+          <a
+            href="https://discord.com/users/380805820415344644"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#discord"></use>
+            </svg>
+          </a>
+          <a
+            href="https://steamcommunity.com/profiles/76561198281258106/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#steam"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.last.fm/user/AK1089-"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#lastfm"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/avishkumar/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#linkedin"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-left"></div>
+
+      <!-- The main content of the page: this is changed per-page and contains the actual content -->
+      <main class="main-content">
+        <header class="page-header">
+          <div class="header-container">
+            <div class="path">
+              <a href="/" class="path-link">home</a>
+              <span class="separator"> / </span
+              ><a href="/puzzles" class="path-link">puzzles</a
+              ><span class="separator"> / </span
+              ><a href="/puzzles/five-locks" class="path-link">five-locks</a>
+            </div>
+            <h1 class="title">Five Locks: Easy and Hard Steps</h1>
+            <div class="metadata">
+              <span class="published-date">published January 12, 2025</span>
+            </div>
+          </div>
+        </header>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"
+          integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs"
+          crossorigin="anonymous"
+        />
+
+        <style type="text/css">
+          .katex img {
+            object-fit: fill;
+            padding: unset;
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: inherit;
+          }
+        </style>
+        <p>
+          <em
+            >All questions here should be answered using estimation (rather than
+            explicit calculation) to test your probabilistic intuition.</em
+          >
+        </p>
+        <h1>The Setup</h1>
+        <p>
+          You have to crack five combination locks, which you do not have the
+          combinations to. The locks have 1/2/3/4/5 dials, and each dial has all
+          ten digits. The combination for each dial is a random 1/2/3/4/5 digit
+          number.
+        </p>
+        <p>
+          It takes you one second to try each incorrect combination, no matter
+          the size of the lock, plus an extra half-second for the correct
+          combination. This means that on average the first lock takes 5 seconds
+          to crack, the next 50 seconds, the next 500 (~8 minutes), the next
+          5000 (~83 minutes), and the last 50000 (~14 hours).
+        </p>
+        <p>
+          Let&rsquo;s call locks 1&ndash;3 the &ldquo;easy&rdquo; locks. No
+          matter howa unlucky you are, you can always finish all three of them
+          within twenty minutes: it only takes
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mn>10</mn><mo>+</mo><mn>100</mn><mo>+</mo><mn>1000</mn
+                    ><mo>=</mo><mn>1110</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >10 + 100 + 1000 = 1110</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7278em; vertical-align: -0.0833em"
+                ></span
+                ><span class="mord">10</span
+                ><span class="mspace" style="margin-right: 0.2222em"></span
+                ><span class="mbin">+</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2222em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7278em; vertical-align: -0.0833em"
+                ></span
+                ><span class="mord">100</span
+                ><span class="mspace" style="margin-right: 0.2222em"></span
+                ><span class="mbin">+</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2222em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">1000</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">1110</span></span
+              ></span
+            ></span
+          >
+          seconds to try every combination on all three.
+        </p>
+        <p>
+          By contrast, let&rsquo;s call locks 4 and 5 the &ldquo;hard&rdquo;
+          locks. Since you&rsquo;re guessing at random, you probably can&rsquo;t
+          crack either of them within an hour.
+        </p>
+        <h1>The Puzzle</h1>
+        <h2>Part 1</h2>
+        <p>
+          On average, it takes 555 seconds (a little over nine minutes) to crack
+          the easy locks, and 55000 seconds (a little over 15 hours) to crack
+          the hard locks. The average total time to crack all five locks is
+          simply the sum of these two durations: over 15 hours.
+        </p>
+        <p>
+          <strong>Question 1</strong>: What is the probability you can crack all
+          five locks within half an hour?
+        </p>
+        <p>
+          <strong>Answer</strong>: Your chance of success is
+          <span class="spoiler"
+            ><span
+              >exactly
+              <span class="katex"
+                ><span class="katex-mathml"
+                  ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                    ><semantics
+                      ><mrow
+                        ><mn>0.08146118</mn
+                        ><mi mathvariant="normal">%</mi></mrow
+                      ><annotation encoding="application/x-tex"
+                        >0.08146118\%</annotation
+                      ></semantics
+                    ></math
+                  ></span
+                ><span class="katex-html" aria-hidden="true"
+                  ><span class="base"
+                    ><span
+                      class="strut"
+                      style="height: 0.8056em; vertical-align: -0.0556em"
+                    ></span
+                    ><span class="mord">0.08146118%</span></span
+                  ></span
+                ></span
+              >, or slightly under 1 in 1,200.</span
+            ></span
+          >
+        </p>
+        <p>
+          This can be found using a dynamic programming method, like the below.
+        </p>
+        <pre
+          data-language="python"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-python"><span>import numpy as np</span><span>from functools import cache</span><span></span><span>@cache</span><span>def possibilities(number_of_attempts: int, lock_index: int) -&gt; int:</span><span></span><span>    # case of first three locks in place</span><span>    if lock_index == 4:</span><span>        return max(0, number_of_attempts - 1)</span><span></span><span>    # sum over the subcases depending on how long this lock takes</span><span>    return sum(</span><span>        possibilities(number_of_attempts - solve_time, lock_index + 1)</span><span>        for solve_time in range(10 ** lock_index)</span><span>    )</span><span></span><span>print(sum(</span><span>    possibilities(number_of_attempts = time_allowed, lock_index = 1)</span><span>    for time_allowed in range(1798)</span><span>))</span></code></pre>
+        <p>
+          This gives the result that there are
+          <span class="spoiler"
+            ><span
+              ><span class="katex"
+                ><span class="katex-mathml"
+                  ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                    ><semantics
+                      ><mrow><mn>814611750000</mn></mrow
+                      ><annotation encoding="application/x-tex"
+                        >814611750000</annotation
+                      ></semantics
+                    ></math
+                  ></span
+                ><span class="katex-html" aria-hidden="true"
+                  ><span class="base"
+                    ><span class="strut" style="height: 0.6444em"></span
+                    ><span class="mord">814611750000</span></span
+                  ></span
+                ></span
+              >
+              (815 billion)</span
+            ></span
+          >
+          orderings to try the numbers which result in a solution taking less
+          than half an hour, out of a total of one quadrillion orderings.
+        </p>
+        <h2>Part 2</h2>
+        <p>
+          Now, someone comes up to you, saying they&rsquo;ve cracked all five
+          locks. You don&rsquo;t know how long they spent on it &mdash; they
+          simply worked at the locks until they got through all five.
+        </p>
+        <p>
+          <strong>Question 2</strong>: How long do you estimate they spent
+          cracking each lock?
+        </p>
+        <p>
+          <strong>Answer</strong>:
+          <span class="spoiler"
+            ><span
+              >Of course, the locks are independent, so the estimated time for
+              each is simply 5, 50, etc. seconds as specified earlier.</span
+            ></span
+          >
+        </p>
+        <p>
+          <strong>Question 3</strong>: What proportion of their time do you
+          think they spent on the hard locks?
+        </p>
+        <p>
+          <strong>Answer</strong>:
+          <span class="spoiler"
+            ><span
+              >Be careful! In general, the expected value of a ratio is
+              <em>not</em> the ratio of the expected values. In this case, it
+              ends up being somewhere between 98% and 99% of the time.</span
+            ></span
+          >
+        </p>
+        <h2>Part 3</h2>
+        <p>
+          In fact, the person informs you that (by some miracle) they indeed
+          managed to crack all five locks within half an hour! Now, you can use
+          this information to update your estimates.
+        </p>
+        <p>
+          <strong>Question 4</strong>: Now, how long do you estimate they spent
+          cracking each lock?
+        </p>
+        <p>
+          <strong>Answer</strong>: This is the crux of the puzzle. This is very
+          hard to calculate directly, but by running simulations
+          <span class="spoiler"
+            ><span
+              >(here, running 200 million trials and filtering to the 162767
+              successful cases), one can estimate that the average time spent on
+              each lock is around 4.97, 48.73, 371.67, 456.77, and 459.64
+              seconds respectively.</span
+            ></span
+          >
+        </p>
+        <p>
+          This means that conditional on success,
+          <span class="spoiler"
+            ><span
+              >the easy steps take more or less the same time as they did
+              without the constraint, while the hard steps all take
+              approximately the same amount of time as each other! Even though
+              the fifth lock should take ten times as long as the fourth lock to
+              crack, in the worlds where you crack all the locks within half an
+              hour the two locks take within 1% of the time of each other.</span
+            ></span
+          >
+        </p>
+        <p>
+          This is because
+          <span class="spoiler"
+            ><span
+              >whether the first lock takes half a second or 9.5 seconds has
+              very little bearing on the overall success probability, so the
+              times for the first lock are essentially the same as without the
+              success constraint. On the other hand, a success
+              <em>requires</em> the fourth and fifth locks to go unusually well,
+              so the cases are filtered heavily to rare outcomes with low
+              times.</span
+            ></span
+          >
+        </p>
+      </main>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-right"></div>
+
+      <!-- The sidebar on the right -->
+      <aside class="sidebar-right"></aside>
+
+      <!-- Padding on the right -->
+      <div class="spacing-right"></div>
+    </div>
+
+    <!-- Load the map script -->
+    <script>
+      // Load visited URLs from localStorage
+      let visitedUrls = new Set();
+      const storedVisited = localStorage.getItem("visitedPages");
+      if (storedVisited) {
+        visitedUrls = new Set(JSON.parse(storedVisited));
+      }
+
+      // Log current page visit
+      const currentPath = window.location.pathname.replace(/\/$/, "");
+      visitedUrls.add(currentPath);
+      localStorage.setItem(
+        "visitedPages",
+        JSON.stringify(Array.from(visitedUrls)),
+      );
+    </script>
+  </body>
+</html>

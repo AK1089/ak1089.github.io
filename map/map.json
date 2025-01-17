@@ -126,6 +126,12 @@
     "display": true
   },
   {
+    "name": "Five Locks",
+    "url": "/puzzles/five-locks",
+    "parent": "/puzzles#probability",
+    "display": true
+  },
+  {
     "name": "Ten Numbers",
     "url": "/puzzles/ten-numbers",
     "parent": "/puzzles#logic",
