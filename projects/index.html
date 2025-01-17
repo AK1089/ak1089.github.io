@@ -199,7 +199,90 @@
         <p>
           This is a home for projects of mine of which I am particularly proud.
           I&rsquo;ve tried to keep things fairly mixed between software,
-          engineering, and creative endeavours.
+          engineering, and creative endeavours. Also check out my
+          <a href="https://github.com/ak1089/">GitHub</a> account, which has
+          many smaller creations of mine.
+        </p>
+        <hr />
+        <h2>Digital Cassettes</h2>
+        <p>
+          I listen to a lot of music on Spotify (you can see my Last.FM account
+          <a href="https://www.last.fm/user/AK1089-/library">here</a>), but I
+          don&rsquo;t own much physical media. This is partly because I grew up
+          well after the era in which vinyl (and even CDs) were dominant, but
+          also online digital media and streaming services are genuinely a much
+          better alternative: they&rsquo;re orders of magnitude cheaper and
+          easier to carry around.
+        </p>
+        <p>
+          With that said, there&rsquo;s something pleasant about the tactile
+          sensations and aesthetics of putting a cassette tape into a player and
+          hearing music come out. Of course, I could buy a cassette player, but
+          I wanted something to get the best out of both worlds.
+        </p>
+        <p>
+          I designed and 3D printed a cassette player and programmed an NFC
+          reader on a Raspberry Pi inside to scan &ldquo;cassettes&rdquo; and
+          use the Spotify API to play the corresponding album or playlist. The
+          cassettes are also designed and 3D printed by me in the exact
+          dimensions and shape of a traditional cassette, and have a small slot
+          to insert a tiny NFC sticker in position for the reader. When a new
+          cassette is inserted, the chip inside is bound to the currently
+          playing album or playlist.
+        </p>
+        <p>
+          You can view
+          <a href="https://github.com/AK1089/digital-cassettes"
+            >the repository</a
+          >.
+        </p>
+        <hr />
+        <h2>Register Machines</h2>
+        <p>
+          An alternative formulation of the familiar Turing Machines (with a
+          single infinite tape) are register machines, which have a number of
+          &ldquo;stacks&rdquo; holding sequences of bits which they can
+          manipulate using push and pop operations. These are instructive in the
+          study of finite automata and formal languages, which is the object of
+          a fascinating course I studied in my third year of university.
+        </p>
+        <p>
+          Register machines have a somewhat limited instruction set, enabling
+          them to be simulated step-by-step without too much trouble. I built a
+          tool which simulates them visually, allowing you to define all of
+          their states and add content to their memory at any point then watch
+          them work.
+        </p>
+        <p>
+          You can view
+          <a href="/register-machines">the interactive simulator</a> or
+          <a href="https://github.com/AK1089/register-machines"
+            >the repository</a
+          >.
+        </p>
+        <hr />
+        <h2>Folder Graph Viewer</h2>
+        <p>
+          The default folder view on most operating systems isn&rsquo;t the
+          best: you can often only see one layer at a time, and have to
+          recursively click into and out of them to see all your nested folders
+          and files. The tree view provided in the terminal is slightly nicer,
+          though the plain text format means that it&rsquo;s sometimes hard to
+          keep track of where you are and there are no visual aids.
+        </p>
+        <p>
+          To combat these problems, I made a script that generates a graph view
+          of a root folder and opens it up for display using HTML and JS. Files
+          and folders are represented by circles, which get smaller as they get
+          more deeply nested, and are coloured based on their file type. Folders
+          can be open and closed to collapse everything inside them, the colours
+          can be customised.
+        </p>
+        <p>
+          You can view
+          <a href="https://github.com/AK1089/folder-graph-viewer"
+            >the repository</a
+          >.
         </p>
       </main>
 
@@ -212,6 +295,8 @@
       <!-- Padding on the right -->
       <div class="spacing-right"></div>
     </div>
+
+    <!-- Load the map script -->
     <script>
       // Load visited URLs from localStorage
       let visitedUrls = new Set();
