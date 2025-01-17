@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+  <!-- Default header, with a title. Links to the main stylesheet. -->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creating and Hosting Map Resource Packs</title>
+    <link rel="stylesheet" href="/styles/base.css" />
+    <script>
+      function copyCode(button) {
+        const pre = button.parentElement;
+        const code = pre.querySelector("code");
+        const text = code.innerText;
+
+        navigator.clipboard.writeText(text);
+
+        button.classList.add("copied");
+        const originalIcon = button.innerHTML;
+        button.innerHTML = `
+            <svg class="icon icon--stroke" width="24" height="24">
+                <use href="/assets/icons/sprite.svg#check"></use>
+            </svg>
+        `;
+
+        setTimeout(() => {
+          button.classList.remove("copied");
+          button.innerHTML = originalIcon;
+        }, 1000);
+      }
+    </script>
+  </head>
+
+  <!-- The body: the layout-container div contains all the content -->
+
+  <body>
+    <div class="layout-container">
+      <!-- Padding on the left -->
+      <div class="spacing-left"></div>
+
+      <!-- The sidebar on the left, with the site title and navigation links -->
+      <div class="sidebar-left">
+        <!-- Header with the site title and a link to the map page -->
+        <div class="sidebar-header">
+          <a href="/" class="site-title">AK1089's Site</a>
+          <a href="/map" class="map-link">
+            <svg class="icon icon--stroke">
+              <use href="/assets/icons/sprite.svg#map"></use>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Primary navigation bar: links to the main sections of the site -->
+        <nav>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a
+                href="/utilities"
+                class="nav-link"
+                style="border-left: 3px solid var(--blue)"
+                >utilities</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/projects"
+                class="nav-link"
+                style="border-left: 3px solid var(--lime)"
+                >projects</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/blog"
+                class="nav-link"
+                style="border-left: 3px solid var(--peach)"
+                >blog</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/puzzles"
+                class="nav-link"
+                style="border-left: 3px solid var(--purple)"
+                >puzzles</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/tech"
+                class="nav-link"
+                style="border-left: 3px solid var(--maroon)"
+                >tech</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/maths"
+                class="nav-link"
+                style="border-left: 3px solid var(--teal)"
+                >maths</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/minr"
+                class="nav-link"
+                style="border-left: 3px solid var(--yellow)"
+                >minr</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/other"
+                class="nav-link"
+                style="border-left: 3px solid var(--subtext-b)"
+                >other</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <div class="social-icons">
+          <a
+            href="https://x.com/_AK1089_"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#twitter"></use>
+            </svg>
+          </a>
+          <a
+            href="https://github.com/ak1089/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#github"></use>
+            </svg>
+          </a>
+          <a
+            href="https://discord.com/users/380805820415344644"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#discord"></use>
+            </svg>
+          </a>
+          <a
+            href="https://steamcommunity.com/profiles/76561198281258106/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#steam"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.last.fm/user/AK1089-"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#lastfm"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/avishkumar/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#linkedin"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-left"></div>
+
+      <!-- The main content of the page: this is changed per-page and contains the actual content -->
+      <main class="main-content">
+        <header class="page-header">
+          <div class="header-container">
+            <div class="path">
+              <a href="/" class="path-link">home</a>
+              <span class="separator"> / </span
+              ><a href="/minr" class="path-link">minr</a
+              ><span class="separator"> / </span
+              ><a href="/minr/resource-packs" class="path-link"
+                >resource-packs</a
+              >
+            </div>
+            <h1 class="title">Creating and Hosting Map Resource Packs</h1>
+            <div class="metadata">
+              <span class="published-date">published May 20, 2024</span
+              ><span class="updated-date">, updated January 17, 2025</span>
+            </div>
+          </div>
+        </header>
+        <p>
+          If you already have a pack and just need help with hosting it, skip to
+          <a href="#setting-up-a-github-repository"
+            >Setting up a GitHub Repository</a
+          >.
+        </p>
+        <h2>Understanding the Folder Structure</h2>
+        <p>
+          A Minecraft Resource Pack is essentially a folder which holds a lot of
+          files with your custom textures and resources in them. The below file
+          tree shows how this folder might be organised.
+        </p>
+        <p>
+          (This is adapted from the Minecraft wiki
+          <a
+            href="https://minecraft.fandom.com/wiki/Resource_pack#Folder_structure"
+            >page on resource packs</a
+          >. I have simplified it to omit some paths which are more complex or
+          less relevant for server resource packs.)
+        </p>
+        <pre
+          data-language="filetree"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-filetree"><span>.</span><span>├── pack.mcmeta</span><span>├── pack.png</span><span>└── assets</span><span>    └── minecraft</span><span>        ├── sounds</span><span>        │   └── custom</span><span>        │       ├── metronome.ogg</span><span>        │       ├── white_noise.ogg</span><span>        │       └── tones</span><span>        │           ├── dial.ogg</span><span>        │           └── square.ogg</span><span>        ├── sounds.json</span><span>        └── textures</span><span>            ├── block</span><span>            │   ├── black_wool.png</span><span>            │   └── white_wool.png</span><span>            └── entity</span><span>                └── zombie</span><span>                    └── zombie.png</span></code></pre>
+        <p>Visually, this looks like:</p>
+        <figure>
+          <img
+            alt="The folder structure of my example resource pack."
+            src="example-pack-structure.avif"
+          />
+          <figcaption>
+            The folder structure of my example resource pack.
+          </figcaption>
+        </figure>
+        <p>
+          We&rsquo;ll go over each of these in more detail individually later
+          on.
+        </p>
+        <h2>Creating Your Resource Pack</h2>
+        <p>
+          To create your resource pack, start by creating a new folder. This
+          folder will serve as the root directory for your resource pack.
+          Alternatively, you can download my example resource pack as a
+          template:
+        </p>
+        <p>
+          <a
+            href="https://github.com/AK1089/Example-Resource-Pack/archive/refs/heads/main.zip"
+            download
+            class="file-download"
+            ><br />
+            <svg><use href="/assets/icons/sprite.svg#document"></use></svg
+            ><br />
+            <span data-filename="Example-Pack.zip"></span><br
+          /></a>
+        </p>
+        <p>
+          If you&rsquo;re not using my example pack, create the following files
+          and folders inside the root folder:
+        </p>
+        <ul>
+          <li>
+            <code>pack.mcmeta</code>: This file contains some important metadata
+            about your resource pack: we&rsquo;ll get to it later.
+          </li>
+          <li>
+            <code>pack.png</code>: This is the icon for your resource pack that
+            displays in the Resource Pack Selection screen.
+          </li>
+          <li>
+            <code>assets</code> folder: This folder will contain all the custom
+            textures, sounds, and fonts for your resource pack.
+          </li>
+        </ul>
+        <p>
+          Inside the <code>assets</code> folder, create a
+          <code>minecraft</code> subfolder, and inside it create the subfolders:
+        </p>
+        <ul>
+          <li>
+            <code>font</code>: If you want a custom font in your pack, otherwise
+            ignore this.
+          </li>
+          <li>
+            <code>textures</code>: If you want to edit the visual appearance /
+            texture of any block, entity, item, or anything else in the game.
+          </li>
+          <li>
+            <code>sounds</code>: If you want to edit or add any sounds in the
+            game. If you include this, make sure to also add a
+            <code>sounds.json</code> file.
+          </li>
+        </ul>
+        <h2>Structuring Pack Meta Files</h2>
+        <p>
+          The <code>pack.mcmeta</code> file is a JSON file that provides
+          information about your resource pack. Inside it, paste the following
+          text:
+        </p>
+        <pre
+          data-language="json"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-json"><span>{</span><span>  &quot;pack&quot;: {</span><span>    &quot;pack_format&quot;: 42,</span><span>    &quot;description&quot;: &quot;Your resource pack description goes here&quot;</span><span>  }</span><span>}</span></code></pre>
+        <p>
+          Pack format 42 is valid for Minecraft version 1.21.3. To check the
+          most recent version, you can see the
+          <a href="https://minecraft.fandom.com/wiki/Pack_format#Resources"
+            >Minecraft wiki</a
+          >
+          page on pack formats.
+        </p>
+        <p>
+          In the description field, add the description you want to be visible
+          in the Resource Pack Selection screen. Note that this is displayed
+          over two lines, and cut off if it is too long.
+        </p>
+        <p>
+          The <code>pack.png</code> file is an optional PNG image that will be
+          displayed as the icon for your resource pack in the selection screen.
+          This should ideally be a small square image. If you don&rsquo;t
+          include this image, the icon for your resource pack will be greyed
+          out.
+        </p>
+        <h2>Adding Textures</h2>
+        <p>
+          To add custom textures to your resource pack, navigate to
+          <code>assets/minecraft/textures</code>. In here, you can create
+          subfolders for the different texture categories, such as
+          <code>block</code>, <code>entity</code>, <code>item</code>, and
+          <code>painting</code>.
+        </p>
+        <p>
+          Place your custom texture files (which should be PNG images) inside
+          the respective subfolders. For example, if you have a custom texture
+          for spruce planks, place it inside the <code>block</code> folder and
+          name it <code>spruce_planks.png</code>.
+        </p>
+        <p>The example pack I provided has some examples:</p>
+        <ul>
+          <li>
+            <code>/textures/block/black_wool.png</code>: retextures black wool
+            to be pure black
+          </li>
+          <li>
+            <code>/textures/block/white_wool.png</code>: retextures white wool
+            to be pure white
+          </li>
+          <li>
+            <code>/textures/entity/zombie/zombie.png</code>: retextures the
+            Zombie to look ghostlike
+          </li>
+        </ul>
+        <h2>Adding Fonts</h2>
+        <p>
+          To add custom fonts to your resource pack, create a
+          <code>font</code> folder inside the
+          <code>assets/minecraft</code> folder. Place your custom font file (in
+          TTF or OTF format) inside the font subfolder. Suppose you want
+        </p>
+        <p>
+          Then, create a file named (for example) <code>courier.json</code>.
+          Inside it, specify your font, in the format
+        </p>
+        <pre
+          data-language="json"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-json"><span>{</span><span>    &quot;providers&quot;: [</span><span>        {</span><span>            &quot;type&quot;: &quot;ttf&quot;,</span><span>            &quot;file&quot;: &quot;minecraft:courier.ttf&quot;</span><span>        }</span><span>    ]</span><span>}</span></code></pre>
+        <p>Replace <code>courier.ttf</code> with your filename.</p>
+        <p>When you want to display text in this new font, you can use</p>
+        <pre
+          data-language="msc"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-msc"><span>@bypass /tellraw @s {&quot;text&quot;: &quot;This is a custom font!&quot;, &quot;font&quot;: &quot;courier&quot;}</span></code></pre>
+        <p>to control the display.</p>
+        <h2>Adding Sounds</h2>
+        <p>
+          To add custom sounds to your resource pack, create a
+          <code>sounds</code> folder inside the
+          <code>assets/minecraft</code> folder to store all your
+          <code>.ogg</code> files. You can organise sounds however you want in
+          here, including in subfolders. In my example pack, the sounds
+          directory is structured as:
+        </p>
+        <pre
+          data-language="tree"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-tree"><span>assets/minecraft</span><span>├── sounds.json</span><span>└── sounds</span><span>    └── custom</span><span>        ├── metronome.ogg</span><span>        ├── white_noise.ogg</span><span>        └── tones</span><span>            ├── dial.ogg</span><span>            └── square.ogg</span></code></pre>
+        <p>
+          Then, in <code>assets/minecraft/sounds.json</code>, add the following
+          text (for example):
+        </p>
+        <pre
+          data-language="json"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-json"><span>{</span><span>    &quot;block.lever.click&quot;: {</span><span>        &quot;sounds&quot;: [</span><span>            {</span><span>                &quot;name&quot;: &quot;custom\/metronome&quot;,</span><span>                &quot;volume&quot;: 1.00</span><span>            }</span><span>        ],</span><span>        &quot;replace&quot;: true</span><span>    },</span><span>    &quot;custom.tone&quot;: {</span><span>        &quot;sounds&quot;: [</span><span>            {</span><span>                &quot;name&quot;: &quot;custom\/tones\/dial&quot;,</span><span>                &quot;volume&quot;: 1.00</span><span>            },</span><span>            {</span><span>                &quot;name&quot;: &quot;custom\/tones\/square&quot;,</span><span>                &quot;volume&quot;: 1.00</span><span>            }</span><span>        ],</span><span>        &quot;replace&quot;: true</span><span>    }</span><span>}</span></code></pre>
+        <p>
+          Edit this accordingly to match all of your files. This follows a
+          simple pattern: For each sound, we have:
+        </p>
+        <ul>
+          <li>
+            <code>"sound.resource.location":</code> (this is the name of the
+            sound path you use in a <code>/playsound</code> command)
+          </li>
+          <li><code>"sounds":</code> (followed by a list of sound files)</li>
+          <li>
+            <code>"name": "path\/to\/sound_file"</code> (using backslashes
+            before each slash)
+          </li>
+          <li>
+            <code>"replace": true</code> (so the game uses these sound files)
+          </li>
+        </ul>
+        <p>
+          Note that the in-game sound events, like
+          <code>block.lever.click</code>, will trigger as usual with your new
+          sound files (here, when you toggle a lever). However, you can also use
+          new paths like <code>custom.tone</code>, which will
+          <em>only</em> trigger when you use <code>/playsound</code>.
+        </p>
+        <h2 id="setting-up-a-github-repository">
+          Setting up a GitHub Repository
+        </h2>
+        <p>
+          We&rsquo;ll be using GitHub to host our pack: if you don&rsquo;t have
+          an account, sign up <a href="https://github.com/signup">here</a>.
+          Click <a href="https://github.com/new">here</a> to create a new GitHub
+          repository.
+        </p>
+        <figure>
+          <img
+            alt="Create a repository like this. Make sure it's set to Public."
+            src="instructions-pt1.avif"
+          />
+          <figcaption>
+            Create a repository like this. Make sure it's set to Public.
+          </figcaption>
+        </figure>
+        <figure>
+          <img
+            alt="Click here to upload your files to GitHub."
+            src="instructions-pt2.avif"
+          />
+          <figcaption>Click here to upload your files to GitHub.</figcaption>
+        </figure>
+        <figure>
+          <img
+            alt='Drag and drop your files then click "Commit changes".'
+            src="instructions-pt3.avif"
+          />
+          <figcaption>
+            Drag and drop your files then click &quot;Commit changes&quot;.
+          </figcaption>
+        </figure>
+        <ul>
+          <li>
+            Add your repository name in the <code>Repository name</code> field:
+            this should be the name of your resource pack. For server resource
+            packs, the name isn&rsquo;t super important: I would recommend
+            simply entering your map&rsquo;s name.
+          </li>
+          <li>
+            Make sure &ldquo;Public&rdquo; is selected, and click &ldquo;Create
+            repository&rdquo;.
+          </li>
+          <li>
+            Click on the blue &ldquo;uploading an existing file&rdquo; link.
+          </li>
+          <li>
+            Navigate to a Finder (Mac) / File Explorer (Windows) window and open
+            your resource pack folder. You should be able to see
+            <code>assets</code>, <code>pack.mcmeta</code>, and
+            <code>pack.png</code>, Drag and drop it into the main part of the
+            GitHub browser window.
+          </li>
+          <li>
+            Wait for everything to finish uploading, then scroll down and click
+            the big green button which says &ldquo;Commit changes&rdquo;.
+          </li>
+        </ul>
+        <p>Your files are now stored online!</p>
+        <h2>Setting up a Server Resource Pack</h2>
+        <p>
+          Now, it&rsquo;s time to set up your command. Enter the details of your
+          map and repository here:
+        </p>
+        <p>
+          GitHub username:
+          <input type="text" id="ghusername" placeholder="AK1089" />
+        </p>
+        <p>
+          Repository name:
+          <input
+            type="text"
+            id="ghreponame"
+            placeholder="Example-Resource-Pack"
+          />
+        </p>
+        <p>Map code: <input type="text" id="mapCode" placeholder="xyz" /></p>
+        <div id="userDownloadArea" style="display: none">
+          <p>
+            Now, test the link by downloading a zipped version of your resource
+            pack from here:
+          </p>
+          <a
+            id="userDownload"
+            href="https://github.com/AK1089/Example-Resource-Pack/archive/refs/heads/main.zip"
+            download
+            class="file-download"
+            ><br />
+            <svg><use href="/assets/icons/sprite.svg#document"></use></svg
+            ><br />
+            <span id="userFilename" data-filename="Your-Pack.zip"></span><br
+          /></a>
+        </div>
+        <div id="dropZoneArea" style="display: none">
+          <p>
+            If this takes you to a "Not found" page, double-check the details
+            you entered. Otherwise, you should have a <code>.zip</code> file.
+            Drag and drop it here:
+          </p>
+          <div class="drop-zone" id="dropZone">
+            <p class="primary-text">Drag and drop a file here</p>
+            <p class="secondary-text">or click to select a file</p>
+          </div>
+        </div>
+        <p><input type="file" id="fileInput" /></p>
+        <div id="resultArea" style="display: none">
+          <p>Now, copy the command below and give it to an admin:</p>
+          <pre
+            data-language="command"
+          ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code id="result" class="language-command"><span><div id="hashOutput"></div></span></code></pre>
+        </div>
+        <p><link rel="stylesheet" href="styles.css" /></p>
+        <script src="script.js"></script>
+      </main>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-right"></div>
+
+      <!-- The sidebar on the right -->
+      <aside class="sidebar-right"></aside>
+
+      <!-- Padding on the right -->
+      <div class="spacing-right"></div>
+    </div>
+
+    <!-- Load the map script -->
+    <script>
+      // Load visited URLs from localStorage
+      let visitedUrls = new Set();
+      const storedVisited = localStorage.getItem("visitedPages");
+      if (storedVisited) {
+        visitedUrls = new Set(JSON.parse(storedVisited));
+      }
+
+      // Log current page visit
+      const currentPath = window.location.pathname.replace(/\/$/, "");
+      visitedUrls.add(currentPath);
+      localStorage.setItem(
+        "visitedPages",
+        JSON.stringify(Array.from(visitedUrls)),
+      );
+    </script>
+  </body>
+</html>

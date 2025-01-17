@@ -66,14 +66,20 @@
     "display": true
   },
   {
-    "name": "State Exploration",
-    "url": "/puzzles#state-exploration",
+    "name": "Mathematical",
+    "url": "/puzzles#mathematical",
     "parent": "/puzzles",
     "display": true
   },
   {
-    "name": "Strategy Finding",
-    "url": "/puzzles#strategy-finding",
+    "name": "Miscellaneous",
+    "url": "/puzzles#miscellaneous",
+    "parent": "/puzzles",
+    "display": true
+  },
+  {
+    "name": "Number Puzzles",
+    "url": "/puzzles#number",
     "parent": "/puzzles",
     "display": true
   },
@@ -90,26 +96,20 @@
     "display": true
   },
   {
-    "name": "Number Puzzles",
-    "url": "/puzzles#number",
+    "name": "State Exploration",
+    "url": "/puzzles#state-exploration",
     "parent": "/puzzles",
     "display": true
   },
   {
-    "name": "Mathematical",
-    "url": "/puzzles#mathematical",
+    "name": "Strategy Finding",
+    "url": "/puzzles#strategy-finding",
     "parent": "/puzzles",
     "display": true
   },
   {
     "name": "Word",
     "url": "/puzzles#word",
-    "parent": "/puzzles",
-    "display": true
-  },
-  {
-    "name": "Miscellaneous",
-    "url": "/puzzles#miscellaneous",
     "parent": "/puzzles",
     "display": true
   },
@@ -141,6 +141,12 @@
     "name": "Map Art",
     "url": "/minr/map-art",
     "parent": "/minr#utilities",
+    "display": true
+  },
+  {
+    "name": "Resource Packs",
+    "url": "/minr/resource-packs",
+    "parent": "/minr#guides",
     "display": true
   },
   {

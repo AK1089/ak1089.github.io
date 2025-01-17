@@ -28,6 +28,7 @@ Some links to the Minr forums are restricted to <span style="color: var(--lime)"
 
 ## My Guides to Scripting & Mapmaking
 
+- A step-by-step guide to [setting up your map with a resource pack](resource-packs).
 - An explanation of [functions](functions).
 
 ## Example Scripts
