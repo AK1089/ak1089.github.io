@@ -5,7 +5,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Minr | AK1089's Site</title>
+    <title>Yeroc% Patch Guide</title>
     <link rel="stylesheet" href="/styles/base.css" />
     <script>
       function copyCode(button) {
@@ -188,9 +188,11 @@
             <div class="path">
               <a href="/" class="path-link">home</a>
               <span class="separator"> / </span
-              ><a href="/minr" class="path-link">minr</a>
+              ><a href="/minr" class="path-link">minr</a
+              ><span class="separator"> / </span
+              ><a href="/minr/yeroc" class="path-link">yeroc</a>
             </div>
-            <h1 class="title">Minr</h1>
+            <h1 class="title">Yeroc% Patch Guide</h1>
             <div class="metadata">
               <span class="published-date">published December 24, 2024</span
               ><span class="updated-date">, updated January 07, 2025</span>
@@ -198,97 +200,115 @@
           </div>
         </header>
         <p>
-          I spend a lot of time on
-          <a href="https://forums.minr.org/">Zero.Minr.Org</a>, one of the
-          oldest Minecraft servers around (since 2010). It&rsquo;s a challenge
-          server, designed for mapmakers to build puzzles, mazes, parkour, and
-          adventure maps. I&rsquo;ve been around on the server since June 2020,
-          and have been a staff member since February 2022. The server IP is
-          <code>zero.minr.org</code> and the
-          <a href="https://discord.com/invite/minr">Discord</a> is
-          <code>discord.gg/minr</code>.
+          TL;DR: look at the example script and copy paste the important lines
+          into your own script.
+        </p>
+        <h2>What is a Yeroc% Skip?</h2>
+        <p>
+          Sometimes in scripts for maps, you want to teleport the player, or
+          give them items, or set variables which allow them to progress
+          further. Sometimes, this happens <em>after a delay</em>: commonly, a
+          back-and-forth dialogue script concludes with the player being
+          teleported away to a new room.
         </p>
         <p>
-          One of the biggest features of the server is a completely custom
-          plugin, which includes Minr Script Code: a full programming language
-          built into Minecraft to facilitate mapmaking. This is an extremely
-          powerful tool, and I&rsquo;ve done a lot of interesting things with
-          it. Most of the pages under this section are devoted to scripting,
-          including some guides I&rsquo;ve written, links to useful resources,
-          example scripts, and other tools I&rsquo;ve created to help with
-          mapmaking.
+          However, this enables an exploit, usually known as a
+          &ldquo;yeroc%&rdquo; run (after Mouthwest, formerly known as Yeroc424,
+          who popularised it). During the execution of a dialogue script, the
+          player can <code>/kill</code> to reset their timer, and when the
+          script concludes they will be teleported, essentially beginning
+          halfway through the map with a zero second timer.
         </p>
-        <h2>My Tools</h2>
-        <ul>
-          <li>
-            My <a href="map-art">map art creator</a> allows you to upload images
-            and view them as custom maps in game.
-          </li>
-          <li>
-            My <a href="yeroc">Yeroc% Patch Library</a> allows you to easily
-            patch a common skip method in your maps.
-          </li>
-        </ul>
-        <h2>Links to External Resources</h2>
         <p>
-          Some links to the Minr forums are restricted to
-          <span style="color: var(--lime)">Greenies</span> and above.
+          While this is against the rules, it&rsquo;s usually good for mapmakers
+          to guard against this anyway. I thought I&rsquo;d make it even easier,
+          with a namespace appropriately named <code>yerocpatch</code>.
+          Everything has guards and checks in place, so you don&rsquo;t have to
+          worry about messing up players if they join another map mid-execution.
+        </p>
+        <h2>Example Script</h2>
+        <p>This is how you would use it in your own scripts.</p>
+        <pre
+          data-language="msc"
+        ><button class="copy-button" onclick="copyCode(this)" aria-label="Copy code to clipboard"><svg class="icon icon--stroke" width="24" height="24"><use href="/assets/icons/sprite.svg#copy"></use></svg></button><code class="language-msc"><span># put this at the start of your script, just below things like cooldowns</span><span>@define Int yeroc_check = yerocpatch::setup(player)</span><span></span><span># most of your script goes here, for example some dialogue</span><span>@player NPC: Hi! I'm a placeholder NPC created for dialogue demonstration purposes.</span><span>@delay 80</span><span>@player NPC: And that was a four second delay during which you could have reset your timer!</span><span></span><span># add this section before you do anything with the player: it checks if the player's run is still valid</span><span>@var yeroc_check = yerocpatch::verify(player, yeroc_check, &quot;default&quot;)</span><span></span><span># terminates the script if the run is invalid (verification codes 0, 1, 2, 3), so the teleport doesn't run</span><span>@if yeroc_check &lt; 4</span><span>    @return</span><span>@fi</span><span></span><span># do the possibly skip-enabling thing, like a teleport</span><span>@bypass /execute in minecraft:theta run teleport @s 1234 56 789</span></code></pre>
+        <h2>Verification Codes</h2>
+        <p>
+          You may have noticed a reference to verification code
+          <code>4</code> in the conditional statement. The full list of codes is
+          as follows:
         </p>
         <ul>
           <li>
-            Eszes Bálint&rsquo;s
-            <a href="https://eszesbalint.github.io/bdstudio/editor">BDStudio</a>
-            is a powerful GUI editor for working with block displays.
+            code <strong>6</strong>: the checker referenced was not found, and
+            there is an error in your setup.
           </li>
           <li>
-            <a href="https://mcstacker.net/">MCStacker</a> is an incredibly
-            capable custom command builder which requires very little knowledge
-            of commands.
+            code <strong>5</strong>: the map has no timer attached (for example,
+            when the map is on Board).
           </li>
           <li>
-            The
-            <a href="https://msc-documentation.readthedocs.io/en/latest/"
-              >official MSC documentation</a
-            >
-            is worth reading if you are starting out with scripting.
+            code <strong>4</strong>: the player has done everything right and
+            the check is valid.
           </li>
           <li>
-            <code>Lightwood13</code> has developed a
-            <a
-              href="https://marketplace.visualstudio.com/items?itemName=Lightwood13.msc"
-              >VSCode extension</a
-            >
-            which helps with writing MSC scripts. I think it&rsquo;s fantastic,
-            and well worth the setup investment.
+            code <strong>3</strong>: the player has left the map since the
+            script started running.
           </li>
           <li>
-            <code>rmanimal</code> wrote
-            <a
-              href="https://forums.minr.org/threads/scripts-with-rman-1-basic-script-understanding.3193/"
-              >Scripts with rman</a
-            >
-            in 2018, and it still holds up as the canonical tutorial-style
-            introduction to scripting.
+            code <strong>2</strong>: the player&rsquo;s timer has already been
+            invalidated.
           </li>
           <li>
-            <code>egabbac</code> maintains a
-            <a
-              href="https://forums.minr.org/threads/compilation-of-mapmaking-resources.7331/"
-              >collection of resources</a
-            >
-            which aim to help with mapmaking.
+            code <strong>1</strong>: the player has reset their timer since the
+            script started running.
           </li>
           <li>
-            On the server, <code>/warp teleport mapmaking</code> has a guide to
-            many aspects of creating maps.
+            code <strong>0</strong>: the checker was manually invalidated using
+            <code>yerocpatch::terminate</code> or <code>invalidate</code>.
           </li>
         </ul>
-        <h2>My Guides to Scripting &amp; Mapmaking</h2>
+        <h2>Advanced Usage</h2>
+        <p>
+          At any point in your script before verification, you can use the line
+          <code>@var yerocpatch::invalidate(player, yeroc_check)</code> to make
+          sure the verification fails. This is useful in conditional branches,
+          to terminate scripts (eg. if the player walks back into an area they
+          shouldn&rsquo;t, even if this doesn&rsquo;t reset their timer).
+        </p>
+        <p>
+          You may also use
+          <code>@var yerocpatch::terminate(player, "your-map-code-here")</code>
+          in any <em>other</em> script to invalidate <em>every</em> ongoing
+          check in your map.
+        </p>
+        <p>
+          In the verification stage, you may replace &ldquo;default&rdquo; with
+          any string. The flags inside will determine the verification
+          behaviour.
+        </p>
         <ul>
-          <li>An explanation of <a href="functions">functions</a>.</li>
+          <li>
+            Strings containing &ldquo;nullify&rdquo; will nullify the
+            player&rsquo;s timer, so that they can complete the map but not
+            attain a time.
+          </li>
+          <li>
+            Strings containing &ldquo;invalidate&rdquo; will invalidate the
+            player&rsquo;s completion altogether.
+          </li>
+          <li>
+            Strings containing &ldquo;kill&rdquo; will kill the player and reset
+            them to their checkpoint.
+          </li>
         </ul>
-        <h2>Example Scripts</h2>
-        <p>🚧 This section is under construction!</p>
+        <p>
+          The namespace will only work on maps which have timers attached: this
+          does not generally include maps on Board. It will <em>not</em> throw
+          errors if you use the scripts, but simply not invalidate timers or
+          kill players. If you want to test the behaviour of your scripts, ask
+          an admin to move your map to another area which has timers (like the
+          Valley).
+        </p>
       </main>
 
       <!-- Spacing between the sidebar and the main content -->

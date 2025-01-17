@@ -108,6 +108,12 @@
     "display": true
   },
   {
+    "name": "Yeroc% Patch",
+    "url": "/minr/yeroc",
+    "parent": "/minr#utilities",
+    "display": true
+  },
+  {
     "name": "Website Design",
     "url": "/other/design",
     "parent": "/other",

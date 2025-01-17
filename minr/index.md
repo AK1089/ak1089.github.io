@@ -12,6 +12,7 @@ One of the biggest features of the server is a completely custom plugin, which i
 ## My Tools
 
 - My [map art creator](map-art) allows you to upload images and view them as custom maps in game.
+- My [Yeroc% Patch Library](yeroc) allows you to easily patch a common skip method in your maps.
 
 ## Links to External Resources
 
