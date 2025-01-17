@@ -15,7 +15,7 @@
     "name": "Map",
     "url": "/map",
     "parent": "/",
-    "display": true
+    "display": false
   },
   {
     "name": "Maths",

@@ -21,9 +21,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const root = stratify(visibleData)
         .sort((a, b) => a.data.name.localeCompare(b.data.name));
 
-    // Create tree layout
+    const estimatedNodeHeight = 40; // Increased to 50px to ensure no overlap
+    const totalNodes = root.descendants().length;
+    const minHeight = estimatedNodeHeight * (totalNodes / 2);
+
     const treeLayout = d3.tree()
-        .size([height, width])
+        .size([Math.max(height, minHeight), width])
         .separation((a, b) => 2.5);
 
     treeLayout(root);
@@ -40,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     svg.addEventListener('wheel', (e) => e.preventDefault(), { passive: false });
     d3.select(svg).call(zoom);
 
-    const initialTransform = d3.zoomIdentity.translate(50, 10).scale(1);
+    const initialTransform = d3.zoomIdentity.translate(40, 10).scale(1);
     d3.select(svg).call(zoom.transform, initialTransform);
 
     // g.setAttribute("transform", `translate(${margin.left},${margin.top})`);
@@ -127,17 +130,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.addEventListener('resize', () => {
         const newWidth = container.clientWidth - margin.left - margin.right;
         const newHeight = container.clientHeight - margin.top - margin.bottom;
+        const minHeight = calculateMinHeight(root); // Recalculate min height
 
-        treeLayout.size([newHeight, newWidth]);
+        treeLayout.size([Math.max(newHeight, minHeight), newWidth]);
         treeLayout(root);
 
-        // Update positions
+        // Rest of your resize handler code stays the same...
         g.querySelectorAll('.sitemap-node').forEach((node, i) => {
             const data = root.descendants()[i];
             node.setAttribute("transform", `translate(${data.y},${data.x})`);
         });
 
-        // Update links
         g.querySelectorAll('.sitemap-link').forEach((path, i) => {
             const data = root.links()[i];
             path.setAttribute("d", d3.linkHorizontal()
