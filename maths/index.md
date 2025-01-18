@@ -8,4 +8,5 @@ I've been a huge mathematics nerd since I was very young: throughout my schoolin
 
 ## Probability
 
+- A [complete catalogue of probability distributions](probability-distributions).
 - An [explainer](laplaces-rule-of-succession) and [interactive model](laplaces-rule-of-succession/interactive) of Laplace's Rule of Succession.
