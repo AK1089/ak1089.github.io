@@ -132,6 +132,12 @@
     "display": true
   },
   {
+    "name": "Probability Distributions",
+    "url": "/maths/probability-distributions",
+    "parent": "/maths",
+    "display": true
+  },
+  {
     "name": "Functions",
     "url": "/minr/functions",
     "parent": "/minr#guides",
@@ -162,6 +168,12 @@
     "display": true
   },
   {
+    "name": "12 Coins",
+    "url": "/puzzles/12-coins",
+    "parent": "/puzzles#optimisation",
+    "display": true
+  },
+  {
     "name": "Anthropics",
     "url": "/puzzles/anthropics",
     "parent": "/puzzles#probability",
@@ -176,6 +188,12 @@
   {
     "name": "Five Locks",
     "url": "/puzzles/five-locks",
+    "parent": "/puzzles#probability",
+    "display": true
+  },
+  {
+    "name": "Monty Hall",
+    "url": "/puzzles/monty-hall",
     "parent": "/puzzles#probability",
     "display": true
   },

@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+  <!-- Default header, with a title. Links to the main stylesheet. -->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monty Hall</title>
+    <link rel="stylesheet" href="/styles/base.css" />
+    <script>
+      function copyCode(button) {
+        const pre = button.parentElement;
+        const code = pre.querySelector("code");
+        const text = code.innerText;
+
+        navigator.clipboard.writeText(text);
+
+        button.classList.add("copied");
+        const originalIcon = button.innerHTML;
+        button.innerHTML = `
+            <svg class="icon icon--stroke" width="24" height="24">
+                <use href="/assets/icons/sprite.svg#check"></use>
+            </svg>
+        `;
+
+        setTimeout(() => {
+          button.classList.remove("copied");
+          button.innerHTML = originalIcon;
+        }, 1000);
+      }
+    </script>
+  </head>
+
+  <!-- The body: the layout-container div contains all the content -->
+
+  <body>
+    <div class="layout-container">
+      <!-- Padding on the left -->
+      <div class="spacing-left"></div>
+
+      <!-- The sidebar on the left, with the site title and navigation links -->
+      <div class="sidebar-left">
+        <!-- Header with the site title and a link to the map page -->
+        <div class="sidebar-header">
+          <a href="/" class="site-title">AK1089's Site</a>
+          <a href="/map" class="map-link">
+            <svg class="icon icon--stroke">
+              <use href="/assets/icons/sprite.svg#map"></use>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Primary navigation bar: links to the main sections of the site -->
+        <nav>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a
+                href="/utilities"
+                class="nav-link"
+                style="border-left: 3px solid var(--blue)"
+                >utilities</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/projects"
+                class="nav-link"
+                style="border-left: 3px solid var(--lime)"
+                >projects</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/blog"
+                class="nav-link"
+                style="border-left: 3px solid var(--peach)"
+                >blog</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/puzzles"
+                class="nav-link"
+                style="border-left: 3px solid var(--purple)"
+                >puzzles</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/tech"
+                class="nav-link"
+                style="border-left: 3px solid var(--maroon)"
+                >tech</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/maths"
+                class="nav-link"
+                style="border-left: 3px solid var(--teal)"
+                >maths</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/minr"
+                class="nav-link"
+                style="border-left: 3px solid var(--yellow)"
+                >minr</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/other"
+                class="nav-link"
+                style="border-left: 3px solid var(--subtext-b)"
+                >other</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <div class="social-icons">
+          <a
+            href="https://x.com/_AK1089_"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#twitter"></use>
+            </svg>
+          </a>
+          <a
+            href="https://github.com/ak1089/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#github"></use>
+            </svg>
+          </a>
+          <a
+            href="https://discord.com/users/380805820415344644"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#discord"></use>
+            </svg>
+          </a>
+          <a
+            href="https://steamcommunity.com/profiles/76561198281258106/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#steam"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.last.fm/user/AK1089-"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#lastfm"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/avishkumar/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#linkedin"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-left"></div>
+
+      <!-- The main content of the page: this is changed per-page and contains the actual content -->
+      <main class="main-content">
+        <header class="page-header">
+          <div class="header-container">
+            <div class="path">
+              <a href="/" class="path-link">home</a>
+              <span class="separator"> / </span
+              ><a href="/puzzles" class="path-link">puzzles</a
+              ><span class="separator"> / </span
+              ><a href="/puzzles/monty-hall" class="path-link">monty-hall</a>
+            </div>
+            <h1 class="title">Monty Hall</h1>
+            <div class="metadata">
+              <span class="published-date">published January 29, 2025</span>
+            </div>
+          </div>
+        </header>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"
+          integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs"
+          crossorigin="anonymous"
+        />
+
+        <style type="text/css">
+          .katex img {
+            object-fit: fill;
+            padding: unset;
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: inherit;
+          }
+        </style>
+        <p>
+          In 1990, Marilyn vos Savant published a solution to the original Monty
+          Hall problem in her magazine column <em>Ask Marilyn</em>. The
+          statement of the problem was as follows:
+        </p>
+        <blockquote class="quote-quote">
+          <svg
+            class="icon icon--stroke"
+            style="stroke-width: 2"
+            width="24"
+            height="24"
+          >
+            <use href="/assets/icons/sprite.svg#quote"></use>
+          </svg>
+          Suppose you're on a game show, and you're given the choice of three
+          doors. Behind one door is a car, behind the others, goats. You pick a
+          door, say #1, and the host, who knows what's behind the doors, opens
+          another door, say #3, which has a goat. He says to you, "Do you want
+          to pick door #2?" Should you switch to door #2 or stick with door #1?
+        </blockquote>
+        <p>
+          The problem was named after the host Monty Hall of popular TV show
+          <em>Let&rsquo;s Make A Deal</em>. In the face of thousands of readers
+          and mathematicians yelling at her and incorrectly insisting that
+          switching offers no advantage, Marilyn correctly stated that switching
+          doors gives you a
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mn>2</mn><mi mathvariant="normal">/</mi><mn>3</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >2/3</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">2/3</span></span
+              ></span
+            ></span
+          >
+          chance of winning the car.
+        </p>
+        <p>
+          When you pick a door to begin with, there is a
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mn>1</mn><mi mathvariant="normal">/</mi><mn>3</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >1/3</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">1/3</span></span
+              ></span
+            ></span
+          >
+          chance the car is behind it: in this case, switching loses you the
+          game. However, if you originally picked a goat (which has a
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mn>2</mn><mi mathvariant="normal">/</mi><mn>3</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >2/3</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">2/3</span></span
+              ></span
+            ></span
+          >
+          chance), the other goat has its door opened, and therefore the only
+          remaining door is the car, winning you the game if you switch.
+        </p>
+        <p>
+          Here, I present some variants of the original problem, with slightly
+          more difficult solutions.
+        </p>
+        <hr />
+        <h2>Many-Door Monty Hall</h2>
+        <p>
+          Suppose you&rsquo;re on a game show, and you&rsquo;re given the choice
+          of one thousand doors. Behind one door is a car, behind the others,
+          goats. You pick a door, say #1, and the host, who knows what&rsquo;s
+          behind the doors, opens every other door except yours and #376. He
+          says to you, &ldquo;Do you want to pick door #376?&rdquo; Should you
+          take his offer to switch, or stick with door #1?
+        </p>
+        <p>
+          Answer:
+          <span class="spoiler"
+            ><span
+              >Of course, you should switch, to give yourself a
+              <span class="katex"
+                ><span class="katex-mathml"
+                  ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                    ><semantics
+                      ><mrow><mn>99.9</mn><mi mathvariant="normal">%</mi></mrow
+                      ><annotation encoding="application/x-tex"
+                        >99.9\%</annotation
+                      ></semantics
+                    ></math
+                  ></span
+                ><span class="katex-html" aria-hidden="true"
+                  ><span class="base"
+                    ><span
+                      class="strut"
+                      style="height: 0.8056em; vertical-align: -0.0556em"
+                    ></span
+                    ><span class="mord">99.9%</span></span
+                  ></span
+                ></span
+              >
+              chance of winning the car. This formulation is equivalent to the
+              original
+              <span class="katex"
+                ><span class="katex-mathml"
+                  ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                    ><semantics
+                      ><mrow><mi>N</mi><mo>=</mo><mn>3</mn></mrow
+                      ><annotation encoding="application/x-tex"
+                        >N=3</annotation
+                      ></semantics
+                    ></math
+                  ></span
+                ><span class="katex-html" aria-hidden="true"
+                  ><span class="base"
+                    ><span class="strut" style="height: 0.6833em"></span
+                    ><span
+                      class="mord mathnormal"
+                      style="margin-right: 0.10903em"
+                      >N</span
+                    ><span class="mspace" style="margin-right: 0.2778em"></span
+                    ><span class="mrel">=</span
+                    ><span
+                      class="mspace"
+                      style="margin-right: 0.2778em"
+                    ></span></span
+                  ><span class="base"
+                    ><span class="strut" style="height: 0.6444em"></span
+                    ><span class="mord">3</span></span
+                  ></span
+                ></span
+              >
+              case, but it is a lot more intuitively obvious why switching is a
+              good strategy.</span
+            ></span
+          >
+        </p>
+        <h2>Many-Round Monty Hall</h2>
+        <p>
+          This is the same problem as the original, but now there are
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>N</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >N</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6833em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.10903em"
+                  >N</span
+                ></span
+              ></span
+            ></span
+          >
+          doors, still with only one car and
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>N</mi><mo>−</mo><mn>1</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >N-1</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7667em; vertical-align: -0.0833em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.10903em"
+                  >N</span
+                ><span class="mspace" style="margin-right: 0.2222em"></span
+                ><span class="mbin">−</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2222em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">1</span></span
+              ></span
+            ></span
+          >
+          goats. You pick a door, and the host opens another door to reveal a
+          goat. He offers you the chance to switch to any of the
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>N</mi><mo>−</mo><mn>2</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >N-2</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7667em; vertical-align: -0.0833em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.10903em"
+                  >N</span
+                ><span class="mspace" style="margin-right: 0.2222em"></span
+                ><span class="mbin">−</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2222em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">2</span></span
+              ></span
+            ></span
+          >
+          remaining closed doors, or stick with your door. Once you make your
+          decision, another goat is revealed, and you once again have the chance
+          to switch to any of the
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>N</mi><mo>−</mo><mn>3</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >N-3</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7667em; vertical-align: -0.0833em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.10903em"
+                  >N</span
+                ><span class="mspace" style="margin-right: 0.2222em"></span
+                ><span class="mbin">−</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2222em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">3</span></span
+              ></span
+            ></span
+          >
+          remaining closed doors, or stick with your current selection.
+        </p>
+        <p>
+          This process continues until the end, where there are only two doors
+          left to pick, and you may choose to stick with your current selection
+          or to switch. What is the optimal strategy, and what win probability
+          does it achieve?
+        </p>
+        <p>
+          Answer:
+          <span class="spoiler"
+            ><span
+              >You should <em>not</em> switch until the very last opportunity,
+              at which point you <em>should</em> switch. This gives you a
+              <span class="katex"
+                ><span class="katex-mathml"
+                  ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                    ><semantics
+                      ><mrow
+                        ><mn>1</mn><mo>−</mo><mn>1</mn
+                        ><mi mathvariant="normal">/</mi><mi>N</mi></mrow
+                      ><annotation encoding="application/x-tex"
+                        >1-1/N</annotation
+                      ></semantics
+                    ></math
+                  ></span
+                ><span class="katex-html" aria-hidden="true"
+                  ><span class="base"
+                    ><span
+                      class="strut"
+                      style="height: 0.7278em; vertical-align: -0.0833em"
+                    ></span
+                    ><span class="mord">1</span
+                    ><span class="mspace" style="margin-right: 0.2222em"></span
+                    ><span class="mbin">−</span
+                    ><span
+                      class="mspace"
+                      style="margin-right: 0.2222em"
+                    ></span></span
+                  ><span class="base"
+                    ><span
+                      class="strut"
+                      style="height: 1em; vertical-align: -0.25em"
+                    ></span
+                    ><span class="mord">1/</span
+                    ><span
+                      class="mord mathnormal"
+                      style="margin-right: 0.10903em"
+                      >N</span
+                    ></span
+                  ></span
+                ></span
+              >
+              chance of winning. You want to maximise the probability of the
+              other door at the final stage having the car, which means at each
+              stage you are minimising the probability that your currently
+              selected door conceals the car. Switching at any earlier point
+              increases the probability of you having the car, so you should
+              avoid it.</span
+            ></span
+          >
+        </p>
+        <h2>Drunk-Host Monty Hall</h2>
+        <p>
+          This is the same problem as the original, but now the host is visibly
+          drunk &mdash; he clearly does not know what is going on, he has no
+          clue what is behind the doors, and he has thrown open a door entirely
+          at random. It still has a goat behind it, as in the original problem.
+          Does switching doors still proffer an advantage?
+        </p>
+        <p>
+          Answer:
+          <span class="spoiler"
+            ><span
+              >No, switching now does not make a difference. The crucial piece
+              of information in the original problem was that the host knew the
+              contents of the doors, and would not have revealed a car.</span
+            ></span
+          >
+        </p>
+        <h2>Golden-Goat Monty Hall</h2>
+        <p>
+          This is the same problem as the original, but you know that one of the
+          goats is the lost pet of a billionaire offering a massive reward,
+          eclipsing the value of the car. You desperately want to turn the pet
+          goat in for the reward, and don&rsquo;t much care about the car. The
+          host is totally unaware of this fact. You pick a door, and the host
+          reveals a goat behind another door &mdash; it is <em>not</em> the pet
+          goat. He offers you the chance to switch doors. Should you?
+        </p>
+        <p>
+          Answer:
+          <span class="spoiler"
+            ><span
+              >No, don&rsquo;t switch. You have a
+              <span class="katex"
+                ><span class="katex-mathml"
+                  ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                    ><semantics
+                      ><mrow
+                        ><mn>2</mn><mi mathvariant="normal">/</mi
+                        ><mn>3</mn></mrow
+                      ><annotation encoding="application/x-tex"
+                        >2/3</annotation
+                      ></semantics
+                    ></math
+                  ></span
+                ><span class="katex-html" aria-hidden="true"
+                  ><span class="base"
+                    ><span
+                      class="strut"
+                      style="height: 1em; vertical-align: -0.25em"
+                    ></span
+                    ><span class="mord">2/3</span></span
+                  ></span
+                ></span
+              >
+              chance of winning the car if you switch, so you must have a
+              <span class="katex"
+                ><span class="katex-mathml"
+                  ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                    ><semantics
+                      ><mrow
+                        ><mn>2</mn><mi mathvariant="normal">/</mi
+                        ><mn>3</mn></mrow
+                      ><annotation encoding="application/x-tex"
+                        >2/3</annotation
+                      ></semantics
+                    ></math
+                  ></span
+                ><span class="katex-html" aria-hidden="true"
+                  ><span class="base"
+                    ><span
+                      class="strut"
+                      style="height: 1em; vertical-align: -0.25em"
+                    ></span
+                    ><span class="mord">2/3</span></span
+                  ></span
+                ></span
+              >
+              chance of winning the pet goat if you do!</span
+            ></span
+          >
+        </p>
+        <h2>Hungry-Tiger Monty Hall</h2>
+        <p>
+          Now, the &ldquo;prizes&rdquo; behind the doors are a goat, a car, and
+          a hungry tiger who will eat you. The host is a nice person: he is
+          hoping you win and certainly hoping you don&rsquo;t get eaten alive on
+          live TV, but cannot communicate with you beyond his choice of door.
+        </p>
+        <p>
+          You choose a door, and the host reveals&hellip; something. Based on
+          what the host reveals, should you switch or stay?
+        </p>
+        <p>
+          Answer:
+          <span class="spoiler"
+            ><span
+              >The host will never reveal the car, as this would make picking
+              the car impossible. If you pick the goat or car, then the host
+              will certainly reveal the tiger, to avoid you getting eaten. But
+              if you pick the tiger, then this is impossible, so he will have to
+              reveal the goat. Therefore if he reveals the goat, you have the
+              tiger, and should switch. If he reveals the tiger, then you have
+              the goat or car, and so it does not matter what you do.</span
+            ></span
+          >
+        </p>
+      </main>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-right"></div>
+
+      <!-- The sidebar on the right -->
+      <aside class="sidebar-right"></aside>
+
+      <!-- Padding on the right -->
+      <div class="spacing-right"></div>
+    </div>
+
+    <!-- Load the map script -->
+    <script>
+      // Load visited URLs from localStorage
+      let visitedUrls = new Set();
+      const storedVisited = localStorage.getItem("visitedPages");
+      if (storedVisited) {
+        visitedUrls = new Set(JSON.parse(storedVisited));
+      }
+
+      // Log current page visit
+      const currentPath = window.location.pathname.replace(/\/$/, "");
+      visitedUrls.add(currentPath);
+      localStorage.setItem(
+        "visitedPages",
+        JSON.stringify(Array.from(visitedUrls)),
+      );
+    </script>
+  </body>
+</html>

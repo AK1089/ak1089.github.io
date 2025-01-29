@@ -29,9 +29,9 @@ Given a competitive game with fixed rules, can you find a strategy to always win
 
 ## Optimisation
 
-A subgenre of strategy finding games where you have to find a strategy to maximise your winnings, but you're not playing against anyone and don't need to communicate anything with your choices.
+A subgenre of strategy finding games where you have to find some sort of strategy to maximise your winnings or show something is possible, but you're not playing against anyone and don't need to communicate anything with your choices.
 
-- 🚧 None to see here yet! Check back soon.
+- The famous [12 coins](12-coins) puzzle and some bonus puzzles based on it.
 
 ## Probability
 
@@ -39,6 +39,7 @@ This is one of my favourite areas of mathematics, so there's no surprise a lot o
 
 - Some easy introductory puzzles about [anthropics](anthropics).
 - A puzzle about cracking [five locks](five-locks) by pure chance.
+- The [Monty Hall](monty-hall) problem and some variants thereof.
 
 ## Number Puzzles
 

@@ -1,0 +1,2762 @@
+<!doctype html>
+<html lang="en">
+  <!-- Default header, with a title. Links to the main stylesheet. -->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The 12 Coin Problem</title>
+    <link rel="stylesheet" href="/styles/base.css" />
+    <script>
+      function copyCode(button) {
+        const pre = button.parentElement;
+        const code = pre.querySelector("code");
+        const text = code.innerText;
+
+        navigator.clipboard.writeText(text);
+
+        button.classList.add("copied");
+        const originalIcon = button.innerHTML;
+        button.innerHTML = `
+            <svg class="icon icon--stroke" width="24" height="24">
+                <use href="/assets/icons/sprite.svg#check"></use>
+            </svg>
+        `;
+
+        setTimeout(() => {
+          button.classList.remove("copied");
+          button.innerHTML = originalIcon;
+        }, 1000);
+      }
+    </script>
+  </head>
+
+  <!-- The body: the layout-container div contains all the content -->
+
+  <body>
+    <div class="layout-container">
+      <!-- Padding on the left -->
+      <div class="spacing-left"></div>
+
+      <!-- The sidebar on the left, with the site title and navigation links -->
+      <div class="sidebar-left">
+        <!-- Header with the site title and a link to the map page -->
+        <div class="sidebar-header">
+          <a href="/" class="site-title">AK1089's Site</a>
+          <a href="/map" class="map-link">
+            <svg class="icon icon--stroke">
+              <use href="/assets/icons/sprite.svg#map"></use>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Primary navigation bar: links to the main sections of the site -->
+        <nav>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a
+                href="/utilities"
+                class="nav-link"
+                style="border-left: 3px solid var(--blue)"
+                >utilities</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/projects"
+                class="nav-link"
+                style="border-left: 3px solid var(--lime)"
+                >projects</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/blog"
+                class="nav-link"
+                style="border-left: 3px solid var(--peach)"
+                >blog</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/puzzles"
+                class="nav-link"
+                style="border-left: 3px solid var(--purple)"
+                >puzzles</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/tech"
+                class="nav-link"
+                style="border-left: 3px solid var(--maroon)"
+                >tech</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/maths"
+                class="nav-link"
+                style="border-left: 3px solid var(--teal)"
+                >maths</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/minr"
+                class="nav-link"
+                style="border-left: 3px solid var(--yellow)"
+                >minr</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/other"
+                class="nav-link"
+                style="border-left: 3px solid var(--subtext-b)"
+                >other</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <div class="social-icons">
+          <a
+            href="https://x.com/_AK1089_"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#twitter"></use>
+            </svg>
+          </a>
+          <a
+            href="https://github.com/ak1089/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#github"></use>
+            </svg>
+          </a>
+          <a
+            href="https://discord.com/users/380805820415344644"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#discord"></use>
+            </svg>
+          </a>
+          <a
+            href="https://steamcommunity.com/profiles/76561198281258106/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#steam"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.last.fm/user/AK1089-"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#lastfm"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/avishkumar/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#linkedin"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-left"></div>
+
+      <!-- The main content of the page: this is changed per-page and contains the actual content -->
+      <main class="main-content">
+        <header class="page-header">
+          <div class="header-container">
+            <div class="path">
+              <a href="/" class="path-link">home</a>
+              <span class="separator"> / </span
+              ><a href="/puzzles" class="path-link">puzzles</a
+              ><span class="separator"> / </span
+              ><a href="/puzzles/12-coins" class="path-link">12-coins</a>
+            </div>
+            <h1 class="title">The 12 Coin Problem</h1>
+            <div class="metadata">
+              <span class="published-date">published January 29, 2025</span>
+            </div>
+          </div>
+        </header>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"
+          integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs"
+          crossorigin="anonymous"
+        />
+
+        <style type="text/css">
+          .katex img {
+            object-fit: fill;
+            padding: unset;
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: inherit;
+          }
+        </style>
+        <p>
+          This is a very popular puzzle, originating from at least as early as
+          1945, along with some closely related but less popular extension
+          questions.
+        </p>
+        <h2>The Problem</h2>
+        <p>
+          You have twelve coins. You know that one (and only one) is a forgery,
+          and is of a different weight to the other eleven coins. You have a
+          balance allowing you to determine which of two sets of coins is
+          heavier (but no other information).
+        </p>
+        <p>
+          Prove that you can always determine the forged coin
+          <em>and</em> whether it is lighter or heavier within three uses of the
+          balance.
+        </p>
+        <h3>Bonus Question 1</h3>
+        <p>
+          Prove that you cannot do this if there are more than
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mn>13</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >13</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">13</span></span
+              ></span
+            ></span
+          >
+          coins.
+        </p>
+        <h3>Bonus Question 2</h3>
+        <p>
+          Can you do this if there are exactly
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mn>13</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >13</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">13</span></span
+              ></span
+            ></span
+          >
+          coins?
+        </p>
+        <h3>Bonus Question 3</h3>
+        <p>
+          What happens if a forgery is not guaranteed to exist? Can you always
+          tell within three uses of the balance whether it does (and if so,
+          determine which coin is the forgery and its relative weight?)
+        </p>
+        <blockquote class="quote-warning">
+          <svg
+            class="icon icon--stroke"
+            style="stroke-width: 2"
+            width="24"
+            height="24"
+          >
+            <use href="/assets/icons/sprite.svg#warning"></use>
+          </svg>
+          Solutions below! Do not scroll down until you have attempted all the
+          problems.
+        </blockquote>
+        <hr />
+        <h1>Solutions</h1>
+        <p>
+          In fact,
+          <span class="spoiler"
+            ><span
+              >the answer to the final bonus question is &ldquo;yes&rdquo;! This
+              means the original problem must also be possible using the same
+              strategy: there will simply be one state which doesn&rsquo;t
+              arise.</span
+            ></span
+          >
+        </p>
+        <h2>Bonus 1: More Than 13 Coins</h2>
+        <p>
+          Suppose there are
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>m</mi><mo>⩾</mo><mn>14</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >m \geqslant 14</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7733em; vertical-align: -0.1367em"
+                ></span
+                ><span class="mord mathnormal">m</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel amsrm">⩾</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">14</span></span
+              ></span
+            ></span
+          >
+          coins. Then in total there are
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mn>2</mn><mi>m</mi><mo>⩾</mo><mn>28</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >2m \geqslant 28</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7811em; vertical-align: -0.1367em"
+                ></span
+                ><span class="mord">2</span
+                ><span class="mord mathnormal">m</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel amsrm">⩾</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">28</span></span
+              ></span
+            ></span
+          >
+          states to distinguish between, in
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo stretchy="false">{</mo><mtext> </mtext><mn>1</mn
+                    ><mo>…</mo><mi>m</mi><mtext> </mtext
+                    ><mo stretchy="false">}</mo><mo>×</mo
+                    ><mo stretchy="false">{</mo><mtext> </mtext
+                    ><mtext mathvariant="monospace">heavy</mtext
+                    ><mo separator="true">,</mo><mtext> </mtext
+                    ><mtext mathvariant="monospace">light</mtext><mtext> </mtext
+                    ><mo stretchy="false">}</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\set{1 \dots m} \times \set{\texttt{heavy}, \,
+                    \texttt{light}}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">1</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="minner">…</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord mathnormal">m</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mclose">}</span
+                ><span class="mspace" style="margin-right: 0.2222em"></span
+                ><span class="mbin">×</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2222em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord text"
+                  ><span class="mord texttt">heavy</span></span
+                ><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord text"
+                  ><span class="mord texttt">light</span></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mclose">}</span></span
+              ></span
+            ></span
+          >, which corresponds to at least
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><msub
+                      ><mrow><mi>log</mi><mo>⁡</mo></mrow
+                      ><mn>2</mn></msub
+                    ><mn>28</mn><mo>&gt;</mo><mn>3</mn
+                    ><msub
+                      ><mrow><mi>log</mi><mo>⁡</mo></mrow
+                      ><mn>2</mn></msub
+                    ><mn>3</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\log_2 28 &gt; 3\log_2 3</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.9386em; vertical-align: -0.2441em"
+                ></span
+                ><span class="mop"
+                  ><span class="mop"
+                    >lo<span style="margin-right: 0.01389em">g</span></span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.207em"
+                          ><span style="top: -2.4559em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">2</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.2441em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">28</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">&gt;</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.9386em; vertical-align: -0.2441em"
+                ></span
+                ><span class="mord">3</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mop"
+                  ><span class="mop"
+                    >lo<span style="margin-right: 0.01389em">g</span></span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.207em"
+                          ><span style="top: -2.4559em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">2</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.2441em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">3</span></span
+              ></span
+            ></span
+          >
+          bits of uncertainty.
+        </p>
+        <p>
+          Each weighing has three outcomes (left heavier, right heavier, or
+          balance) and thus can provide at most
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><msub
+                      ><mrow><mi>log</mi><mo>⁡</mo></mrow
+                      ><mn>2</mn></msub
+                    ><mn>3</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\log_2 3</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.9386em; vertical-align: -0.2441em"
+                ></span
+                ><span class="mop"
+                  ><span class="mop"
+                    >lo<span style="margin-right: 0.01389em">g</span></span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.207em"
+                          ><span style="top: -2.4559em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">2</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.2441em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">3</span></span
+              ></span
+            ></span
+          >
+          bits of information.
+        </p>
+        <p>
+          Therefore 3 weighings provide at most
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mn>3</mn
+                    ><msub
+                      ><mrow><mi>log</mi><mo>⁡</mo></mrow
+                      ><mn>2</mn></msub
+                    ><mn>3</mn><mo>&lt;</mo
+                    ><msub
+                      ><mrow><mi>log</mi><mo>⁡</mo></mrow
+                      ><mn>2</mn></msub
+                    ><mn>2</mn><mi>m</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >3 \log_2 3 &lt; \log_2 2m</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.9386em; vertical-align: -0.2441em"
+                ></span
+                ><span class="mord">3</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mop"
+                  ><span class="mop"
+                    >lo<span style="margin-right: 0.01389em">g</span></span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.207em"
+                          ><span style="top: -2.4559em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">2</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.2441em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">3</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">&lt;</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.9386em; vertical-align: -0.2441em"
+                ></span
+                ><span class="mop"
+                  ><span class="mop"
+                    >lo<span style="margin-right: 0.01389em">g</span></span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.207em"
+                          ><span style="top: -2.4559em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">2</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.2441em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">2</span
+                ><span class="mord mathnormal">m</span></span
+              ></span
+            ></span
+          >
+          bits of information, which cannot possibly be enough to consistently
+          distinguish all states.
+        </p>
+        <h2>Bonus 2: Exactly 13 Coins</h2>
+        <p>
+          Suppose
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>m</mi><mo>=</mo><mn>13</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >m = 13</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.4306em"></span
+                ><span class="mord mathnormal">m</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">13</span></span
+              ></span
+            ></span
+          >. There are 26 possible states to distinguish between, which naively
+          should be possible. However, consider the first weighing, WLOG between
+          coins
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo stretchy="false">{</mo><mtext> </mtext><mn>1</mn
+                    ><mo>…</mo><mi>r</mi><mtext> </mtext
+                    ><mo stretchy="false">}</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\set{1 \dots r}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">1</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="minner">…</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.02778em"
+                  >r</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mclose">}</span></span
+              ></span
+            ></span
+          >
+          and
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo stretchy="false">{</mo><mtext> </mtext><mi>r</mi
+                    ><mo>+</mo><mn>1</mn><mo>…</mo><mi>s</mi><mtext> </mtext
+                    ><mo stretchy="false">}</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\set{r+1 \dots s}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.02778em"
+                  >r</span
+                ><span class="mspace" style="margin-right: 0.2222em"></span
+                ><span class="mbin">+</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2222em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">1</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="minner">…</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord mathnormal">s</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mclose">}</span></span
+              ></span
+            ></span
+          >.
+        </p>
+        <p>
+          Obviously, we want
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>s</mi><mo>=</mo><mn>2</mn><mi>r</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >s = 2r</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.4306em"></span
+                ><span class="mord mathnormal">s</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">2</span
+                ><span class="mord mathnormal" style="margin-right: 0.02778em"
+                  >r</span
+                ></span
+              ></span
+            ></span
+          >, otherwise the weighings are unbalanced, and anything could happen.
+          Precisely, suppose the side with more coins is heavier. We have gained
+          literally zero information: every state is still possible.
+        </p>
+        <p>
+          Since there are still
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mn>26</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >26</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">26</span></span
+              ></span
+            ></span
+          >
+          possible states, and we can obtain at most
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mn>2</mn
+                    ><msub
+                      ><mrow><mi>log</mi><mo>⁡</mo></mrow
+                      ><mn>2</mn></msub
+                    ><mn>3</mn><mo>&lt;</mo
+                    ><msub
+                      ><mrow><mi>log</mi><mo>⁡</mo></mrow
+                      ><mn>2</mn></msub
+                    ><mn>26</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >2 \log_2 3 &lt; \log_2 26</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.9386em; vertical-align: -0.2441em"
+                ></span
+                ><span class="mord">2</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mop"
+                  ><span class="mop"
+                    >lo<span style="margin-right: 0.01389em">g</span></span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.207em"
+                          ><span style="top: -2.4559em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">2</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.2441em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">3</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">&lt;</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.9386em; vertical-align: -0.2441em"
+                ></span
+                ><span class="mop"
+                  ><span class="mop"
+                    >lo<span style="margin-right: 0.01389em">g</span></span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.207em"
+                          ><span style="top: -2.4559em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">2</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.2441em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">26</span></span
+              ></span
+            ></span
+          >
+          bits of information with our two further weighings, clearly we cannot
+          always detect the forgery and its nature. Thus it cannot be possible
+          to guarantee detection in three weighings if the first weighing is
+          unbalanced.
+        </p>
+        <p>
+          From now on, we therefore weigh the first
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>r</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >r</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.4306em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.02778em"
+                  >r</span
+                ></span
+              ></span
+            ></span
+          >
+          coins against the next
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>r</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >r</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.4306em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.02778em"
+                  >r</span
+                ></span
+              ></span
+            ></span
+          >
+          coins.
+        </p>
+        <p>
+          Now, suppose
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>r</mi><mo>⩽</mo><mn>4</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >r \leqslant 4</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7733em; vertical-align: -0.1367em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.02778em"
+                  >r</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel amsrm">⩽</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">4</span></span
+              ></span
+            ></span
+          >. If the coins balance, then there are still
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mn>2</mn><mo stretchy="false">(</mo><mi>m</mi><mo>−</mo
+                    ><mn>2</mn><mi>r</mi><mo stretchy="false">)</mo><mo>⩾</mo
+                    ><mn>10</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >2(m - 2r) \geqslant 10</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">2</span><span class="mopen">(</span
+                ><span class="mord mathnormal">m</span
+                ><span class="mspace" style="margin-right: 0.2222em"></span
+                ><span class="mbin">−</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2222em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">2</span
+                ><span class="mord mathnormal" style="margin-right: 0.02778em"
+                  >r</span
+                ><span class="mclose">)</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel amsrm">⩾</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">10</span></span
+              ></span
+            ></span
+          >
+          remaining states, given by the remaining $m-2r$ coins. This requires
+          at least
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><msub
+                      ><mrow><mi>log</mi><mo>⁡</mo></mrow
+                      ><mn>2</mn></msub
+                    ><mn>10</mn><mo>&gt;</mo><mn>2</mn
+                    ><msub
+                      ><mrow><mi>log</mi><mo>⁡</mo></mrow
+                      ><mn>2</mn></msub
+                    ><mn>3</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\log_2 10 &gt; 2 \log_2 3</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.9386em; vertical-align: -0.2441em"
+                ></span
+                ><span class="mop"
+                  ><span class="mop"
+                    >lo<span style="margin-right: 0.01389em">g</span></span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.207em"
+                          ><span style="top: -2.4559em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">2</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.2441em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">10</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">&gt;</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.9386em; vertical-align: -0.2441em"
+                ></span
+                ><span class="mord">2</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mop"
+                  ><span class="mop"
+                    >lo<span style="margin-right: 0.01389em">g</span></span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.207em"
+                          ><span style="top: -2.4559em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">2</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.2441em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">3</span></span
+              ></span
+            ></span
+          >
+          bits of information to distinguish, and therefore we cannot guarantee
+          a solution in two further weighings.
+        </p>
+        <p>
+          Conversely, suppose
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>r</mi><mo>⩾</mo><mn>5</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >r \geqslant 5</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7733em; vertical-align: -0.1367em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.02778em"
+                  >r</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel amsrm">⩾</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">5</span></span
+              ></span
+            ></span
+          >. If the coins do not balance, there are still
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mn>2</mn><mi>r</mi><mo>⩾</mo><mn>10</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >2r \geqslant 10</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7811em; vertical-align: -0.1367em"
+                ></span
+                ><span class="mord">2</span
+                ><span class="mord mathnormal" style="margin-right: 0.02778em"
+                  >r</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel amsrm">⩾</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">10</span></span
+              ></span
+            ></span
+          >
+          remaining states, which again for the same reasons means we cannot
+          guarantee a solution in two further weighings.
+        </p>
+        <p>
+          Therefore no matter what arrangement we pick for the first weighing,
+          there is some situation in which we have insufficient further
+          information to distinguish betwen the remaining possibilities with our
+          two remaining weighings. This means we cannot guarantee discovery of
+          the forgery within three weighings, even when
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>m</mi><mo>=</mo><mn>13</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >m = 13</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.4306em"></span
+                ><span class="mord mathnormal">m</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">13</span></span
+              ></span
+            ></span
+          >.
+        </p>
+        <h2>Bonus 3: Without A Guaranteed forgery</h2>
+        <p>
+          Label the
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mn>12</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >12</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">12</span></span
+              ></span
+            ></span
+          >
+          coins
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mn>1</mn><mo>…</mo><mn>12</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >1 \dots 12</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">1</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="minner">…</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">12</span></span
+              ></span
+            ></span
+          >. There are
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mn>25</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >25</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">25</span></span
+              ></span
+            ></span
+          >
+          total cases: label them by
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><msup><mn>1</mn><mo>+</mo></msup
+                    ><mo>…</mo><msup><mn>12</mn><mo>+</mo></msup></mrow
+                  ><annotation encoding="application/x-tex"
+                    >1^+ \dots 12^+</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.7713em"></span
+                ><span class="mord"
+                  ><span class="mord">1</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.7713em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mbin mtight">+</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="minner">…</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">1</span
+                ><span class="mord"
+                  ><span class="mord">2</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.7713em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mbin mtight">+</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            ></span
+          >
+          for each coin being a heavy forgery,
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><msup><mn>1</mn><mo>−</mo></msup
+                    ><mo>…</mo><msup><mn>12</mn><mo>−</mo></msup></mrow
+                  ><annotation encoding="application/x-tex"
+                    >1^- \dots 12^-</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.7713em"></span
+                ><span class="mord"
+                  ><span class="mord">1</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.7713em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mbin mtight">−</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="minner">…</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">1</span
+                ><span class="mord"
+                  ><span class="mord">2</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.7713em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mbin mtight">−</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            ></span
+          >
+          for each coin being a light forgery, and <code>X</code> for the coins
+          all being real.
+        </p>
+        <p>
+          When I say &ldquo;weigh some set
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>L</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >L</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6833em"></span
+                ><span class="mord mathnormal">L</span></span
+              ></span
+            ></span
+          >
+          against some set
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>R</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >R</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6833em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.00773em"
+                  >R</span
+                ></span
+              ></span
+            ></span
+          >&rdquo;, these refer to the left and right hand sides.
+        </p>
+        <p>
+          First, weigh coins
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo stretchy="false">{</mo><mtext> </mtext><mn>1</mn
+                    ><mo separator="true">,</mo><mn>2</mn
+                    ><mo separator="true">,</mo><mn>3</mn
+                    ><mo separator="true">,</mo><mn>4</mn><mtext> </mtext
+                    ><mo stretchy="false">}</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\set{1, 2, 3, 4}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">1</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">2</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">3</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">4</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mclose">}</span></span
+              ></span
+            ></span
+          >
+          against
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo stretchy="false">{</mo><mtext> </mtext><mn>5</mn
+                    ><mo separator="true">,</mo><mn>6</mn
+                    ><mo separator="true">,</mo><mn>7</mn
+                    ><mo separator="true">,</mo><mn>8</mn><mtext> </mtext
+                    ><mo stretchy="false">}</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\set{5, 6, 7, 8}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">5</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">6</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">7</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">8</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mclose">}</span></span
+              ></span
+            ></span
+          >. If they balance, then we have the nine possible cases
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><msup><mn>9</mn><mo>+</mo></msup
+                    ><mo>…</mo><msup><mn>12</mn><mo>+</mo></msup
+                    ><mo separator="true">,</mo><msup><mn>9</mn><mo>−</mo></msup
+                    ><mo>…</mo><msup><mn>12</mn><mo>−</mo></msup></mrow
+                  ><annotation encoding="application/x-tex"
+                    >9^+ \dots 12^+, 9^- \dots 12^-</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.9658em; vertical-align: -0.1944em"
+                ></span
+                ><span class="mord"
+                  ><span class="mord">9</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.7713em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mbin mtight">+</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="minner">…</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">1</span
+                ><span class="mord"
+                  ><span class="mord">2</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.7713em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mbin mtight">+</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord"
+                  ><span class="mord">9</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.7713em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mbin mtight">−</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="minner">…</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">1</span
+                ><span class="mord"
+                  ><span class="mord">2</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.7713em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mbin mtight">−</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            ></span
+          >
+          and <code>X</code>. For the second weighing, weigh
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo stretchy="false">{</mo><mtext> </mtext><mn>9</mn
+                    ><mo separator="true">,</mo><mn>10</mn><mtext> </mtext
+                    ><mo stretchy="false">}</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\set{9, 10}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">9</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">10</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mclose">}</span></span
+              ></span
+            ></span
+          >
+          against
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo stretchy="false">{</mo><mtext> </mtext><mn>11</mn
+                    ><mo separator="true">,</mo><mn>1</mn><mtext> </mtext
+                    ><mo stretchy="false">}</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\set{11, 1}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">11</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">1</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mclose">}</span></span
+              ></span
+            ></span
+          >.
+        </p>
+        <ol>
+          <li>
+            Suppose they again balance. Then
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow><mn>12</mn></mrow
+                    ><annotation encoding="application/x-tex"
+                      >12</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.6444em"></span
+                  ><span class="mord">12</span></span
+                ></span
+              ></span
+            >
+            must be the forgery, if one exists. Weigh
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow><mn>12</mn></mrow
+                    ><annotation encoding="application/x-tex"
+                      >12</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.6444em"></span
+                  ><span class="mord">12</span></span
+                ></span
+              ></span
+            >
+            against
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow><mn>1</mn></mrow
+                    ><annotation encoding="application/x-tex"
+                      >1</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.6444em"></span
+                  ><span class="mord">1</span></span
+                ></span
+              ></span
+            >. If
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow><mn>12</mn></mrow
+                    ><annotation encoding="application/x-tex"
+                      >12</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.6444em"></span
+                  ><span class="mord">12</span></span
+                ></span
+              ></span
+            >
+            is heavier or lighter the weighing confirms this, and if they
+            balance there is no forgery.
+          </li>
+          <li>
+            Suppose instead that the right hand side is heavier. Then we have
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><msup><mn>9</mn><mo>−</mo></msup></mrow
+                    ><annotation encoding="application/x-tex"
+                      >9^-</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.7713em"></span
+                  ><span class="mord"
+                    ><span class="mord">9</span
+                    ><span class="msupsub"
+                      ><span class="vlist-t"
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: 0.7713em"
+                            ><span style="top: -3.063em; margin-right: 0.05em"
+                              ><span class="pstrut" style="height: 2.7em"></span
+                              ><span class="sizing reset-size6 size3 mtight"
+                                ><span class="mbin mtight">−</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            >,
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><msup><mn>10</mn><mo>−</mo></msup></mrow
+                    ><annotation encoding="application/x-tex"
+                      >10^-</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.7713em"></span
+                  ><span class="mord">1</span
+                  ><span class="mord"
+                    ><span class="mord">0</span
+                    ><span class="msupsub"
+                      ><span class="vlist-t"
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: 0.7713em"
+                            ><span style="top: -3.063em; margin-right: 0.05em"
+                              ><span class="pstrut" style="height: 2.7em"></span
+                              ><span class="sizing reset-size6 size3 mtight"
+                                ><span class="mbin mtight">−</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            >, or
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><msup><mn>11</mn><mo>+</mo></msup></mrow
+                    ><annotation encoding="application/x-tex"
+                      >11^+</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.7713em"></span
+                  ><span class="mord">1</span
+                  ><span class="mord"
+                    ><span class="mord">1</span
+                    ><span class="msupsub"
+                      ><span class="vlist-t"
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: 0.7713em"
+                            ><span style="top: -3.063em; margin-right: 0.05em"
+                              ><span class="pstrut" style="height: 2.7em"></span
+                              ><span class="sizing reset-size6 size3 mtight"
+                                ><span class="mbin mtight">+</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            >. Weigh
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><mo stretchy="false">{</mo><mtext> </mtext><mn>9</mn
+                      ><mtext> </mtext><mo stretchy="false">}</mo></mrow
+                    ><annotation encoding="application/x-tex"
+                      >\set{9}</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span
+                    class="strut"
+                    style="height: 1em; vertical-align: -0.25em"
+                  ></span
+                  ><span class="mopen">{</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord">9</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mclose">}</span></span
+                ></span
+              ></span
+            >
+            against
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><mo stretchy="false">{</mo><mtext> </mtext><mn>10</mn
+                      ><mtext> </mtext><mo stretchy="false">}</mo></mrow
+                    ><annotation encoding="application/x-tex"
+                      >\set{10}</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span
+                    class="strut"
+                    style="height: 1em; vertical-align: -0.25em"
+                  ></span
+                  ><span class="mopen">{</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord">10</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mclose">}</span></span
+                ></span
+              ></span
+            >
+            &mdash; the lighter coin is the forgery and is lighter than the real
+            coins, or if they balance 11 is the forgery and is heavier than the
+            real coins.
+          </li>
+          <li>
+            Suppose instead that the left hand side is heavier. Then we have
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><msup><mn>9</mn><mo>+</mo></msup></mrow
+                    ><annotation encoding="application/x-tex"
+                      >9^+</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.7713em"></span
+                  ><span class="mord"
+                    ><span class="mord">9</span
+                    ><span class="msupsub"
+                      ><span class="vlist-t"
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: 0.7713em"
+                            ><span style="top: -3.063em; margin-right: 0.05em"
+                              ><span class="pstrut" style="height: 2.7em"></span
+                              ><span class="sizing reset-size6 size3 mtight"
+                                ><span class="mbin mtight">+</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            >,
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><msup><mn>10</mn><mo>+</mo></msup></mrow
+                    ><annotation encoding="application/x-tex"
+                      >10^+</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.7713em"></span
+                  ><span class="mord">1</span
+                  ><span class="mord"
+                    ><span class="mord">0</span
+                    ><span class="msupsub"
+                      ><span class="vlist-t"
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: 0.7713em"
+                            ><span style="top: -3.063em; margin-right: 0.05em"
+                              ><span class="pstrut" style="height: 2.7em"></span
+                              ><span class="sizing reset-size6 size3 mtight"
+                                ><span class="mbin mtight">+</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            >, or
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><msup><mn>11</mn><mo>−</mo></msup></mrow
+                    ><annotation encoding="application/x-tex"
+                      >11^-</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.7713em"></span
+                  ><span class="mord">1</span
+                  ><span class="mord"
+                    ><span class="mord">1</span
+                    ><span class="msupsub"
+                      ><span class="vlist-t"
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: 0.7713em"
+                            ><span style="top: -3.063em; margin-right: 0.05em"
+                              ><span class="pstrut" style="height: 2.7em"></span
+                              ><span class="sizing reset-size6 size3 mtight"
+                                ><span class="mbin mtight">−</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            >. Weigh
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><mo stretchy="false">{</mo><mtext> </mtext><mn>9</mn
+                      ><mtext> </mtext><mo stretchy="false">}</mo></mrow
+                    ><annotation encoding="application/x-tex"
+                      >\set{9}</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span
+                    class="strut"
+                    style="height: 1em; vertical-align: -0.25em"
+                  ></span
+                  ><span class="mopen">{</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord">9</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mclose">}</span></span
+                ></span
+              ></span
+            >
+            against
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><mo stretchy="false">{</mo><mtext> </mtext><mn>10</mn
+                      ><mtext> </mtext><mo stretchy="false">}</mo></mrow
+                    ><annotation encoding="application/x-tex"
+                      >\set{10}</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span
+                    class="strut"
+                    style="height: 1em; vertical-align: -0.25em"
+                  ></span
+                  ><span class="mopen">{</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord">10</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mclose">}</span></span
+                ></span
+              ></span
+            >
+            &mdash; the heavier coin is the forgery and is heavier than the real
+            coins, or if they balance
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow><mn>11</mn></mrow
+                    ><annotation encoding="application/x-tex"
+                      >11</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.6444em"></span
+                  ><span class="mord">11</span></span
+                ></span
+              ></span
+            >
+            is the forgery and is lighter than the real coins.
+          </li>
+        </ol>
+        <p>
+          Otherwise, suppose without loss of generality that the right hand side
+          is heavier. (If the left hand side is heavier, we may just relabel the
+          coins).
+        </p>
+        <p>
+          We therefore have
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><msup><mn>1</mn><mo>−</mo></msup
+                    ><mo>…</mo><msup><mn>4</mn><mo>−</mo></msup></mrow
+                  ><annotation encoding="application/x-tex"
+                    >1^- \dots 4^-</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.7713em"></span
+                ><span class="mord"
+                  ><span class="mord">1</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.7713em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mbin mtight">−</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="minner">…</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord"
+                  ><span class="mord">4</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.7713em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mbin mtight">−</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            ></span
+          >
+          or
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><msup><mn>5</mn><mo>+</mo></msup
+                    ><mo>…</mo><msup><mn>8</mn><mo>+</mo></msup></mrow
+                  ><annotation encoding="application/x-tex"
+                    >5^+ \dots 8^+</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.7713em"></span
+                ><span class="mord"
+                  ><span class="mord">5</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.7713em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mbin mtight">+</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="minner">…</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord"
+                  ><span class="mord">8</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.7713em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mbin mtight">+</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            ></span
+          >, which is
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mn>8</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >8</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">8</span></span
+              ></span
+            ></span
+          >
+          total cases to distinguish with the two remaining weighings. Weigh
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo stretchy="false">{</mo><mtext> </mtext><mn>1</mn
+                    ><mo separator="true">,</mo><mn>2</mn
+                    ><mo separator="true">,</mo><mn>5</mn><mtext> </mtext
+                    ><mo stretchy="false">}</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\set{1, 2, 5}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">1</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">2</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">5</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mclose">}</span></span
+              ></span
+            ></span
+          >
+          against
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo stretchy="false">{</mo><mtext> </mtext><mn>3</mn
+                    ><mo separator="true">,</mo><mn>4</mn
+                    ><mo separator="true">,</mo><mn>6</mn><mtext> </mtext
+                    ><mo stretchy="false">}</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\set{3, 4, 6}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">3</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">4</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">6</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mclose">}</span></span
+              ></span
+            ></span
+          >.
+        </p>
+        <ol>
+          <li>
+            Suppose the right hand side
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><mo stretchy="false">{</mo><mtext> </mtext><mn>3</mn
+                      ><mo separator="true">,</mo><mn>4</mn
+                      ><mo separator="true">,</mo><mn>6</mn><mtext> </mtext
+                      ><mo stretchy="false">}</mo></mrow
+                    ><annotation encoding="application/x-tex"
+                      >\set{3, 4, 6}</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span
+                    class="strut"
+                    style="height: 1em; vertical-align: -0.25em"
+                  ></span
+                  ><span class="mopen">{</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord">3</span><span class="mpunct">,</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord">4</span><span class="mpunct">,</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord">6</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mclose">}</span></span
+                ></span
+              ></span
+            >
+            is again heavier. Then we have one of
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><msup><mn>1</mn><mo>−</mo></msup></mrow
+                    ><annotation encoding="application/x-tex"
+                      >1^-</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.7713em"></span
+                  ><span class="mord"
+                    ><span class="mord">1</span
+                    ><span class="msupsub"
+                      ><span class="vlist-t"
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: 0.7713em"
+                            ><span style="top: -3.063em; margin-right: 0.05em"
+                              ><span class="pstrut" style="height: 2.7em"></span
+                              ><span class="sizing reset-size6 size3 mtight"
+                                ><span class="mbin mtight">−</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            >,
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><msup><mn>2</mn><mo>−</mo></msup></mrow
+                    ><annotation encoding="application/x-tex"
+                      >2^-</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.7713em"></span
+                  ><span class="mord"
+                    ><span class="mord">2</span
+                    ><span class="msupsub"
+                      ><span class="vlist-t"
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: 0.7713em"
+                            ><span style="top: -3.063em; margin-right: 0.05em"
+                              ><span class="pstrut" style="height: 2.7em"></span
+                              ><span class="sizing reset-size6 size3 mtight"
+                                ><span class="mbin mtight">−</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            >, or
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><msup><mn>6</mn><mo>+</mo></msup></mrow
+                    ><annotation encoding="application/x-tex"
+                      >6^+</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.7713em"></span
+                  ><span class="mord"
+                    ><span class="mord">6</span
+                    ><span class="msupsub"
+                      ><span class="vlist-t"
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: 0.7713em"
+                            ><span style="top: -3.063em; margin-right: 0.05em"
+                              ><span class="pstrut" style="height: 2.7em"></span
+                              ><span class="sizing reset-size6 size3 mtight"
+                                ><span class="mbin mtight">+</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            >. Weigh
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><mo stretchy="false">{</mo><mtext> </mtext><mn>1</mn
+                      ><mtext> </mtext><mo stretchy="false">}</mo></mrow
+                    ><annotation encoding="application/x-tex"
+                      >\set{1}</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span
+                    class="strut"
+                    style="height: 1em; vertical-align: -0.25em"
+                  ></span
+                  ><span class="mopen">{</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord">1</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mclose">}</span></span
+                ></span
+              ></span
+            >
+            against
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><mo stretchy="false">{</mo><mtext> </mtext><mn>2</mn
+                      ><mtext> </mtext><mo stretchy="false">}</mo></mrow
+                    ><annotation encoding="application/x-tex"
+                      >\set{2}</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span
+                    class="strut"
+                    style="height: 1em; vertical-align: -0.25em"
+                  ></span
+                  ><span class="mopen">{</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord">2</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mclose">}</span></span
+                ></span
+              ></span
+            >
+            &mdash; the lighter coin is the forgery and is lighter than the real
+            coins, or if they balance then
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow><mn>6</mn></mrow
+                    ><annotation encoding="application/x-tex"
+                      >6</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.6444em"></span
+                  ><span class="mord">6</span></span
+                ></span
+              ></span
+            >
+            is the forgery and is heavier than the real coins.
+          </li>
+          <li>
+            Suppose the left hand side
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><mo stretchy="false">{</mo><mtext> </mtext><mn>1</mn
+                      ><mo separator="true">,</mo><mn>2</mn
+                      ><mo separator="true">,</mo><mn>5</mn><mtext> </mtext
+                      ><mo stretchy="false">}</mo></mrow
+                    ><annotation encoding="application/x-tex"
+                      >\set{1, 2, 5}</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span
+                    class="strut"
+                    style="height: 1em; vertical-align: -0.25em"
+                  ></span
+                  ><span class="mopen">{</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord">1</span><span class="mpunct">,</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord">2</span><span class="mpunct">,</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord">5</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mclose">}</span></span
+                ></span
+              ></span
+            >
+            is now heavier. Then we have one of
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><msup><mn>1</mn><mo>+</mo></msup></mrow
+                    ><annotation encoding="application/x-tex"
+                      >1^+</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.7713em"></span
+                  ><span class="mord"
+                    ><span class="mord">1</span
+                    ><span class="msupsub"
+                      ><span class="vlist-t"
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: 0.7713em"
+                            ><span style="top: -3.063em; margin-right: 0.05em"
+                              ><span class="pstrut" style="height: 2.7em"></span
+                              ><span class="sizing reset-size6 size3 mtight"
+                                ><span class="mbin mtight">+</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            >,
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><msup><mn>2</mn><mo>+</mo></msup></mrow
+                    ><annotation encoding="application/x-tex"
+                      >2^+</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.7713em"></span
+                  ><span class="mord"
+                    ><span class="mord">2</span
+                    ><span class="msupsub"
+                      ><span class="vlist-t"
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: 0.7713em"
+                            ><span style="top: -3.063em; margin-right: 0.05em"
+                              ><span class="pstrut" style="height: 2.7em"></span
+                              ><span class="sizing reset-size6 size3 mtight"
+                                ><span class="mbin mtight">+</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            >, or
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><msup><mn>6</mn><mo>−</mo></msup></mrow
+                    ><annotation encoding="application/x-tex"
+                      >6^-</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.7713em"></span
+                  ><span class="mord"
+                    ><span class="mord">6</span
+                    ><span class="msupsub"
+                      ><span class="vlist-t"
+                        ><span class="vlist-r"
+                          ><span class="vlist" style="height: 0.7713em"
+                            ><span style="top: -3.063em; margin-right: 0.05em"
+                              ><span class="pstrut" style="height: 2.7em"></span
+                              ><span class="sizing reset-size6 size3 mtight"
+                                ><span class="mbin mtight">−</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ></span
+              ></span
+            >. Weigh
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><mo stretchy="false">{</mo><mtext> </mtext><mn>1</mn
+                      ><mtext> </mtext><mo stretchy="false">}</mo></mrow
+                    ><annotation encoding="application/x-tex"
+                      >\set{1}</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span
+                    class="strut"
+                    style="height: 1em; vertical-align: -0.25em"
+                  ></span
+                  ><span class="mopen">{</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord">1</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mclose">}</span></span
+                ></span
+              ></span
+            >
+            against
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow
+                      ><mo stretchy="false">{</mo><mtext> </mtext><mn>2</mn
+                      ><mtext> </mtext><mo stretchy="false">}</mo></mrow
+                    ><annotation encoding="application/x-tex"
+                      >\set{2}</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span
+                    class="strut"
+                    style="height: 1em; vertical-align: -0.25em"
+                  ></span
+                  ><span class="mopen">{</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mord">2</span
+                  ><span class="mspace" style="margin-right: 0.1667em"></span
+                  ><span class="mclose">}</span></span
+                ></span
+              ></span
+            >
+            &mdash; the lighter coin is the forgery and is lighter than the real
+            coins, or if they balance then
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow><mn>6</mn></mrow
+                    ><annotation encoding="application/x-tex"
+                      >6</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.6444em"></span
+                  ><span class="mord">6</span></span
+                ></span
+              ></span
+            >
+            is the forgery and is heavier than the real coins.
+          </li>
+          <li>
+            Finally, suppose they balance. Then either
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow><mn>7</mn></mrow
+                    ><annotation encoding="application/x-tex"
+                      >7</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.6444em"></span
+                  ><span class="mord">7</span></span
+                ></span
+              ></span
+            >
+            or
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow><mn>8</mn></mrow
+                    ><annotation encoding="application/x-tex"
+                      >8</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.6444em"></span
+                  ><span class="mord">8</span></span
+                ></span
+              ></span
+            >
+            is the forgery &mdash; weigh them against each other to identify the
+            forgery, which is heavier than the real coins.
+          </li>
+        </ol>
+        <p>
+          Therefore, three weighings is sufficient to identify whether there is
+          a forgery, and if so which coin and whether it is heavier or lighter
+          than the other eleven coins.
+        </p>
+      </main>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-right"></div>
+
+      <!-- The sidebar on the right -->
+      <aside class="sidebar-right"></aside>
+
+      <!-- Padding on the right -->
+      <div class="spacing-right"></div>
+    </div>
+
+    <!-- Load the map script -->
+    <script>
+      // Load visited URLs from localStorage
+      let visitedUrls = new Set();
+      const storedVisited = localStorage.getItem("visitedPages");
+      if (storedVisited) {
+        visitedUrls = new Set(JSON.parse(storedVisited));
+      }
+
+      // Log current page visit
+      const currentPath = window.location.pathname.replace(/\/$/, "");
+      visitedUrls.add(currentPath);
+      localStorage.setItem(
+        "visitedPages",
+        JSON.stringify(Array.from(visitedUrls)),
+      );
+    </script>
+  </body>
+</html>
