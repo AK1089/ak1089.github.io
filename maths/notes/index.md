@@ -15,6 +15,6 @@ I would like to thank the lecturers who created and taught all these interesting
 
 *Graph Theory*, lectured by Professor Stuart Martin.
 
-<a href="https://ak1089.github.io/maths-notes/graph-theory/graph-theory.pdf" download class="file-download"><br/>
+<a href="https://ak1089.github.io/maths-notes/graph-theory/graph-theory.pdf" target="_blank" class="file-download"><br/>
 <svg><use href="/assets/icons/sprite.svg#document"></use></svg><br/>
 <span data-filename="graph-theory.pdf"></span><br/></a>
