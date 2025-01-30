@@ -29,6 +29,7 @@ body {
     --black: #000000;
     --grey: #262525;
     --text: #4c4f69;
+    --link: #4d73bf;
     --subtext-b: #5c5f77;
     --subtext-a: #6c6f85;
     --overlay-c: #7c7f93;
@@ -430,8 +431,9 @@ h1:first-child {
 }
 
 a {
-    color: var(--darkblue);
+    color: var(--link);
     text-decoration: underline;
+    text-decoration-thickness: 8%;
     transition: color 0.2s ease;
 }
 
