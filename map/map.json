@@ -132,6 +132,12 @@
     "display": true
   },
   {
+    "name": "Cambridge Notes",
+    "url": "/maths/notes",
+    "parent": "/maths",
+    "display": true
+  },
+  {
     "name": "Probability Distributions",
     "url": "/maths/probability-distributions",
     "parent": "/maths",
