@@ -18,3 +18,12 @@ I would like to thank the lecturers who created and taught all these interesting
 <a href="https://ak1089.github.io/maths-notes/graph-theory/graph-theory.pdf" target="_blank" class="file-download"><br/>
 <svg><use href="/assets/icons/sprite.svg#document"></use></svg><br/>
 <span data-filename="graph-theory.pdf"></span><br/></a>
+
+## Lent 2024--25
+
+*Applied Probability*, lectured by Professor Sourav Sarkar.
+
+<a href="https://ak1089.github.io/maths-notes/applied-probability/applied-probability.pdf" target="_blank" class="file-download"><br/>
+<svg><use href="/assets/icons/sprite.svg#document"></use></svg><br/>
+<span data-filename="applied-probability.pdf"></span><br/></a>
+
