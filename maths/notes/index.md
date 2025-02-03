@@ -1,6 +1,7 @@
 ---
 title: Cambridge Lecture Notes
 date: 2025-01-30
+updated: 2025-02-03
 ---
 
 This page holds a collection of lecture notes for various Cambridge Mathematics courses, taken during Part II of the Mathematical Tripos. These notes are unofficial and may contain errors. While they are written and published with permission, they are not endorsed by the lecturer or University.
@@ -26,4 +27,10 @@ I would like to thank the lecturers who created and taught all these interesting
 <a href="https://ak1089.github.io/maths-notes/applied-probability/applied-probability.pdf" target="_blank" class="file-download"><br/>
 <svg><use href="/assets/icons/sprite.svg#document"></use></svg><br/>
 <span data-filename="applied-probability.pdf"></span><br/></a>
+
+*Coding and Cryptography*, lectured by Dr Rachel Camina.
+
+<a href="https://ak1089.github.io/maths-notes/coding-and-cryptography/coding-and-crypto.pdf" target="_blank" class="file-download"><br/>
+<svg><use href="/assets/icons/sprite.svg#document"></use></svg><br/>
+<span data-filename="coding-and-crypto.pdf"></span><br/></a>
 
