@@ -9,6 +9,8 @@ I am a huge fan of all sorts of puzzles, with a special fondness for logic puzzl
 
 I'm also a huge escape room enthusiast, having been to 60+ with my friends over the last decade and a bit. I sometimes run organised "escape rooms" or puzzle hunts with original puzzles: for example I hosted a dinner party during which I remotely cut the lights and pretended to be shot, leading to a trail of clues for guests to reveal my murderer.
 
+Not all of these are original puzzles, though sadly I don't remember the sources for most of them, having heard them years ago.
+
 ## Logic Puzzles
 
 These are puzzles in a clearly defined environment, usually based on deducing a unique answer satisfying a set of logical constraints. These puzzles are often considered the "purest": there is no trickery and the solution is always possible to get using only the answer in the question.

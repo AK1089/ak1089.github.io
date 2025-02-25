@@ -144,6 +144,18 @@
     "display": true
   },
   {
+    "name": "Tail Events",
+    "url": "/maths/tail-events",
+    "parent": "/maths",
+    "display": true
+  },
+  {
+    "name": "The Number Zoo",
+    "url": "/maths/the-number-zoo",
+    "parent": "/maths",
+    "display": true
+  },
+  {
     "name": "Functions",
     "url": "/minr/functions",
     "parent": "/minr#guides",
