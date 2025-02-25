@@ -34,3 +34,8 @@ I would like to thank the lecturers who created and taught all these interesting
 <svg><use href="/assets/icons/sprite.svg#document"></use></svg><br/>
 <span data-filename="coding-and-crypto.pdf"></span><br/></a>
 
+*Logic and Set Theory*, lectured by Dr András Zsák.
+
+<a href="https://ak1089.github.io/maths-notes/logic-and-set-theory/logic-and-set-theory.pdf" target="_blank" class="file-download"><br/>
+<svg><use href="/assets/icons/sprite.svg#document"></use></svg><br/>
+<span data-filename="logic-and-set-theory.pdf"></span><br/></a>
