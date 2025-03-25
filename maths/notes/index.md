@@ -1,7 +1,7 @@
 ---
 title: Cambridge Lecture Notes
 date: 2025-01-30
-updated: 2025-02-03
+updated: 2025-03-25
 ---
 
 This page holds a collection of lecture notes for various Cambridge Mathematics courses, taken during Part II of the Mathematical Tripos. These notes are unofficial and may contain errors. While they are written and published with permission, they are not endorsed by the lecturer or University.
@@ -26,13 +26,13 @@ I would like to thank the lecturers who created and taught all these interesting
 <svg><use href="/assets/icons/sprite.svg#document"></use></svg><br/>
 <span data-filename="automata-and-formal-languages.pdf"></span><br/></a>
 
-## Lent 2024--25
+*Number Theory*, lectured by Dr Jack Thorne.
 
-*Applied Probability*, lectured by Professor Sourav Sarkar.
-
-<a href="https://ak1089.github.io/maths-notes/applied-probability/applied-probability.pdf" target="_blank" class="file-download"><br/>
+<a href="https://ak1089.github.io/maths-notes/number-theory/number-theory.pdf" target="_blank" class="file-download"><br/>
 <svg><use href="/assets/icons/sprite.svg#document"></use></svg><br/>
-<span data-filename="applied-probability.pdf"></span><br/></a>
+<span data-filename="number-theory.pdf"></span><br/></a>
+
+## Lent 2024--25
 
 *Coding and Cryptography*, lectured by Dr Rachel Camina.
 
@@ -55,4 +55,5 @@ The [Maths Department's official page](https://www.maths.cam.ac.uk/undergrad/stu
 3. [King Ming Lam](https://1drv.ms/f/s!AtFdZ6-agiAQky4Y2DSTwhZeT7ha): OneDrive folder, exclusively IA and IB
 4. [Adam Kelly](https://ak2316.user.srcf.net/lecture-notes/): SRCF website, primarily IA and IB
 5. [Bhavik Mehta](https://github.com/b-mehta/maths-notes): GitHub repository, exclusively II and III
-6. [Gareth Taylor](https://tartarus.org/gareth/maths/notes/): (yes, *that* Gareth Taylor!) personal website, very old
+6. [Maxim Scherbakov](https://ms2915.user.srcf.net/): SRCF website, exclusively II
+7. [Gareth Taylor](https://tartarus.org/gareth/maths/notes/): (yes, *that* Gareth Taylor!) personal website, very old
