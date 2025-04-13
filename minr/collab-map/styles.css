@@ -1,0 +1,321 @@
+/* Base styles and variables */
+:root {
+    --primary-color: #4a69bd;
+    --secondary-color: #6a89cc;
+    --accent-color: #f6b93b;
+    --background-color: #f8f9fa;
+    --card-background: rgba(255, 255, 255, 0.95);
+    --text-color: #2c3e50;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+        "header"
+        "search"
+        "graph"
+        "footer";
+    position: relative;
+}
+
+/* Back button styles */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
+.back-button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--card-background);
+    border-radius: 50%;
+    box-shadow: var(--box-shadow);
+    color: var(--primary-color);
+    transition: all var(--transition-speed);
+}
+
+.back-button a:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateX(-2px);
+}
+
+/* Header Styles */
+header {
+    grid-area: header;
+    padding: 2rem 1rem 1rem;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    box-shadow: var(--box-shadow);
+    user-select: none;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+h2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* Search Bar Styles */
+.search-container {
+    grid-area: search;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+}
+
+#search-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 20px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    transition: all var(--transition-speed);
+    box-shadow: var(--box-shadow);
+}
+
+#search-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 105, 189, 0.3);
+}
+
+.search-results {
+    position: absolute;
+    top: calc(100% - 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    display: none;
+}
+
+.search-results.visible {
+    display: block;
+}
+
+.search-result-item {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.search-result-item:hover,
+.search-result-item.highlighted {
+    background-color: rgba(74, 105, 189, 0.1);
+}
+
+/* Graph Container Styles */
+.graph-container {
+    grid-area: graph;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    user-select: none;
+}
+
+#network-graph {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Node and Edge Styles */
+.node {
+    cursor: pointer;
+}
+
+.node circle {
+    fill: var(--secondary-color);
+    stroke: var(--primary-color);
+    stroke-width: 2px;
+}
+
+.node text {
+    fill: var(--text-color);
+    font-size: 12px;
+    text-anchor: middle;
+    pointer-events: none;
+    opacity: 0.9;
+    font-weight: 600;
+}
+
+.node:hover circle {
+    fill: var(--accent-color);
+    transform: scale(1.2);
+    transition: 0.3s ease;
+}
+
+.node.highlighted circle {
+    fill: var(--accent-color);
+    stroke: #e58e26;
+    stroke-width: 3px;
+    transition: 0.3s ease;
+}
+
+/* Primary highlighted node (the one being hovered/selected) */
+.node.primary-highlight circle {
+    fill: #ff5e5e;
+    stroke: #d93636;
+    stroke-width: 3px;
+    transform: scale(1.3);
+}
+
+.node.highlighted text {
+    font-weight: 700;
+    opacity: 1;
+}
+
+.link {
+    stroke: #ccc;
+    stroke-opacity: 0.6;
+    transition: all var(--transition-speed);
+}
+
+.link.highlighted {
+    stroke: var(--accent-color);
+    stroke-opacity: 0.8;
+}
+
+/* Node Info Panel Styles */
+.node-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow);
+    transform: translateX(350px);
+    transition: transform var(--transition-speed);
+    z-index: 5;
+}
+
+.node-info.visible {
+    transform: translateX(0);
+}
+
+.node-info h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.info-section {
+    margin-bottom: 1rem;
+}
+
+.info-section h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+#connection-list {
+    list-style: none;
+    margin-left: 1rem;
+}
+
+#connection-list li {
+    margin-bottom: 0.3rem;
+    cursor: pointer;
+    transition: color var(--transition-speed);
+}
+
+#connection-list li:hover {
+    color: var(--primary-color);
+}
+
+/* Footer Styles */
+footer {
+    grid-area: footer;
+    text-align: center;
+    padding: 1rem;
+    background-color: #f0f0f0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    .node-info {
+        width: 250px;
+        right: 10px;
+        top: 10px;
+    }
+}
+
+/* Custom tooltip */
+.tooltip {
+    position: absolute;
+    background-color: var(--card-background);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-speed);
+    z-index: 100;
+}

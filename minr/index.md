@@ -9,6 +9,10 @@ I spend a lot of time on [Zero.Minr.Org](https://forums.minr.org/), one of the o
 
 One of the biggest features of the server is a completely custom plugin, which includes Minr Script Code: a full programming language built into Minecraft to facilitate mapmaking. This is an extremely powerful tool, and I've done a lot of interesting things with it. Most of the pages under this section are devoted to scripting, including some guides I've written, links to useful resources, example scripts, and other tools I've created to help with mapmaking.
 
+## Fun Things
+
+- The [collaborations map](collab-map) shows an interactive view of every mapmaker's collaborations.
+
 ## My Tools
 
 - My [map art creator](map-art) allows you to upload images and view them as custom maps in game.
@@ -30,7 +34,3 @@ Some links to the Minr forums are restricted to <span style="color: var(--lime)"
 
 - A step-by-step guide to [setting up your map with a resource pack](resource-packs).
 - An explanation of [functions](functions).
-
-## Example Scripts
-
-🚧 This section is under construction!

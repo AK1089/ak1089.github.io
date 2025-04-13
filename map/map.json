@@ -30,6 +30,12 @@
     "display": true
   },
   {
+    "name": "Fun",
+    "url": "/minr#fun",
+    "parent": "/minr",
+    "display": true
+  },
+  {
     "name": "Guides",
     "url": "/minr#guides",
     "parent": "/minr",
@@ -153,6 +159,12 @@
     "name": "The Number Zoo",
     "url": "/maths/the-number-zoo",
     "parent": "/maths",
+    "display": true
+  },
+  {
+    "name": "Collab Map",
+    "url": "/minr/collab-map",
+    "parent": "/minr#fun",
     "display": true
   },
   {
