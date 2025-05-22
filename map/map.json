@@ -210,6 +210,12 @@
     "display": true
   },
   {
+    "name": "Bracket City",
+    "url": "/puzzles/bracket-city",
+    "parent": "/puzzles",
+    "display": true
+  },
+  {
     "name": "Circular Train",
     "url": "/puzzles/circular-train",
     "parent": "/puzzles#state-exploration",

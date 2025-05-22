@@ -1,0 +1,153 @@
+:root {
+    --primary-color: #4a6fa5;
+    --secondary-color: #166088;
+    --highlight-color: #19b5fe;
+    --bg-color: #f5f7fa;
+    --text-color: #333;
+    --bracket-color: #e74c3c;
+    --solved-color: #40a02b;
+    --inner-bracket-color: #f39c12;
+}
+
+.puzzle-text {
+    font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    white-space: pre-wrap;
+}
+
+.bracket {
+    color: var(--bracket-color);
+    font-weight: bold;
+}
+
+.inner-bracket {
+    color: var(--inner-bracket-color);
+    font-weight: bold;
+    background-color: rgba(243, 156, 18, 0.2);
+    padding: 0 2px;
+    border-radius: 3px;
+}
+
+.solved {
+    color: var(--solved-color);
+    font-weight: normal;
+}
+
+.guess-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: var(--highlight-color);
+    outline: none;
+}
+
+.file-upload {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.file-upload label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.file-upload input[type="file"] {
+    padding: 8px 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.file-upload input[type="file"]:hover {
+    border-color: #007bff;
+    background: #fff;
+}
+
+.file-upload input[type="file"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.status-message {
+    margin-top: 1rem;
+    padding: 0.8rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.success {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #27ae60;
+}
+
+.error {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: #c0392b;
+}
+
+.hidden {
+    display: none;
+}
+
+.progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.history {
+    margin-top: 2rem;
+}
+
+.history h3 {
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.history-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+.history-item .guess {
+    font-weight: 500;
+}
+
+.history-item .result {
+    color: var(--solved-color);
+}
+
+.game-complete {
+    text-align: center;
+    padding: 1rem;
+    background-color: rgba(46, 204, 113, 0.2);
+    border-radius: 8px;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #27ae60;
+}

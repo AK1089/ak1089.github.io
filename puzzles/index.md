@@ -59,7 +59,7 @@ This is for other puzzles which rely on more advanced mathematics to solve. Thes
 
 This section contains puzzles related to matching patterns in words, arranging letters, finding words which meet constraints, and other related things.
 
-- 🚧 None to see here yet! Check back soon.
+- [Bracket City](bracket-city), a clone of [the original](https://www.theatlantic.com/games/bracket-city/) so that I can make and share my own.
 
 ## Miscellaneous
 

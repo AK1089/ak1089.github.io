@@ -12,12 +12,14 @@ from extensions.blockquote import BlockquoteFormatter
 class HeaderMetadata:
     def __init__(self, path: Path, frontmatter: dict):
         self.title = frontmatter.get("title", path.stem.replace("-", " ").title())
-        self.date = frontmatter.get("date").strftime("%B %d, %Y")
-        self.updated = (
-            frontmatter.get("updated").strftime("%B %d, %Y")
-            if "updated" in frontmatter
-            else None
-        )
+        
+        date = frontmatter.get("date")
+        assert date is not None, "Date is required in frontmatter"
+        self.date = date.strftime("%B %d, %Y")
+        
+        updated = frontmatter.get("updated")
+        self.updated = None if updated is None else updated.strftime("%B %d, %Y")
+
         self.address_bar_title = frontmatter.get("address_bar_title", self.title)
 
         # create breadcrumb path (excluding the file itself)
