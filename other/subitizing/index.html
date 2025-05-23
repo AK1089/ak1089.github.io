@@ -5,8 +5,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Puzzles | AK1089's Site</title>
+    <title>Subitizing Trainer</title>
     <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
     <script>
       function copyCode(button) {
         const pre = button.parentElement;
@@ -188,150 +190,66 @@
             <div class="path">
               <a href="/" class="path-link">home</a>
               <span class="separator"> / </span
-              ><a href="/puzzles" class="path-link">puzzles</a>
+              ><a href="/other" class="path-link">other</a
+              ><span class="separator"> / </span
+              ><a href="/other/subitizing" class="path-link">subitizing</a>
             </div>
-            <h1 class="title">Puzzles</h1>
+            <h1 class="title">Subitizing Trainer</h1>
             <div class="metadata">
-              <span class="published-date">published December 24, 2024</span
-              ><span class="updated-date">, updated January 17, 2025</span>
+              <span class="published-date">published June 03, 2024</span
+              ><span class="updated-date">, updated May 23, 2025</span>
             </div>
           </div>
         </header>
+        <div id="game-area">
+          <div id="session-controls">
+            <label for="min-dots">Min Dots:</label>
+            <input type="number" id="min-dots" min="1" max="99" value="1" />
+            <label for="max-dots">Max Dots:</label>
+            <input type="number" id="max-dots" min="2" max="100" value="20" />
+            <label for="trial-count">Trials per number:</label>
+            <input type="number" id="trial-count" min="1" max="10" value="3" />
+          </div>
+          <div id="dot-container"></div>
+        </div>
+        <div id="buttons-area">
+          <div id="message">Press Start to begin.</div>
+          <button id="start-button">Start</button>
+          <button id="stats-button">Show Stats</button>
+          <button id="export-button">Export Statistics</button>
+          <div id="progress-container"><div id="progress-bar"></div></div>
+        </div>
+        <h2>Background and Instructions</h2>
         <p>
-          I am a huge fan of all sorts of puzzles, with a special fondness for
-          logic puzzles with a mathematical flair as well as word and grid
-          puzzles. Interviews for quantitative trading jobs are full of these
-          sorts of brainteasers, which is one reason I love the industry so
-          much.
+          When you see 8–10 objects, you usually do not know how many there are
+          without counting them. While you can use tricks to count them quickly,
+          you are never as fast as when you see 2–4 objects and know the number
+          exactly. This process of counting without counting was termed
+          subitizing by Swiss child psychologist Jean Piaget, and is often
+          trained for small numbers as a
+          <a href="https://earlymathcounts.org/subitize-this/"
+            >classroom activity</a
+          >.
         </p>
         <p>
-          I&rsquo;m also a huge escape room enthusiast, having been to 60+ with
-          my friends over the last decade and a bit. I sometimes run organised
-          &ldquo;escape rooms&rdquo; or puzzle hunts with original puzzles: for
-          example I hosted a dinner party during which I remotely cut the lights
-          and pretended to be shot, leading to a trail of clues for guests to
-          reveal my murderer.
+          I wanted to see if I could also get better at this with deliberate
+          practice, including on bigger numbers (up to 20). I also thought it
+          would be cool to be able to look at a group of objects, and
+          immediately declare &ldquo;16&rdquo;, while others are stuck counting
+          them explicitly.
         </p>
         <p>
-          Not all of these are original puzzles, though sadly I don&rsquo;t
-          remember the sources for most of them, having heard them years ago.
+          The game is simple: set the range of numbers with which you want to
+          practice and the number of trials desired for each number, then click
+          <strong>Start</strong>. The screen will repeatedly display some number
+          of dots within your chosen range. You must intuit how many there are
+          as quickly as possible.
         </p>
-        <h2>Logic Puzzles</h2>
         <p>
-          These are puzzles in a clearly defined environment, usually based
-          on deducing a unique answer satisfying a set of logical constraints.
-          These puzzles are often considered the &ldquo;purest&rdquo;: there is
-          no trickery and the solution is always possible to get using only the
-          answer in the question.
+          <strong>You only press the last digit of the number of dots.</strong>
+          If you see 8 dots, you press 8. If you see 12 dots, you press 2. The
+          game will be generous, and assume you mistook 18 dots for 17 (not 7).
         </p>
-        <ul>
-          <li>
-            A difficult puzzle based on finding
-            <a href="ten-numbers">ten numbers</a> which answer ten interlinked
-            questions.
-          </li>
-        </ul>
-        <h2>State Exploration</h2>
-        <p>
-          These are puzzles in which you are in a fixed ideal environment with
-          some latent unknown variable, and must find an algorithm to deduce the
-          variable given a set of exploratory actions.
-        </p>
-        <ul>
-          <li>
-            Deduce the number of carriages while trapped on a
-            <a href="circular-train">circular train</a>.
-          </li>
-        </ul>
-        <h2>Strategy Finding</h2>
-        <p>
-          Given a competitive game with fixed rules, can you find a strategy to
-          always win? Given a cooperative setup with limited communication
-          bandwidth, can you find a strategy to always win with your partner?
-        </p>
-        <ul>
-          <li>🚧 None to see here yet! Check back soon.</li>
-        </ul>
-        <h2>Optimisation</h2>
-        <p>
-          A subgenre of strategy finding games where you have to find some sort
-          of strategy to maximise your winnings or show something is possible,
-          but you&rsquo;re not playing against anyone and don&rsquo;t need to
-          communicate anything with your choices.
-        </p>
-        <ul>
-          <li>
-            The famous <a href="12-coins">12 coins</a> puzzle and some bonus
-            puzzles based on it.
-          </li>
-        </ul>
-        <h2>Probability</h2>
-        <p>
-          This is one of my favourite areas of mathematics, so there&rsquo;s no
-          surprise a lot of puzzles are about probability. These are often about
-          estimating the probability or expected value of some event given
-          information.
-        </p>
-        <ul>
-          <li>
-            Some easy introductory puzzles about
-            <a href="anthropics">anthropics</a>.
-          </li>
-          <li>
-            A puzzle about cracking <a href="five-locks">five locks</a> by pure
-            chance.
-          </li>
-          <li>
-            The <a href="monty-hall">Monty Hall</a> problem and some variants
-            thereof.
-          </li>
-        </ul>
-        <h2>Number Puzzles</h2>
-        <p>
-          These are often mathematical puzzles which rely on numbers: frequently
-          of the genre &ldquo;find a number which satisfies all of a list of
-          constraints&rdquo;.
-        </p>
-        <ul>
-          <li>
-            A trivia-style quiz where you
-            <a href="sorting-numbers">sort numbers</a> in the form of cryptic
-            clues.
-          </li>
-        </ul>
-        <h2>Other Mathematical Puzzles</h2>
-        <p>
-          This is for other puzzles which rely on more advanced mathematics to
-          solve. These may be about higher dimensional thinking, integration, or
-          otherwise require abstract thinking.
-        </p>
-        <ul>
-          <li>🚧 None to see here yet! Check back soon.</li>
-        </ul>
-        <h2>Word Puzzles</h2>
-        <p>
-          This section contains puzzles related to matching patterns in words,
-          arranging letters, finding words which meet constraints, and other
-          related things.
-        </p>
-        <ul>
-          <li>
-            <a href="bracket-city">Bracket City</a>, a clone of
-            <a href="https://www.theatlantic.com/games/bracket-city/"
-              >the original</a
-            >
-            so that I can make and share my own.
-          </li>
-        </ul>
-        <h2>Miscellaneous</h2>
-        <p>
-          This is for any other type of puzzle, or things which are only really
-          <em>puzzles</em> in a loose sense, which don&rsquo;t belong in any
-          other section but nonetheless deserve a mention on this page.
-        </p>
-        <ul>
-          <li>🚧 None to see here yet! Check back soon.</li>
-        </ul>
       </main>
 
       <!-- Spacing between the sidebar and the main content -->
