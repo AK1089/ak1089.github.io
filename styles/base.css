@@ -1071,3 +1071,8 @@ pre .copy-button:hover {
         left: -2.5rem;
     }
 }
+
+.responsive-svg {
+    width: 100%;
+    height: auto;
+}
