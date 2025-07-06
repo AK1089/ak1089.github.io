@@ -114,7 +114,7 @@
     "display": true
   },
   {
-    "name": "Word",
+    "name": "Word Puzzles",
     "url": "/puzzles#word",
     "parent": "/puzzles",
     "display": true
@@ -198,6 +198,12 @@
     "display": true
   },
   {
+    "name": "Subitizing",
+    "url": "/other/subitizing",
+    "parent": "/other",
+    "display": true
+  },
+  {
     "name": "12 Coins",
     "url": "/puzzles/12-coins",
     "parent": "/puzzles#optimisation",
@@ -212,7 +218,13 @@
   {
     "name": "Bracket City",
     "url": "/puzzles/bracket-city",
-    "parent": "/puzzles",
+    "parent": "/puzzles#word",
+    "display": true
+  },
+  {
+    "name": "Bridge Battle",
+    "url": "/puzzles/bridges",
+    "parent": "/puzzles#strategy-finding",
     "display": true
   },
   {
@@ -228,6 +240,12 @@
     "display": true
   },
   {
+    "name": "Logic Gates",
+    "url": "/puzzles/logic-gates",
+    "parent": "/puzzles#logic",
+    "display": true
+  },
+  {
     "name": "Monty Hall",
     "url": "/puzzles/monty-hall",
     "parent": "/puzzles#probability",
@@ -237,6 +255,12 @@
     "name": "Sorting Numbers",
     "url": "/puzzles/sorting-numbers",
     "parent": "/puzzles#number",
+    "display": true
+  },
+  {
+    "name": "Subway",
+    "url": "/puzzles/subway",
+    "parent": "/puzzles#optimisation",
     "display": true
   },
   {
@@ -261,6 +285,12 @@
     "name": "Interactive Model",
     "url": "/maths/laplaces-rule-of-succession/interactive",
     "parent": "/maths/laplaces-rule-of-succession",
+    "display": false
+  },
+  {
+    "name": "Solution",
+    "url": "/puzzles/logic-gates/solution",
+    "parent": "/puzzles/logic-gates",
     "display": false
   }
 ]
