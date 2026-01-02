@@ -12,6 +12,6 @@ This is a pretty incomplete list of software I think is extremely good. I use al
 1. [KeyBR](https://www.keybr.com/) - A website for typing speed practice which is effective at training and improvement
 1. [Excalidraw](https://excalidraw.com/) - A free whiteboard with many useful features for diagrams and lovely aesthetics
 1. Autodesk [Fusion 360](https://www.autodesk.com/) - Easy and powerful CAD software for designing 3D models and prints
-1. Eszes Bálint's [BDStudio](h ttps://eszesbalint.github.io/bdstudio/editor) - A powerful GUI editor for block displays in Minecraft
+1. Eszes Bálint's [BDStudio](https://eszesbalint.github.io/bdstudio/editor) - A powerful GUI editor for block displays in Minecraft
 1. [MCStacker](https://mcstacker.net/) - An incredibly capable custom command builder for Minecraft commands
 1. [Cold Turkey Blocker](https://getcoldturkey.com/) - The most effective website and distraction blocker I've used so far

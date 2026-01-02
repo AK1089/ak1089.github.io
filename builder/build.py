@@ -92,7 +92,10 @@ def build_site():
 
     # find all markdown files in the current directory (recursively) and build them into HTML
     for md_path in Path(".").rglob("*.md"):
-        success = build_file(template, md_path)
+        # skip node_modules and other excluded directories
+        if "node_modules" in md_path.parts:
+            continue
+        success = build_file(template, md_path.resolve())
         print(f"Built: {md_path}" if success else f"Skipped: {md_path}")
 
 
@@ -113,7 +116,11 @@ def build_file(template: str, md_path: Path, force: bool = False) -> bool:
 
     # parse frontmatter and content
     frontmatter, content = parse_markdown_with_frontmatter(md_content)
-    metadata = HeaderMetadata(md_path, frontmatter)
+    try:
+        metadata = HeaderMetadata(md_path, frontmatter)
+    except AssertionError as e:
+        print(f"Error processing {md_path}: {e}")
+        raise
 
     # convert markdown and add header
     content_html = md.convert(content)
