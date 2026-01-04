@@ -204,6 +204,18 @@
     "display": true
   },
   {
+    "name": "Fun Facts",
+    "url": "/other/fun-facts",
+    "parent": "/other",
+    "display": true
+  },
+  {
+    "name": "Sources",
+    "url": "/other/fun-facts/sources",
+    "parent": "/other/fun-facts",
+    "display": false
+  },
+  {
     "name": "12 Coins",
     "url": "/puzzles/12-coins",
     "parent": "/puzzles#optimisation",
