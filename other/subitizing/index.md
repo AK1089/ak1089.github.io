@@ -2,6 +2,7 @@
 title: Subitizing Trainer
 date: 2024-06-03
 updated: 2025-05-23
+manual_html: true
 ---
 
 <div id="game-area">

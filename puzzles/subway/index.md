@@ -2,6 +2,7 @@
 title: Subway Race
 date: 2025-03-11
 updated: 2025-07-06
+manual_html: true
 ---
 
 Each of the eight trains starts at a station marked S, and sets off clockwise at noon. They each take a certain amount of time to travel between two stations. You can change between platforms instantly.

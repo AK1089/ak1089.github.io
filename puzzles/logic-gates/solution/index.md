@@ -2,6 +2,7 @@
 title: Logic Gates Solution
 date: 2025-07-01
 updated: 2025-07-06
+manual_html: true
 ---
 
 Look at the third diagram. The top and bottom paths are the same, but they lead to different outputs going in to the `XOR` gate. The two purple inputs are therefore different (without loss of generality, `0` and `1`). So we may mark:
