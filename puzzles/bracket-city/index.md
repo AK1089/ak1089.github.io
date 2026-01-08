@@ -1,11 +1,11 @@
 ---
 title: Bracket City
-date: 2024-01-01
+date: 2025-05-22
 manual_html: true
 ---
 
 # Bracket City
 
-An interactive puzzle game involving brackets and logical reasoning.
+This is an interactive puzzle game involving brackets and logical reasoning.
 
-This is a custom interactive puzzle with a specialized game interface.
+It is based on the original game by the Atlantic magazine: https://www.theatlantic.com/games/bracket-city/

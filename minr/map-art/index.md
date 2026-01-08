@@ -1,6 +1,7 @@
 ---
 title: Map Art Maker
-date: 2024-01-01
+date: 2021-11-26
+date: 2024-12-26
 manual_html: true
 ---
 
@@ -8,10 +9,4 @@ manual_html: true
 
 A tool for creating Minecraft map art. This interactive application helps users convert images into Minecraft map art by processing uploaded images and generating the appropriate blocks and colors.
 
-Features:
-- Image upload functionality
-- Conversion of images to Minecraft map format
-- Visual preview of the resulting map art
-- Export functionality for use in Minecraft
-
-This is a custom interactive application with image processing capabilities.
+The user may upload any image. It is processed to turn it into a 128x128 square (the size of a standard Minecraft map) and recoloured to use the standard Minecraft colour palette. A script which runs in-game to place blocks in such a way as to recreate this colours is generated. This is turned into a random code given to the user, which they can input in-game to run the script and give them a map.
