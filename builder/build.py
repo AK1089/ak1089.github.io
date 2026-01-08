@@ -107,7 +107,7 @@ def create_llm_notice(md_path: Path) -> str:
     """Create an HTML comment directing LLMs to the markdown source."""
     root = Path(__file__).resolve().parent.parent
     relative_path = md_path.relative_to(root)
-    md_url = f"{SITE_DOMAIN}/{relative_path}"
+    md_url = f"https://raw.githubusercontent.com/ak1089/ak1089.github.io/main/{relative_path}"
 
     return f"""
 <!--
