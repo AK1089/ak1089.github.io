@@ -198,22 +198,16 @@
     "display": true
   },
   {
-    "name": "Subitizing",
-    "url": "/other/subitizing",
-    "parent": "/other",
-    "display": true
-  },
-  {
     "name": "Fun Facts",
     "url": "/other/fun-facts",
     "parent": "/other",
     "display": true
   },
   {
-    "name": "Sources",
-    "url": "/other/fun-facts/sources",
-    "parent": "/other/fun-facts",
-    "display": false
+    "name": "Subitizing",
+    "url": "/other/subitizing",
+    "parent": "/other",
+    "display": true
   },
   {
     "name": "12 Coins",
@@ -297,6 +291,12 @@
     "name": "Interactive Model",
     "url": "/maths/laplaces-rule-of-succession/interactive",
     "parent": "/maths/laplaces-rule-of-succession",
+    "display": false
+  },
+  {
+    "name": "Sources",
+    "url": "/other/fun-facts/sources",
+    "parent": "/other/fun-facts",
     "display": false
   },
   {

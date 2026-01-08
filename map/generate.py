@@ -1,4 +1,5 @@
 import json
+import subprocess
 from pathlib import Path
 
 
@@ -11,7 +12,7 @@ def get_parent_url(url):
 
 def generate_flat_sitemap(start_path):
     # Define directories to block
-    blocklist = {"assets", "styles", "scripts", "node_modules"}
+    blocklist = {"assets", "styles", "scripts", "node_modules", "venv"}
 
     # Try to load existing map
     existing_map = {}
@@ -87,6 +88,44 @@ def generate_flat_sitemap(start_path):
     return results
 
 
+def update_index_with_tree(map_dir):
+    """Run tree.py and update index.md with the output."""
+    # Run tree.py and capture output
+    tree_script = map_dir / "tree.py"
+    result = subprocess.run(
+        ["python3", str(tree_script)],
+        capture_output=True,
+        text=True
+    )
+
+    if result.returncode != 0:
+        print(f"Error running tree.py: {result.stderr}")
+        return
+
+    tree_output = result.stdout.strip()
+
+    # Read current index.md
+    index_path = map_dir / "index.md"
+    with open(index_path, "r") as f:
+        content = f.read()
+
+    # Find the marker comment
+    marker = "```tree"
+    if marker not in content:
+        print(f"Warning: Could not find marker '{marker}' in index.md")
+        return
+
+    # Split content at the marker and replace everything after it
+    before_marker = content.split(marker)[0]
+
+    # Reconstruct the file with the new tree
+    new_content = f"{before_marker}{marker}\n{tree_output}\n```\n"
+
+    # Write back to index.md
+    with open(index_path, "w") as f:
+        f.write(new_content)
+
+
 if __name__ == "__main__":
     # Run from the map directory
     current_dir = Path(__file__).parent
@@ -96,3 +135,6 @@ if __name__ == "__main__":
     output_path = current_dir / "map.json"
     with open(output_path, "w") as f:
         json.dump(sitemap, f, indent=2)
+
+    # Update index.md with tree structure
+    update_index_with_tree(current_dir)
