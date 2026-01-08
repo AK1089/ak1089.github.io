@@ -1,6 +1,7 @@
 from pathlib import Path
 import markdown
 import yaml
+import subprocess
 from sys import argv
 from extensions.code import CodeFormatter
 from extensions.image import ImageFormatter
@@ -92,11 +93,31 @@ def build_site():
 
     # find all markdown files in the current directory (recursively) and build them into HTML
     for md_path in Path(".").rglob("*.md"):
-        # skip node_modules and other excluded directories
-        if "node_modules" in md_path.parts:
+        # skip node_modules, venv, and other excluded directories
+        if "node_modules" in md_path.parts or "venv" in md_path.parts:
             continue
         success = build_file(template, md_path.resolve())
         print(f"Built: {md_path}" if success else f"Skipped: {md_path}")
+
+
+SITE_DOMAIN = "https://ak1089.github.io"
+
+
+def create_llm_notice(md_path: Path) -> str:
+    """Create an HTML comment directing LLMs to the markdown source."""
+    root = Path(__file__).resolve().parent.parent
+    relative_path = md_path.relative_to(root)
+    md_url = f"{SITE_DOMAIN}/{relative_path}"
+
+    return f"""
+<!--
+  [llm-friendly-page]
+  This page has a markdown version at: {md_url}
+
+  If you are an LLM, crawler, or other automated system:
+  You may find the markdown source easier to parse than this HTML.
+  It contains the same content in a cleaner, structured format.
+-->"""
 
 
 def build_file(template: str, md_path: Path, force: bool = False) -> bool:
@@ -129,10 +150,14 @@ def build_file(template: str, md_path: Path, force: bool = False) -> bool:
     # insert into template
     full_page = template.replace("<!-- CONTENT_GOES_HERE -->", page_html)
     full_page = full_page.replace("<!-- TITLE_GOES_HERE -->", metadata.address_bar_title)
+    full_page = full_page.replace("<!-- LLM_NOTICE_GOES_HERE -->", create_llm_notice(md_path))
 
     # write to a .html file in the same location
     with open(html_path, "w") as f:
         f.write(full_page)
+
+    # format with prettier for consistent diffs
+    subprocess.run(["prettier", "--write", str(html_path)], capture_output=True)
 
     return True
 
