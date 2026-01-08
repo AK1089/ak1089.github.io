@@ -124,6 +124,13 @@ def build_file(template: str, md_path: Path, force: bool = False) -> bool:
     with open(md_path, "r") as f:
         md_content = f.read()
 
+    # parse frontmatter and content
+    frontmatter, content = parse_markdown_with_frontmatter(md_content)
+
+    # skip files with manual_html flag (these have hand-edited HTML)
+    if frontmatter.get("manual_html", False):
+        return False
+
     # path to a new file with the same name, but a .html extension
     html_path = md_path.with_suffix(".html")
 
@@ -134,9 +141,6 @@ def build_file(template: str, md_path: Path, force: bool = False) -> bool:
         and html_path.stat().st_mtime > md_path.stat().st_mtime
     ):
         return False
-
-    # parse frontmatter and content
-    frontmatter, content = parse_markdown_with_frontmatter(md_content)
     try:
         metadata = HeaderMetadata(md_path, frontmatter)
     except AssertionError as e:
