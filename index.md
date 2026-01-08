@@ -1,13 +1,13 @@
 ---
 title: Home
 date: 2024-04-19
-updated: 2025-01-30
+updated: 2026-01-08
 address_bar_title: Home | AK1089's Site
 ---
 
 </p><img src="/assets/images/portrait.avif" alt="A picture of me" style="float: right !important; width: 25% !important; margin-left: 20px !important; margin-bottom: 10px !important; border: none !important; padding: 0 !important; filter: brightness(1.2) !important; box-shadow: none !important;" /><p>
 
-Welcome! My name is Avish, and this is my personal site for things I make or find interesting. I'm 21 years old, born and raised in London, and am currently in my final year of pursuing an undergraduate Maths degree at the University of Cambridge.
+Welcome! My name is Avish, and this is my personal site for things I make or find interesting. I'm 21 years old, born and raised in London, and am currently working as a quantitative researcher in Amsterdam.
 
 In my free time, I enjoy programming, reading, making and solving puzzles, social deduction games, board games, playing on Minr, and creating things. Online, I often go by AK1089, after my initials and [favourite number](https://en.wikipedia.org/wiki/1089_%28number%29#In_magic). You can find me at the social links down on the left.
 
@@ -18,7 +18,7 @@ In my free time, I enjoy programming, reading, making and solving puzzles, socia
 See the site sections on the sidebar, or view everything from the [site map](map). Popular pages include:
  
 - My [collection of puzzles](/puzzles) of various genres
-- My [mathematics lecture notes](/maths/notes)
+- My [lecture notes](/maths/notes) from Part II Mathematics at Cambridge
 - Minr-specific utilities I've built, especially the [map art creator](/minr/map-art)
 
 ## Site Features
