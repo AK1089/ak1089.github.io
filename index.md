@@ -20,6 +20,7 @@ See the site sections on the sidebar, or view everything from the [site map](map
 - My [collection of puzzles](/puzzles) of various genres
 - My [lecture notes](/maths/notes) from Part II Mathematics at Cambridge
 - Minr-specific utilities I've built, especially the [map art creator](/minr/map-art)
+- My [collection of fun facts](/other/fun-facts) spanning science, history, and more
 
 ## Site Features
 

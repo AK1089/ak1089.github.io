@@ -45,3 +45,6 @@ bower_components/
 .tox/
 .nox/
 .mypy_cache/
+
+# Claude
+CLAUDE.md
