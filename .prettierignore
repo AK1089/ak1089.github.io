@@ -1,0 +1,5 @@
+# Files with complex inline SVGs (e.g., from Excalidraw) that Prettier mangles
+puzzles/logic-gates/index.html
+puzzles/logic-gates/solution/index.html
+puzzles/bridges/index.html
+puzzles/bracket-city/index.html
