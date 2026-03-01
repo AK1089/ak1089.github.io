@@ -1,3 +1,40 @@
+/* ── Side-by-side pair layout ────────────────────────────────── */
+
+.chess-pair {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 0.5rem 1rem;
+    max-width: 1050px;
+    margin: 1.5rem auto;
+    align-items: end;
+}
+
+.chess-pair > .chess3d-bar {
+    grid-column: 1 / -1;
+}
+
+.chess-pair .chess2d {
+    max-width: none;
+    margin: 0 auto;
+}
+
+.chess-pair .chess2d-caption {
+    max-width: none;
+}
+
+.chess-pair .chess3d-wrap {
+    max-width: none;
+    margin: 0;
+}
+
+@media (max-width: 700px) {
+    .chess-pair {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── 3-D board ──────────────────────────────────────────────── */
+
 .chess3d-wrap {
     max-width: 600px;
     margin: 1.5rem auto;
@@ -34,6 +71,19 @@
 
 .chess3d-layer-bar:hover {
     background: rgba(139, 115, 85, 0.85);
+}
+
+.chess3d-layer-indicator {
+    position: absolute;
+    left: -6px;
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 5px solid rgba(139, 115, 85, 0.6);
+    transform: translateY(-50%);
+    transition: top 0.15s ease;
+    pointer-events: none;
 }
 
 .chess3d-cv canvas {

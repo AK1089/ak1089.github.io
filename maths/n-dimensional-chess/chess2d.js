@@ -69,8 +69,7 @@
 
             const caption = document.createElement("p");
             caption.className = "chess2d-caption";
-            caption.textContent =
-                "Click any square to place the " + this.piece.name.toLowerCase() + ".";
+            caption.textContent = "Click any square to place the piece.";
             this.captionEl = caption;
 
             this.container.appendChild(board);
@@ -113,7 +112,7 @@
             }
 
             this.captionEl.textContent =
-                this.piece.name + ": " + count + " move" + (count !== 1 ? "s" : "") + " available from this square.";
+                count + " move" + (count !== 1 ? "s" : "") + " available from this space.";
         }
 
         clear() {
@@ -133,7 +132,10 @@
         document.querySelectorAll("[data-chess2d]").forEach(function (el) {
             var key = el.dataset.chess2d;
             var piece = PIECES[key];
-            if (piece) new ChessBoard2D(el, piece);
+            if (piece) {
+                var board = new ChessBoard2D(el, piece);
+                el._chess2d = board;
+            }
         });
     });
 

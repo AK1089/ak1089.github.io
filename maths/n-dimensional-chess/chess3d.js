@@ -52,14 +52,14 @@ const C = {
 const GAP = 1.2; // vertical space between layers
 const SZ = 1.0; // cell side length (cells touching)
 const TH = 0.18; // cell thickness
-const CANVAS_H = 420; // canvas height in px
+const CANVAS_H = 350; // canvas height in px
 
 /* ── 3-D Board ───────────────────────────────────────────────── */
 
 class Board3D {
     constructor(container, keys) {
         this.el = container;
-        this.n = parseInt(container.dataset.boardSize) || 5;
+        this.n = parseInt(container.dataset.boardSize) || 8;
         this.keys = keys;
         this.key = keys[0];
         this.pos = null;
@@ -75,7 +75,6 @@ class Board3D {
         });
         this.focusedLayer = null;
         this.edgeMats = [];
-        this.vertMat = null;
         this.build();
     }
 
@@ -90,6 +89,7 @@ class Board3D {
         wrap.className = "chess3d-wrap";
 
         // Variant selector buttons
+        const pair = this.el.closest(".chess-pair");
         if (this.keys.length > 1) {
             const bar = document.createElement("div");
             bar.className = "chess3d-bar";
@@ -104,10 +104,15 @@ class Board3D {
                     b.classList.add("active");
                     this.key = k;
                     if (this.pos) this.highlight();
+                    this.sync2DName(PIECES[k].name);
                 });
                 bar.appendChild(b);
             }
-            wrap.appendChild(bar);
+            if (pair) {
+                pair.prepend(bar);
+            } else {
+                wrap.appendChild(bar);
+            }
         }
 
         this.cv = Object.assign(document.createElement("div"), {
@@ -128,6 +133,20 @@ class Board3D {
         // Place piece at centre
         const m = (this.n - 1) >> 1;
         this.place(m, m, m);
+
+        // Sync 2D board name with initial variant
+        if (this.keys.length > 1) this.sync2DName(this.piece.name);
+    }
+
+    sync2DName(name) {
+        const pair = this.el.closest(".chess-pair");
+        if (!pair) return;
+        const board = pair.querySelector("[data-chess2d]")?._chess2d;
+        if (!board?.piecePos) return;
+        board.piece = { ...board.piece, name };
+        const { row, col } = board.piecePos;
+        board.piecePos = null;
+        board.handleClick(row, col);
     }
 
     /* ── Three.js setup ──────────────────────────────────────── */
@@ -140,9 +159,9 @@ class Board3D {
         this.scene = new THREE.Scene();
         this.cam = new THREE.PerspectiveCamera(40, w / CANVAS_H, 0.1, 200);
         this.cam.position.set(
-            mid + this.n * 1.4,
-            midY + this.n,
-            mid + this.n * 1.4,
+            mid + this.n * 1.5,
+            midY + this.n * 1.1,
+            mid + this.n * 1.5,
         );
 
         this.ren = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -188,14 +207,31 @@ class Board3D {
     buildLayerPicker() {
         const el = document.createElement("div");
         el.className = "chess3d-layers";
+        this.layerBars = [];
         for (let y = this.n - 1; y >= 0; y--) {
             const bar = document.createElement("div");
             bar.className = "chess3d-layer-bar";
             bar.addEventListener("mouseenter", () => this.focusLayer(y));
             el.appendChild(bar);
+            this.layerBars[y] = bar;
         }
+        // Piece indicator triangle
+        this.layerIndicator = document.createElement("div");
+        this.layerIndicator.className = "chess3d-layer-indicator";
+        el.appendChild(this.layerIndicator);
         el.addEventListener("mouseleave", () => this.unfocusLayer());
         this.cv.appendChild(el);
+    }
+
+    updateIndicator() {
+        if (!this.pos || !this.layerIndicator) return;
+        const bar = this.layerBars[this.pos.y];
+        if (!bar) return;
+        const parent = bar.parentElement;
+        const barRect = bar.getBoundingClientRect();
+        const parentRect = parent.getBoundingClientRect();
+        this.layerIndicator.style.top =
+            barRect.top - parentRect.top + barRect.height / 2 + "px";
     }
 
     focusLayer(y) {
@@ -207,7 +243,6 @@ class Board3D {
         }
         for (let ly = 0; ly < this.n; ly++)
             this.edgeMats[ly].opacity = ly === y ? 0.35 : 0.03;
-        this.vertMat.opacity = 0.02;
         if (this.sphere)
             this.sphereMat.opacity = this.pos.y === y ? 1.0 : 0.08;
     }
@@ -219,7 +254,6 @@ class Board3D {
             c.mesh.material.opacity = isLit ? 0.92 : 0.82;
         }
         for (const m of this.edgeMats) m.opacity = 0.35;
-        this.vertMat.opacity = 0.12;
         if (this.sphere) this.sphereMat.opacity = 1.0;
     }
 
@@ -261,32 +295,6 @@ class Board3D {
                     this.scene.add(edges);
                 }
 
-        // Vertical grid lines between layers — one batched LineSegments
-        this.vertMat = new THREE.LineBasicMaterial({
-            color: C.edge,
-            transparent: true,
-            opacity: 0.12,
-        });
-        const half = SZ / 2;
-        const pts = [];
-        for (let gxi = 0; gxi <= this.n; gxi++) {
-            const gx = gxi - half;
-            for (let gzi = 0; gzi <= this.n; gzi++) {
-                const gz = gzi - half;
-                for (let y = 0; y < this.n - 1; y++) {
-                    pts.push(
-                        new THREE.Vector3(gx, y * GAP + TH / 2, gz),
-                        new THREE.Vector3(gx, (y + 1) * GAP - TH / 2, gz),
-                    );
-                }
-            }
-        }
-        this.scene.add(
-            new THREE.LineSegments(
-                new THREE.BufferGeometry().setFromPoints(pts),
-                this.vertMat,
-            ),
-        );
     }
 
     /* ── Interaction ─────────────────────────────────────────── */
@@ -343,6 +351,7 @@ class Board3D {
         this.scene.add(this.sphere);
 
         this.highlight();
+        this.updateIndicator();
     }
 
     highlight() {
@@ -371,12 +380,7 @@ class Board3D {
                 }
 
         this.cap.textContent =
-            this.piece.name +
-            ": " +
-            count +
-            " move" +
-            (count !== 1 ? "s" : "") +
-            " available from this square. Drag to orbit.";
+            count + " move" + (count !== 1 ? "s" : "") + " available from this space.";
 
         // Re-apply layer isolation if active
         if (this.focusedLayer !== null) this.focusLayer(this.focusedLayer);

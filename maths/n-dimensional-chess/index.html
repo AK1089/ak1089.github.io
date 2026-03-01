@@ -877,8 +877,10 @@
             ></span
           >.
         </p>
-        <div data-chess2d="king"></div>
-        <div data-chess3d="king"></div>
+        <div class="chess-pair">
+          <div data-chess2d="king"></div>
+          <div data-chess3d="king"></div>
+        </div>
         <h3>Knight</h3>
         <p>
           The knight also does not fit the sliding framework. Its displacement
@@ -1083,8 +1085,10 @@
           >
           pattern, up to signs and axis choices.
         </p>
-        <div data-chess2d="knight"></div>
-        <div data-chess3d="knight"></div>
+        <div class="chess-pair">
+          <div data-chess2d="knight"></div>
+          <div data-chess3d="knight"></div>
+        </div>
         <h3>Rook</h3>
         <p>
           The rook slides any distance along a single axis. Its direction vector
@@ -1331,8 +1335,10 @@
                           ><span></span></span></span></span></span></span></span></span></span
           >.
         </p>
-        <div data-chess2d="rook"></div>
-        <div data-chess3d="rook"></div>
+        <div class="chess-pair">
+          <div data-chess2d="rook"></div>
+          <div data-chess3d="rook"></div>
+        </div>
         <h3>Bishop</h3>
         <p>
           In two dimensions, the bishop slides diagonally, moving along both
@@ -1593,10 +1599,12 @@
               ></span
             ></span
           >-bishop. In two dimensions, these are equivalent, but in higher
-          dimensions this breaks down
+          dimensions this breaks down.
         </p>
-        <div data-chess2d="bishop"></div>
-        <div data-chess3d="bishop"></div>
+        <div class="chess-pair">
+          <div data-chess2d="bishop"></div>
+          <div data-chess3d="bishop"></div>
+        </div>
         <h3>Queen</h3>
         <p>
           In two dimensions, the queen can slide any distance along a rank,
@@ -1701,6 +1709,7 @@
           <thead>
             <tr>
               <th>Queen variant</th>
+              <th></th>
               <th>Directions allowed</th>
               <th>Norm characterisation</th>
             </tr>
@@ -1724,42 +1733,9 @@
                       ><span class="mord">2</span></span
                     ></span
                   ></span
-                >-Queen (Rook
-                <span class="katex"
-                  ><span class="katex-mathml"
-                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
-                      ><semantics
-                        ><mrow><mo>∪</mo></mrow
-                        ><annotation encoding="application/x-tex"
-                          >\cup</annotation
-                        ></semantics
-                      ></math
-                    ></span
-                  ><span class="katex-html" aria-hidden="true"
-                    ><span class="base"
-                      ><span class="strut" style="height: 0.5556em"></span
-                      ><span class="mord">∪</span></span
-                    ></span
-                  ></span
-                >
-                <span class="katex"
-                  ><span class="katex-mathml"
-                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
-                      ><semantics
-                        ><mrow><mn>2</mn></mrow
-                        ><annotation encoding="application/x-tex"
-                          >2</annotation
-                        ></semantics
-                      ></math
-                    ></span
-                  ><span class="katex-html" aria-hidden="true"
-                    ><span class="base"
-                      ><span class="strut" style="height: 0.6444em"></span
-                      ><span class="mord">2</span></span
-                    ></span
-                  ></span
-                >-Bishop)
+                >-Queen
               </td>
+              <td></td>
               <td>
                 <span class="katex"
                   ><span class="katex-mathml"
@@ -2080,46 +2056,9 @@
                       ></span
                     ></span
                   ></span
-                >-Queen (Rook
-                <span class="katex"
-                  ><span class="katex-mathml"
-                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
-                      ><semantics
-                        ><mrow><mo>∪</mo></mrow
-                        ><annotation encoding="application/x-tex"
-                          >\cup</annotation
-                        ></semantics
-                      ></math
-                    ></span
-                  ><span class="katex-html" aria-hidden="true"
-                    ><span class="base"
-                      ><span class="strut" style="height: 0.5556em"></span
-                      ><span class="mord">∪</span></span
-                    ></span
-                  ></span
-                >
-                <span class="katex"
-                  ><span class="katex-mathml"
-                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
-                      ><semantics
-                        ><mrow><mi>N</mi></mrow
-                        ><annotation encoding="application/x-tex"
-                          >N</annotation
-                        ></semantics
-                      ></math
-                    ></span
-                  ><span class="katex-html" aria-hidden="true"
-                    ><span class="base"
-                      ><span class="strut" style="height: 0.6833em"></span
-                      ><span
-                        class="mord mathnormal"
-                        style="margin-right: 0.10903em"
-                        >N</span
-                      ></span
-                    ></span
-                  ></span
-                >-Bishop)
+                >-Queen
               </td>
+              <td></td>
               <td>
                 <span class="katex"
                   ><span class="katex-mathml"
@@ -2447,8 +2386,9 @@
                       ></span
                     ></span
                   ></span
-                >-Queen (= unrestricted-range King)
+                >-Queen
               </td>
+              <td></td>
               <td>
                 <span class="katex"
                   ><span class="katex-mathml"
@@ -2499,15 +2439,18 @@
                     ><math xmlns="http://www.w3.org/1998/Math/MathML"
                       ><semantics
                         ><mrow
-                          ><mi>δ</mi><mo>=</mo><mi>k</mi><mi>ε</mi><mo>:</mo
-                          ><mi mathvariant="normal">∥</mi><mi>ε</mi
+                          ><mi>δ</mi><mo>=</mo><mi>k</mi
+                          ><mi mathvariant="bold">v</mi><mo>:</mo
+                          ><mi mathvariant="normal">∥</mi
+                          ><mi mathvariant="bold">v</mi
                           ><msub
                             ><mi mathvariant="normal">∥</mi
                             ><mi mathvariant="normal">∞</mi></msub
-                          ><mo>=</mo><mn>1</mn></mrow
+                          ><mo>=</mo><mn>1</mn><mo separator="true">,</mo
+                          ><mi>k</mi><mo>⩾</mo><mn>1</mn></mrow
                         ><annotation encoding="application/x-tex"
-                          >\delta = k \varepsilon: \|\varepsilon\|_\infty =
-                          1</annotation
+                          >\delta = k \mathbf{v}: \|\mathbf{v}\|_\infty = 1, k
+                          \geqslant 1</annotation
                         ></semantics
                       ></math
                     ></span
@@ -2533,7 +2476,8 @@
                         class="mord mathnormal"
                         style="margin-right: 0.03148em"
                         >k</span
-                      ><span class="mord mathnormal">ε</span
+                      ><span class="mord mathbf" style="margin-right: 0.01597em"
+                        >v</span
                       ><span
                         class="mspace"
                         style="margin-right: 0.2778em"
@@ -2549,7 +2493,8 @@
                         style="height: 1em; vertical-align: -0.25em"
                       ></span
                       ><span class="mord">∥</span
-                      ><span class="mord mathnormal">ε</span
+                      ><span class="mord mathbf" style="margin-right: 0.01597em"
+                        >v</span
                       ><span class="mord"
                         ><span class="mord">∥</span
                         ><span class="msupsub"
@@ -2584,6 +2529,29 @@
                         style="margin-right: 0.2778em"
                       ></span></span
                     ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 0.8889em; vertical-align: -0.1944em"
+                      ></span
+                      ><span class="mord">1</span><span class="mpunct">,</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.1667em"
+                      ></span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.03148em"
+                        >k</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span
+                      ><span class="mrel amsrm">⩾</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span></span
+                    ><span class="base"
                       ><span class="strut" style="height: 0.6444em"></span
                       ><span class="mord">1</span></span
                     ></span
@@ -2613,8 +2581,8 @@
                 ></span
               ></span
             ></span
-          >-queen is the most permissive: its move set is simply every
-          displacement of the form
+          >-queen is the most permissive, with its move set simply containing
+          every displacement of the form
           <span class="katex"
             ><span class="katex-mathml"
               ><math xmlns="http://www.w3.org/1998/Math/MathML"
@@ -2633,6 +2601,87 @@
                 ><span class="mord mathbf" style="margin-right: 0.01597em"
                   >v</span
                 ></span
+              ></span
+            ></span
+          >
+          for
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi mathvariant="bold">v</mi><mo>∈</mo
+                    ><mo stretchy="false">{</mo><mo>−</mo><mn>1</mn
+                    ><mo separator="true">,</mo><mn>0</mn
+                    ><mo separator="true">,</mo><mo>+</mo><mn>1</mn
+                    ><msup><mo stretchy="false">}</mo><mi>N</mi></msup
+                    ><mo>∖</mo><mo stretchy="false">{</mo
+                    ><mn mathvariant="bold">0</mn
+                    ><mo stretchy="false">}</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\mathbf{v} \in \{-1, 0, +1\}^N \setminus
+                    \{\mathbf{0}\}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.5782em; vertical-align: -0.0391em"
+                ></span
+                ><span class="mord mathbf" style="margin-right: 0.01597em"
+                  >v</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">∈</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1.0913em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span><span class="mord">−</span
+                ><span class="mord">1</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">0</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">+</span><span class="mord">1</span
+                ><span class="mclose"
+                  ><span class="mclose">}</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.8413em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span
+                                class="mord mathnormal mtight"
+                                style="margin-right: 0.10903em"
+                                >N</span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ><span class="mspace" style="margin-right: 0.2222em"></span
+                ><span class="mbin">∖</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2222em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span><span class="mord mathbf">0</span
+                ><span class="mclose">}</span></span
               ></span
             ></span
           >. The
@@ -2655,16 +2704,281 @@
           >-queen is the most restrictive, only ever moving along one or two
           axes at a time.
         </p>
-        <div data-chess2d="queen"></div>
-        <div data-chess3d="queen"></div>
+        <p>
+          The three queen variants are distinct for
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>N</mi><mo>&gt;</mo><mn>2</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >N &gt; 2</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7224em; vertical-align: -0.0391em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.10903em"
+                  >N</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">&gt;</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">2</span></span
+              ></span
+            ></span
+          >. The
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>S</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >S</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6833em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.05764em"
+                  >S</span
+                ></span
+              ></span
+            ></span
+          >-queen is a strict superpiece of both others, since its move set
+          includes all directions with
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi>S</mi><mo stretchy="false">(</mo
+                    ><mi mathvariant="bold">v</mi><mo stretchy="false">)</mo
+                    ><mo>⩾</mo><mn>1</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >S(\mathbf{v}) \geqslant 1</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.05764em"
+                  >S</span
+                ><span class="mopen">(</span
+                ><span class="mord mathbf" style="margin-right: 0.01597em"
+                  >v</span
+                ><span class="mclose">)</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel amsrm">⩾</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">1</span></span
+              ></span
+            ></span
+          >. The
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mn>2</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >2</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">2</span></span
+              ></span
+            ></span
+          >-queen and
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>N</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >N</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6833em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.10903em"
+                  >N</span
+                ></span
+              ></span
+            ></span
+          >-queen, however, are incomparable: the
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mn>2</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >2</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">2</span></span
+              ></span
+            ></span
+          >-queen can move along
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo stretchy="false">(</mo><mi>k</mi
+                    ><mo separator="true">,</mo><mi>k</mi
+                    ><mo separator="true">,</mo><mn>0</mn
+                    ><mo separator="true">,</mo><mo>…</mo
+                    ><mo separator="true">,</mo><mn>0</mn
+                    ><mo stretchy="false">)</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >(k, k, 0, \ldots, 0)</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">(</span
+                ><span class="mord mathnormal" style="margin-right: 0.03148em"
+                  >k</span
+                ><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.03148em"
+                  >k</span
+                ><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">0</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="minner">…</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">0</span><span class="mclose">)</span></span
+              ></span
+            ></span
+          >, activating exactly two axes, which the
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>N</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >N</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6833em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.10903em"
+                  >N</span
+                ></span
+              ></span
+            ></span
+          >-queen cannot; and the
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>N</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >N</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6833em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.10903em"
+                  >N</span
+                ></span
+              ></span
+            ></span
+          >-queen can move along
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo stretchy="false">(</mo><mi>k</mi
+                    ><mo separator="true">,</mo><mi>k</mi
+                    ><mo separator="true">,</mo><mo>…</mo
+                    ><mo separator="true">,</mo><mi>k</mi
+                    ><mo stretchy="false">)</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >(k, k, \ldots, k)</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">(</span
+                ><span class="mord mathnormal" style="margin-right: 0.03148em"
+                  >k</span
+                ><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.03148em"
+                  >k</span
+                ><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="minner">…</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.03148em"
+                  >k</span
+                ><span class="mclose">)</span></span
+              ></span
+            ></span
+          >, activating all axes simultaneously, which the $2$-queen cannot.
+        </p>
+        <div class="chess-pair">
+          <div data-chess2d="queen"></div>
+          <div data-chess3d="queen"></div>
+        </div>
         <h3>Pawn</h3>
         <p>
           I&rsquo;m going to omit the pawn from this analysis: its movement is
           inherently stateful (having moved or not determines whether it can
-          advance two squares),directional (its movement cannot be characterised
-          by symmetric displacement constraints), and generally peculiar (it
-          captures and advances differently, and en passant exists). All of
-          these make pawns resist clean generalisation into higher dimensions.
+          advance two squares), directional (its movement cannot be
+          characterised by symmetric displacement constraints), and generally
+          peculiar (it captures and advances differently, and en passant
+          exists). All of these make pawns resist clean generalisation into
+          higher dimensions.
         </p>
         <h2>III. Metrics</h2>
         <h2>IV. Asymptotics</h2>
