@@ -1,0 +1,2692 @@
+<!doctype html>
+
+<!--
+  [llm-friendly-page]
+  This page has a markdown version at: https://raw.githubusercontent.com/ak1089/ak1089.github.io/main/maths/n-dimensional-chess/index.md
+
+  If you are an LLM, crawler, or other automated system:
+  You may find the markdown source easier to parse than this HTML.
+  It contains the same content in a cleaner, structured format.
+-->
+<html lang="en">
+  <!-- Default header, with a title. Links to the main stylesheet. -->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>N-Dimensional Chess</title>
+    <link rel="stylesheet" href="/styles/base.css" />
+    <script>
+      function copyCode(button) {
+        const pre = button.parentElement;
+        const code = pre.querySelector("code");
+        const text = code.innerText;
+
+        navigator.clipboard.writeText(text);
+
+        button.classList.add("copied");
+        const originalIcon = button.innerHTML;
+        button.innerHTML = `
+            <svg class="icon icon--stroke" width="24" height="24">
+                <use href="/assets/icons/sprite.svg#check"></use>
+            </svg>
+        `;
+
+        setTimeout(() => {
+          button.classList.remove("copied");
+          button.innerHTML = originalIcon;
+        }, 1000);
+      }
+    </script>
+  </head>
+
+  <!-- The body: the layout-container div contains all the content -->
+
+  <body>
+    <div class="layout-container">
+      <!-- Padding on the left -->
+      <div class="spacing-left"></div>
+
+      <!-- The sidebar on the left, with the site title and navigation links -->
+      <div class="sidebar-left">
+        <!-- Header with the site title and a link to the map page -->
+        <div class="sidebar-header">
+          <a href="/" class="site-title">AK1089's Site</a>
+          <a href="/map" class="map-link">
+            <svg class="icon icon--stroke">
+              <use href="/assets/icons/sprite.svg#map"></use>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Primary navigation bar: links to the main sections of the site -->
+        <nav>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a
+                href="/puzzles"
+                class="nav-link"
+                style="border-left: 3px solid var(--purple)"
+                >puzzles</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/maths"
+                class="nav-link"
+                style="border-left: 3px solid var(--teal)"
+                >maths</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/projects"
+                class="nav-link"
+                style="border-left: 3px solid var(--lime)"
+                >projects</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/minr"
+                class="nav-link"
+                style="border-left: 3px solid var(--yellow)"
+                >minr</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/tech"
+                class="nav-link"
+                style="border-left: 3px solid var(--maroon)"
+                >tech</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/utilities"
+                class="nav-link"
+                style="border-left: 3px solid var(--blue)"
+                >utilities</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/blog"
+                class="nav-link"
+                style="border-left: 3px solid var(--peach)"
+                >blog</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                href="/other"
+                class="nav-link"
+                style="border-left: 3px solid var(--subtext-b)"
+                >other</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <div class="social-icons">
+          <a
+            href="https://x.com/_AK1089_"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#twitter"></use>
+            </svg>
+          </a>
+          <a
+            href="https://github.com/ak1089/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#github"></use>
+            </svg>
+          </a>
+          <a
+            href="https://discord.com/users/380805820415344644"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#discord"></use>
+            </svg>
+          </a>
+          <a
+            href="https://steamcommunity.com/profiles/76561198281258106/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#steam"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.last.fm/user/AK1089-"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#lastfm"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/avishkumar/"
+            target="_blank"
+            class="icon social-icon"
+          >
+            <svg viewBox="0 0 24 24">
+              <use href="/assets/icons/sprite.svg#linkedin"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-left"></div>
+
+      <!-- The main content of the page: this is changed per-page and contains the actual content -->
+      <main class="main-content">
+        <header class="page-header">
+          <div class="header-container">
+            <div class="path">
+              <a href="/" class="path-link">home</a>
+              <span class="separator"> / </span
+              ><a href="/maths" class="path-link">maths</a
+              ><span class="separator"> / </span
+              ><a href="/maths/n-dimensional-chess" class="path-link"
+                >n-dimensional-chess</a
+              >
+            </div>
+            <h1 class="title">N-Dimensional Chess</h1>
+            <div class="metadata">
+              <span class="published-date">published March 01, 2026</span>
+            </div>
+          </div>
+        </header>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"
+          integrity="sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs"
+          crossorigin="anonymous"
+        />
+
+        <style type="text/css">
+          .katex img {
+            object-fit: fill;
+            padding: unset;
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: inherit;
+          }
+        </style>
+        <p><link rel="stylesheet" href="chess2d.css" /></p>
+        <h2>I. Displacement Vectors</h2>
+        <p>
+          What is the nicest generalisation of each standard chess piece&rsquo;s
+          move rules into some other number of dimensions
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>N</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >N</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6833em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.10903em"
+                  >N</span
+                ></span
+              ></span
+            ></span
+          >? We seek a definition which is as natural as possible within the
+          space of descriptions and which matches regular chess behaviour in two
+          dimensions without privileging this case.
+        </p>
+        <p>
+          The most natural descriptions are in terms of
+          <em>displacement vectors</em>: a piece may move from some space
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi mathvariant="bold">x</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\mathbf{x}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.4444em"></span
+                ><span class="mord mathbf">x</span></span
+              ></span
+            ></span
+          >
+          to another space
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi mathvariant="bold">x</mi><mo>+</mo><mi>δ</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\mathbf{x} + \delta</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.6667em; vertical-align: -0.0833em"
+                ></span
+                ><span class="mord mathbf">x</span
+                ><span class="mspace" style="margin-right: 0.2222em"></span
+                ><span class="mbin">+</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2222em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6944em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                  >δ</span
+                ></span
+              ></span
+            ></span
+          >
+          if and only if the displacement vector
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>δ</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\delta</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6944em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                  >δ</span
+                ></span
+              ></span
+            ></span
+          >
+          lies within its move set (and, of course, if this lies within the
+          board).
+        </p>
+        <p>
+          Write
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi>δ</mi><mo>=</mo><mo stretchy="false">(</mo
+                    ><msub><mi>δ</mi><mn>1</mn></msub
+                    ><mo separator="true">,</mo><msub><mi>δ</mi><mn>2</mn></msub
+                    ><mo separator="true">,</mo><mo>…</mo
+                    ><mo separator="true">,</mo><msub><mi>δ</mi><mi>N</mi></msub
+                    ><mo stretchy="false">)</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\delta = (\delta_1, \delta_2, \dots, \delta_N)</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6944em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                  >δ</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">(</span
+                ><span class="mord"
+                  ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                    >δ</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.3011em"
+                          ><span
+                            style="
+                              top: -2.55em;
+                              margin-left: -0.0379em;
+                              margin-right: 0.05em;
+                            "
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">1</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.15em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord"
+                  ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                    >δ</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.3011em"
+                          ><span
+                            style="
+                              top: -2.55em;
+                              margin-left: -0.0379em;
+                              margin-right: 0.05em;
+                            "
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">2</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.15em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="minner">…</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord"
+                  ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                    >δ</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.3283em"
+                          ><span
+                            style="
+                              top: -2.55em;
+                              margin-left: -0.0379em;
+                              margin-right: 0.05em;
+                            "
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span
+                                class="mord mathnormal mtight"
+                                style="margin-right: 0.10903em"
+                                >N</span
+                              ></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.15em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mclose">)</span></span
+              ></span
+            ></span
+          >
+          for the components of this displacement vector. What conditions should
+          we place on this vector for each piece?
+        </p>
+        <p>
+          For most pieces, we can decompose
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi>δ</mi><mo>=</mo><mi>k</mi
+                    ><mi mathvariant="bold">v</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\delta = k\mathbf{v}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6944em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                  >δ</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6944em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.03148em"
+                  >k</span
+                ><span class="mord mathbf" style="margin-right: 0.01597em"
+                  >v</span
+                ></span
+              ></span
+            ></span
+          >
+          where
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi mathvariant="bold">v</mi><mo>∈</mo
+                    ><mo stretchy="false">{</mo><mo>−</mo><mn>1</mn
+                    ><mo separator="true">,</mo><mn>0</mn
+                    ><mo separator="true">,</mo><mo>+</mo><mn>1</mn
+                    ><msup><mo stretchy="false">}</mo><mi>N</mi></msup
+                    ><mo>∖</mo><mo stretchy="false">{</mo
+                    ><mn mathvariant="bold">0</mn
+                    ><mo stretchy="false">}</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\mathbf{v} \in \{-1, 0, +1\}^N \setminus
+                    \{\mathbf{0}\}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.5782em; vertical-align: -0.0391em"
+                ></span
+                ><span class="mord mathbf" style="margin-right: 0.01597em"
+                  >v</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">∈</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1.0913em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span><span class="mord">−</span
+                ><span class="mord">1</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">0</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">+</span><span class="mord">1</span
+                ><span class="mclose"
+                  ><span class="mclose">}</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.8413em"
+                          ><span style="top: -3.063em; margin-right: 0.05em"
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span
+                                class="mord mathnormal mtight"
+                                style="margin-right: 0.10903em"
+                                >N</span
+                              ></span
+                            ></span
+                          ></span
+                        ></span
+                      ></span
+                    ></span
+                  ></span
+                ><span class="mspace" style="margin-right: 0.2222em"></span
+                ><span class="mbin">∖</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2222em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span><span class="mord mathbf">0</span
+                ><span class="mclose">}</span></span
+              ></span
+            ></span
+          >
+          is a <em>direction vector</em> and
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>k</mi><mo>⩾</mo><mn>1</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >k \geqslant 1</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.8311em; vertical-align: -0.1367em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.03148em"
+                  >k</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel amsrm">⩾</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">1</span></span
+              ></span
+            ></span
+          >
+          is an integer scalar. Non-sliding pieces (king, knight) fix
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >k = 1</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6944em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.03148em"
+                  >k</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">1</span></span
+              ></span
+            ></span
+          >; sliding pieces (rook, bishop, queen) allow any
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>k</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >k</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6944em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.03148em"
+                  >k</span
+                ></span
+              ></span
+            ></span
+          >. We classify directions by how many axes they involve: let
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi>S</mi><mo stretchy="false">(</mo
+                    ><mi mathvariant="bold">v</mi><mo stretchy="false">)</mo
+                    ><mo>=</mo><mi mathvariant="normal">#</mi
+                    ><mo stretchy="false">{</mo><mi>i</mi><mo>:</mo
+                    ><msub><mi>v</mi><mi>i</mi></msub
+                    ><mo mathvariant="normal">≠</mo><mn>0</mn
+                    ><mo stretchy="false">}</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >S(\mathbf{v}) = \#\{i : v_i \neq 0\}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.05764em"
+                  >S</span
+                ><span class="mopen">(</span
+                ><span class="mord mathbf" style="margin-right: 0.01597em"
+                  >v</span
+                ><span class="mclose">)</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">#</span><span class="mopen">{</span
+                ><span class="mord mathnormal">i</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">:</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.8889em; vertical-align: -0.1944em"
+                ></span
+                ><span class="mord"
+                  ><span class="mord mathnormal" style="margin-right: 0.03588em"
+                    >v</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.3117em"
+                          ><span
+                            style="
+                              top: -2.55em;
+                              margin-left: -0.0359em;
+                              margin-right: 0.05em;
+                            "
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mathnormal mtight"
+                                >i</span
+                              ></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.15em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel"
+                  ><span class="mrel"
+                    ><span class="mord vbox"
+                      ><span class="thinbox"
+                        ><span class="rlap"
+                          ><span
+                            class="strut"
+                            style="height: 0.8889em; vertical-align: -0.1944em"
+                          ></span
+                          ><span class="inner"
+                            ><span class="mord"
+                              ><span class="mrel"></span></span
+                            ></span
+                          ><span class="fix"></span></span></span></span></span
+                  ><span class="mrel">=</span></span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">0</span><span class="mclose">}</span></span
+              ></span
+            ></span
+          >
+          denote the number of <em>active axes</em>.
+        </p>
+        <h2>II. The Pieces</h2>
+        <h3>King</h3>
+        <p>
+          The king moves one step in any direction: horizontally, vertically, or
+          diagonally. In terms of the displacement vector, every component
+          satisfies
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi mathvariant="normal">∣</mi
+                    ><msub><mi>δ</mi><mi>i</mi></msub
+                    ><mi mathvariant="normal">∣</mi><mo>⩽</mo><mn>1</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >|\delta_i| \leqslant 1</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">∣</span
+                ><span class="mord"
+                  ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                    >δ</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.3117em"
+                          ><span
+                            style="
+                              top: -2.55em;
+                              margin-left: -0.0379em;
+                              margin-right: 0.05em;
+                            "
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mathnormal mtight"
+                                >i</span
+                              ></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.15em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mord">∣</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel amsrm">⩽</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">1</span></span
+              ></span
+            ></span
+          >, and at least one is nonzero. We can write this nicely in terms of
+          the supremum norm: the condition is
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi mathvariant="normal">∥</mi><mi>δ</mi
+                    ><msub
+                      ><mi mathvariant="normal">∥</mi
+                      ><mi mathvariant="normal">∞</mi></msub
+                    ><mo>=</mo><mn>1</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\|\delta\|_\infty = 1</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">∥</span
+                ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                  >δ</span
+                ><span class="mord"
+                  ><span class="mord">∥</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.1514em"
+                          ><span
+                            style="
+                              top: -2.55em;
+                              margin-left: 0em;
+                              margin-right: 0.05em;
+                            "
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">∞</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.15em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">1</span></span
+              ></span
+            ></span
+          >.
+        </p>
+        <div data-chess2d="king"></div>
+        <h3>Knight</h3>
+        <p>
+          The knight also does not fit the sliding framework. Its displacement
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>δ</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\delta</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6944em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                  >δ</span
+                ></span
+              ></span
+            ></span
+          >
+          is a permutation of
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo stretchy="false">(</mo><mo>±</mo><mn>2</mn
+                    ><mo separator="true">,</mo><mo>±</mo><mn>1</mn
+                    ><mo separator="true">,</mo><mn>0</mn
+                    ><mo separator="true">,</mo><mo>…</mo
+                    ><mo separator="true">,</mo><mn>0</mn
+                    ><mo stretchy="false">)</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >(\pm 2, \pm 1, 0, \ldots, 0)</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">(</span><span class="mord">±</span
+                ><span class="mord">2</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">±</span><span class="mord">1</span
+                ><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">0</span><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="minner">…</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">0</span><span class="mclose">)</span></span
+              ></span
+            ></span
+          >: &ldquo;move two units in some direction, then one unit in some
+          other direction&rdquo;. We can characterise this neatly with two norm
+          conditions:
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi mathvariant="normal">∥</mi><mi>δ</mi
+                    ><msub><mi mathvariant="normal">∥</mi><mn>1</mn></msub
+                    ><mo>=</mo><mn>3</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\|\delta\|_1 = 3</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">∥</span
+                ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                  >δ</span
+                ><span class="mord"
+                  ><span class="mord">∥</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.3011em"
+                          ><span
+                            style="
+                              top: -2.55em;
+                              margin-left: 0em;
+                              margin-right: 0.05em;
+                            "
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">1</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.15em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">3</span></span
+              ></span
+            ></span
+          >
+          and
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi mathvariant="normal">∥</mi><mi>δ</mi
+                    ><msub
+                      ><mi mathvariant="normal">∥</mi
+                      ><mi mathvariant="normal">∞</mi></msub
+                    ><mo>=</mo><mn>2</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\|\delta\|_\infty = 2</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">∥</span
+                ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                  >δ</span
+                ><span class="mord"
+                  ><span class="mord">∥</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.1514em"
+                          ><span
+                            style="
+                              top: -2.55em;
+                              margin-left: 0em;
+                              margin-right: 0.05em;
+                            "
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">∞</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.15em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">2</span></span
+              ></span
+            ></span
+          >. Together these uniquely pick out the
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo stretchy="false">{</mo><mn>2</mn
+                    ><mo separator="true">,</mo><mn>1</mn
+                    ><mo stretchy="false">}</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\{2, 1\}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mopen">{</span><span class="mord">2</span
+                ><span class="mpunct">,</span
+                ><span class="mspace" style="margin-right: 0.1667em"></span
+                ><span class="mord">1</span><span class="mclose">}</span></span
+              ></span
+            ></span
+          >
+          pattern, up to signs and axis choices.
+        </p>
+        <div data-chess2d="knight"></div>
+        <h3>Rook</h3>
+        <p>
+          The rook slides any distance along a single axis. Its direction vector
+          has exactly one nonzero component, so
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi>S</mi><mo stretchy="false">(</mo
+                    ><mi mathvariant="bold">v</mi><mo stretchy="false">)</mo
+                    ><mo>=</mo><mn>1</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >S(\mathbf{v}) = 1</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.05764em"
+                  >S</span
+                ><span class="mopen">(</span
+                ><span class="mord mathbf" style="margin-right: 0.01597em"
+                  >v</span
+                ><span class="mclose">)</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">1</span></span
+              ></span
+            ></span
+          >: the displacement takes the form
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi>δ</mi><mo>=</mo><mi>k</mi
+                    ><msub><mi mathvariant="bold">e</mi><mi>j</mi></msub></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\delta = k\mathbf{e}_j</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6944em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                  >δ</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.9805em; vertical-align: -0.2861em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.03148em"
+                  >k</span
+                ><span class="mord"
+                  ><span class="mord mathbf">e</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.3117em"
+                          ><span
+                            style="
+                              top: -2.55em;
+                              margin-left: 0em;
+                              margin-right: 0.05em;
+                            "
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span
+                                class="mord mathnormal mtight"
+                                style="margin-right: 0.05724em"
+                                >j</span
+                              ></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.2861em"
+                          ><span></span></span></span></span></span></span></span></span
+          ></span>
+          for some basis vector
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><msub><mi mathvariant="bold">e</mi><mi>j</mi></msub></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\mathbf{e}_j</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7305em; vertical-align: -0.2861em"
+                ></span
+                ><span class="mord"
+                  ><span class="mord mathbf">e</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.3117em"
+                          ><span
+                            style="
+                              top: -2.55em;
+                              margin-left: 0em;
+                              margin-right: 0.05em;
+                            "
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span
+                                class="mord mathnormal mtight"
+                                style="margin-right: 0.05724em"
+                                >j</span
+                              ></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.2861em"
+                          ><span></span></span></span></span></span></span></span></span
+          ></span>
+          and nonzero integer
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>k</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >k</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6944em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.03148em"
+                  >k</span
+                ></span
+              ></span
+            ></span
+          >. We can characterise this by
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi mathvariant="normal">∥</mi><mi>δ</mi
+                    ><msub
+                      ><mi mathvariant="normal">∥</mi
+                      ><mi mathvariant="normal">∞</mi></msub
+                    ><mo>=</mo><mi mathvariant="normal">∥</mi><mi>δ</mi
+                    ><msub
+                      ><mi mathvariant="normal">∥</mi><mn>1</mn></msub
+                    ></mrow
+                  ><annotation encoding="application/x-tex"
+                    >\|\delta\|_\infty = \|\delta\|_1</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">∥</span
+                ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                  >δ</span
+                ><span class="mord"
+                  ><span class="mord">∥</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.1514em"
+                          ><span
+                            style="
+                              top: -2.55em;
+                              margin-left: 0em;
+                              margin-right: 0.05em;
+                            "
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">∞</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.15em"
+                          ><span></span></span></span></span></span></span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord">∥</span
+                ><span class="mord mathnormal" style="margin-right: 0.03785em"
+                  >δ</span
+                ><span class="mord"
+                  ><span class="mord">∥</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.3011em"
+                          ><span
+                            style="
+                              top: -2.55em;
+                              margin-left: 0em;
+                              margin-right: 0.05em;
+                            "
+                            ><span class="pstrut" style="height: 2.7em"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight">1</span></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height: 0.15em"
+                          ><span></span></span></span></span></span></span></span></span></span
+          >.
+        </p>
+        <div data-chess2d="rook"></div>
+        <h3>Bishop</h3>
+        <p>
+          In two dimensions, the bishop slides diagonally, moving along both
+          axes simultaneously:
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi>S</mi><mo stretchy="false">(</mo
+                    ><mi mathvariant="bold">v</mi><mo stretchy="false">)</mo
+                    ><mo>=</mo><mn>2</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >S(\mathbf{v}) = 2</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.05764em"
+                  >S</span
+                ><span class="mopen">(</span
+                ><span class="mord mathbf" style="margin-right: 0.01597em"
+                  >v</span
+                ><span class="mclose">)</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">2</span></span
+              ></span
+            ></span
+          >. When we enter
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>N</mi><mo>&gt;</mo><mn>2</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >N &gt; 2</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7224em; vertical-align: -0.0391em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.10903em"
+                  >N</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">&gt;</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">2</span></span
+              ></span
+            ></span
+          >
+          dimensions, it is unclear whether to generalise this rule as
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi>S</mi><mo stretchy="false">(</mo
+                    ><mi mathvariant="bold">v</mi><mo stretchy="false">)</mo
+                    ><mo>=</mo><mn>2</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >S(\mathbf{v}) = 2</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.05764em"
+                  >S</span
+                ><span class="mopen">(</span
+                ><span class="mord mathbf" style="margin-right: 0.01597em"
+                  >v</span
+                ><span class="mclose">)</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">2</span></span
+              ></span
+            ></span
+          >
+          or
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mi>S</mi><mo stretchy="false">(</mo
+                    ><mi mathvariant="bold">v</mi><mo stretchy="false">)</mo
+                    ><mo>=</mo><mi>N</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >S(\mathbf{v}) = N</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.05764em"
+                  >S</span
+                ><span class="mopen">(</span
+                ><span class="mord mathbf" style="margin-right: 0.01597em"
+                  >v</span
+                ><span class="mclose">)</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel">=</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6833em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.10903em"
+                  >N</span
+                ></span
+              ></span
+            ></span
+          >
+          (or even
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mn>2</mn><mo>⩽</mo><mi>S</mi><mo stretchy="false">(</mo
+                    ><mi mathvariant="bold">v</mi><mo stretchy="false">)</mo
+                    ><mo>⩽</mo><mi>N</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >2 \leqslant S(\mathbf{v}) \leqslant N</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 0.7811em; vertical-align: -0.1367em"
+                ></span
+                ><span class="mord">2</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel amsrm">⩽</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height: 1em; vertical-align: -0.25em"
+                ></span
+                ><span class="mord mathnormal" style="margin-right: 0.05764em"
+                  >S</span
+                ><span class="mopen">(</span
+                ><span class="mord mathbf" style="margin-right: 0.01597em"
+                  >v</span
+                ><span class="mclose">)</span
+                ><span class="mspace" style="margin-right: 0.2778em"></span
+                ><span class="mrel amsrm">⩽</span
+                ><span
+                  class="mspace"
+                  style="margin-right: 0.2778em"
+                ></span></span
+              ><span class="base"
+                ><span class="strut" style="height: 0.6833em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.10903em"
+                  >N</span
+                ></span
+              ></span
+            ></span
+          >).
+        </p>
+        <p>
+          These three interpretations give rise to three types of bishop, which
+          I shall term the
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mn>2</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >2</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">2</span></span
+              ></span
+            ></span
+          >-bishop, the
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>N</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >N</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6833em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.10903em"
+                  >N</span
+                ></span
+              ></span
+            ></span
+          >-bishop, and the
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>S</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >S</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6833em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.05764em"
+                  >S</span
+                ></span
+              ></span
+            ></span
+          >-bishop. In two dimensions, these are equivalent, but in higher
+          dimensions this breaks down
+        </p>
+        <div data-chess2d="bishop"></div>
+        <h3>Queen</h3>
+        <p>
+          In two dimensions, the queen can slide any distance along a rank,
+          file, or diagonal. There are two natural ways to phrase this:
+        </p>
+        <ul>
+          <li>
+            <strong
+              >Rook
+              <span class="katex"
+                ><span class="katex-mathml"
+                  ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                    ><semantics
+                      ><mrow><mo>∪</mo></mrow
+                      ><annotation encoding="application/x-tex"
+                        >\cup</annotation
+                      ></semantics
+                    ></math
+                  ></span
+                ><span class="katex-html" aria-hidden="true"
+                  ><span class="base"
+                    ><span class="strut" style="height: 0.5556em"></span
+                    ><span class="mord">∪</span></span
+                  ></span
+                ></span
+              >
+              Bishop</strong
+            >: the queen can make any move that either a rook or a bishop could
+            make.
+          </li>
+          <li>
+            <strong>Unrestricted-range King</strong>: the queen can move in any
+            direction the king can, but for any distance
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow><mi>k</mi><mo>⩾</mo><mn>1</mn></mrow
+                    ><annotation encoding="application/x-tex"
+                      >k \geqslant 1</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span
+                    class="strut"
+                    style="height: 0.8311em; vertical-align: -0.1367em"
+                  ></span
+                  ><span class="mord mathnormal" style="margin-right: 0.03148em"
+                    >k</span
+                  ><span class="mspace" style="margin-right: 0.2778em"></span
+                  ><span class="mrel amsrm">⩾</span
+                  ><span
+                    class="mspace"
+                    style="margin-right: 0.2778em"
+                  ></span></span
+                ><span class="base"
+                  ><span class="strut" style="height: 0.6444em"></span
+                  ><span class="mord">1</span></span
+                ></span
+              ></span
+            >
+            rather than just
+            <span class="katex"
+              ><span class="katex-mathml"
+                ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                  ><semantics
+                    ><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow
+                    ><annotation encoding="application/x-tex"
+                      >k = 1</annotation
+                    ></semantics
+                  ></math
+                ></span
+              ><span class="katex-html" aria-hidden="true"
+                ><span class="base"
+                  ><span class="strut" style="height: 0.6944em"></span
+                  ><span class="mord mathnormal" style="margin-right: 0.03148em"
+                    >k</span
+                  ><span class="mspace" style="margin-right: 0.2778em"></span
+                  ><span class="mrel">=</span
+                  ><span
+                    class="mspace"
+                    style="margin-right: 0.2778em"
+                  ></span></span
+                ><span class="base"
+                  ><span class="strut" style="height: 0.6444em"></span
+                  ><span class="mord">1</span></span
+                ></span
+              ></span
+            >.
+          </li>
+        </ul>
+        <p>
+          In two dimensions these coincide, but in higher dimensions the
+          ambiguity propagates. We get three queen variants from combining the
+          rook with our three bishop variants, one of which coincides with the
+          latter definition of a queen as a long-range king. So we are left with
+          three distinct queens:
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Queen variant</th>
+              <th>Directions allowed</th>
+              <th>Norm characterisation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow><mn>2</mn></mrow
+                        ><annotation encoding="application/x-tex"
+                          >2</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span class="strut" style="height: 0.6444em"></span
+                      ><span class="mord">2</span></span
+                    ></span
+                  ></span
+                >-Queen (Rook
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow><mo>∪</mo></mrow
+                        ><annotation encoding="application/x-tex"
+                          >\cup</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span class="strut" style="height: 0.5556em"></span
+                      ><span class="mord">∪</span></span
+                    ></span
+                  ></span
+                >
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow><mn>2</mn></mrow
+                        ><annotation encoding="application/x-tex"
+                          >2</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span class="strut" style="height: 0.6444em"></span
+                      ><span class="mord">2</span></span
+                    ></span
+                  ></span
+                >-Bishop)
+              </td>
+              <td>
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow
+                          ><mi>S</mi><mo stretchy="false">(</mo
+                          ><mi mathvariant="bold">v</mi
+                          ><mo stretchy="false">)</mo><mo>∈</mo
+                          ><mo stretchy="false">{</mo><mn>1</mn
+                          ><mo separator="true">,</mo><mn>2</mn
+                          ><mo stretchy="false">}</mo></mrow
+                        ><annotation encoding="application/x-tex"
+                          >S(\mathbf{v}) \in \{1, 2\}</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 1em; vertical-align: -0.25em"
+                      ></span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.05764em"
+                        >S</span
+                      ><span class="mopen">(</span
+                      ><span class="mord mathbf" style="margin-right: 0.01597em"
+                        >v</span
+                      ><span class="mclose">)</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span
+                      ><span class="mrel">∈</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span></span
+                    ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 1em; vertical-align: -0.25em"
+                      ></span
+                      ><span class="mopen">{</span><span class="mord">1</span
+                      ><span class="mpunct">,</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.1667em"
+                      ></span
+                      ><span class="mord">2</span
+                      ><span class="mclose">}</span></span
+                    ></span
+                  ></span
+                >
+              </td>
+              <td>
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow
+                          ><mi mathvariant="normal">∥</mi><mi>δ</mi
+                          ><msub
+                            ><mi mathvariant="normal">∥</mi
+                            ><mi mathvariant="normal">∞</mi></msub
+                          ><mo>=</mo><mi mathvariant="normal">∥</mi><mi>δ</mi
+                          ><msub
+                            ><mi mathvariant="normal">∥</mi><mn>1</mn></msub
+                          ></mrow
+                        ><annotation encoding="application/x-tex"
+                          >\|\delta\|_\infty = \|\delta\|_1</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 1em; vertical-align: -0.25em"
+                      ></span
+                      ><span class="mord">∥</span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.03785em"
+                        >δ</span
+                      ><span class="mord"
+                        ><span class="mord">∥</span
+                        ><span class="msupsub"
+                          ><span class="vlist-t vlist-t2"
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.1514em"
+                                ><span
+                                  style="
+                                    top: -2.55em;
+                                    margin-left: 0em;
+                                    margin-right: 0.05em;
+                                  "
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 2.7em"
+                                  ></span
+                                  ><span class="sizing reset-size6 size3 mtight"
+                                    ><span class="mord mtight">∞</span></span
+                                  ></span
+                                ></span
+                              ><span class="vlist-s">​</span></span
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.15em"
+                                ><span></span></span></span></span></span></span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span
+                      ><span class="mrel">=</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span></span
+                    ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 1em; vertical-align: -0.25em"
+                      ></span
+                      ><span class="mord">∥</span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.03785em"
+                        >δ</span
+                      ><span class="mord"
+                        ><span class="mord">∥</span
+                        ><span class="msupsub"
+                          ><span class="vlist-t vlist-t2"
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.3011em"
+                                ><span
+                                  style="
+                                    top: -2.55em;
+                                    margin-left: 0em;
+                                    margin-right: 0.05em;
+                                  "
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 2.7em"
+                                  ></span
+                                  ><span class="sizing reset-size6 size3 mtight"
+                                    ><span class="mord mtight">1</span></span
+                                  ></span
+                                ></span
+                              ><span class="vlist-s">​</span></span
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.15em"
+                                ><span></span></span></span></span></span></span></span></span
+                ></span>
+                or
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow
+                          ><mi mathvariant="normal">∥</mi><mi>δ</mi
+                          ><msub
+                            ><mi mathvariant="normal">∥</mi
+                            ><mi mathvariant="normal">∞</mi></msub
+                          ><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac
+                          ><mi mathvariant="normal">∥</mi><mi>δ</mi
+                          ><msub
+                            ><mi mathvariant="normal">∥</mi><mn>1</mn></msub
+                          ></mrow
+                        ><annotation encoding="application/x-tex"
+                          >\|\delta\|_\infty =
+                          \tfrac{1}{2}\|\delta\|_1</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 1em; vertical-align: -0.25em"
+                      ></span
+                      ><span class="mord">∥</span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.03785em"
+                        >δ</span
+                      ><span class="mord"
+                        ><span class="mord">∥</span
+                        ><span class="msupsub"
+                          ><span class="vlist-t vlist-t2"
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.1514em"
+                                ><span
+                                  style="
+                                    top: -2.55em;
+                                    margin-left: 0em;
+                                    margin-right: 0.05em;
+                                  "
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 2.7em"
+                                  ></span
+                                  ><span class="sizing reset-size6 size3 mtight"
+                                    ><span class="mord mtight">∞</span></span
+                                  ></span
+                                ></span
+                              ><span class="vlist-s">​</span></span
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.15em"
+                                ><span></span></span></span></span></span></span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span
+                      ><span class="mrel">=</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span></span
+                    ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 1.1901em; vertical-align: -0.345em"
+                      ></span
+                      ><span class="mord"
+                        ><span class="mopen nulldelimiter"></span
+                        ><span class="mfrac"
+                          ><span class="vlist-t vlist-t2"
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.8451em"
+                                ><span style="top: -2.655em"
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 3em"
+                                  ></span
+                                  ><span class="sizing reset-size6 size3 mtight"
+                                    ><span class="mord mtight"
+                                      ><span class="mord mtight">2</span></span
+                                    ></span
+                                  ></span
+                                ><span style="top: -3.23em"
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 3em"
+                                  ></span
+                                  ><span
+                                    class="frac-line"
+                                    style="border-bottom-width: 0.04em"
+                                  ></span></span
+                                ><span style="top: -3.394em"
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 3em"
+                                  ></span
+                                  ><span class="sizing reset-size6 size3 mtight"
+                                    ><span class="mord mtight"
+                                      ><span class="mord mtight">1</span></span
+                                    ></span
+                                  ></span
+                                ></span
+                              ><span class="vlist-s">​</span></span
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.345em"
+                                ><span></span></span></span></span></span
+                        ><span class="mclose nulldelimiter"></span></span
+                      ><span class="mord">∥</span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.03785em"
+                        >δ</span
+                      ><span class="mord"
+                        ><span class="mord">∥</span
+                        ><span class="msupsub"
+                          ><span class="vlist-t vlist-t2"
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.3011em"
+                                ><span
+                                  style="
+                                    top: -2.55em;
+                                    margin-left: 0em;
+                                    margin-right: 0.05em;
+                                  "
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 2.7em"
+                                  ></span
+                                  ><span class="sizing reset-size6 size3 mtight"
+                                    ><span class="mord mtight">1</span></span
+                                  ></span
+                                ></span
+                              ><span class="vlist-s">​</span></span
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.15em"
+                                ><span></span></span></span></span></span></span></span></span
+                ></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow><mi>N</mi></mrow
+                        ><annotation encoding="application/x-tex"
+                          >N</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span class="strut" style="height: 0.6833em"></span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.10903em"
+                        >N</span
+                      ></span
+                    ></span
+                  ></span
+                >-Queen (Rook
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow><mo>∪</mo></mrow
+                        ><annotation encoding="application/x-tex"
+                          >\cup</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span class="strut" style="height: 0.5556em"></span
+                      ><span class="mord">∪</span></span
+                    ></span
+                  ></span
+                >
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow><mi>N</mi></mrow
+                        ><annotation encoding="application/x-tex"
+                          >N</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span class="strut" style="height: 0.6833em"></span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.10903em"
+                        >N</span
+                      ></span
+                    ></span
+                  ></span
+                >-Bishop)
+              </td>
+              <td>
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow
+                          ><mi>S</mi><mo stretchy="false">(</mo
+                          ><mi mathvariant="bold">v</mi
+                          ><mo stretchy="false">)</mo><mo>∈</mo
+                          ><mo stretchy="false">{</mo><mn>1</mn
+                          ><mo separator="true">,</mo><mi>N</mi
+                          ><mo stretchy="false">}</mo></mrow
+                        ><annotation encoding="application/x-tex"
+                          >S(\mathbf{v}) \in \{1, N\}</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 1em; vertical-align: -0.25em"
+                      ></span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.05764em"
+                        >S</span
+                      ><span class="mopen">(</span
+                      ><span class="mord mathbf" style="margin-right: 0.01597em"
+                        >v</span
+                      ><span class="mclose">)</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span
+                      ><span class="mrel">∈</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span></span
+                    ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 1em; vertical-align: -0.25em"
+                      ></span
+                      ><span class="mopen">{</span><span class="mord">1</span
+                      ><span class="mpunct">,</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.1667em"
+                      ></span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.10903em"
+                        >N</span
+                      ><span class="mclose">}</span></span
+                    ></span
+                  ></span
+                >
+              </td>
+              <td>
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow
+                          ><mi mathvariant="normal">∥</mi><mi>δ</mi
+                          ><msub
+                            ><mi mathvariant="normal">∥</mi
+                            ><mi mathvariant="normal">∞</mi></msub
+                          ><mo>=</mo><mi mathvariant="normal">∥</mi><mi>δ</mi
+                          ><msub
+                            ><mi mathvariant="normal">∥</mi><mn>1</mn></msub
+                          ></mrow
+                        ><annotation encoding="application/x-tex"
+                          >\|\delta\|_\infty = \|\delta\|_1</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 1em; vertical-align: -0.25em"
+                      ></span
+                      ><span class="mord">∥</span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.03785em"
+                        >δ</span
+                      ><span class="mord"
+                        ><span class="mord">∥</span
+                        ><span class="msupsub"
+                          ><span class="vlist-t vlist-t2"
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.1514em"
+                                ><span
+                                  style="
+                                    top: -2.55em;
+                                    margin-left: 0em;
+                                    margin-right: 0.05em;
+                                  "
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 2.7em"
+                                  ></span
+                                  ><span class="sizing reset-size6 size3 mtight"
+                                    ><span class="mord mtight">∞</span></span
+                                  ></span
+                                ></span
+                              ><span class="vlist-s">​</span></span
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.15em"
+                                ><span></span></span></span></span></span></span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span
+                      ><span class="mrel">=</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span></span
+                    ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 1em; vertical-align: -0.25em"
+                      ></span
+                      ><span class="mord">∥</span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.03785em"
+                        >δ</span
+                      ><span class="mord"
+                        ><span class="mord">∥</span
+                        ><span class="msupsub"
+                          ><span class="vlist-t vlist-t2"
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.3011em"
+                                ><span
+                                  style="
+                                    top: -2.55em;
+                                    margin-left: 0em;
+                                    margin-right: 0.05em;
+                                  "
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 2.7em"
+                                  ></span
+                                  ><span class="sizing reset-size6 size3 mtight"
+                                    ><span class="mord mtight">1</span></span
+                                  ></span
+                                ></span
+                              ><span class="vlist-s">​</span></span
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.15em"
+                                ><span></span></span></span></span></span></span></span></span
+                ></span>
+                or
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow
+                          ><mi mathvariant="normal">∥</mi><mi>δ</mi
+                          ><msub
+                            ><mi mathvariant="normal">∥</mi
+                            ><mi mathvariant="normal">∞</mi></msub
+                          ><mo>=</mo><mfrac><mn>1</mn><mi>N</mi></mfrac
+                          ><mi mathvariant="normal">∥</mi><mi>δ</mi
+                          ><msub
+                            ><mi mathvariant="normal">∥</mi><mn>1</mn></msub
+                          ></mrow
+                        ><annotation encoding="application/x-tex"
+                          >\|\delta\|_\infty =
+                          \tfrac{1}{N}\|\delta\|_1</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 1em; vertical-align: -0.25em"
+                      ></span
+                      ><span class="mord">∥</span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.03785em"
+                        >δ</span
+                      ><span class="mord"
+                        ><span class="mord">∥</span
+                        ><span class="msupsub"
+                          ><span class="vlist-t vlist-t2"
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.1514em"
+                                ><span
+                                  style="
+                                    top: -2.55em;
+                                    margin-left: 0em;
+                                    margin-right: 0.05em;
+                                  "
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 2.7em"
+                                  ></span
+                                  ><span class="sizing reset-size6 size3 mtight"
+                                    ><span class="mord mtight">∞</span></span
+                                  ></span
+                                ></span
+                              ><span class="vlist-s">​</span></span
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.15em"
+                                ><span></span></span></span></span></span></span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span
+                      ><span class="mrel">=</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span></span
+                    ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 1.1901em; vertical-align: -0.345em"
+                      ></span
+                      ><span class="mord"
+                        ><span class="mopen nulldelimiter"></span
+                        ><span class="mfrac"
+                          ><span class="vlist-t vlist-t2"
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.8451em"
+                                ><span style="top: -2.655em"
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 3em"
+                                  ></span
+                                  ><span class="sizing reset-size6 size3 mtight"
+                                    ><span class="mord mtight"
+                                      ><span
+                                        class="mord mathnormal mtight"
+                                        style="margin-right: 0.10903em"
+                                        >N</span
+                                      ></span
+                                    ></span
+                                  ></span
+                                ><span style="top: -3.23em"
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 3em"
+                                  ></span
+                                  ><span
+                                    class="frac-line"
+                                    style="border-bottom-width: 0.04em"
+                                  ></span></span
+                                ><span style="top: -3.394em"
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 3em"
+                                  ></span
+                                  ><span class="sizing reset-size6 size3 mtight"
+                                    ><span class="mord mtight"
+                                      ><span class="mord mtight">1</span></span
+                                    ></span
+                                  ></span
+                                ></span
+                              ><span class="vlist-s">​</span></span
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.345em"
+                                ><span></span></span></span></span></span
+                        ><span class="mclose nulldelimiter"></span></span
+                      ><span class="mord">∥</span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.03785em"
+                        >δ</span
+                      ><span class="mord"
+                        ><span class="mord">∥</span
+                        ><span class="msupsub"
+                          ><span class="vlist-t vlist-t2"
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.3011em"
+                                ><span
+                                  style="
+                                    top: -2.55em;
+                                    margin-left: 0em;
+                                    margin-right: 0.05em;
+                                  "
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 2.7em"
+                                  ></span
+                                  ><span class="sizing reset-size6 size3 mtight"
+                                    ><span class="mord mtight">1</span></span
+                                  ></span
+                                ></span
+                              ><span class="vlist-s">​</span></span
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.15em"
+                                ><span></span></span></span></span></span></span></span></span
+                ></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow><mi>S</mi></mrow
+                        ><annotation encoding="application/x-tex"
+                          >S</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span class="strut" style="height: 0.6833em"></span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.05764em"
+                        >S</span
+                      ></span
+                    ></span
+                  ></span
+                >-Queen (= unrestricted-range King)
+              </td>
+              <td>
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow
+                          ><mi>S</mi><mo stretchy="false">(</mo
+                          ><mi mathvariant="bold">v</mi
+                          ><mo stretchy="false">)</mo><mo>⩾</mo><mn>1</mn></mrow
+                        ><annotation encoding="application/x-tex"
+                          >S(\mathbf{v}) \geqslant 1</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 1em; vertical-align: -0.25em"
+                      ></span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.05764em"
+                        >S</span
+                      ><span class="mopen">(</span
+                      ><span class="mord mathbf" style="margin-right: 0.01597em"
+                        >v</span
+                      ><span class="mclose">)</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span
+                      ><span class="mrel amsrm">⩾</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span></span
+                    ><span class="base"
+                      ><span class="strut" style="height: 0.6444em"></span
+                      ><span class="mord">1</span></span
+                    ></span
+                  ></span
+                >
+              </td>
+              <td>
+                <span class="katex"
+                  ><span class="katex-mathml"
+                    ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                      ><semantics
+                        ><mrow
+                          ><mi>δ</mi><mo>=</mo><mi>k</mi><mi>ϵ</mi><mo>:</mo
+                          ><mi mathvariant="normal">∥</mi><mi>ϵ</mi
+                          ><msub
+                            ><mi mathvariant="normal">∥</mi
+                            ><mi mathvariant="normal">∞</mi></msub
+                          ><mo>=</mo><mn>1</mn></mrow
+                        ><annotation encoding="application/x-tex"
+                          >\delta = k \epsilon: \|\epsilon\|_\infty =
+                          1</annotation
+                        ></semantics
+                      ></math
+                    ></span
+                  ><span class="katex-html" aria-hidden="true"
+                    ><span class="base"
+                      ><span class="strut" style="height: 0.6944em"></span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.03785em"
+                        >δ</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span
+                      ><span class="mrel">=</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span></span
+                    ><span class="base"
+                      ><span class="strut" style="height: 0.6944em"></span
+                      ><span
+                        class="mord mathnormal"
+                        style="margin-right: 0.03148em"
+                        >k</span
+                      ><span class="mord mathnormal">ϵ</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span
+                      ><span class="mrel">:</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span></span
+                    ><span class="base"
+                      ><span
+                        class="strut"
+                        style="height: 1em; vertical-align: -0.25em"
+                      ></span
+                      ><span class="mord">∥</span
+                      ><span class="mord mathnormal">ϵ</span
+                      ><span class="mord"
+                        ><span class="mord">∥</span
+                        ><span class="msupsub"
+                          ><span class="vlist-t vlist-t2"
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.1514em"
+                                ><span
+                                  style="
+                                    top: -2.55em;
+                                    margin-left: 0em;
+                                    margin-right: 0.05em;
+                                  "
+                                  ><span
+                                    class="pstrut"
+                                    style="height: 2.7em"
+                                  ></span
+                                  ><span class="sizing reset-size6 size3 mtight"
+                                    ><span class="mord mtight">∞</span></span
+                                  ></span
+                                ></span
+                              ><span class="vlist-s">​</span></span
+                            ><span class="vlist-r"
+                              ><span class="vlist" style="height: 0.15em"
+                                ><span></span></span></span></span></span></span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span
+                      ><span class="mrel">=</span
+                      ><span
+                        class="mspace"
+                        style="margin-right: 0.2778em"
+                      ></span></span
+                    ><span class="base"
+                      ><span class="strut" style="height: 0.6444em"></span
+                      ><span class="mord">1</span></span
+                    ></span
+                  ></span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          The
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>S</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >S</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6833em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.05764em"
+                  >S</span
+                ></span
+              ></span
+            ></span
+          >-queen is the most permissive: its move set is simply every
+          displacement of the form
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mi>k</mi><mi mathvariant="bold">v</mi></mrow
+                  ><annotation encoding="application/x-tex"
+                    >k\mathbf{v}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6944em"></span
+                ><span class="mord mathnormal" style="margin-right: 0.03148em"
+                  >k</span
+                ><span class="mord mathbf" style="margin-right: 0.01597em"
+                  >v</span
+                ></span
+              ></span
+            ></span
+          >. The
+          <span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mn>2</mn></mrow
+                  ><annotation encoding="application/x-tex"
+                    >2</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span class="strut" style="height: 0.6444em"></span
+                ><span class="mord">2</span></span
+              ></span
+            ></span
+          >-queen is the most restrictive, only ever moving along one or two
+          axes at a time.
+        </p>
+        <div data-chess2d="queen"></div>
+        <h3>Pawn</h3>
+        <p>
+          I&rsquo;m going to omit the pawn from this analysis: its movement is
+          inherently stateful (having moved or not determines whether it can
+          advance two squares),directional (its movement cannot be characterised
+          by symmetric displacement constraints), and generally peculiar (it
+          captures and advances differently, and en passant exists). All of
+          these make pawns resist clean generalisation into higher dimensions.
+        </p>
+        <h2>III. Metrics</h2>
+        <h2>IV. Asymptotics</h2>
+        <script src="chess2d.js"></script>
+      </main>
+
+      <!-- Spacing between the sidebar and the main content -->
+      <div class="spacing-middle-right"></div>
+
+      <!-- The sidebar on the right -->
+      <aside class="sidebar-right"></aside>
+
+      <!-- Padding on the right -->
+      <div class="spacing-right"></div>
+    </div>
+
+    <!-- Load the map script -->
+    <script>
+      // Load visited URLs from localStorage
+      let visitedUrls = new Set();
+      const storedVisited = localStorage.getItem("visitedPages");
+      if (storedVisited) {
+        visitedUrls = new Set(JSON.parse(storedVisited));
+      }
+
+      // Log current page visit
+      const currentPath = window.location.pathname.replace(/\/$/, "");
+      visitedUrls.add(currentPath);
+      localStorage.setItem(
+        "visitedPages",
+        JSON.stringify(Array.from(visitedUrls)),
+      );
+    </script>
+  </body>
+</html>
