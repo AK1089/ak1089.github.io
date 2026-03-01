@@ -226,7 +226,12 @@
             height: inherit;
           }
         </style>
-        <p><link rel="stylesheet" href="chess2d.css" /></p>
+        <p>
+          <link rel="stylesheet" href="chess2d.css" /><br /><link
+            rel="stylesheet"
+            href="chess3d.css"
+          />
+        </p>
         <h2>I. Displacement Vectors</h2>
         <p>
           What is the nicest generalisation of each standard chess piece&rsquo;s
@@ -873,6 +878,7 @@
           >.
         </p>
         <div data-chess2d="king"></div>
+        <div data-chess3d="king"></div>
         <h3>Knight</h3>
         <p>
           The knight also does not fit the sliding framework. Its displacement
@@ -1078,6 +1084,7 @@
           pattern, up to signs and axis choices.
         </p>
         <div data-chess2d="knight"></div>
+        <div data-chess3d="knight"></div>
         <h3>Rook</h3>
         <p>
           The rook slides any distance along a single axis. Its direction vector
@@ -1325,6 +1332,7 @@
           >.
         </p>
         <div data-chess2d="rook"></div>
+        <div data-chess3d="rook"></div>
         <h3>Bishop</h3>
         <p>
           In two dimensions, the bishop slides diagonally, moving along both
@@ -1588,6 +1596,7 @@
           dimensions this breaks down
         </p>
         <div data-chess2d="bishop"></div>
+        <div data-chess3d="bishop"></div>
         <h3>Queen</h3>
         <p>
           In two dimensions, the queen can slide any distance along a rank,
@@ -2490,14 +2499,14 @@
                     ><math xmlns="http://www.w3.org/1998/Math/MathML"
                       ><semantics
                         ><mrow
-                          ><mi>δ</mi><mo>=</mo><mi>k</mi><mi>ϵ</mi><mo>:</mo
-                          ><mi mathvariant="normal">∥</mi><mi>ϵ</mi
+                          ><mi>δ</mi><mo>=</mo><mi>k</mi><mi>ε</mi><mo>:</mo
+                          ><mi mathvariant="normal">∥</mi><mi>ε</mi
                           ><msub
                             ><mi mathvariant="normal">∥</mi
                             ><mi mathvariant="normal">∞</mi></msub
                           ><mo>=</mo><mn>1</mn></mrow
                         ><annotation encoding="application/x-tex"
-                          >\delta = k \epsilon: \|\epsilon\|_\infty =
+                          >\delta = k \varepsilon: \|\varepsilon\|_\infty =
                           1</annotation
                         ></semantics
                       ></math
@@ -2524,7 +2533,7 @@
                         class="mord mathnormal"
                         style="margin-right: 0.03148em"
                         >k</span
-                      ><span class="mord mathnormal">ϵ</span
+                      ><span class="mord mathnormal">ε</span
                       ><span
                         class="mspace"
                         style="margin-right: 0.2778em"
@@ -2540,7 +2549,7 @@
                         style="height: 1em; vertical-align: -0.25em"
                       ></span
                       ><span class="mord">∥</span
-                      ><span class="mord mathnormal">ϵ</span
+                      ><span class="mord mathnormal">ε</span
                       ><span class="mord"
                         ><span class="mord">∥</span
                         ><span class="msupsub"
@@ -2647,6 +2656,7 @@
           axes at a time.
         </p>
         <div data-chess2d="queen"></div>
+        <div data-chess3d="queen"></div>
         <h3>Pawn</h3>
         <p>
           I&rsquo;m going to omit the pawn from this analysis: its movement is
@@ -2659,6 +2669,15 @@
         <h2>III. Metrics</h2>
         <h2>IV. Asymptotics</h2>
         <script src="chess2d.js"></script>
+        <script type="importmap">
+          {
+            "imports": {
+              "three": "https://cdn.jsdelivr.net/npm/three@0.166.0/build/three.module.js",
+              "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.0/examples/jsm/"
+            }
+          }
+        </script>
+        <script type="module" src="chess3d.js"></script>
       </main>
 
       <!-- Spacing between the sidebar and the main content -->

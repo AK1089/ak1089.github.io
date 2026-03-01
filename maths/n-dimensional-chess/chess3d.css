@@ -1,0 +1,76 @@
+.chess3d-wrap {
+    max-width: 600px;
+    margin: 1.5rem auto;
+}
+
+.chess3d-cv {
+    position: relative;
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.chess3d-layers {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 6px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.chess3d-layer-bar {
+    width: 22px;
+    height: 4px;
+    background: rgba(139, 115, 85, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.chess3d-layer-bar:hover {
+    background: rgba(139, 115, 85, 0.85);
+}
+
+.chess3d-cv canvas {
+    display: block;
+}
+
+.chess3d-bar {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.chess3d-btn {
+    padding: 0.35rem 0.85rem;
+    border: 1.5px solid #8b7355;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--text-a, #4c4f69);
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.chess3d-btn:hover {
+    background: rgba(139, 115, 85, 0.1);
+}
+
+.chess3d-btn.active {
+    background: #8b7355;
+    color: #fff;
+}
+
+.chess3d-cap {
+    text-align: center;
+    color: var(--subtext-a, #6c6f85);
+    font-size: 0.88rem;
+    margin: 0.4rem auto 1.5rem;
+}

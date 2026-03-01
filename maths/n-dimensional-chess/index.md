@@ -4,6 +4,7 @@ date: 2026-03-01
 ---
 
 <link rel="stylesheet" href="chess2d.css">
+<link rel="stylesheet" href="chess3d.css">
 
 ## I. Displacement Vectors
 
@@ -23,17 +24,23 @@ The king moves one step in any direction: horizontally, vertically, or diagonall
 
 <div data-chess2d="king"></div>
 
+<div data-chess3d="king"></div>
+
 ### Knight
 
 The knight also does not fit the sliding framework. Its displacement $`\delta`$ is a permutation of $`(\pm 2, \pm 1, 0, \ldots, 0)`$: "move two units in some direction, then one unit in some other direction". We can characterise this neatly with two norm conditions: $`\|\delta\|_1 = 3`$ and $`\|\delta\|_\infty = 2`$. Together these uniquely pick out the $`\{2, 1\}`$ pattern, up to signs and axis choices.
 
 <div data-chess2d="knight"></div>
 
+<div data-chess3d="knight"></div>
+
 ### Rook
 
 The rook slides any distance along a single axis. Its direction vector has exactly one nonzero component, so $`S(\mathbf{v}) = 1`$: the displacement takes the form $`\delta = k\mathbf{e}_j`$ for some basis vector $`\mathbf{e}_j`$ and nonzero integer $`k`$. We can characterise this by $`\|\delta\|_\infty = \|\delta\|_1`$.
 
 <div data-chess2d="rook"></div>
+
+<div data-chess3d="rook"></div>
 
 ### Bishop
 
@@ -42,6 +49,8 @@ In two dimensions, the bishop slides diagonally, moving along both axes simultan
 These three interpretations give rise to three types of bishop, which I shall term the $`2`$-bishop, the $`N`$-bishop, and the $`S`$-bishop. In two dimensions, these are equivalent, but in higher dimensions this breaks down
 
 <div data-chess2d="bishop"></div>
+
+<div data-chess3d="bishop"></div>
 
 ### Queen
 
@@ -62,6 +71,8 @@ The $`S`$-queen is the most permissive: its move set is simply every displacemen
 
 <div data-chess2d="queen"></div>
 
+<div data-chess3d="queen"></div>
+
 ### Pawn
 
 I'm going to omit the pawn from this analysis: its movement is inherently stateful (having moved or not determines whether it can advance two squares),directional (its movement cannot be characterised by symmetric displacement constraints), and generally peculiar (it captures and advances differently, and en passant exists). All of these make pawns resist clean generalisation into higher dimensions.
@@ -71,3 +82,7 @@ I'm going to omit the pawn from this analysis: its movement is inherently statef
 ## IV. Asymptotics
 
 <script src="chess2d.js"></script>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.166.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.0/examples/jsm/" } }
+</script>
+<script type="module" src="chess3d.js"></script>
