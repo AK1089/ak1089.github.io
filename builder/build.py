@@ -1,13 +1,43 @@
 from pathlib import Path
 import markdown
 import yaml
-import subprocess
+from contextlib import contextmanager
 from sys import argv
 from extensions.code import CodeFormatter
 from extensions.image import ImageFormatter
 from extensions.downloads import DownloadFormatter
 from extensions.spoiler import SpoilerFormatter
 from extensions.blockquote import BlockquoteFormatter
+from markdown_katex import wrapper as katex_wrapper
+
+
+ROOT = Path(__file__).resolve().parent.parent
+
+
+@contextmanager
+def batched_katex_cache_cleanup():
+    """
+    markdown-katex currently scans cache dir for stale files after every math
+    render. Disable that inside a build run and clean once at the end.
+    """
+    original_cleanup = katex_wrapper._cleanup_cache_dir
+    katex_wrapper._cleanup_cache_dir = lambda: None
+    try:
+        yield
+    finally:
+        katex_wrapper._cleanup_cache_dir = original_cleanup
+        original_cleanup()
+
+
+def should_process_markdown_file(md_path: Path) -> bool:
+    if "node_modules" in md_path.parts or "venv" in md_path.parts:
+        return False
+
+    # Allow site content at root (`index.md`) but skip repository docs.
+    if md_path.parent == ROOT and md_path.name != "index.md":
+        return False
+
+    return True
 
 
 class HeaderMetadata:
@@ -25,9 +55,7 @@ class HeaderMetadata:
 
         # create breadcrumb path (excluding the file itself)
         self.path_parts = []
-        root = Path(__file__).resolve().parent.parent
-
-        relative_path = path.relative_to(root)
+        relative_path = path.relative_to(ROOT)
                 
         # Create breadcrumb path (excluding the file itself)
         self.path_parts = [
@@ -93,10 +121,10 @@ def build_site():
 
     # find all markdown files in the current directory (recursively) and build them into HTML
     for md_path in Path(".").rglob("*.md"):
-        # skip node_modules, venv, and other excluded directories
-        if "node_modules" in md_path.parts or "venv" in md_path.parts:
+        md_path = md_path.resolve()
+        if not should_process_markdown_file(md_path):
             continue
-        success = build_file(template, md_path.resolve())
+        success = build_file(template, md_path)
         print(f"Built: {md_path}" if success else f"Skipped: {md_path}")
 
 
@@ -105,8 +133,7 @@ SITE_DOMAIN = "https://ak1089.github.io"
 
 def create_llm_notice(md_path: Path) -> str:
     """Create an HTML comment directing LLMs to the markdown source."""
-    root = Path(__file__).resolve().parent.parent
-    relative_path = md_path.relative_to(root)
+    relative_path = md_path.relative_to(ROOT)
     md_url = f"https://raw.githubusercontent.com/ak1089/ak1089.github.io/main/{relative_path}"
 
     return f"""
@@ -121,6 +148,9 @@ def create_llm_notice(md_path: Path) -> str:
 
 
 def build_file(template: str, md_path: Path, force: bool = False) -> bool:
+    if not should_process_markdown_file(md_path):
+        return False
+
     with open(md_path, "r") as f:
         md_content = f.read()
 
@@ -129,6 +159,10 @@ def build_file(template: str, md_path: Path, force: bool = False) -> bool:
 
     # skip files with manual_html flag (these have hand-edited HTML)
     if frontmatter.get("manual_html", False):
+        return False
+    
+    # Skip markdown docs that are not site pages.
+    if frontmatter.get("date") is None:
         return False
 
     # path to a new file with the same name, but a .html extension
@@ -148,6 +182,7 @@ def build_file(template: str, md_path: Path, force: bool = False) -> bool:
         raise
 
     # convert markdown and add header
+    md.reset()
     content_html = md.convert(content)
     page_html = create_header_html(metadata) + content_html
 
@@ -159,9 +194,6 @@ def build_file(template: str, md_path: Path, force: bool = False) -> bool:
     # write to a .html file in the same location
     with open(html_path, "w") as f:
         f.write(full_page)
-
-    # format with prettier for consistent diffs
-    subprocess.run(["prettier", "--write", str(html_path)], capture_output=True)
 
     return True
 
@@ -183,12 +215,15 @@ if __name__ == "__main__":
     ])
 
     if len(argv) == 1:
-        build_site()
+        with batched_katex_cache_cleanup():
+            build_site()
 
     else:
         with open("assets/templates/base.html", "r") as f:
             template = f.read()
 
-        for arg in argv[1:]:
-            build_file(template, Path(arg), force=True)
-            print(f"Force built: {arg}")
+        with batched_katex_cache_cleanup():
+            for arg in argv[1:]:
+                md_path = Path(arg).resolve()
+                success = build_file(template, md_path, force=True)
+                print(f"Force built: {arg}" if success else f"Skipped: {arg}")

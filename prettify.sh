@@ -7,10 +7,16 @@
 #
 # Note: Files listed in .prettierignore (e.g., pages with complex SVGs) are skipped.
 
-command -v prettier >/dev/null 2>&1 || {
-    echo >&2 "Prettier is not installed. Install it with 'npm install -g prettier'."
+if command -v prettier >/dev/null 2>&1; then
+    PRETTIER=(prettier)
+elif [ -x "./node_modules/.bin/prettier" ]; then
+    PRETTIER=(./node_modules/.bin/prettier)
+elif command -v npx >/dev/null 2>&1; then
+    PRETTIER=(npx --no-install prettier)
+else
+    echo >&2 "Prettier is not installed. Install it with 'npm i -D prettier'."
     exit 1
-}
+fi
 
 # Check if a file is ignored by prettier
 is_ignored() {
@@ -31,7 +37,7 @@ if [ $# -gt 0 ]; then
                 echo "Skipping $file (listed in .prettierignore)"
             else
                 echo "Formatting $file..."
-                prettier --write "$file"
+                "${PRETTIER[@]}" --write "$file"
             fi
         else
             echo "File not found: $file"
@@ -51,7 +57,7 @@ else
             echo "Skipping $file (listed in .prettierignore)"
         else
             echo "Formatting $file..."
-            prettier --write "$file"
+            "${PRETTIER[@]}" --write "$file"
         fi
     done
 fi
