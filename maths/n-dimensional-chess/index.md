@@ -164,7 +164,23 @@ For the $`S`$-bishop, we sum over all $`k = 2`$ to $`N`$, since the moves are di
 
 ### Queen
 
-// TODO
+**Power.** Since the rook directions $`S(\mathbf{v}) = 1`$ are disjoint from the bishop directions $`S(\mathbf{v}) \geqslant 2`$, the power of a queen is simply the power of the corresponding bishop plus the rook's constant $`7N`$ moves.
+
+For the $`2`$-queen, this gives a worst case of $`\frac{7}{2}N(N+1)`$ and a best case of $`\frac{1}{2}(13N^2+N)`$, with an average of $`\frac{1}{8}(35N^2+21N)`$.
+
+For the $`N`$-queen, the worst case is $`7(N+1)`$ and the best case $`3 \cdot 2^N + 7N + 1`$, with an average of $`7N + 4^{-N}(1^N+2^N+3^N+4^N+5^N+6^N+7^N)`$.
+
+For the $`S`$-queen, we may equivalently sum over all $`k = 1`$ to $`N`$. This yields a worst case of $`7(2^N-1)`$ and a best case of $`3^{N+1}+2^N-4`$, with an average of
+
+```math
+\sum_{r=1}^7 \left[\left(1+\frac r4\right)^N-1\right] = 4^{-N}\left(5^N+6^N+7^N+8^N+9^N+10^N+11^N\right)-7
+```
+
+**Speed.** Again the rook component removes the infinite-distance pathology: every queen can always reach its target in at most $`N`$ moves by behaving like a rook and correcting one coordinate at a time.
+
+The $`S`$-queen is much faster than this crude bound suggests. Because it contains the $`S`$-bishop, the same three-move construction applies unchanged: for $`N \geqslant 3`$, any square can be reached from any other in at most three moves. In two dimensions, of course, this collapses to the familiar diameter $`2`$.
+
+The $`2`$-queen and $`N`$-queen lie between the rook and the $`S`$-queen. They gain shortcuts only when the coordinate gaps happen to line up: the $`2`$-queen can eliminate two equal gaps at once, while the $`N`$-queen can exploit a common step shared across every coordinate. The latter condition is much more rigid, so the $`N`$-queen is often forced back into essentially rook-like travel.
 
 <link rel="stylesheet" href="chess1d.css">
 <link rel="stylesheet" href="chess2d.css">
