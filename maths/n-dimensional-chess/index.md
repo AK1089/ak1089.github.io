@@ -3,6 +3,7 @@ title: N-Dimensional Chess
 date: 2026-03-01
 ---
 
+<link rel="stylesheet" href="chess1d.css">
 <link rel="stylesheet" href="chess2d.css">
 <link rel="stylesheet" href="chess3d.css">
 
@@ -21,6 +22,7 @@ Write $`\delta = (\delta_1, \delta_2, \dots, \delta_N)`$ for the components of t
 The king moves one step in any direction: horizontally, vertically, or diagonally. In terms of the displacement vector, every component satisfies $`|\delta_i| \leqslant 1`$, and at least one is nonzero. We can write this nicely in terms of the supremum norm: the condition is $`\|\delta\|_\infty = 1`$.
 
 <div class="chess-pair">
+<div data-chess1d="king"></div>
 <div data-chess2d="king"></div>
 <div data-chess3d="king"></div>
 </div>
@@ -30,15 +32,17 @@ The king moves one step in any direction: horizontally, vertically, or diagonall
 The knight also does not fit the sliding framework. Its displacement $`\delta`$ is a permutation of $`(\pm 2, \pm 1, 0, \ldots, 0)`$: "move two units in some direction, then one unit in some other direction". We can characterise this neatly with two norm conditions: $`\|\delta\|_1 = 3`$ and $`\|\delta\|_\infty = 2`$. Together these uniquely pick out the $`\{2, 1\}`$ pattern, up to signs and axis choices.
 
 <div class="chess-pair">
+<div data-chess1d="knight"></div>
 <div data-chess2d="knight"></div>
 <div data-chess3d="knight"></div>
 </div>
 
 ### Rook
 
-The rook slides any distance along a single axis. Its direction vector has exactly one nonzero component, so $`S(\mathbf{v}) = 1`$: the displacement takes the form $`\delta = k\mathbf{e}_j`$ for some basis vector $`\mathbf{e}_j`$ and nonzero integer $`k`$. We can also characterise this by $`\|\delta\|_\infty = \|\delta\|_1` \neq 0$.
+The rook slides any distance along a single axis. Its direction vector has exactly one nonzero component, so $`S(\mathbf{v}) = 1`$: the displacement takes the form $`\delta = k\mathbf{e}_j`$ for some basis vector $`\mathbf{e}_j`$ and nonzero integer $`k`$. We can also characterise this by $`\|\delta\|_\infty = \|\delta\|_1` \neq 0`$.
 
 <div class="chess-pair">
+<div data-chess1d="rook"></div>
 <div data-chess2d="rook"></div>
 <div data-chess3d="rook"></div>
 </div>
@@ -50,6 +54,7 @@ In two dimensions, the bishop slides diagonally, moving along both axes simultan
 These three interpretations give rise to three types of bishop, which I shall term the $`2`$-bishop, the $`N`$-bishop, and the $`S`$-bishop. In two dimensions, these are equivalent, but in higher dimensions this breaks down.
 
 <div class="chess-pair">
+<div data-chess1d="bishop"></div>
 <div data-chess2d="bishop"></div>
 <div data-chess3d="bishop"></div>
 </div>
@@ -74,6 +79,7 @@ The $`S`$-queen is the most permissive, with its move set simply containing ever
 The three queen variants are distinct for $`N > 2`$. The $`S`$-queen is a strict superpiece of both others. The $`2`$-queen and $`N`$-queen, however, are incomparable: only the $`2`$-queen can move by $`\delta_2 = (k, k, 0, \ldots, 0)`$, while only the $`N`$-queen can move by $`\delta_N = (k, k, \ldots, k)`$. You can see these in the three-dimensional case below.
 
 <div class="chess-pair">
+<div data-chess1d="queen"></div>
 <div data-chess2d="queen"></div>
 <div data-chess3d="queen"></div>
 </div>
@@ -151,6 +157,7 @@ This bound is tight: with only two moves (any $`k_1, k_2`$), each coordinate tak
 The $`2`$-queen and $`N`$-queen lack this trick, as their restricted directions prevent independent per-coordinate sign choices. Their worst-case distance is $`N`$, matching the Rook, though diagonal moves can sometimes cover two coordinates at once (reducing the distance to as low as $`\lceil N/2 \rceil`$ when multiple coordinates need the same displacement).
 
 
+<script src="chess1d.js"></script>
 <script src="chess2d.js"></script>
 <script type="importmap">
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.166.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.0/examples/jsm/" } }

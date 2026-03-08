@@ -227,10 +227,10 @@
           }
         </style>
         <p>
-          <link rel="stylesheet" href="chess2d.css" /><br /><link
+          <link rel="stylesheet" href="chess1d.css" /><br /><link
             rel="stylesheet"
-            href="chess3d.css"
-          />
+            href="chess2d.css"
+          /><br /><link rel="stylesheet" href="chess3d.css" />
         </p>
         <h2>I. Displacement Vectors</h2>
         <p>
@@ -951,6 +951,7 @@
           >.
         </p>
         <div class="chess-pair">
+          <div data-chess1d="king"></div>
           <div data-chess2d="king"></div>
           <div data-chess3d="king"></div>
         </div>
@@ -1159,6 +1160,7 @@
           pattern, up to signs and axis choices.
         </p>
         <div class="chess-pair">
+          <div data-chess1d="knight"></div>
           <div data-chess2d="knight"></div>
           <div data-chess3d="knight"></div>
         </div>
@@ -1328,6 +1330,7 @@
           \neq 0$.
         </p>
         <div class="chess-pair">
+          <div data-chess1d="rook"></div>
           <div data-chess2d="rook"></div>
           <div data-chess3d="rook"></div>
         </div>
@@ -1594,6 +1597,7 @@
           dimensions this breaks down.
         </p>
         <div class="chess-pair">
+          <div data-chess1d="bishop"></div>
           <div data-chess2d="bishop"></div>
           <div data-chess3d="bishop"></div>
         </div>
@@ -2973,6 +2977,7 @@
           >. You can see these in the three-dimensional case below.
         </p>
         <div class="chess-pair">
+          <div data-chess1d="queen"></div>
           <div data-chess2d="queen"></div>
           <div data-chess3d="queen"></div>
         </div>
@@ -9677,6 +9682,7 @@ M834 80h400000v40h-400000z"
           >
           when multiple coordinates need the same displacement).
         </p>
+        <script src="chess1d.js"></script>
         <script src="chess2d.js"></script>
         <script type="importmap">
           {
