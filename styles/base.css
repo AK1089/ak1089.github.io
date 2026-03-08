@@ -67,7 +67,7 @@ body {
 
 @font-face {
     font-family: "Garamond";
-    src: url("/assets/fonts/EB Garamond Medium.woff2") format('woff2');
+    src: url("/assets/fonts/EB Garamond Regular.woff2") format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -75,7 +75,7 @@ body {
 
 @font-face {
     font-family: "Garamond";
-    src: url("/assets/fonts/EB Garamond Medium Italic.woff2") format('woff2');
+    src: url("/assets/fonts/EB Garamond Italic.woff2") format('woff2');
     font-weight: 500;
     font-style: italic;
     font-display: swap;
@@ -83,7 +83,7 @@ body {
 
 @font-face {
     font-family: "Garamond";
-    src: url("/assets/fonts/EB Garamond SemiBold.woff2") format('woff2');
+    src: url("/assets/fonts/EB Garamond Bold.woff2") format('woff2');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -91,7 +91,7 @@ body {
 
 @font-face {
     font-family: "Garamond";
-    src: url("/assets/fonts/EB Garamond SemiBold Italic.woff2") format('woff2');
+    src: url("/assets/fonts/EB Garamond Bold Italic.woff2") format('woff2');
     font-weight: 600;
     font-style: italic;
     font-display: swap;
@@ -109,22 +109,6 @@ body {
     font-family: "Garamond";
     src: url("/assets/fonts/EB Garamond Bold Italic.woff2") format('woff2');
     font-weight: 700;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Garamond";
-    src: url("/assets/fonts/EB Garamond Extra Bold.woff2") format('woff2');
-    font-weight: 800;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Garamond";
-    src: url("/assets/fonts/EB Garamond Extra Bold Italic.woff2") format('woff2');
-    font-weight: 800;
     font-style: italic;
     font-display: swap;
 }
