@@ -3,6 +3,7 @@ import markdown
 import yaml
 from contextlib import contextmanager
 from sys import argv
+from markdown_katex import KatexExtension
 from extensions.code import CodeFormatter
 from extensions.image import ImageFormatter
 from extensions.downloads import DownloadFormatter
@@ -12,6 +13,7 @@ from markdown_katex import wrapper as katex_wrapper
 
 
 ROOT = Path(__file__).resolve().parent.parent
+KATEX_HEAD_LINK = '<link rel="stylesheet" href="/assets/vendor/katex/katex.min.css" />'
 
 
 @contextmanager
@@ -183,13 +185,16 @@ def build_file(template: str, md_path: Path, force: bool = False) -> bool:
 
     # convert markdown and add header
     md.reset()
+    md.current_source_dir = md_path.parent
     content_html = md.convert(content)
+    extra_head = KATEX_HEAD_LINK if 'class="katex' in content_html else ""
     page_html = create_header_html(metadata) + content_html
 
     # insert into template
     full_page = template.replace("<!-- CONTENT_GOES_HERE -->", page_html)
     full_page = full_page.replace("<!-- TITLE_GOES_HERE -->", metadata.address_bar_title)
     full_page = full_page.replace("<!-- LLM_NOTICE_GOES_HERE -->", create_llm_notice(md_path))
+    full_page = full_page.replace("<!-- EXTRA_HEAD_GOES_HERE -->", extra_head)
 
     # write to a .html file in the same location
     with open(html_path, "w") as f:
@@ -206,7 +211,7 @@ if __name__ == "__main__":
         "nl2br",
         "sane_lists",
         "smarty",
-        "markdown_katex",
+        KatexExtension(insert_fonts_css=False),
         BlockquoteFormatter(),
         CodeFormatter(),
         ImageFormatter(),
