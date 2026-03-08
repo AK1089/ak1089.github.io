@@ -29,10 +29,10 @@ const PIECES = {
     },
     rook: { name: "Rook", validate: sliding((s) => s === 1) },
     "bishop-2": { name: "2-Bishop", validate: sliding((s) => s === 2) },
-    "bishop-n": { name: "3-Bishop", validate: sliding((s) => s === 3) },
+    "bishop-n": { name: "N-Bishop", validate: sliding((s) => s === 3) },
     "bishop-s": { name: "S-Bishop", validate: sliding((s) => s >= 2) },
     "queen-2": { name: "2-Queen", validate: sliding((s) => s <= 2) },
-    "queen-n": { name: "3-Queen", validate: sliding((s) => s === 1 || s === 3) },
+    "queen-n": { name: "N-Queen", validate: sliding((s) => s === 1 || s === 3) },
     "queen-s": { name: "S-Queen", validate: sliding(() => true) },
 };
 
