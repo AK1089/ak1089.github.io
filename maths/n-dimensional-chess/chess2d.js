@@ -81,7 +81,7 @@
             this.handleClick(initRow, initCol);
         }
 
-        handleClick(row, col) {
+        handleClick(row, col, options = {}) {
             if (
                 this.piecePos &&
                 this.piecePos.row === row &&
@@ -113,6 +113,10 @@
 
             this.captionEl.textContent =
                 count + " move" + (count !== 1 ? "s" : "") + " available from this space.";
+
+            if (!options.silent && typeof this.onMove === "function") {
+                this.onMove({ row, col });
+            }
         }
 
         clear() {

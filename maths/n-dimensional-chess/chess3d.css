@@ -13,11 +13,17 @@
     grid-column: 1 / -1;
 }
 
+.chess-pair > [data-chess1d] {
+    grid-column: 1 / -1;
+}
+
+.chess-pair .chess1d,
 .chess-pair .chess2d {
     max-width: none;
     margin: 0 auto;
 }
 
+.chess-pair .chess1d-caption,
 .chess-pair .chess2d-caption {
     max-width: none;
 }
@@ -73,6 +79,22 @@
     background: rgba(139, 115, 85, 0.85);
 }
 
+.chess3d-layer-bar.active {
+    background: rgba(139, 115, 85, 0.95);
+}
+
+.chess3d-layer-bar--moves {
+    width: 22px;
+    height: 10px;
+    background: rgba(136, 184, 176, 0.35);
+    margin-bottom: 4px;
+}
+
+.chess3d-layer-bar--moves:hover,
+.chess3d-layer-bar--moves.active {
+    background: rgba(136, 184, 176, 0.95);
+}
+
 .chess3d-layer-indicator {
     position: absolute;
     left: -6px;
@@ -114,6 +136,11 @@
 }
 
 .chess3d-btn.active {
+    background: #8b7355;
+    color: #fff;
+}
+
+.chess3d-btn.playing {
     background: #8b7355;
     color: #fff;
 }

@@ -60,6 +60,7 @@ class Board3D {
     constructor(container, keys) {
         this.el = container;
         this.n = parseInt(container.dataset.boardSize) || 8;
+        this.totalSpaces = this.n ** 3;
         this.keys = keys;
         this.key = keys[0];
         this.pos = null;
@@ -75,6 +76,8 @@ class Board3D {
         });
         this.focusedLayer = null;
         this.edgeMats = [];
+        this.scanTimer = null;
+        this.scanIndex = 0;
         this.build();
     }
 
@@ -88,11 +91,13 @@ class Board3D {
         const wrap = document.createElement("div");
         wrap.className = "chess3d-wrap";
 
-        // Variant selector buttons
+        // Shared controls
         const pair = this.el.closest(".chess-pair");
+        const bar = document.createElement("div");
+        bar.className = "chess3d-bar";
+        const oneDContainer = pair?.querySelector("[data-chess1d]");
+
         if (this.keys.length > 1) {
-            const bar = document.createElement("div");
-            bar.className = "chess3d-bar";
             for (const k of this.keys) {
                 const b = document.createElement("button");
                 b.className = "chess3d-btn" + (k === this.key ? " active" : "");
@@ -104,10 +109,25 @@ class Board3D {
                     b.classList.add("active");
                     this.key = k;
                     if (this.pos) this.highlight();
-                    this.sync2DName(PIECES[k].name);
+                    this.syncCompanionBoards(k);
                 });
                 bar.appendChild(b);
             }
+        }
+
+        this.playBtn = document.createElement("button");
+        this.playBtn.className = "chess3d-btn chess3d-btn--play chess1d-play-btn";
+        this.playBtn.type = "button";
+        this.playBtn.textContent = "Play";
+        this.playBtn.addEventListener("click", () => this.toggleScan());
+
+        if (oneDContainer) {
+            oneDContainer.appendChild(this.playBtn);
+        } else {
+            bar.appendChild(this.playBtn);
+        }
+
+        if (this.keys.length > 1) {
             if (pair) {
                 pair.prepend(bar);
             } else {
@@ -133,20 +153,108 @@ class Board3D {
         // Place piece at centre
         const m = (this.n - 1) >> 1;
         this.place(m, m, m);
+        this.bindCompanionInteractions();
 
         // Sync 2D board name with initial variant
-        if (this.keys.length > 1) this.sync2DName(this.piece.name);
+        if (this.keys.length > 1) this.syncCompanionBoards(this.key);
     }
 
-    sync2DName(name) {
+    syncCompanionBoards(key) {
+        const name = PIECES[key].name;
         const pair = this.el.closest(".chess-pair");
         if (!pair) return;
+
+        const board1D = pair.querySelector("[data-chess1d]")?._chess1d;
+        const piece1D = window.CHESS_PIECES_1D?.[key];
+        if (board1D && piece1D) board1D.setPiece(piece1D);
+
         const board = pair.querySelector("[data-chess2d]")?._chess2d;
         if (!board?.piecePos) return;
         board.piece = { ...board.piece, name };
         const { row, col } = board.piecePos;
         board.piecePos = null;
         board.handleClick(row, col);
+    }
+
+    syncCompanionPosition(x, y, z) {
+        const pair = this.el.closest(".chess-pair");
+        if (!pair) return;
+
+        const board1D = pair.querySelector("[data-chess1d]")?._chess1d;
+        if (board1D && board1D.piecePos !== x) board1D.handleClick(x, { silent: true });
+
+        const board2D = pair.querySelector("[data-chess2d]")?._chess2d;
+        if (
+            board2D &&
+            (!board2D.piecePos ||
+                board2D.piecePos.row !== y ||
+                board2D.piecePos.col !== x)
+        ) {
+            board2D.handleClick(y, x, { silent: true });
+        }
+    }
+
+    bindCompanionInteractions() {
+        const pair = this.el.closest(".chess-pair");
+        if (!pair) return;
+        const board1D = pair.querySelector("[data-chess1d]")?._chess1d;
+        const board2D = pair.querySelector("[data-chess2d]")?._chess2d;
+        if (board1D) {
+            board1D.onMove = ({ x }) => {
+                if (!this.pos) return;
+                this.place(x, this.pos.y, this.pos.z);
+            };
+        }
+        if (board2D) {
+            board2D.onMove = ({ row, col }) => {
+                if (!this.pos) return;
+                // 2D is (slow, medium) = (x, y); preserve fast axis (z).
+                this.place(col, row, this.pos.z);
+            };
+        }
+    }
+
+    indexToPosition(i) {
+        const n2 = this.n * this.n;
+        const x = Math.floor(i / n2);
+        const y = Math.floor((i % n2) / this.n);
+        const z = i % this.n;
+        return { x, y, z };
+    }
+
+    toggleScan() {
+        if (this.scanTimer) {
+            this.stopScan();
+            return;
+        }
+
+        if (this.scanIndex >= this.totalSpaces) this.scanIndex = 0;
+        this.scanStep();
+        if (this.scanIndex >= this.totalSpaces) return;
+
+        this.scanTimer = setInterval(() => this.scanStep(), 90);
+        this.playBtn.classList.add("playing");
+        this.playBtn.textContent = "Pause";
+    }
+
+    stopScan() {
+        if (this.scanTimer) {
+            clearInterval(this.scanTimer);
+            this.scanTimer = null;
+        }
+        this.playBtn.classList.remove("playing");
+        this.playBtn.textContent = this.scanIndex >= this.totalSpaces ? "Replay" : "Play";
+    }
+
+    scanStep() {
+        if (this.scanIndex >= this.totalSpaces) {
+            this.stopScan();
+            return;
+        }
+        const { x, y, z } = this.indexToPosition(this.scanIndex);
+        this.place(x, y, z);
+        this.scanIndex++;
+        if (this.scanIndex >= this.totalSpaces) this.stopScan();
     }
 
     /* ── Three.js setup ──────────────────────────────────────── */
@@ -208,10 +316,32 @@ class Board3D {
         const el = document.createElement("div");
         el.className = "chess3d-layers";
         this.layerBars = [];
+        this.selectedLayer = null;
+        this.selectedAccessible = false;
+        this.hoveringAccessible = false;
+        this.accessibleControl = document.createElement("div");
+        this.accessibleControl.className =
+            "chess3d-layer-bar chess3d-layer-bar--moves";
+        this.accessibleControl.title = "Focus accessible squares";
+        this.accessibleControl.addEventListener("mouseenter", () => {
+            this.hoveringAccessible = true;
+            if (!this.hasSelection()) this.focusAccessible();
+        });
+        this.accessibleControl.addEventListener("mouseleave", () => {
+            this.hoveringAccessible = false;
+            if (!this.hasSelection()) this.unfocusLayer();
+        });
+        this.accessibleControl.addEventListener("click", () =>
+            this.toggleAccessibleSelection(),
+        );
+        el.appendChild(this.accessibleControl);
         for (let y = this.n - 1; y >= 0; y--) {
             const bar = document.createElement("div");
             bar.className = "chess3d-layer-bar";
-            bar.addEventListener("mouseenter", () => this.focusLayer(y));
+            bar.addEventListener("mouseenter", () => {
+                if (!this.hasSelection()) this.focusLayer(y);
+            });
+            bar.addEventListener("click", () => this.toggleLayerSelection(y));
             el.appendChild(bar);
             this.layerBars[y] = bar;
         }
@@ -219,8 +349,51 @@ class Board3D {
         this.layerIndicator = document.createElement("div");
         this.layerIndicator.className = "chess3d-layer-indicator";
         el.appendChild(this.layerIndicator);
-        el.addEventListener("mouseleave", () => this.unfocusLayer());
+        el.addEventListener("mouseleave", () => {
+            if (!this.hasSelection()) this.unfocusLayer();
+        });
         this.cv.appendChild(el);
+    }
+
+    hasSelection() {
+        return this.selectedLayer !== null || this.selectedAccessible;
+    }
+
+    toggleLayerSelection(y) {
+        if (this.selectedAccessible) {
+            this.selectedAccessible = false;
+            this.accessibleControl?.classList.remove("active");
+        }
+        if (this.selectedLayer === y) {
+            this.selectedLayer = null;
+            this.layerBars[y]?.classList.remove("active");
+            this.unfocusLayer();
+            return;
+        }
+
+        if (this.selectedLayer !== null) {
+            this.layerBars[this.selectedLayer]?.classList.remove("active");
+        }
+        this.selectedLayer = y;
+        this.layerBars[y]?.classList.add("active");
+        this.focusLayer(y);
+    }
+
+    toggleAccessibleSelection() {
+        if (this.selectedAccessible) {
+            this.selectedAccessible = false;
+            this.accessibleControl?.classList.remove("active");
+            this.unfocusLayer();
+            return;
+        }
+
+        if (this.selectedLayer !== null) {
+            this.layerBars[this.selectedLayer]?.classList.remove("active");
+            this.selectedLayer = null;
+        }
+        this.selectedAccessible = true;
+        this.accessibleControl?.classList.add("active");
+        this.focusAccessible();
     }
 
     updateIndicator() {
@@ -254,6 +427,17 @@ class Board3D {
             c.mesh.material.opacity = isLit ? 0.92 : 0.82;
         }
         for (const m of this.edgeMats) m.opacity = 0.35;
+        if (this.sphere) this.sphereMat.opacity = 1.0;
+    }
+
+    focusAccessible() {
+        if (!this.pos) return;
+        const pieceKey = `${this.pos.x},${this.pos.y},${this.pos.z}`;
+        for (const [k, c] of this.cells) {
+            const isAccessible = this.lit.includes(k) || k === pieceKey;
+            c.mesh.material.opacity = isAccessible ? 0.9 : 0.08;
+        }
+        for (const m of this.edgeMats) m.opacity = 0.08;
         if (this.sphere) this.sphereMat.opacity = 1.0;
     }
 
@@ -304,6 +488,12 @@ class Board3D {
         this.mouse = new THREE.Vector2();
         this.downAt = null;
         const meshes = [...this.cells.values()].map((c) => c.mesh);
+        const activeLayerHit = (hits) =>
+            hits.find(
+                (h) =>
+                    this.selectedLayer === null ||
+                    h.object.userData.y === this.selectedLayer,
+            );
 
         this.ren.domElement.addEventListener("pointerdown", (e) => {
             this.downAt = { x: e.clientX, y: e.clientY };
@@ -319,8 +509,9 @@ class Board3D {
             this.setMouse(e);
             this.ray.setFromCamera(this.mouse, this.cam);
             const hits = this.ray.intersectObjects(meshes);
-            if (hits.length) {
-                const { x, y, z } = hits[0].object.userData;
+            const hit = activeLayerHit(hits);
+            if (hit) {
+                const { x, y, z } = hit.object.userData;
                 this.place(x, y, z);
             }
         });
@@ -329,7 +520,8 @@ class Board3D {
             this.setMouse(e);
             this.ray.setFromCamera(this.mouse, this.cam);
             const hits = this.ray.intersectObjects(meshes);
-            this.ren.domElement.style.cursor = hits.length ? "pointer" : "grab";
+            const hit = activeLayerHit(hits);
+            this.ren.domElement.style.cursor = hit ? "pointer" : "grab";
         });
     }
 
@@ -352,12 +544,12 @@ class Board3D {
 
         this.highlight();
         this.updateIndicator();
+        this.syncCompanionPosition(x, y, z);
     }
 
     highlight() {
-        // Reset previous highlights
-        for (const k of this.lit) {
-            const c = this.cells.get(k);
+        // Normalize base appearance before applying fresh move highlights.
+        for (const c of this.cells.values()) {
             c.mesh.material.color.setHex(c.base);
             c.mesh.material.opacity = 0.82;
         }
@@ -384,6 +576,7 @@ class Board3D {
 
         // Re-apply layer isolation if active
         if (this.focusedLayer !== null) this.focusLayer(this.focusedLayer);
+        if (this.selectedAccessible || this.hoveringAccessible) this.focusAccessible();
     }
 
     /* ── Render loop ─────────────────────────────────────────── */
