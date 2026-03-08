@@ -3,10 +3,6 @@ title: N-Dimensional Chess
 date: 2026-03-01
 ---
 
-<link rel="stylesheet" href="chess1d.css">
-<link rel="stylesheet" href="chess2d.css">
-<link rel="stylesheet" href="chess3d.css">
-
 ## I. Displacement Vectors
 
 What is the nicest generalisation of each standard chess piece into an arbitrary $`N`$-dimensional board $`\{0, \ldots, 7\}^N`$? We seek a definition which is as natural and simple as possible and which matches the piece's behaviour in two dimensions without privileging this case.
@@ -39,7 +35,7 @@ The knight also does not fit the sliding framework. Its displacement $`\delta`$ 
 
 ### Rook
 
-The rook slides any distance along a single axis. Its direction vector has exactly one nonzero component, so $`S(\mathbf{v}) = 1`$: the displacement takes the form $`\delta = k\mathbf{e}_j`$ for some basis vector $`\mathbf{e}_j`$ and nonzero integer $`k`$. We can also characterise this by $`\|\delta\|_\infty = \|\delta\|_1` \neq 0`$.
+The rook slides any distance along a single axis. Its direction vector has exactly one nonzero component, so $`S(\mathbf{v}) = 1`$: the displacement takes the form $`\delta = k\mathbf{e}_j`$ for some basis vector $`\mathbf{e}_j`$ and nonzero integer $`k`$. We can also characterise this by $`\|\delta\|_\infty = \|\delta\|_1 \neq 0`$.
 
 <div class="chess-pair">
 <div data-chess1d="rook"></div>
@@ -94,7 +90,7 @@ How powerful is a piece? In two-dimensional chess, the consensus ranks queen fir
 
 A natural starting point is **power**: how many squares can a piece reach in one move? This is position-dependent: a rook on an $`N`$-board can always reach exactly $`7N`$ squares from any starting position, but a bishop's reach varies enormously (larger near the board's centre and smaller near corners). We could resolve this using best-case power (maximised over all positions), worst-case power (minimised), or average-case power (averaged uniformly over all squares). Each has drawbacks: best-case power flatters pieces like the bishop which only achieve their peak in a narrow region, worst-case power penalises every piece equally for corner effects, and average-case power is complicated by the [geometry of high-dimensional cubes](https://www.youtube.com/watch?v=fsLh-NYhOoU), where almost all of the volume is concentrated near the boundary.
 
-A second natural metric is **speed**: across all pairs of reachable squares, how many moves does it take to travel between them? Again we can take the worst case or the average. Speed captures something different from power: a piece might threaten many squares locally but be slow to traverse the board, or vice versa. Since lower values are better, speed is really a *diameter* the length of the shortest path between two (randomly chosen or maximally distant) squares.
+A second natural metric is **speed**: across all pairs of squares, how many moves does it take to travel between them? Again we can take the worst case or the average. Speed captures something different from power: a piece might threaten many squares locally but be slow to traverse the board, or vice versa. Since lower values are better, speed is really a *diameter* the length of the shortest path between two (randomly chosen or maximally distant) squares.
 
 Finally, for bishops in particular, we should note that they have limited **reach** and cannot necessarily access all squares: in two dimensions, each bishop is confined to either the light or dark squares. How does this translate to higher dimensions?
 
@@ -120,8 +116,6 @@ The $`k^{\text{th}}`$ term in the brackets comes from the probability of the dis
 
 For the average case, each potential move requires the $`\pm 2`$ step to land on the board (probability $`3/4`$) and the $`\pm 1`$ step likewise (probability $`7/8`$). By linearity of expectation, the average power is $`4N(N-1) \cdot \tfrac{21}{32} = \tfrac{21N(N-1)}{8}`$, which is quadratic in $`N`$.
 
-**Speed.** Each Knight move contributes at most $`3`$ to the $`\ell_1`$ displacement, so the distance between any two squares is at least $`\lceil \|\mathbf{x} - \mathbf{y}\|_1 / 3 \rceil`$. For the worst case (opposite corners, $`\ell_1`$ displacement $`7N`$), this gives $`\lceil 7N/3 \rceil`$ moves, and this bound is approximately tight. To see why: if each move contributes $`+2`$ to one coordinate and $`+1`$ to another, and each coordinate $`i`$ receives $`a_i`$ contributions of $`2`$ and $`b_i = 7 - 2a_i`$ contributions of $`1`$, then the total number of moves is $`m = \sum a_i = \sum b_i`$, which yields $`3m = 7N`$. (When $`3 \nmid 7N`$, or parity forces an adjustment, one or two additional corrective moves suffice.)
-
 ### Rook
 
 **Power.** The Rook can always reach exactly $`7N`$ squares: along each of the $`N`$ axes, there are $`7`$ other values to slide to, regardless of the Rook's current position. This makes the Rook unique among the pieces, as its power is completely position-independent with no distinction between best, worst, and average case.
@@ -140,22 +134,41 @@ The $`2`$-bishop preserves the parity of the coordinate sum $`\sum x_i`$: each m
 
 The $`N`$-bishop is more constrained. Each move changes all $`N`$ coordinates by $`\pm k`$, so any two moves that differ in the sign of a single coordinate produce a net displacement of $`2k`$ in that coordinate and $`0`$ in all others. This means the $`N`$-bishop can shift individual coordinates, but only by even amounts. The reachable squares are those where every coordinate shares the same parity: either all coordinates are even or all are odd. On the $`8`$-board, each parity class contains $`4^N`$ squares, so the $`N`$-bishop can reach $`2 \cdot 4^N`$ squares out of $`8^N`$ — a fraction $`2^{1-N}`$ of the board. For $`N = 2`$ this gives $`1/2`$ (recovering the familiar result), but for $`N = 10`$ it is less than $`0.2\%`$. The $`N`$-bishop becomes increasingly trapped in higher dimensions.
 
-The $`S`$-bishop breaks free entirely for $`N \geqslant 3`$. It includes both $`S = 3`$ moves (say $`(+k, +k, +k, 0, \ldots)`$) and $`S = 2`$ moves (say $`(-k, -k, 0, \ldots)`$). Composing these gives a net displacement of $`(0, 0, +k, 0, \ldots)`$: effectively a rook move. Since it can simulate rook-like displacements along any axis, the $`S`$-bishop can reach every square on the board.
+The $`S`$-bishop breaks free entirely for $`N \geqslant 3`$. It includes both $`S = 3`$ moves (say $`(1, 1, 1, 0, \ldots, 0)`$) and $`S = 2`$ moves (say $`(0, -1, -1, 0, \ldots, 0)`$). Composing these gives a net displacement of $`(1, 0, 0, 0, \ldots)`$: effectively a single orthogonal move. Since it can simulate rook-like displacements along any axis, the $`S`$-bishop can reach every square on the board.
 
-**Power.** The $`2`$-bishop has $`13 \binom{N}{2}`$ moves from a central square ($`13`$ diagonal moves in each of the $`\binom{N}{2}`$ coordinate planes): quadratic growth. The $`N`$-bishop has $`3 \cdot 2^N + 1`$ from the centre ($`3`$ moves along each of $`2^N - 1`$ space diagonals plus $`4`$ along the remaining one) but only $`7`$ from a corner, where a single space diagonal reaches inward. The $`S`$-bishop inherits both move sets, with power dominated by its $`2`$-bishop component for small $`N`$ and its higher-$`S`$ components for large $`N`$.
+**Power.** Let a $`k`$-bishop have the ability to move along precisely $`k`$ out of $`N`$ axes. At a corner, every axis only has one sign available, so a $`k`$-bishop has $`7 \binom{N}{k}`$ moves available at each of the $`2^N`$ corners. At a central square, for $`d=1,2,3`$ every axis has two sign choices, for $`d=4`$ every axis has one, and otherwise none. So from the central $`2^N`$ squares, a $`k`$-bishop may make 
+
+```math
+3\cdot 2^k\binom Nk+\binom Nk =(3\cdot 2^k+1)\binom Nk
+```
+
+total moves. Averaging over all squares, for a fixed distance $`d`$ to the edge, a random coordinate allows $`+d`$ from $`8-d`$ positions and $`-d`$ from $`8-d`$ positions, so taking the expected number of legal signs on one axis to be $`\frac{8-d}{4}`$ and leveraging independence across coordinates yields:
+
+```math
+\mathbb E[R_k]
+=\binom Nk \sum_{d=1}^7 \left( \frac{8-d}{4} \right)^k
+=\binom Nk \frac1{4^k}\sum_{r=1}^7 r^k
+```
+
+For $`k = 2`$, the worst case is $`\frac{7}{2} N(N-1)`$ and the best case $`\frac{13}{2} N(N-1)`$, with an average of $`\frac{35}{8} N(N-1)`$.
+
+For $`k = N`$, the situation is a lot more variable. The worst case is $`7`$ and the best case $`3\cdot 2^N+1`$, with an average of $`4^{-N}(1^N+2^N+3^N+4^N+5^N+6^N+7^N)`$.
+
+For the $`S`$-bishop, we sum over all $`k = 2`$ to $`N`$, since the moves are disjoint. This yields a worst case of $`7(2^N-N-1)`$ and a best case of $`3^{N+1}+2^N-7N-4`$, with an average of
+
+```math
+\sum_{r=1}^7 \left[\left(1+\frac r4\right)^N-1-\frac{Nr}{4}\right] = 4^{-N}\left(5^N+6^N+7^N+8^N+9^N+10^N+11^N\right)-7-7N
+```
+
+**Speed.** Of course, the $`2`$-bishop and $`N`$-bishop cannot reach the whole board, so their worst-case and average traversal time between squares is infinite. What about the $`S`$-bishop (for $`N \geqslant 3`$)? Perhaps surprisingly, it can travel anywhere on the board in just *three moves*! This astounding fact deserves its own page.
 
 ### Queen
 
-All three queens include the Rook's move set and therefore have full reach. Their differences lie in power and speed.
+// TODO
 
-**Power.** Each queen's power is the sum of the Rook's $`7N`$ and its corresponding bishop's contribution. The $`2`$-queen adds $`13\binom{N}{2}`$; the $`N`$-queen adds $`3 \cdot 2^N + 1`$; the $`S`$-queen adds all bishop moves with $`S \geqslant 2`$. From a central square, the $`S`$-queen can reach every square within Chebyshev distance $`3`$, for a best-case power of $`7^N - 1`$ — an enormous number.
-
-**Speed.** The $`S`$-queen can reach any square from any other in at most $`3`$ moves, using a binary decomposition. Write $`d_i = y_i - x_i`$ for each coordinate. Since $`|d_i| \leqslant 7`$, we can decompose $`d_i = 4s_i^{(1)} + 2s_i^{(2)} + s_i^{(3)}`$ where each $`s_i^{(j)} \in \{-1, 0, +1\}`$, and make three $`S`$-queen moves with $`k = 4, 2, 1`$ respectively, each coordinate independently choosing its sign. The intermediate positions stay on the board: at the $`k = 4`$ step, coordinates in $`\{0, \ldots, 3\}`$ can step up or stay, while those in $`\{4, \ldots, 7\}`$ can step down or stay, and similarly at each finer scale.
-
-This bound is tight: with only two moves (any $`k_1, k_2`$), each coordinate takes at most $`9`$ values ($`k_1 s_1 + k_2 s_2`$ for $`s_i \in \{-1, 0, +1\}`$), which cannot cover all $`15`$ values in $`\{-7, \ldots, 7\}`$.
-
-The $`2`$-queen and $`N`$-queen lack this trick, as their restricted directions prevent independent per-coordinate sign choices. Their worst-case distance is $`N`$, matching the Rook, though diagonal moves can sometimes cover two coordinates at once (reducing the distance to as low as $`\lceil N/2 \rceil`$ when multiple coordinates need the same displacement).
-
+<link rel="stylesheet" href="chess1d.css">
+<link rel="stylesheet" href="chess2d.css">
+<link rel="stylesheet" href="chess3d.css">
 
 <script src="chess1d.js"></script>
 <script src="chess2d.js"></script>
