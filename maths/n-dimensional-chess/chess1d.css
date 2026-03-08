@@ -1,0 +1,101 @@
+.chess1d {
+    display: grid;
+    grid-template-columns: repeat(var(--board-size, 8), minmax(0, 1fr));
+    gap: 0;
+    width: min(100%, 360px);
+    border: 1px solid #8b7355;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.chess1d-cell {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 0;
+    padding: 0;
+    font-size: 0;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+    color: #1a1a2e;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.chess1d-cell--light {
+    background: #f0d9b5;
+}
+
+.chess1d-cell--dark {
+    background: #b58863;
+}
+
+.chess1d-cell--piece {
+    font-size: min(2rem, calc(360px / var(--board-size, 8) * 0.7));
+    line-height: 1;
+    color: #1a1a2e;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.chess1d-cell--move.chess1d-cell--light {
+    background: #c5e3de;
+}
+
+.chess1d-cell--move.chess1d-cell--dark {
+    background: #88b8b0;
+}
+
+.chess1d-cell:hover:not(.chess1d-cell--piece) {
+    filter: brightness(1.05);
+}
+
+.chess1d-caption {
+    text-align: center;
+    color: var(--subtext-a, #6c6f85);
+    font-size: 0.88rem;
+    margin: 0.4rem auto 0;
+}
+
+.chess-pair > [data-chess1d] {
+    display: grid;
+    grid-template-columns: minmax(0, 360px) auto;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.75rem;
+}
+
+.chess-pair > [data-chess1d] .chess1d {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.chess-pair > [data-chess1d] .chess1d-play-btn {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: start;
+    width: 5.75rem;
+    text-align: center;
+}
+
+.chess-pair > [data-chess1d] .chess1d-caption {
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+@media (max-width: 700px) {
+    .chess-pair > [data-chess1d] {
+        grid-template-columns: 1fr;
+        row-gap: 0.5rem;
+    }
+
+    .chess-pair > [data-chess1d] .chess1d-play-btn {
+        grid-column: 1;
+        grid-row: 2;
+        justify-self: center;
+    }
+
+    .chess-pair > [data-chess1d] .chess1d-caption {
+        grid-row: 3;
+    }
+}
