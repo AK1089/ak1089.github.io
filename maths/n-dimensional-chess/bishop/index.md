@@ -1,10 +1,9 @@
 ---
-title: The S-Bishop in Three Moves
-date: 2026-03-08
-address_bar_title: The S-Bishop in Three Moves
+title: High-Dimensional Bishops are Fast
+date: 2026-03-09
 ---
 
-The most surprising piece in this family is the $`S`$-bishop, which may move the same distance along any set of axes of size two or greater. Although it is defined purely in terms of diagonal motion, for $`N \geqslant 3`$ it can access the entire board. This is easy to see via the pair of moves $`\mathbf{e}_i + \mathbf{e}_j + \mathbf{e}_k`$ followed by $`-\mathbf{e}_j-\mathbf{e}_k`$, which combine to form the unit displacement $`\mathbf{e}_i`$. More surprising than this reach is just how fast it can travel.
+As defined [here](..) under the Bishop section, the $`S`$-bishop moves by choosing two or more axes and moving along this diagonal (the same distance along each chosen axis). Although it is defined purely in terms of diagonal motion, for $`N \geqslant 3`$ it can access the entire board. This is easy to see via the pair of moves $`\mathbf{e}_i + \mathbf{e}_j + \mathbf{e}_k`$ followed by $`-\mathbf{e}_j-\mathbf{e}_k`$, which combine to form the unit displacement $`\mathbf{e}_i`$. More surprising than this reach is just how fast it can travel.
 
 **Theorem.** For $`N \geqslant 3`$, the $`S`$-bishop can access any square from any starting square in at most three moves.
 

@@ -1,7 +1,6 @@
 ---
 title: N-Dimensional Chess
-date: 2026-03-01
-updated: 2026-03-09
+date: 2026-03-09
 ---
 
 ## I. Displacement Vectors

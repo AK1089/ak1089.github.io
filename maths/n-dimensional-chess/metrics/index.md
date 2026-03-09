@@ -1,6 +1,6 @@
 ---
-title: Metrics for N-Dimensional Chess
-date: 2026-03-08
+title: Evaluating N-Dimensional Chess Pieces
+date: 2026-03-09
 ---
 
 This page analyses the strength of the pieces defined [previously](..). I will use three notions throughout.
