@@ -1,0 +1,188 @@
+.sbishop-widget {
+    margin: 1.5rem 0 1rem;
+}
+
+.sbishop-widget__label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.42rem;
+    color: var(--subtext-b);
+    font-size: 0.94rem;
+}
+
+.sbishop-widget__label input {
+    width: 100%;
+    border: 1px solid var(--surface-c);
+    border-radius: 10px;
+    background: var(--base);
+    color: var(--text);
+    padding: 0.72rem 0.82rem;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sbishop-widget__controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 8rem;
+    align-items: end;
+    gap: 0.85rem;
+}
+
+.sbishop-widget__controls input[type="text"] {
+    font-family: "Cascadia Code", monospace;
+    font-size: 0.86rem;
+    padding: 0.64rem 0.74rem;
+}
+
+.sbishop-widget__label input[type="number"] {
+    font-family: "Cascadia Code", monospace;
+    font-size: 0.86rem;
+    padding: 0.64rem 0.74rem;
+}
+
+.sbishop-widget__label input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(4, 165, 229, 0.12);
+}
+
+.sbishop-widget__dimension {
+    width: 100%;
+}
+
+.sbishop-widget__button-row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.sbishop-widget__button {
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 0.7rem 1rem;
+    background: var(--base);
+    color: var(--text);
+    cursor: pointer;
+    font: 600 0.92rem/1 var(--text-sans);
+    transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.sbishop-widget__button:hover {
+    transform: translateY(-1px);
+}
+
+.sbishop-widget__button--primary {
+    background: var(--darkblue);
+    color: white;
+}
+
+.sbishop-widget__button--ghost {
+    border-color: var(--surface-b);
+}
+
+.sbishop-widget__status {
+    margin: 1rem 0 0;
+    min-height: 1.2rem;
+    color: var(--subtext-b);
+}
+
+.sbishop-widget__status.is-error {
+    color: var(--red);
+}
+
+.sbishop-widget__result {
+    margin-top: 1rem;
+}
+
+.sbishop-widget__summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-bottom: 0.9rem;
+}
+
+.sbishop-widget__pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.1rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--surface-a);
+    color: var(--subtext-b);
+    font-size: 0.9rem;
+}
+
+.sbishop-widget__start,
+.sbishop-widget__move {
+    background: rgba(255, 255, 255, 0.56);
+    border: 1px solid var(--surface-a);
+    border-radius: 12px;
+    padding: 0.95rem 1rem;
+}
+
+.sbishop-widget__journey {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.sbishop-widget__move-head,
+.sbishop-widget__line {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.85rem;
+    align-items: flex-start;
+}
+
+.sbishop-widget__move-head {
+    margin-bottom: 0.72rem;
+}
+
+.sbishop-widget__move-label {
+    font-weight: 600;
+}
+
+.sbishop-widget__meta {
+    color: var(--subtext-a);
+    font-size: 0.9rem;
+    text-align: right;
+}
+
+.sbishop-widget__term {
+    width: 6rem;
+    flex-shrink: 0;
+    color: var(--subtext-a);
+}
+
+.sbishop-widget__vector {
+    display: block;
+    flex: 1;
+    padding: 0.62rem 0.75rem;
+    border-radius: 10px;
+    background: var(--base);
+    border: 1px solid rgba(140, 143, 161, 0.35);
+    font-family: "Cascadia Code", monospace;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    white-space: normal;
+    word-break: break-word;
+}
+
+@media (max-width: 720px) {
+    .sbishop-widget__controls {
+        grid-template-columns: 1fr;
+    }
+
+    .sbishop-widget__move-head,
+    .sbishop-widget__line {
+        flex-direction: column;
+    }
+
+    .sbishop-widget__term {
+        width: auto;
+    }
+
+    .sbishop-widget__meta {
+        text-align: left;
+    }
+}

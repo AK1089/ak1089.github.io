@@ -8,7 +8,7 @@ The most surprising piece in this family is the $`S`$-bishop, which may move the
 
 **Theorem.** For $`N \geqslant 3`$, the $`S`$-bishop can access any square from any starting square in at most three moves.
 
-<!-- If you wish to test this yourself... -->
+*If you wish to see this in action, scroll to the [bottom of the page](#move-finder).*
 
 ---
 
@@ -92,4 +92,34 @@ Thus the theorem also holds for $`N=3`$. $`\square`$
 
 ---
 
-Combining the three propositions proves the theorem for every $`N \geqslant 3`$.
+<h2 id="move-finder">Move Finder</h2>
+
+Combining the three propositions proves the theorem for every $`N \geqslant 3`$. The widget below is constructive, and finds explicit moves for any coordinates.
+
+<div class="sbishop-widget" data-sbishop-widget>
+  <div class="sbishop-widget__controls">
+    <label class="sbishop-widget__label">
+      <span>Start square</span>
+      <input type="text" value="(0, 0, 0, 0, 0)" data-sbishop-start>
+    </label>
+    <label class="sbishop-widget__label">
+      <span>End square</span>
+      <input type="text" value="(7, 1, 6, 3, 5)" data-sbishop-end>
+    </label>
+    <label class="sbishop-widget__label sbishop-widget__dimension">
+      <span>Dimensions</span>
+      <input type="number" min="3" max="100" step="1" value="5" data-sbishop-dimensions>
+    </label>
+  </div>
+
+  <div class="sbishop-widget__button-row">
+    <button type="button" class="sbishop-widget__button sbishop-widget__button--primary" data-sbishop-action="solve">Find route</button>
+    <button type="button" class="sbishop-widget__button sbishop-widget__button--ghost" data-sbishop-action="swap">Swap squares</button>
+    <button type="button" class="sbishop-widget__button sbishop-widget__button--ghost" data-sbishop-action="random">Random example</button>
+  </div>
+
+  <p class="sbishop-widget__status" data-sbishop-status aria-live="polite"></p>
+  <div class="sbishop-widget__result" data-sbishop-result></div>
+</div>
+
+<script src="widget.js"></script>
