@@ -99,3 +99,19 @@
         grid-row: 3;
     }
 }
+
+table th,
+table td {
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+}
+
+table th:first-child,
+table td:first-child {
+    padding-left: 0;
+}
+
+table th:last-child,
+table td:last-child {
+    padding-right: 0;
+}
