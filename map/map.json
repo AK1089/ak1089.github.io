@@ -138,6 +138,24 @@
     "display": true
   },
   {
+    "name": "N-Dimensional Chess",
+    "url": "/maths/n-dimensional-chess",
+    "parent": "/maths",
+    "display": true
+  },
+  {
+    "name": "The Bishop",
+    "url": "/maths/n-dimensional-chess/bishop",
+    "parent": "/maths/n-dimensional-chess",
+    "display": true
+  },
+  {
+    "name": "Metrics",
+    "url": "/maths/n-dimensional-chess/metrics",
+    "parent": "/maths/n-dimensional-chess",
+    "display": true
+  },
+  {
     "name": "Cambridge Notes",
     "url": "/maths/notes",
     "parent": "/maths",
