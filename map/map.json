@@ -144,18 +144,6 @@
     "display": true
   },
   {
-    "name": "The Bishop",
-    "url": "/maths/n-dimensional-chess/bishop",
-    "parent": "/maths/n-dimensional-chess",
-    "display": true
-  },
-  {
-    "name": "Metrics",
-    "url": "/maths/n-dimensional-chess/metrics",
-    "parent": "/maths/n-dimensional-chess",
-    "display": true
-  },
-  {
     "name": "Cambridge Notes",
     "url": "/maths/notes",
     "parent": "/maths",
@@ -310,6 +298,24 @@
     "url": "/maths/laplaces-rule-of-succession/interactive",
     "parent": "/maths/laplaces-rule-of-succession",
     "display": false
+  },
+  {
+    "name": "The Bishop",
+    "url": "/maths/n-dimensional-chess/bishop",
+    "parent": "/maths/n-dimensional-chess",
+    "display": true
+  },
+  {
+    "name": "Metrics",
+    "url": "/maths/n-dimensional-chess/metrics",
+    "parent": "/maths/n-dimensional-chess",
+    "display": true
+  },
+  {
+    "name": "Sample Mean Chebyshev",
+    "url": "/maths/tail-events/chebyshev-25",
+    "parent": "/maths/tail-events",
+    "display": true
   },
   {
     "name": "Sources",
