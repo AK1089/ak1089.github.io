@@ -157,6 +157,34 @@
     color: var(--subtext-b);
 }
 
+.grid-wrapper {
+    position: relative;
+}
+
+.grid-copy {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--overlay-a);
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+}
+
+.grid-copy:hover {
+    color: var(--purple);
+    background: var(--surface-b);
+}
+
+.grid-copy.copied {
+    color: var(--green);
+}
+
 .flip-grid {
     font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
     font-size: 1rem;
@@ -219,6 +247,15 @@
 .copy-status {
     font-size: 0.8rem;
     color: var(--green);
+}
+
+.share-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: var(--subtext-a);
 }
 
 .hidden {

@@ -103,23 +103,41 @@ function decodeBits(encoded) {
   return { userSeq, prngSeq, humanFirst };
 }
 
+const rawSequences = {};
+
 function showResults(seqA, seqB, answerLabel, shareUrl) {
   document.getElementById("sequence-a").textContent = formatGrid(seqA);
   document.getElementById("sequence-b").textContent = formatGrid(seqB);
+  rawSequences.a = seqA;
+  rawSequences.b = seqB;
+
+  document.querySelectorAll(".grid-copy").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const raw = rawSequences[btn.dataset.seq];
+      navigator.clipboard.writeText(raw).then(() => {
+        btn.classList.add("copied");
+        setTimeout(() => btn.classList.remove("copied"), 1000);
+      });
+    });
+  });
 
   const obscuredEl = document.getElementById("answer-obscured");
   const realEl = document.getElementById("answer-real");
   realEl.textContent = answerLabel;
   startObfuscation(obscuredEl);
 
-  // Hover on the sentence reveals the letter
+  // Hover on the sentence reveals the letter (with delay to avoid accidents)
+  let revealTimeout = null;
   const answerTextEl = document.querySelector(".answer-text");
   answerTextEl.addEventListener("mouseenter", () => {
-    clearInterval(obfuscationInterval);
-    obscuredEl.classList.add("hidden");
-    realEl.classList.remove("hidden");
+    revealTimeout = setTimeout(() => {
+      clearInterval(obfuscationInterval);
+      obscuredEl.classList.add("hidden");
+      realEl.classList.remove("hidden");
+    }, 300);
   });
   answerTextEl.addEventListener("mouseleave", () => {
+    clearTimeout(revealTimeout);
     realEl.classList.add("hidden");
     obscuredEl.classList.remove("hidden");
     startObfuscation(obscuredEl);
@@ -136,7 +154,7 @@ function showResults(seqA, seqB, answerLabel, shareUrl) {
       });
     });
   } else {
-    document.getElementById("copy-link").classList.add("hidden");
+    document.getElementById("share-row").classList.add("hidden");
   }
 
   document.getElementById("results").classList.remove("hidden");
@@ -217,7 +235,7 @@ if (flipsParam) {
   document.getElementById("intro-text").innerHTML =
     `One of these sequences of ${n} coin flips comes from a ` +
     `random number generator. The other comes from the person who sent you ` +
-    `this link, trying their best to be random. Can you tell the difference?`;
+    `this link trying their best to be random. Can you tell the difference?`;
 
   showResults(seqA, seqB, answerLabel, null);
   document.getElementById("try-it").classList.remove("hidden");
