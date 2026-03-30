@@ -1,0 +1,146 @@
+.intro-text {
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+/* Tap pad */
+.tap-pad {
+    width: 100%;
+    height: 280px;
+    border: 2px solid var(--surface-b);
+    border-radius: 12px;
+    background: var(--mantle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.tap-pad:hover {
+    border-color: var(--surface-a);
+    background: var(--crust);
+}
+
+.tap-pad:focus {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px rgba(147, 107, 229, 0.2);
+}
+
+.tap-pad-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--overlay-b);
+    pointer-events: none;
+}
+
+.tap-pad-prompt .keys {
+    display: flex;
+    gap: 1rem;
+    font-size: 1.5rem;
+}
+
+.tap-pad-prompt .key {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--surface-b);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--overlay-a);
+    background: var(--base);
+    box-shadow: 0 2px 0 var(--surface-c);
+}
+
+.tap-pad-prompt .hint {
+    font-size: 0.9rem;
+    color: var(--overlay-a);
+}
+
+/* Progress section */
+.progress-section {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.progress-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.progress-label {
+    font-size: 0.85rem;
+    color: var(--subtext-a);
+    min-width: 80px;
+    text-align: right;
+    font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+}
+
+.progress-bar-track {
+    flex: 1;
+    height: 24px;
+    background: var(--mantle);
+    border-radius: 12px;
+    border: 1px solid var(--surface-b);
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 12px;
+    transition: width 0.3s ease;
+}
+
+.progress-bar-fill.timer {
+    width: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--blue));
+}
+
+.progress-bar-fill.flips {
+    width: 0%;
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+}
+
+.progress-value {
+    font-size: 0.85rem;
+    color: var(--subtext-b);
+    min-width: 56px;
+    font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+}
+
+/* Pulse animation on keypress */
+@keyframes pad-pulse {
+    0% { background: var(--crust); }
+    100% { background: var(--mantle); }
+}
+
+.tap-pad.pulse {
+    animation: pad-pulse 0.15s ease-out;
+}
+
+/* Active state: hide prompt, show "recording" look */
+.tap-pad.active {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px rgba(147, 107, 229, 0.2);
+}
+
+/* Finished state */
+.tap-pad.done {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(64, 160, 43, 0.15);
+    cursor: default;
+}
