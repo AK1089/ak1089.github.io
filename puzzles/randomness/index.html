@@ -198,37 +198,39 @@
           </div>
         </header>
 
-        <p class="intro-text">
+        <p class="intro-text" id="intro-text">
           How random can you be? You have one minute to type out a sequence of
           coin flips with no take-backs and no peeking. Try to be as
           unpredictable as you can! Afterwards, see if your friends can tell
           your sequence apart from a truly random one.
         </p>
 
-        <div class="tap-pad" tabindex="0" id="tap-pad">
-          <div class="tap-pad-prompt">
-            <div class="keys">
-              <div class="key">H</div>
-              <div class="key">T</div>
+        <div class="input-section" id="input-section">
+          <div class="tap-pad" tabindex="0" id="tap-pad">
+            <div class="tap-pad-prompt">
+              <div class="keys">
+                <div class="key">H</div>
+                <div class="key">T</div>
+              </div>
+              <span class="hint">Click here, then start typing to begin</span>
             </div>
-            <span class="hint">Click here, then start typing to begin</span>
           </div>
-        </div>
 
-        <div class="progress-section">
-          <div class="progress-row">
-            <span class="progress-label">Time</span>
-            <div class="progress-bar-track">
-              <div class="progress-bar-fill timer" id="timer-bar"></div>
+          <div class="progress-section">
+            <div class="progress-row">
+              <span class="progress-label">Time</span>
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill timer" id="timer-bar"></div>
+              </div>
+              <span class="progress-value" id="timer-value">1:00</span>
             </div>
-            <span class="progress-value" id="timer-value">1:00</span>
-          </div>
-          <div class="progress-row">
-            <span class="progress-label">Flips</span>
-            <div class="progress-bar-track">
-              <div class="progress-bar-fill flips" id="flips-bar"></div>
+            <div class="progress-row">
+              <span class="progress-label">Flips</span>
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill flips" id="flips-bar"></div>
+              </div>
+              <span class="progress-value" id="flips-value">0</span>
             </div>
-            <span class="progress-value" id="flips-value">0</span>
           </div>
         </div>
 
@@ -248,7 +250,7 @@
               >Sequence
               <span class="answer-obscured" id="answer-obscured"></span
               ><span class="answer-real hidden" id="answer-real"></span> was
-              human-written!</span
+              human-written! (Hover to reveal)</span
             >
             <button class="copy-icon" id="copy-link" title="Copy share link">
               <svg
@@ -270,6 +272,11 @@
             </button>
             <span class="copy-status hidden" id="copy-status">Copied!</span>
           </div>
+
+          <p class="try-it hidden" id="try-it">
+            Want to try it yourself?
+            <a href="/puzzles/randomness">Click here!</a>
+          </p>
         </div>
       </main>
 

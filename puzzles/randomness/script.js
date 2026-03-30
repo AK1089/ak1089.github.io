@@ -85,17 +85,27 @@ function startObfuscation(el) {
   }, 120);
 }
 
-function showResults() {
-  const prngSeq = generatePrng(sequence.length);
-  const humanFirst = Math.random() < 0.5;
+// Decode 34 base64url characters back into sequences and order
+function decodeBits(encoded) {
+  const b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+  const bits = [];
+  for (const ch of encoded) {
+    let val = b64.indexOf(ch);
+    for (let j = 5; j >= 0; j--) {
+      bits.push((val >> j) & 1);
+    }
+  }
 
-  const seqA = humanFirst ? sequence : prngSeq;
-  const seqB = humanFirst ? prngSeq : sequence;
+  const userSeq = bits.slice(0, 100).map((b) => (b ? "T" : "H")).join("");
+  const prngSeq = bits.slice(100, 200).map((b) => (b ? "T" : "H")).join("");
+  const humanFirst = bits[200] === 0;
 
+  return { userSeq, prngSeq, humanFirst };
+}
+
+function showResults(seqA, seqB, answerLabel, shareUrl) {
   document.getElementById("sequence-a").textContent = formatGrid(seqA);
   document.getElementById("sequence-b").textContent = formatGrid(seqB);
-
-  const answerLabel = humanFirst ? "A" : "B";
 
   const obscuredEl = document.getElementById("answer-obscured");
   const realEl = document.getElementById("answer-real");
@@ -115,18 +125,19 @@ function showResults() {
     startObfuscation(obscuredEl);
   });
 
-  const encoded = encodeBits(sequence, prngSeq, humanFirst);
-  const shareUrl = `${location.origin}${location.pathname}?flips=${encoded}`;
+  if (shareUrl) {
+    const copyButton = document.getElementById("copy-link");
+    const copyStatus = document.getElementById("copy-status");
 
-  const copyButton = document.getElementById("copy-link");
-  const copyStatus = document.getElementById("copy-status");
-
-  copyButton.addEventListener("click", () => {
-    navigator.clipboard.writeText(shareUrl).then(() => {
-      copyStatus.classList.remove("hidden");
-      setTimeout(() => copyStatus.classList.add("hidden"), 2000);
+    copyButton.addEventListener("click", () => {
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        copyStatus.classList.remove("hidden");
+        setTimeout(() => copyStatus.classList.add("hidden"), 2000);
+      });
     });
-  });
+  } else {
+    document.getElementById("copy-link").classList.add("hidden");
+  }
 
   document.getElementById("results").classList.remove("hidden");
 }
@@ -140,7 +151,16 @@ function finish() {
   timerValue.textContent = "0:00";
   hint.textContent = "Finished!";
 
-  showResults();
+  const prngSeq = generatePrng(sequence.length);
+  const humanFirst = Math.random() < 0.5;
+  const seqA = humanFirst ? sequence : prngSeq;
+  const seqB = humanFirst ? prngSeq : sequence;
+  const answerLabel = humanFirst ? "A" : "B";
+
+  const encoded = encodeBits(sequence, prngSeq, humanFirst);
+  const shareUrl = `${location.origin}${location.pathname}?flips=${encoded}`;
+
+  showResults(seqA, seqB, answerLabel, shareUrl);
 }
 
 function pulse() {
@@ -180,3 +200,25 @@ pad.addEventListener("keydown", (e) => {
     recordFlip(key);
   }
 });
+
+// Handle shared links: ?flips=<encoded>
+const params = new URLSearchParams(location.search);
+const flipsParam = params.get("flips");
+
+if (flipsParam) {
+  const { userSeq, prngSeq, humanFirst } = decodeBits(flipsParam);
+  const seqA = humanFirst ? userSeq : prngSeq;
+  const seqB = humanFirst ? prngSeq : userSeq;
+  const answerLabel = humanFirst ? "A" : "B";
+  const n = userSeq.length;
+
+  // Hide the input section and swap the intro text
+  document.getElementById("input-section").classList.add("hidden");
+  document.getElementById("intro-text").innerHTML =
+    `One of these sequences of ${n} coin flips comes from a ` +
+    `random number generator. The other comes from the person who sent you ` +
+    `this link, trying their best to be random. Can you tell the difference?`;
+
+  showResults(seqA, seqB, answerLabel, null);
+  document.getElementById("try-it").classList.remove("hidden");
+}
