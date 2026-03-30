@@ -231,6 +231,46 @@
             <span class="progress-value" id="flips-value">0</span>
           </div>
         </div>
+
+        <div class="results hidden" id="results">
+          <div class="sequence-block">
+            <h3>Sequence A</h3>
+            <pre class="flip-grid" id="sequence-a"></pre>
+          </div>
+
+          <div class="sequence-block">
+            <h3>Sequence B</h3>
+            <pre class="flip-grid" id="sequence-b"></pre>
+          </div>
+
+          <div class="answer-row">
+            <span class="answer-text"
+              >Sequence
+              <span class="answer-obscured" id="answer-obscured"></span
+              ><span class="answer-real hidden" id="answer-real"></span> was
+              human-written!</span
+            >
+            <button class="copy-icon" id="copy-link" title="Copy share link">
+              <svg
+                class="icon icon--stroke"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path
+                  d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                ></path>
+              </svg>
+            </button>
+            <span class="copy-status hidden" id="copy-status">Copied!</span>
+          </div>
+        </div>
       </main>
 
       <div class="spacing-middle-right"></div>
