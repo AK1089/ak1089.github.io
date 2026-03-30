@@ -47,5 +47,4 @@ bower_components/
 .mypy_cache/
 
 # Claude
-CLAUDE.md
 AGENTS.md
