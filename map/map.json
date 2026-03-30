@@ -210,6 +210,12 @@
     "display": true
   },
   {
+    "name": "Randomness",
+    "url": "/other/randomness",
+    "parent": "/other",
+    "display": true
+  },
+  {
     "name": "Subitizing",
     "url": "/other/subitizing",
     "parent": "/other",
