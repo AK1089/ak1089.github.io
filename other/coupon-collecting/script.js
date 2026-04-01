@@ -1,4 +1,18 @@
 (function () {
+    /* ── History persistence ── */
+    const HISTORY_KEY = 'cc-run-history';
+
+    function loadHistory() {
+        try { return JSON.parse(localStorage.getItem(HISTORY_KEY)) || []; }
+        catch { return []; }
+    }
+
+    function saveRun(n, k, m) {
+        const hist = loadHistory();
+        hist.push({ n, k, m, ts: Date.now() });
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(hist));
+    }
+
     const COLORS = [
         { name: 'crimson', hex: '#E24B4A', bg: '#FCEBEB', tx: '#791F1F' },
         { name: 'blue', hex: '#378ADD', bg: '#E6F1FB', tx: '#0C447C' },
@@ -120,6 +134,7 @@
         gameOver = true;
         setButtons(false);
         let K = counts.size;
+        saveRun(N, totalDrawn, K);
         let msg = document.getElementById('cc-result-msg');
         if (K === N) {
             msg.innerHTML =
@@ -132,6 +147,7 @@
                 + missed.map(c => pillHTML(c, c.name)).join(' ')
                 + '</div><button class="cc-btn" onclick="document.getElementById(\'cc-game-reinit\').click()">Play again</button>';
         }
+        renderStats();
     }
 
     document.getElementById('cc-btn-draw1').addEventListener('click', function () { draw(1); });
@@ -146,5 +162,97 @@
     document.body.appendChild(reinitBtn);
     reinitBtn.addEventListener('click', init);
 
+    /* ── Stats visualisation ── */
+
+    function renderStats() {
+        var container = document.getElementById('cc-history');
+        if (!container) return;
+        var hist = loadHistory();
+        if (hist.length === 0) {
+            container.innerHTML = '';
+            return;
+        }
+
+        // Gather distinct n values present in history
+        var nValues = [...new Set(hist.map(r => r.n))].sort((a, b) => a - b);
+        var slider = document.getElementById('cc-slider-n');
+        var label = document.getElementById('cc-slider-label');
+
+        if (nValues.length === 0) { container.innerHTML = ''; return; }
+
+        // Set slider range
+        slider.min = 0;
+        slider.max = nValues.length - 1;
+
+        // If current value is out of range, reset
+        if (Number(slider.value) > nValues.length - 1) slider.value = nValues.length - 1;
+
+        var chosenN = nValues[Number(slider.value)];
+        label.textContent = 'n = ' + chosenN;
+
+        // Filter runs for this n
+        var runs = hist.filter(r => r.n === chosenN);
+        var totalRuns = runs.length;
+        var wins = runs.filter(r => r.m === r.n).length;
+
+        // Show summary line
+        var summary = document.getElementById('cc-stats-summary');
+        summary.textContent = totalRuns + ' game' + (totalRuns !== 1 ? 's' : '') + ' played with ' + chosenN + ' coupon' + (chosenN !== 1 ? 's' : '') + '  ·  ' + wins + ' correct (' + (totalRuns > 0 ? Math.round(100 * wins / totalRuns) : 0) + '%)';
+
+        // Build histogram: bucket k values
+        var kMin = Math.min(...runs.map(r => r.k));
+        var kMax = Math.max(...runs.map(r => r.k));
+
+        // Choose bucket count: aim for ~10-15 buckets
+        var bucketCount = Math.min(Math.max(1, runs.length), 15);
+        if (kMax === kMin) bucketCount = 1;
+        var bucketSize = Math.max(1, Math.ceil((kMax - kMin + 1) / bucketCount));
+        // Rebuild actual bucket count from size
+        bucketCount = Math.ceil((kMax - kMin + 1) / bucketSize);
+
+        var buckets = [];
+        for (var i = 0; i < bucketCount; i++) {
+            var lo = kMin + i * bucketSize;
+            var hi = lo + bucketSize - 1;
+            var inBucket = runs.filter(r => r.k >= lo && r.k <= hi);
+            buckets.push({
+                lo: lo,
+                hi: hi,
+                wins: inBucket.filter(r => r.m === r.n).length,
+                losses: inBucket.filter(r => r.m !== r.n).length
+            });
+        }
+
+        var maxHeight = Math.max(1, ...buckets.map(b => b.wins + b.losses));
+
+        // Render chart
+        var chart = document.getElementById('cc-chart');
+        var barsHTML = '';
+        for (var i = 0; i < buckets.length; i++) {
+            var b = buckets[i];
+            var total = b.wins + b.losses;
+            var winPct = total > 0 ? (b.wins / maxHeight) * 100 : 0;
+            var losePct = total > 0 ? (b.losses / maxHeight) * 100 : 0;
+            var label_text = b.lo === b.hi ? '' + b.lo : b.lo + '–' + b.hi;
+
+            barsHTML += '<div class="cc-chart-col">'
+                + '<div class="cc-chart-bar">'
+                + (b.losses > 0 ? '<div class="cc-bar-seg cc-bar-lose" style="height:' + losePct + '%" title="' + b.losses + ' wrong"></div>' : '')
+                + (b.wins > 0 ? '<div class="cc-bar-seg cc-bar-win" style="height:' + winPct + '%" title="' + b.wins + ' correct"></div>' : '')
+                + '</div>'
+                + '<div class="cc-chart-label">' + label_text + '</div>'
+                + '</div>';
+        }
+        chart.innerHTML = barsHTML;
+
+        // Show the wrapper
+        document.getElementById('cc-history-wrap').style.display = '';
+    }
+
+    // Slider event
+    var slider = document.getElementById('cc-slider-n');
+    if (slider) slider.addEventListener('input', renderStats);
+
     init();
+    renderStats();
 })();

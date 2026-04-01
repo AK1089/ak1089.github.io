@@ -42,5 +42,23 @@ Of course, you can never be absolutely certain. But say you buy one billion boxe
   <div id="cc-result-msg"></div>
 </div>
 
+<div id="cc-history-wrap" style="display:none">
+<h2>Your history</h2>
+<div class="cc-slider-row">
+  <input type="range" id="cc-slider-n" min="0" max="0" value="0" class="cc-slider">
+  <span id="cc-slider-label" class="cc-slider-val">n = ?</span>
+</div>
+<div id="cc-stats-summary" class="cc-stats-summary"></div>
+<div class="cc-chart-wrap">
+  <div class="cc-chart-axis-label">Boxes opened</div>
+  <div id="cc-chart" class="cc-chart"></div>
+</div>
+<div class="cc-legend">
+  <span class="cc-legend-item"><span class="cc-legend-dot cc-bar-win"></span> Correct</span>
+  <span class="cc-legend-item"><span class="cc-legend-dot cc-bar-lose"></span> Wrong</span>
+</div>
+<div id="cc-history"></div>
+</div>
+
 <script src="script.js" defer></script>
 

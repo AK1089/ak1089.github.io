@@ -133,3 +133,131 @@
     font-size: 11px;
     vertical-align: middle
 }
+
+/* ── History / Stats ── */
+
+#cc-history-wrap {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--surface-a);
+}
+
+#cc-history-wrap h2 {
+    font-size: 1.15rem;
+    margin: 0 0 1rem
+}
+
+.cc-slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 0.5rem
+}
+
+.cc-slider {
+    flex: 1;
+    max-width: 280px;
+    accent-color: var(--teal)
+}
+
+.cc-slider-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 50px
+}
+
+.cc-stats-summary {
+    font-family: var(--text-sans);
+    font-size: 13px;
+    color: var(--overlay-b);
+    margin-bottom: 1rem
+}
+
+.cc-chart-wrap {
+    position: relative;
+    margin-bottom: 0.5rem
+}
+
+.cc-chart-axis-label {
+    font-family: var(--text-sans);
+    font-size: 11px;
+    color: var(--overlay-a);
+    text-align: center;
+    margin-top: 2px
+}
+
+.cc-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 140px;
+    padding: 0 2px
+}
+
+.cc-chart-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0
+}
+
+.cc-chart-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 120px
+}
+
+.cc-bar-seg {
+    border-radius: 3px 3px 0 0;
+    min-height: 0;
+    transition: height 0.25s ease
+}
+
+.cc-bar-win {
+    background: #1D9E75
+}
+
+.cc-bar-lose {
+    background: #E24B4A;
+    border-radius: 3px 3px 0 0
+}
+
+.cc-bar-lose + .cc-bar-win {
+    border-radius: 0
+}
+
+.cc-chart-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--overlay-a);
+    text-align: center;
+    margin-top: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.cc-legend {
+    display: flex;
+    gap: 16px;
+    font-family: var(--text-sans);
+    font-size: 12px;
+    color: var(--overlay-b);
+    margin-bottom: 1rem
+}
+
+.cc-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px
+}
+
+.cc-legend-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px
+}
