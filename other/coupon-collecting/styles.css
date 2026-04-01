@@ -134,6 +134,14 @@
     vertical-align: middle
 }
 
+.cc-bot-comment {
+    font-family: var(--text-sans);
+    font-size: 13px;
+    color: var(--overlay-b);
+    font-style: italic;
+    margin-top: 0.5rem
+}
+
 /* ── History / Stats ── */
 
 #cc-history-wrap {

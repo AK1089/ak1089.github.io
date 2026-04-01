@@ -66,7 +66,7 @@
         { name: 'coffee', hex: '#6F4E37', bg: '#EDE9E4', tx: '#38271C' },
     ];
 
-    let N, palette, counts, totalDrawn, sinceNew, gameOver;
+    let N, palette, counts, totalDrawn, sinceNew, gameOver, drawLog;
 
     function sampleN() {
         const weights = [];
@@ -87,6 +87,7 @@
         totalDrawn = 0;
         sinceNew = 0;
         gameOver = false;
+        drawLog = [];
         document.getElementById('cc-n-drawn').textContent = '0';
         document.getElementById('cc-k-seen').textContent = '0';
         document.getElementById('cc-since-new').textContent = '\u2014';
@@ -108,6 +109,7 @@
             counts.set(c.name, (counts.get(c.name) || 0) + 1);
             totalDrawn++;
             if (wasNew) sinceNew = 0; else sinceNew++;
+            drawLog.push(c.name);
         }
         render();
     }
@@ -127,6 +129,63 @@
             sorted.map(([name, count]) => pillHTML(palette.find(p => p.name === name), name + ': ' + count)).join('');
     }
 
+    // The bot ends the game if and only if num_seen_since_last_new_colour > 3 * num_distinct_colours_seen_so_far.
+    // This is a heuristic that performs extremely well across different values of N for its simplicity.
+    
+    // Simulate the bot's 3x heuristic on the current draw log.
+    // Returns { boxes: number of boxes when bot would stop, k: colours seen at that point }
+    // If the bot wouldn't have stopped yet, continues drawing randomly to find when it would.
+    function simulateBot() {
+        var seen = new Set();
+        var gap = 0;
+        // Replay the actual draws
+        for (var i = 0; i < drawLog.length; i++) {
+            var wasNew = !seen.has(drawLog[i]);
+            seen.add(drawLog[i]);
+            if (wasNew) gap = 0; else gap++;
+            if (gap > 3 * seen.size) return { boxes: i + 1, k: seen.size };
+        }
+        // Bot hasn't stopped yet — keep drawing to find when it would
+        var drawn = drawLog.length;
+        while (true) {
+            var c = palette[Math.floor(Math.random() * N)];
+            var wasNew = !seen.has(c.name);
+            seen.add(c.name);
+            drawn++;
+            if (wasNew) gap = 0; else gap++;
+            if (gap > 3 * seen.size) return { boxes: drawn, k: seen.size };
+        }
+    }
+
+    function botComment(playerWon, bot) {
+        var botWon = bot.k === N;
+        if (playerWon && !botWon && bot.boxes < totalDrawn) {
+            return 'I would have stopped after ' + bot.boxes + ' boxes, and gotten it wrong. Good job being cautious!';
+        }
+        if (playerWon && botWon && bot.boxes < totalDrawn) {
+            return 'I would have got this after only ' + bot.boxes + ' boxes. Nice work, but too slow!';
+        }
+        if (playerWon && bot.boxes > totalDrawn) {
+            return "I wouldn't be confident enough to do that! I'd only have called this correctly after " + (bot.boxes - totalDrawn) + ' more boxes.';
+        }
+        if (playerWon && bot.boxes === totalDrawn) {
+            return 'I would have played this the exact same way!';
+        }
+        if (!playerWon && bot.boxes < totalDrawn) {
+            return 'I would have stopped after only ' + bot.boxes + ' boxes and gotten this wrong too.';
+        }
+        if (!playerWon && bot.boxes === totalDrawn) {
+            return 'I would have played this the exact same way!';
+        }
+        if (!playerWon && !botWon && bot.boxes > totalDrawn) {
+            return 'I would have waited to see ' + (bot.boxes - totalDrawn) + ' more boxes, but gotten it wrong anyway!';
+        }
+        if (!playerWon && botWon && bot.boxes > totalDrawn) {
+            return 'I would have waited to see ' + (bot.boxes - totalDrawn) + ' more boxes and gotten this right!';
+        }
+        return '';
+    }
+
     function guess() {
         if (gameOver) return;
         gameOver = true;
@@ -135,15 +194,19 @@
         saveRun(N, totalDrawn, K, sinceNew);
         let msg = document.getElementById('cc-result-msg');
         var were = N === 1 ? 'was' : 'were';
-        if (K === N) {
+        var playerWon = K === N;
+        var bot = simulateBot();
+        var comment = botComment(playerWon, bot);
+        var botHTML = comment ? '<div class="cc-bot-comment">' + comment + '</div>' : '';
+        if (playerWon) {
             msg.innerHTML =
-                '<div class="cc-result cc-result-win">Correct! There ' + were + ' ' + N + ' coupon' + (N > 1 ? 's' : '') + ' and you found them all in ' + totalDrawn + ' boxes.</div>';
+                '<div class="cc-result cc-result-win">Correct! There ' + were + ' ' + N + ' coupon' + (N > 1 ? 's' : '') + ' and you found them all in ' + totalDrawn + ' boxes.</div>' + botHTML;
         } else {
             let missed = palette.filter(c => !counts.has(c.name));
             msg.innerHTML =
                 '<div class="cc-result cc-result-lose">Not quite! There ' + were + ' ' + N + ' coupon' + (N > 1 ? 's' : '') + ' but you only found ' + K + '. You missed: '
                 + missed.map(c => pillHTML(c, c.name)).join(' ')
-                + '</div>';
+                + '</div>' + botHTML;
         }
         renderStats();
     }

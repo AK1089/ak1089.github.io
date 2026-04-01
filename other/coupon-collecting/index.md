@@ -23,7 +23,7 @@ Of course, you can never be absolutely certain. But say you buy one billion boxe
       <div class="cc-stat-val" id="cc-n-drawn">0</div>
     </div>
     <div class="cc-stat">
-      <div class="cc-stat-label">Distinct colours</div>
+      <div class="cc-stat-label">Distinct coupons</div>
       <div class="cc-stat-val" id="cc-k-seen">0</div>
     </div>
     <div class="cc-stat">
@@ -31,7 +31,7 @@ Of course, you can never be absolutely certain. But say you buy one billion boxe
       <div class="cc-stat-val" id="cc-since-new">&mdash;</div>
     </div>
   </div>
-  <div class="cc-section-label">Colour counts</div>
+  <div class="cc-section-label">Coupon counts</div>
   <div class="cc-pills" id="cc-colour-counts"></div>
   <div class="cc-btns">
     <button class="cc-btn" id="cc-btn-draw1">Draw 1</button>
@@ -61,4 +61,4 @@ Of course, you can never be absolutely certain. But say you buy one billion boxe
 
 <script src="script.js" defer></script>
 
-In fact, there is an *extremely* simple stopping rule which achieves a success rate of about $`95\%`$ uniformly over all $`n`$. Can you find it?
+There is an *extremely* simple stopping rule which achieves a success rate of about $`95\%`$ uniformly over all $`n`$. The messages after each round show you what I would have done in your situation using this rule. Can you determine the strategy?
