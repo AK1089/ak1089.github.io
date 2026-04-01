@@ -123,12 +123,12 @@
         let msg = document.getElementById('cc-result-msg');
         if (K === N) {
             msg.innerHTML =
-                '<div class="cc-result cc-result-win">Correct! There were ' + N + ' colour' + (N > 1 ? 's' : '') + ' and you found them all in ' + totalDrawn + ' draws.</div>'
+                '<div class="cc-result cc-result-win">Correct! There were ' + N + ' coupon' + (N > 1 ? 's' : '') + ' and you found them all in ' + totalDrawn + ' boxes.</div>'
                 + '<button class="cc-btn" onclick="document.getElementById(\'cc-game-reinit\').click()">Play again</button>';
         } else {
             let missed = palette.filter(c => !counts.has(c.name));
             msg.innerHTML =
-                '<div class="cc-result cc-result-lose">Not quite! There were ' + N + ' colour' + (N > 1 ? 's' : '') + ' but you only found ' + K + '. You missed: '
+                '<div class="cc-result cc-result-lose">Not quite! There were ' + N + ' coupon' + (N > 1 ? 's' : '') + ' but you only found ' + K + '. You missed: '
                 + missed.map(c => pillHTML(c, c.name)).join(' ')
                 + '</div><button class="cc-btn" onclick="document.getElementById(\'cc-game-reinit\').click()">Play again</button>';
         }
