@@ -54,8 +54,20 @@
 
     let N, palette, counts, totalDrawn, sinceNew, gameOver;
 
+    function sampleN() {
+        const weights = [];
+        for (let i = 1; i <= COLORS.length; i++) weights.push(Math.pow(0.85, i) + 0.02);
+        const total = weights.reduce((a, b) => a + b, 0);
+        let r = Math.random() * total;
+        for (let i = 0; i < weights.length; i++) {
+            r -= weights[i];
+            if (r <= 0) return i + 1;
+        }
+        return weights.length;
+    }
+
     function init() {
-        N = Math.floor(Math.random() * 10) + 1;
+        N = sampleN();
         palette = [...COLORS].sort(() => Math.random() - 0.5).slice(0, N);
         counts = new Map();
         totalDrawn = 0;
