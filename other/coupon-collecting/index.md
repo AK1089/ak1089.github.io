@@ -55,6 +55,7 @@ Of course, you can never be absolutely certain. But say you buy one billion boxe
   <span class="cc-legend-item"><span class="cc-legend-dot cc-dot-win"></span> Correct</span>
   <span class="cc-legend-item"><span class="cc-legend-dot cc-dot-lose"></span> Wrong</span>
 </div>
+<button class="cc-btn cc-btn-clear" id="cc-btn-export">Export CSV</button>
 <button class="cc-btn cc-btn-clear" id="cc-btn-clear">Clear history</button>
 </div>
 

@@ -250,6 +250,24 @@
         }
     });
 
+    // Export history as CSV
+    var exportBtn = document.getElementById('cc-btn-export');
+    if (exportBtn) exportBtn.addEventListener('click', function () {
+        var hist = loadHistory();
+        if (hist.length === 0) return;
+        var rows = ['total_colours,boxes_opened,colours_found,gap_since_last_new,correct,timestamp'];
+        for (var i = 0; i < hist.length; i++) {
+            var r = hist[i];
+            rows.push(r.n + ',' + r.k + ',' + r.m + ',' + (r.gap != null ? r.gap : '') + ',' + (r.m === r.n ? 'yes' : 'no') + ',' + (r.ts || ''));
+        }
+        var blob = new Blob([rows.join('\n')], { type: 'text/csv' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'coupon-collecting-history.csv';
+        a.click();
+        URL.revokeObjectURL(a.href);
+    });
+
     // Clear history
     var clearBtn = document.getElementById('cc-btn-clear');
     if (clearBtn) clearBtn.addEventListener('click', function () {
