@@ -69,6 +69,10 @@
     margin-bottom: 1.25rem
 }
 
+.cc-btn, .cc-btn-guess {
+    touch-action: manipulation;
+}
+
 .cc-btn {
     font-family: var(--text-sans);
     font-size: 13px;
