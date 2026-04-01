@@ -1,5 +1,4 @@
 .cc-game {
-    max-width: 520px;
     margin-top: 1.5rem
 }
 
@@ -39,6 +38,7 @@
 .cc-pills {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
     gap: 6px;
     min-height: 28px;
     margin-bottom: 1.25rem
