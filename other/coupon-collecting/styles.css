@@ -1,0 +1,131 @@
+.cc-game {
+    max-width: 520px;
+    margin-top: 1.5rem
+}
+
+.cc-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 1.25rem
+}
+
+.cc-stat {
+    background: var(--crust);
+    border-radius: 8px;
+    padding: 0.75rem 1rem
+}
+
+.cc-stat-label {
+    font-family: var(--text-sans);
+    font-size: 12px;
+    color: var(--overlay-b)
+}
+
+.cc-stat-val {
+    font-size: 22px;
+    font-weight: 500;
+    margin-top: 2px;
+    font-family: 'DM Mono', monospace
+}
+
+.cc-section-label {
+    font-family: var(--text-sans);
+    font-size: 12px;
+    color: var(--overlay-a);
+    margin-bottom: 6px
+}
+
+.cc-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-height: 28px;
+    margin-bottom: 1.25rem
+}
+
+.cc-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: var(--text-sans);
+}
+
+.cc-pill-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    flex-shrink: 0
+}
+
+.cc-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1.25rem
+}
+
+.cc-btn {
+    font-family: var(--text-sans);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid var(--surface-a);
+    background: var(--base);
+    color: var(--text);
+    transition: background 0.15s, transform 0.1s;
+}
+
+.cc-btn:hover {
+    background: var(--crust)
+}
+
+.cc-btn:active {
+    transform: scale(0.97)
+}
+
+.cc-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+    transform: none
+}
+
+.cc-btn-guess {
+    border-color: var(--teal);
+    color: var(--teal)
+}
+
+.cc-btn-guess:hover {
+    background: var(--crust)
+}
+
+.cc-result {
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    line-height: 1.5;
+    font-family: var(--text-sans);
+}
+
+.cc-result-win {
+    background: #e1f5ee;
+    color: #085041
+}
+
+.cc-result-lose {
+    background: #fcebeb;
+    color: #791f1f
+}
+
+.cc-result .cc-pill {
+    font-size: 11px;
+    vertical-align: middle
+}
