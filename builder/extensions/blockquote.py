@@ -18,7 +18,7 @@ class BlockquotePreprocessor(Preprocessor):
 
         for line in lines:
             # Check for blockquote start
-            quote_match = re.match(r"^```(quote-(?:info|quote|success|warning))$", line)
+            quote_match = re.match(r"^```(quote-(?:info|quote|success|warning|question))$", line)
 
             if quote_match and not current_blockquote:
                 # Start new blockquote

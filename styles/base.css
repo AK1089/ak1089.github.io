@@ -799,6 +799,8 @@ blockquote {
     --success-bg: #F1FFF8;
     --warning-fg: var(--yellow);
     --warning-bg: #FFF9DA;
+    --question-fg: var(--purple);
+    --question-bg: #F5F0FF;
 }
 
 /* Base blockquote styles */
@@ -882,6 +884,19 @@ blockquote>svg {
 
 .quote-success svg {
     color: var(--success-fg);
+}
+
+/* Question variant */
+.quote-question {
+    background-color: var(--question-bg);
+}
+
+.quote-question::before {
+    background-color: var(--question-fg);
+}
+
+.quote-question svg {
+    color: var(--question-fg);
 }
 
 .katex {
