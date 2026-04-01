@@ -182,8 +182,12 @@
         function yFrac(k) { return logMax > 0 ? (Math.log(k + 4) - logMin) / (logMax - logMin) : 0; }
 
         var dotsHTML = '';
+        var placed = {};
         for (var i = 0; i < hist.length; i++) {
             var r = hist[i];
+            var key = r.n + ',' + r.k;
+            if (placed[key]) continue;
+            placed[key] = true;
             var x = ((r.n - 0.5) / maxN) * 100;
             var y = (1 - yFrac(r.k)) * 100;
             var cls = r.m === r.n ? 'cc-dot-win' : 'cc-dot-lose';
@@ -248,6 +252,29 @@
             tooltip.style.left = e.clientX + 12 + 'px';
             tooltip.style.top = e.clientY - 40 + 'px';
         }
+    });
+
+    // Autoplay 1000 games with heuristic: guess when sinceNew > 3 * seen
+    var autoBtn = document.getElementById('cc-btn-autoplay');
+    if (autoBtn) autoBtn.addEventListener('click', function () {
+        for (var g = 0; g < 1000; g++) {
+            var n = sampleN();
+            var pal = COLORS.slice(0, n);
+            var seen = new Set();
+            var drawn = 0;
+            var gap = 0;
+            while (true) {
+                var c = pal[Math.floor(Math.random() * n)];
+                var wasNew = !seen.has(c.name);
+                seen.add(c.name);
+                drawn++;
+                if (wasNew) gap = 0; else gap++;
+                if (gap > 3 * seen.size) break;
+            }
+            saveRun(n, drawn, seen.size, gap);
+        }
+        init();
+        renderStats();
     });
 
     // Export history as CSV
