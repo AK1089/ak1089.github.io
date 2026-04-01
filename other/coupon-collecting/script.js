@@ -96,14 +96,12 @@
     }
 
     function setButtons(on) {
-        document.getElementById('cc-btn-draw1').disabled = !on;
-        document.getElementById('cc-btn-draw10').disabled = !on;
-        document.getElementById('cc-btn-draw100').disabled = !on;
         document.getElementById('cc-btn-guess').disabled = !on;
+        document.getElementById('cc-btn-replay').style.display = on ? 'none' : '';
     }
 
     function draw(n) {
-        if (gameOver) return;
+        if (gameOver) { init(); draw(n); return; }
         for (let i = 0; i < n; i++) {
             let c = palette[Math.floor(Math.random() * N)];
             let wasNew = !counts.has(c.name);
@@ -136,16 +134,16 @@
         let K = counts.size;
         saveRun(N, totalDrawn, K, sinceNew);
         let msg = document.getElementById('cc-result-msg');
+        var were = N === 1 ? 'was' : 'were';
         if (K === N) {
             msg.innerHTML =
-                '<div class="cc-result cc-result-win">Correct! There were ' + N + ' coupon' + (N > 1 ? 's' : '') + ' and you found them all in ' + totalDrawn + ' boxes.</div>'
-                + '<button class="cc-btn" onclick="document.getElementById(\'cc-game-reinit\').click()">Play again</button>';
+                '<div class="cc-result cc-result-win">Correct! There ' + were + ' ' + N + ' coupon' + (N > 1 ? 's' : '') + ' and you found them all in ' + totalDrawn + ' boxes.</div>';
         } else {
             let missed = palette.filter(c => !counts.has(c.name));
             msg.innerHTML =
-                '<div class="cc-result cc-result-lose">Not quite! There were ' + N + ' coupon' + (N > 1 ? 's' : '') + ' but you only found ' + K + '. You missed: '
+                '<div class="cc-result cc-result-lose">Not quite! There ' + were + ' ' + N + ' coupon' + (N > 1 ? 's' : '') + ' but you only found ' + K + '. You missed: '
                 + missed.map(c => pillHTML(c, c.name)).join(' ')
-                + '</div><button class="cc-btn" onclick="document.getElementById(\'cc-game-reinit\').click()">Play again</button>';
+                + '</div>';
         }
         renderStats();
     }
@@ -154,13 +152,7 @@
     document.getElementById('cc-btn-draw10').addEventListener('click', function () { draw(10); });
     document.getElementById('cc-btn-draw100').addEventListener('click', function () { draw(100); });
     document.getElementById('cc-btn-guess').addEventListener('click', guess);
-
-    // Hidden button for reinit from dynamically created "Play again" buttons
-    var reinitBtn = document.createElement('button');
-    reinitBtn.id = 'cc-game-reinit';
-    reinitBtn.style.display = 'none';
-    document.body.appendChild(reinitBtn);
-    reinitBtn.addEventListener('click', init);
+    document.getElementById('cc-btn-replay').addEventListener('click', init);
 
     /* ── Scatter-plot stats ── */
 
@@ -180,12 +172,14 @@
         summary.textContent = hist.length + ' game' + (hist.length !== 1 ? 's' : '') + ' played  ·  ' + wins + ' correct (' + Math.round(100 * wins / hist.length) + '%)';
 
         // Axis ranges
-        var maxN = Math.max(...hist.map(r => r.n));
+        var rawMaxN = Math.max(...hist.map(r => r.n));
+        var maxN = rawMaxN >= 10 ? rawMaxN + 1 : 10;
         var maxK = Math.max(...hist.map(r => r.k));
 
         // Log scale helpers — map k ∈ [1, maxK] to [0, 1]
-        var logMax = Math.log(maxK);
-        function yFrac(k) { return logMax > 0 ? Math.log(k) / logMax : 0; }
+        var logMax = Math.log(maxK + 4);
+        var logMin = Math.log(4);
+        function yFrac(k) { return logMax > 0 ? (Math.log(k + 4) - logMin) / (logMax - logMin) : 0; }
 
         var dotsHTML = '';
         for (var i = 0; i < hist.length; i++) {
@@ -207,7 +201,7 @@
         }
 
         // Axis ticks for k (y-axis) — log-spaced nice values
-        var yTickVals = [1];
+        var yTickVals = [];
         // Add 2, 5, 10, 20, 50, 100, ... up to maxK
         var bases = [1, 2, 5];
         var mag = 1;
@@ -259,6 +253,7 @@
     // Clear history
     var clearBtn = document.getElementById('cc-btn-clear');
     if (clearBtn) clearBtn.addEventListener('click', function () {
+        if (!confirm('Clear all game history?')) return;
         localStorage.removeItem(HISTORY_KEY);
         document.getElementById('cc-history-wrap').style.display = 'none';
     });

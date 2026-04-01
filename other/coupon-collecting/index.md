@@ -38,6 +38,7 @@ Of course, you can never be absolutely certain. But say you buy one billion boxe
     <button class="cc-btn" id="cc-btn-draw10">Draw 10</button>
     <button class="cc-btn" id="cc-btn-draw100">Draw 100</button>
     <button class="cc-btn cc-btn-guess" id="cc-btn-guess">I think that's all</button>
+    <button class="cc-btn" id="cc-btn-replay" style="display:none">Play again</button>
   </div>
   <div id="cc-result-msg"></div>
 </div>
@@ -49,6 +50,7 @@ Of course, you can never be absolutely certain. But say you buy one billion boxe
   <div class="cc-axis-label-y">Boxes opened</div>
   <div id="cc-scatter" class="cc-scatter"></div>
 </div>
+<div class="cc-axis-label-x">Number of colours</div>
 <div class="cc-legend">
   <span class="cc-legend-item"><span class="cc-legend-dot cc-dot-win"></span> Correct</span>
   <span class="cc-legend-item"><span class="cc-legend-dot cc-dot-lose"></span> Wrong</span>

@@ -173,7 +173,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-left: 28px;
     padding-right: 28px
+}
+
+.cc-axis-label-x {
+    font-family: var(--text-sans);
+    font-size: 11px;
+    color: var(--overlay-a);
+    text-align: center;
+    margin-top: 16px;
+    margin-left: 67px
 }
 
 .cc-scatter {
