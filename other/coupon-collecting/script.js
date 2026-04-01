@@ -7,9 +7,9 @@
         catch { return []; }
     }
 
-    function saveRun(n, k, m) {
+    function saveRun(n, k, m, gap) {
         const hist = loadHistory();
-        hist.push({ n, k, m, ts: Date.now() });
+        hist.push({ n, k, m, gap, ts: Date.now() });
         localStorage.setItem(HISTORY_KEY, JSON.stringify(hist));
     }
 
@@ -134,7 +134,7 @@
         gameOver = true;
         setButtons(false);
         let K = counts.size;
-        saveRun(N, totalDrawn, K);
+        saveRun(N, totalDrawn, K, sinceNew);
         let msg = document.getElementById('cc-result-msg');
         if (K === N) {
             msg.innerHTML =
@@ -162,96 +162,106 @@
     document.body.appendChild(reinitBtn);
     reinitBtn.addEventListener('click', init);
 
-    /* ── Stats visualisation ── */
+    /* ── Scatter-plot stats ── */
 
     function renderStats() {
-        var container = document.getElementById('cc-history');
-        if (!container) return;
+        var wrap = document.getElementById('cc-history-wrap');
+        var chart = document.getElementById('cc-scatter');
+        if (!wrap || !chart) return;
+
         var hist = loadHistory();
         if (hist.length === 0) {
-            container.innerHTML = '';
+            wrap.style.display = 'none';
             return;
         }
 
-        // Gather distinct n values present in history
-        var nValues = [...new Set(hist.map(r => r.n))].sort((a, b) => a - b);
-        var slider = document.getElementById('cc-slider-n');
-        var label = document.getElementById('cc-slider-label');
-
-        if (nValues.length === 0) { container.innerHTML = ''; return; }
-
-        // Set slider range
-        slider.min = 0;
-        slider.max = nValues.length - 1;
-
-        // If current value is out of range, reset
-        if (Number(slider.value) > nValues.length - 1) slider.value = nValues.length - 1;
-
-        var chosenN = nValues[Number(slider.value)];
-        label.textContent = 'n = ' + chosenN;
-
-        // Filter runs for this n
-        var runs = hist.filter(r => r.n === chosenN);
-        var totalRuns = runs.length;
-        var wins = runs.filter(r => r.m === r.n).length;
-
-        // Show summary line
+        var wins = hist.filter(r => r.m === r.n).length;
         var summary = document.getElementById('cc-stats-summary');
-        summary.textContent = totalRuns + ' game' + (totalRuns !== 1 ? 's' : '') + ' played with ' + chosenN + ' coupon' + (chosenN !== 1 ? 's' : '') + '  ·  ' + wins + ' correct (' + (totalRuns > 0 ? Math.round(100 * wins / totalRuns) : 0) + '%)';
+        summary.textContent = hist.length + ' game' + (hist.length !== 1 ? 's' : '') + ' played  ·  ' + wins + ' correct (' + Math.round(100 * wins / hist.length) + '%)';
 
-        // Build histogram: bucket k values
-        var kMin = Math.min(...runs.map(r => r.k));
-        var kMax = Math.max(...runs.map(r => r.k));
+        // Axis ranges
+        var maxN = Math.max(...hist.map(r => r.n));
+        var maxK = Math.max(...hist.map(r => r.k));
 
-        // Choose bucket count: aim for ~10-15 buckets
-        var bucketCount = Math.min(Math.max(1, runs.length), 15);
-        if (kMax === kMin) bucketCount = 1;
-        var bucketSize = Math.max(1, Math.ceil((kMax - kMin + 1) / bucketCount));
-        // Rebuild actual bucket count from size
-        bucketCount = Math.ceil((kMax - kMin + 1) / bucketSize);
+        // Log scale helpers — map k ∈ [1, maxK] to [0, 1]
+        var logMax = Math.log(maxK);
+        function yFrac(k) { return logMax > 0 ? Math.log(k) / logMax : 0; }
 
-        var buckets = [];
-        for (var i = 0; i < bucketCount; i++) {
-            var lo = kMin + i * bucketSize;
-            var hi = lo + bucketSize - 1;
-            var inBucket = runs.filter(r => r.k >= lo && r.k <= hi);
-            buckets.push({
-                lo: lo,
-                hi: hi,
-                wins: inBucket.filter(r => r.m === r.n).length,
-                losses: inBucket.filter(r => r.m !== r.n).length
-            });
+        var dotsHTML = '';
+        for (var i = 0; i < hist.length; i++) {
+            var r = hist[i];
+            var x = ((r.n - 0.5) / maxN) * 100;
+            var y = (1 - yFrac(r.k)) * 100;
+            var cls = r.m === r.n ? 'cc-dot-win' : 'cc-dot-lose';
+            var gap = r.gap != null ? r.gap : '?';
+            var tip = r.m + '/' + r.n + ' coupons seen in ' + r.k + ' boxes\n' + gap + ' boxes since last new colour';
+            dotsHTML += '<div class="cc-dot ' + cls + '" style="left:' + x + '%;top:' + y + '%" data-tip="' + tip.replace(/"/g, '&quot;') + '"></div>';
         }
 
-        var maxHeight = Math.max(1, ...buckets.map(b => b.wins + b.losses));
-
-        // Render chart
-        var chart = document.getElementById('cc-chart');
-        var barsHTML = '';
-        for (var i = 0; i < buckets.length; i++) {
-            var b = buckets[i];
-            var total = b.wins + b.losses;
-            var winPct = total > 0 ? (b.wins / maxHeight) * 100 : 0;
-            var losePct = total > 0 ? (b.losses / maxHeight) * 100 : 0;
-            var label_text = b.lo === b.hi ? '' + b.lo : b.lo + '–' + b.hi;
-
-            barsHTML += '<div class="cc-chart-col">'
-                + '<div class="cc-chart-bar">'
-                + (b.losses > 0 ? '<div class="cc-bar-seg cc-bar-lose" style="height:' + losePct + '%" title="' + b.losses + ' wrong"></div>' : '')
-                + (b.wins > 0 ? '<div class="cc-bar-seg cc-bar-win" style="height:' + winPct + '%" title="' + b.wins + ' correct"></div>' : '')
-                + '</div>'
-                + '<div class="cc-chart-label">' + label_text + '</div>'
-                + '</div>';
+        // Axis ticks for n (x-axis)
+        var xStep = maxN <= 10 ? 1 : Math.ceil(maxN / 10);
+        var xTicksHTML = '';
+        for (var n = xStep; n <= maxN; n += xStep) {
+            var xPos = ((n - 0.5) / maxN) * 100;
+            xTicksHTML += '<span class="cc-axis-tick cc-axis-tick-x" style="left:' + xPos + '%">' + n + '</span>';
         }
-        chart.innerHTML = barsHTML;
 
-        // Show the wrapper
-        document.getElementById('cc-history-wrap').style.display = '';
+        // Axis ticks for k (y-axis) — log-spaced nice values
+        var yTickVals = [1];
+        // Add 2, 5, 10, 20, 50, 100, ... up to maxK
+        var bases = [1, 2, 5];
+        var mag = 1;
+        while (true) {
+            for (var bi = 0; bi < bases.length; bi++) {
+                var v = bases[bi] * mag;
+                if (v > 1 && v <= maxK) yTickVals.push(v);
+                if (v > maxK) break;
+            }
+            mag *= 10;
+            if (mag > maxK * 10) break;
+        }
+        var yTicksHTML = '';
+        for (var ti = 0; ti < yTickVals.length; ti++) {
+            var k = yTickVals[ti];
+            var yPos = (1 - yFrac(k)) * 100;
+            yTicksHTML += '<span class="cc-axis-tick cc-axis-tick-y" style="top:' + yPos + '%">' + k + '</span>';
+        }
+
+        chart.innerHTML = '<div class="cc-scatter-area">' + dotsHTML + '</div>'
+            + '<div class="cc-axis-ticks-x">' + xTicksHTML + '</div>'
+            + '<div class="cc-axis-ticks-y">' + yTicksHTML + '</div>';
+
+        wrap.style.display = '';
     }
 
-    // Slider event
-    var slider = document.getElementById('cc-slider-n');
-    if (slider) slider.addEventListener('input', renderStats);
+    // Shared tooltip element
+    var tooltip = document.createElement('div');
+    tooltip.className = 'cc-chart-tooltip';
+    document.body.appendChild(tooltip);
+
+    document.addEventListener('mouseover', function (e) {
+        var dot = e.target.closest('.cc-dot');
+        if (dot && dot.dataset.tip) {
+            tooltip.innerHTML = dot.dataset.tip.replace(/\n/g, '<br>');
+            tooltip.style.display = 'block';
+        }
+    });
+    document.addEventListener('mouseout', function (e) {
+        if (e.target.closest('.cc-dot')) tooltip.style.display = 'none';
+    });
+    document.addEventListener('mousemove', function (e) {
+        if (tooltip.style.display === 'block') {
+            tooltip.style.left = e.clientX + 12 + 'px';
+            tooltip.style.top = e.clientY - 40 + 'px';
+        }
+    });
+
+    // Clear history
+    var clearBtn = document.getElementById('cc-btn-clear');
+    if (clearBtn) clearBtn.addEventListener('click', function () {
+        localStorage.removeItem(HISTORY_KEY);
+        document.getElementById('cc-history-wrap').style.display = 'none';
+    });
 
     init();
     renderStats();
