@@ -198,6 +198,12 @@
     "display": true
   },
   {
+    "name": "Coupon Collecting",
+    "url": "/other/coupon-collecting",
+    "parent": "/other",
+    "display": true
+  },
+  {
     "name": "Website Design",
     "url": "/other/design",
     "parent": "/other",
