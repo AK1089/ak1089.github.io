@@ -10,3 +10,4 @@ This is the place on my site for anything that doesn't fit neatly into any other
 - [Here](subitizing) is a subitizing trainer, which lets you practice "counting without counting".
 - [Here](fun-facts) is my collection of counterintuitive and surprising fun facts.
 - [Here](randomness), you can try and "act random" by faking a series of coin tosses.
+- [Here](coupon-collecting), you can play the role of the coupon collector in a guessing game.
