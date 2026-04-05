@@ -14,6 +14,10 @@ I graduated from the University of Cambridge in 2025, where I read Mathematics. 
 - An [explainer](laplaces-rule-of-succession) and [interactive model](laplaces-rule-of-succession/interactive) of Laplace's Rule of Succession.
 - An [article](tail-events) about Chebyshev's inequality and extreme tail events (black swans), and a [proof](tail-events/chebyshev-25) that Chebyshev's inequality is not tight for sample means.
 
+## Number Theory
+
+- A [proof](prime-reciprocal-divergence) that the sum of prime reciprocals diverges.
+
 ## Other
 
 - A taxonomy of real numbers, which I call the [number zoo](the-number-zoo).
