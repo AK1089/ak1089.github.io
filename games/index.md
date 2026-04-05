@@ -1,9 +1,11 @@
 ---
-title: Utilities
+title: Games
 date: 2024-12-24
-address_bar_title: Utilities | AK1089's Site
+address_bar_title: Games | AK1089's Site
 ---
 
-This is a catalogue of things I've made which are potentially helpful, organised by category. These will primarily be software-based. For now, you can find Minr-specific utilities under the [Minr section](/minr).
+A collection of interactive games and challenges.
 
-🚧 This section is under construction! Check back soon for general-purpose utilities and tools.
+- [Here](subitizing) is a subitizing trainer, which lets you practice "counting without counting".
+- [Here](randomness), you can try and "act random" by faking a series of coin tosses.
+- [Here](coupon-collecting), you can play the role of the coupon collector in a guessing game.
