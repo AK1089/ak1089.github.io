@@ -1,7 +1,7 @@
 ---
 title: Home
 date: 2024-04-19
-updated: 2026-01-08
+updated: 2026-04-06
 address_bar_title: Home | AK1089's Site
 ---
 
@@ -19,9 +19,9 @@ See the site sections on the sidebar, or view everything from the [site map](map
  
 - My [collection of puzzles](/puzzles) of various genres
 - My [lecture notes](/maths/notes) from Part II Mathematics at Cambridge
-- Minr-specific utilities I've built, especially the [map art creator](/minr/map-art)
+- Minr-specific [utilities](/minr) I've built, especially the [map art creator](/minr/map-art)
 
-My [most recent page](/maths/n-dimensional-chess) looks at higher-dimensional chess.
+Recently, I've looked at [higher-dimensional chess](/maths/n-dimensional-chess/) and [prime numbers](/maths/prime-reciprocal-divergence/).
 
 ## Site Features
 
