@@ -24,6 +24,24 @@
     "display": true
   },
   {
+    "name": "Number Theory",
+    "url": "/maths#number-theory",
+    "parent": "/maths",
+    "display": true
+  },
+  {
+    "name": "Other",
+    "url": "/maths#other",
+    "parent": "/maths",
+    "display": true
+  },
+  {
+    "name": "Probability",
+    "url": "/maths#probability",
+    "parent": "/maths",
+    "display": true
+  },
+  {
     "name": "Minr",
     "url": "/minr",
     "parent": "/",
@@ -134,13 +152,13 @@
   {
     "name": "Laplace's Rule Of Succession",
     "url": "/maths/laplaces-rule-of-succession",
-    "parent": "/maths",
+    "parent": "/maths#probability",
     "display": true
   },
   {
     "name": "N-Dimensional Chess",
     "url": "/maths/n-dimensional-chess",
-    "parent": "/maths",
+    "parent": "/maths#other",
     "display": true
   },
   {
@@ -150,21 +168,27 @@
     "display": true
   },
   {
+    "name": "Prime Reciprocals",
+    "url": "/maths/prime-reciprocal-divergence",
+    "parent": "/maths#number-theory",
+    "display": true
+  },
+  {
     "name": "Probability Distributions",
     "url": "/maths/probability-distributions",
-    "parent": "/maths",
+    "parent": "/maths#probability",
     "display": true
   },
   {
     "name": "Tail Events",
     "url": "/maths/tail-events",
-    "parent": "/maths",
+    "parent": "/maths#probability",
     "display": true
   },
   {
     "name": "The Number Zoo",
     "url": "/maths/the-number-zoo",
-    "parent": "/maths",
+    "parent": "/maths#other",
     "display": true
   },
   {
