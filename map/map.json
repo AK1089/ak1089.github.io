@@ -6,8 +6,8 @@
     "display": true
   },
   {
-    "name": "Blog",
-    "url": "/blog",
+    "name": "Games",
+    "url": "/games",
     "parent": "/",
     "display": true
   },
@@ -144,9 +144,21 @@
     "display": true
   },
   {
-    "name": "Utilities",
-    "url": "/utilities",
-    "parent": "/",
+    "name": "Coupon Collecting",
+    "url": "/games/coupon-collecting",
+    "parent": "/games",
+    "display": true
+  },
+  {
+    "name": "Randomness",
+    "url": "/games/randomness",
+    "parent": "/games",
+    "display": true
+  },
+  {
+    "name": "Subitizing",
+    "url": "/games/subitizing",
+    "parent": "/games",
     "display": true
   },
   {
@@ -222,12 +234,6 @@
     "display": true
   },
   {
-    "name": "Coupon Collecting",
-    "url": "/other/coupon-collecting",
-    "parent": "/other",
-    "display": true
-  },
-  {
     "name": "Website Design",
     "url": "/other/design",
     "parent": "/other",
@@ -236,18 +242,6 @@
   {
     "name": "Fun Facts",
     "url": "/other/fun-facts",
-    "parent": "/other",
-    "display": true
-  },
-  {
-    "name": "Randomness",
-    "url": "/other/randomness",
-    "parent": "/other",
-    "display": true
-  },
-  {
-    "name": "Subitizing",
-    "url": "/other/subitizing",
     "parent": "/other",
     "display": true
   },
