@@ -2,7 +2,7 @@
 
 <!--
   [llm-friendly-page]
-  This page has a markdown version at: https://raw.githubusercontent.com/ak1089/ak1089.github.io/main/other/coupon-collecting/index.md
+  This page has a markdown version at: https://raw.githubusercontent.com/ak1089/ak1089.github.io/main/games/coupon-collecting/index.md
 
   If you are an LLM, crawler, or other automated system:
   You may find the markdown source easier to parse than this HTML.
@@ -108,7 +108,7 @@
                 href="/games"
                 class="nav-link"
                 style="border-left: 3px solid var(--blue)"
-                >games</a
+                >games</
               >
             </li>
             <li class="nav-item">
@@ -185,259 +185,19 @@
 
       <!-- The main content of the page: this is changed per-page and contains the actual content -->
       <main class="main-content">
+        
         <header class="page-header">
-          <div class="header-container">
-            <div class="path">
-              <a href="/" class="path-link">home</a>
-              <span class="separator"> / </span
-              ><a href="/other" class="path-link">other</a
-              ><span class="separator"> / </span
-              ><a href="/other/coupon-collecting" class="path-link"
-                >coupon-collecting</a
-              >
+            <div class="header-container">
+                <div class="path">
+                    <a href="/" class="path-link">home</a> <span class="separator"> / </span><a href="/games" class="path-link">games</a><span class="separator"> / </span><a href="/games/coupon-collecting" class="path-link">coupon-collecting</a>
+                </div>
+                <h1 class="title">Coupon Collecting</h1>
+                <div class="metadata">
+                    <span class="published-date">published April 01, 2026</span>
+                </div>
             </div>
-            <h1 class="title">Coupon Collecting</h1>
-            <div class="metadata">
-              <span class="published-date">published April 01, 2026</span>
-            </div>
-          </div>
         </header>
-        <p>
-          The original
-          <a href="https://en.wikipedia.org/wiki/Coupon_collector%27s_problem"
-            >coupon collector&rsquo;s problem</a
-          >
-          poses the question:
-        </p>
-        <blockquote class="quote-question">
-          <svg
-            class="icon icon--stroke"
-            style="stroke-width: 2"
-            width="24"
-            height="24"
-          >
-            <use href="/assets/icons/sprite.svg#question"></use>
-          </svg>
-          If each cereal box contains a random coupon uniformly drawn from
-          <span class="katex"
-            ><span class="katex-mathml"
-              ><math xmlns="http://www.w3.org/1998/Math/MathML"
-                ><semantics
-                  ><mrow><mi>n</mi></mrow
-                  ><annotation encoding="application/x-tex"
-                    >n</annotation
-                  ></semantics
-                ></math
-              ></span
-            ><span class="katex-html" aria-hidden="true"
-              ><span class="base"
-                ><span class="strut" style="height: 0.4306em"></span
-                ><span class="mord mathnormal">n</span></span
-              ></span
-            ></span
-          >
-          varieties, what is the probability that
-          <span class="katex"
-            ><span class="katex-mathml"
-              ><math xmlns="http://www.w3.org/1998/Math/MathML"
-                ><semantics
-                  ><mrow><mi>t</mi></mrow
-                  ><annotation encoding="application/x-tex"
-                    >t</annotation
-                  ></semantics
-                ></math
-              ></span
-            ><span class="katex-html" aria-hidden="true"
-              ><span class="base"
-                ><span class="strut" style="height: 0.6151em"></span
-                ><span class="mord mathnormal">t</span></span
-              ></span
-            ></span
-          >
-          boxes must be bought in order to collect each coupon?
-        </blockquote>
-        <p>
-          A subtly different question arises when considering the case that one
-          does not know the total number of coupons. How many boxes must be
-          bought before you know you have all of them?
-        </p>
-        <p>
-          Of course, you can never be absolutely certain. But say you buy one
-          billion boxes, and get
-          <span class="katex"
-            ><span class="katex-mathml"
-              ><math xmlns="http://www.w3.org/1998/Math/MathML"
-                ><semantics
-                  ><mrow><mn>333,495,391</mn></mrow
-                  ><annotation encoding="application/x-tex"
-                    >333{,}495{,}391</annotation
-                  ></semantics
-                ></math
-              ></span
-            ><span class="katex-html" aria-hidden="true"
-              ><span class="base"
-                ><span
-                  class="strut"
-                  style="height: 0.8389em; vertical-align: -0.1944em"
-                ></span
-                ><span class="mord">333</span
-                ><span class="mord"><span class="mpunct">,</span></span
-                ><span class="mord">495</span
-                ><span class="mord"><span class="mpunct">,</span></span
-                ><span class="mord">391</span></span
-              ></span
-            ></span
-          >
-          blue,
-          <span class="katex"
-            ><span class="katex-mathml"
-              ><math xmlns="http://www.w3.org/1998/Math/MathML"
-                ><semantics
-                  ><mrow><mn>333,284,381</mn></mrow
-                  ><annotation encoding="application/x-tex"
-                    >333{,}284{,}381</annotation
-                  ></semantics
-                ></math
-              ></span
-            ><span class="katex-html" aria-hidden="true"
-              ><span class="base"
-                ><span
-                  class="strut"
-                  style="height: 0.8389em; vertical-align: -0.1944em"
-                ></span
-                ><span class="mord">333</span
-                ><span class="mord"><span class="mpunct">,</span></span
-                ><span class="mord">284</span
-                ><span class="mord"><span class="mpunct">,</span></span
-                ><span class="mord">381</span></span
-              ></span
-            ></span
-          >
-          red, and
-          <span class="katex"
-            ><span class="katex-mathml"
-              ><math xmlns="http://www.w3.org/1998/Math/MathML"
-                ><semantics
-                  ><mrow><mn>333,220,228</mn></mrow
-                  ><annotation encoding="application/x-tex"
-                    >333{,}220{,}228</annotation
-                  ></semantics
-                ></math
-              ></span
-            ><span class="katex-html" aria-hidden="true"
-              ><span class="base"
-                ><span
-                  class="strut"
-                  style="height: 0.8389em; vertical-align: -0.1944em"
-                ></span
-                ><span class="mord">333</span
-                ><span class="mord"><span class="mpunct">,</span></span
-                ><span class="mord">220</span
-                ><span class="mord"><span class="mpunct">,</span></span
-                ><span class="mord">228</span></span
-              ></span
-            ></span
-          >
-          green coupons. I would be fairly confident that in fact there are
-          three varieties of coupon! Here, you can test that intuition.
-        </p>
-        <p><link rel="stylesheet" href="styles.css" /></p>
-        <div class="cc-game">
-          <div class="cc-stats">
-            <div class="cc-stat">
-              <div class="cc-stat-label">Samples drawn</div>
-              <div class="cc-stat-val" id="cc-n-drawn">0</div>
-            </div>
-            <div class="cc-stat">
-              <div class="cc-stat-label">Distinct coupons</div>
-              <div class="cc-stat-val" id="cc-k-seen">0</div>
-            </div>
-            <div class="cc-stat">
-              <div class="cc-stat-label">Since last new</div>
-              <div class="cc-stat-val" id="cc-since-new">&mdash;</div>
-            </div>
-          </div>
-          <div class="cc-section-label">Coupon counts</div>
-          <div class="cc-pills" id="cc-colour-counts"></div>
-          <div class="cc-btns">
-            <button class="cc-btn" id="cc-btn-draw1">Draw 1</button>
-            <button class="cc-btn" id="cc-btn-draw10">Draw 10</button>
-            <button class="cc-btn" id="cc-btn-draw100">Draw 100</button>
-            <button class="cc-btn cc-btn-guess" id="cc-btn-guess">
-              I think that's all
-            </button>
-            <button class="cc-btn" id="cc-btn-replay" style="display: none">
-              Play again
-            </button>
-          </div>
-          <div id="cc-result-msg"></div>
-        </div>
-        <div id="cc-history-wrap" style="display: none">
-          <h2>Your history</h2>
-          <div id="cc-stats-summary" class="cc-stats-summary"></div>
-          <div class="cc-scatter-wrap">
-            <div class="cc-axis-label-y">Boxes opened</div>
-            <div id="cc-scatter" class="cc-scatter"></div>
-          </div>
-          <div class="cc-axis-label-x">Number of colours</div>
-          <div class="cc-legend">
-            <span class="cc-legend-item"
-              ><span class="cc-legend-dot cc-dot-win"></span> Correct</span
-            >
-            <span class="cc-legend-item"
-              ><span class="cc-legend-dot cc-dot-lose"></span> Wrong</span
-            >
-          </div>
-          <button class="cc-btn cc-btn-clear" id="cc-btn-clear">
-            Clear history</button
-          ><button class="cc-btn cc-btn-clear" id="cc-btn-export">
-            Export CSV
-          </button>
-        </div>
-        <script src="script.js" defer></script>
-        <p>
-          There is an <em>extremely</em> simple stopping rule which achieves a
-          success rate of about
-          <span class="katex"
-            ><span class="katex-mathml"
-              ><math xmlns="http://www.w3.org/1998/Math/MathML"
-                ><semantics
-                  ><mrow><mn>95</mn><mi mathvariant="normal">%</mi></mrow
-                  ><annotation encoding="application/x-tex"
-                    >95\%</annotation
-                  ></semantics
-                ></math
-              ></span
-            ><span class="katex-html" aria-hidden="true"
-              ><span class="base"
-                ><span
-                  class="strut"
-                  style="height: 0.8056em; vertical-align: -0.0556em"
-                ></span
-                ><span class="mord">95%</span></span
-              ></span
-            ></span
-          >
-          uniformly over all
-          <span class="katex"
-            ><span class="katex-mathml"
-              ><math xmlns="http://www.w3.org/1998/Math/MathML"
-                ><semantics
-                  ><mrow><mi>n</mi></mrow
-                  ><annotation encoding="application/x-tex"
-                    >n</annotation
-                  ></semantics
-                ></math
-              ></span
-            ><span class="katex-html" aria-hidden="true"
-              ><span class="base"
-                ><span class="strut" style="height: 0.4306em"></span
-                ><span class="mord mathnormal">n</span></span
-              ></span
-            ></span
-          >. The messages after each round show you what I would have done in
-          your situation using this rule. Can you determine the strategy?
-        </p>
+    <p>The original <a href="https://en.wikipedia.org/wiki/Coupon_collector%27s_problem">coupon collector&rsquo;s problem</a> poses the question:</p><blockquote class="quote-question">    <svg class="icon icon--stroke" style="stroke-width: 2;" width="24" height="24">        <use href="/assets/icons/sprite.svg#question"></use>    </svg>    If each cereal box contains a random coupon uniformly drawn from <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> varieties, what is the probability that <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span></span></span></span> boxes must be bought in order to collect each coupon?</blockquote><p>A subtly different question arises when considering the case that one does not know the total number of coupons. How many boxes must be bought before you know you have all of them?</p><p>Of course, you can never be absolutely certain. But say you buy one billion boxes, and get <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>333,495,391</mn></mrow><annotation encoding="application/x-tex">333{,}495{,}391</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">333</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">495</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">391</span></span></span></span> blue, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>333,284,381</mn></mrow><annotation encoding="application/x-tex">333{,}284{,}381</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">333</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">284</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">381</span></span></span></span> red, and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>333,220,228</mn></mrow><annotation encoding="application/x-tex">333{,}220{,}228</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">333</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">220</span><span class="mord"><span class="mpunct">,</span></span><span class="mord">228</span></span></span></span> green coupons. I would be fairly confident that in fact there are three varieties of coupon! Here, you can test that intuition.</p><p><link rel="stylesheet" href="styles.css"></p><div class="cc-game">  <div class="cc-stats">    <div class="cc-stat">      <div class="cc-stat-label">Samples drawn</div>      <div class="cc-stat-val" id="cc-n-drawn">0</div>    </div>    <div class="cc-stat">      <div class="cc-stat-label">Distinct coupons</div>      <div class="cc-stat-val" id="cc-k-seen">0</div>    </div>    <div class="cc-stat">      <div class="cc-stat-label">Since last new</div>      <div class="cc-stat-val" id="cc-since-new">&mdash;</div>    </div>  </div>  <div class="cc-section-label">Coupon counts</div>  <div class="cc-pills" id="cc-colour-counts"></div>  <div class="cc-btns">    <button class="cc-btn" id="cc-btn-draw1">Draw 1</button>    <button class="cc-btn" id="cc-btn-draw10">Draw 10</button>    <button class="cc-btn" id="cc-btn-draw100">Draw 100</button>    <button class="cc-btn cc-btn-guess" id="cc-btn-guess">I think that's all</button>    <button class="cc-btn" id="cc-btn-replay" style="display:none">Play again</button>  </div>  <div id="cc-result-msg"></div></div><div id="cc-history-wrap" style="display:none"><h2>Your history</h2><div id="cc-stats-summary" class="cc-stats-summary"></div><div class="cc-scatter-wrap">  <div class="cc-axis-label-y">Boxes opened</div>  <div id="cc-scatter" class="cc-scatter"></div></div><div class="cc-axis-label-x">Number of colours</div><div class="cc-legend">  <span class="cc-legend-item"><span class="cc-legend-dot cc-dot-win"></span> Correct</span>  <span class="cc-legend-item"><span class="cc-legend-dot cc-dot-lose"></span> Wrong</span></div><button class="cc-btn cc-btn-clear" id="cc-btn-clear">Clear history</button><button class="cc-btn cc-btn-clear" id="cc-btn-export">Export CSV</button></div><script src="script.js" defer></script><p>There is an <em>extremely</em> simple stopping rule which achieves a success rate of about <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>95</mn><mi mathvariant="normal">%</mi></mrow><annotation encoding="application/x-tex">95\%</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8056em;vertical-align:-0.0556em;"></span><span class="mord">95%</span></span></span></span> uniformly over all <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>. The messages after each round show you what I would have done in your situation using this rule. Can you determine the strategy?</p>
       </main>
 
       <!-- Spacing between the sidebar and the main content -->
