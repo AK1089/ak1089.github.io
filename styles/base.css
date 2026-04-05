@@ -247,7 +247,7 @@ p {
     .main-content {
         width: 100%;
         max-width: 768px;
-        padding: 3rem 1rem;
+        padding: 1.5rem 1rem 6rem 1rem;
     }
 
     .body {
