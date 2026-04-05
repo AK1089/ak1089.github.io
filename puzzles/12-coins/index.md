@@ -51,7 +51,7 @@ Since there are still $`26`$ possible states, and we can obtain at most $`2 \log
 
 From now on, we therefore weigh the first $`r`$ coins against the next $`r`$ coins.
 
-Now, suppose $`r \leqslant 4`$. If the coins balance, then there are still $`2(m - 2r) \geqslant 10`$ remaining states, given by the remaining $m-2r$ coins. This requires at least $`\log_2 10 > 2 \log_2 3`$ bits of information to distinguish, and therefore we cannot guarantee a solution in two further weighings.
+Now, suppose $`r \leqslant 4`$. If the coins balance, then there are still $`2(m - 2r) \geqslant 10`$ remaining states, given by the remaining $`m-2r`$ coins. This requires at least $`\log_2 10 > 2 \log_2 3`$ bits of information to distinguish, and therefore we cannot guarantee a solution in two further weighings.
 
 Conversely, suppose $`r \geqslant 5`$. If the coins do not balance, there are still $`2r \geqslant 10`$ remaining states, which again for the same reasons means we cannot guarantee a solution in two further weighings.
 
