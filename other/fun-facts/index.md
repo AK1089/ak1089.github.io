@@ -1,6 +1,6 @@
 ---
 title: Fun Facts
-date: 2025-01-04
+date: 2026-01-04
 ---
 
 This is my collection of little fun facts. My goal is for these to be genuinely novel, counterintuitive, or surprising: I'd hope that everybody who comes across this page already knows no more than two-thirds of them. Some facts have detailed calculations on a separate [sources page](sources).

@@ -1,6 +1,6 @@
 ---
 title: Fun Facts - Sources and Calculations
-date: 2025-01-04
+date: 2026-01-04
 ---
 
 This page provides detailed calculations and commentary for facts on my [fun facts](/other/fun-facts) page that require more than a simple source link.

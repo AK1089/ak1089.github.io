@@ -1,7 +1,7 @@
 ---
 title: Map Art Maker
 date: 2021-11-26
-date: 2024-12-26
+updated: 2024-12-26
 manual_html: true
 ---
 

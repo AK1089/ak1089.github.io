@@ -2,6 +2,7 @@
 title: Maths
 date: 2024-12-24
 address_bar_title: Maths | AK1089's Site
+updated: 2026-04-06
 ---
 
 This page catalogues anything mathematical I've written, resources, and things of interest I suggest reading.
