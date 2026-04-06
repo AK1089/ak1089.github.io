@@ -10,7 +10,8 @@ Here's a list of simple things you can do with scripts which have a really high 
 ### Reset Lecterns
 
 Make your lecterns automatically flip back to page 1, so that a new player coming to read instructions doesn't have to flip all the way back.
-```
+
+```msc
 @global_cooldown 30s
 @bypass /data modify block {{block.getX()}} {{block.getY()}} {{block.getZ()}} Page set value 0
 ```
@@ -23,15 +24,16 @@ When working with player heads you are placing in item frames (for example as di
 
 You can use the following method to colourise the player's name according to their rank:
 
-```
-@player {{player.getDisplayName()}}  # returns eg. "&6AK1089", since 6 is the code for orange/gold
+```msc
+# returns eg. "&6AK1089", since 6 is the code for orange/gold
+@player {{player.getDisplayName()}}
 ```
 
 ### Reset Formatting Correctly
 
 Make sure you put formatting reset tokens in the right place! In the first example, the colon will also be red and bolded. In the second example, the colon will look like the rest of the text, and only the name will be emphasised.
 
-```
+```msc
 # this is bad, because the colon will also be red and bolded which isn't ideal
 @player &c&lJohn: &7hi this is some dialogue
 # this looks much cleaner
@@ -42,7 +44,7 @@ Make sure you put formatting reset tokens in the right place! In the first examp
 
 You can use `/item replace` for extra control over player inventories compared to `/give`.
 
-```
+```msc
 # latter goes directly into their current hand, rather than just slot 1
 @bypass /give @s apple 1
 @bypass /item replace entity @s weapon.mainhand with apple 1
@@ -55,7 +57,7 @@ Be careful when using this with multiple items, as you could replace something t
 
 I have made a custom function which pluralises words after numbers according to the number you put in. Use it like this:
 
-```
+```msc
 # this is bad and looks ugly
 @player You have completed {{tasks_completed}} task(s)!
 # this is much nicer and not that hard to use
