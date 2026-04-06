@@ -1,13 +1,13 @@
 ---
 title: Minr
 date: 2024-12-24
-updated: 2025-01-07
+updated: 2026-04-06
 address_bar_title: Minr | AK1089's Site
 ---
 
-I spend a lot of time on [Zero.Minr.Org](https://forums.minr.org/), one of the oldest Minecraft servers around (since 2010). It's a challenge server, designed for mapmakers to build puzzles, mazes, parkour, and adventure maps. I've been around on the server since June 2020, and have been a staff member since February 2022. The server IP is `zero.minr.org` and the [Discord](https://discord.com/invite/minr) is `discord.gg/minr`.
+I spend a lot of time on [zero.minr.org](https://forums.minr.org/), one of the oldest Minecraft servers around (since 2010). It's a challenge server, designed for mapmakers to build puzzles, mazes, parkour, and adventure maps. I've been around on the server since June 2020, and been staff since February 2022. 
 
-One of the biggest features of the server is a completely custom plugin, which includes Minr Script Code: a full programming language built into Minecraft to facilitate mapmaking. This is an extremely powerful tool, and I've done a lot of interesting things with it. Most of the pages under this section are devoted to scripting, including some guides I've written, links to useful resources, example scripts, and other tools I've created to help with mapmaking.
+A major draw of the server is the custom plugin, which includes Minr Script Code: a full programming language within Minecraft which facilitates mapmaking. Many of the pages here are devoted to scripting.
 
 ## Fun Things
 
@@ -34,3 +34,4 @@ Some links to the Minr forums are restricted to <span style="color: var(--lime)"
 
 - A step-by-step guide to [setting up your map with a resource pack](resource-packs).
 - An explanation of [functions](functions).
+- A list of [tips](script-polish) for making your maps feel more polished.
