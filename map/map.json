@@ -228,6 +228,12 @@
     "display": true
   },
   {
+    "name": "Script Polish",
+    "url": "/minr/script-polish",
+    "parent": "/minr#guides",
+    "display": true
+  },
+  {
     "name": "Yeroc% Patch",
     "url": "/minr/yeroc",
     "parent": "/minr#utilities",
