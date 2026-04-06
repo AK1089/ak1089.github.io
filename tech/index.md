@@ -1,23 +1,11 @@
 ---
 title: Technology and Programming
 date: 2024-12-24
+updated: 2026-04-06
 address_bar_title: Tech | AK1089's Site
 ---
 
-I've been a hobby programmer since I was around 12. I mostly write code in Python, with some JavaScript on the side. I'm also a huge technology enthusiast, and believe in the power of accelerating technological progress to elevate humanity to new heights. This section of the site is focused on everything to do with technology, both on the software and the hardware side.
+I've been a hobby programmer since I was around 12. I mostly write code in Python, with some JavaScript on the side. I'm also a huge tech enthusiast and love to see technological progress. This page has a few tech-related things I've written.
 
-## Python and Other Programming
-
-- Some fun [quirks](python-quirks) of Python programming.
-
-## AI and Machine Learning
-
-🚧 This section is under construction!
-
-## Engineering and Hardware
-
-🚧 This section is under construction!
-
-## Everything Else
-
+- Here are some fun [quirks](python-quirks) of Python programming.
 - Here's a list of [software I especially like](good-software).
