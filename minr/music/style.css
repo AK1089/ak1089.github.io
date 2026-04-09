@@ -1,0 +1,113 @@
+.converter {
+    max-width: 480px;
+    margin: 1.5rem auto;
+    font-family: var(--text-sans);
+}
+
+/* Drop zone */
+.nbs-dropzone {
+    border: 2px dashed var(--surface-b);
+    border-radius: 12px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    color: var(--subtext-a);
+    font-size: 0.9rem;
+}
+.nbs-dropzone:hover,
+.nbs-dropzone.drag-over {
+    border-color: var(--blue);
+    background: hsla(197, 97%, 46%, 0.06);
+}
+.nbs-dropzone .drop-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+.nbs-dropzone .drop-hint {
+    font-size: 0.75rem;
+    color: var(--overlay-a);
+    margin-top: 0.25rem;
+}
+.nbs-dropzone input[type="file"] {
+    display: none;
+}
+
+/* Mode toggle */
+.mode-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    margin: 0.75rem auto;
+    background: var(--crust);
+    border-radius: 8px;
+    padding: 3px;
+    width: fit-content;
+}
+.mode-btn {
+    padding: 0.3rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    font-family: var(--text-sans);
+    font-size: 0.78rem;
+    color: var(--overlay-b);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+.mode-btn.active {
+    background: white;
+    color: var(--text);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Output card */
+.output-card {
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    background: var(--mantle);
+    border: 1px solid var(--surface-a);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+.output-info {
+    min-width: 0;
+}
+.output-filename {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.output-stats {
+    font-size: 0.72rem;
+    color: var(--overlay-b);
+    margin-top: 0.15rem;
+}
+.download-btn {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--surface-b);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.download-btn:hover {
+    color: var(--overlay-b);
+}
+
+/* Error */
+.output-error {
+    margin-top: 0.75rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    background: hsla(0, 70%, 50%, 0.08);
+    font-size: 0.8rem;
+    color: var(--red);
+}
