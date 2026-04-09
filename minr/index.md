@@ -13,10 +13,11 @@ A major draw of the server is the custom plugin, which includes Minr Script Code
 
 - The [collaborations map](collab-map) shows an interactive view of every mapmaker's collaborations.
 
-## My Tools
+## Custom Tools
 
 - My [map art creator](map-art) allows you to upload images and view them as custom maps in game.
 - My [Yeroc% Patch Library](yeroc) allows you to easily patch a common skip method in your maps.
+- RYgamer's [NBS to MSC converter](music) converts Note Block Studio files to Minr scripts.
 
 ## Links to External Resources
 
@@ -30,7 +31,7 @@ Some links to the Minr forums are restricted to <span style="color: var(--lime)"
 - `egabbac` maintains a [collection of resources](https://forums.minr.org/threads/compilation-of-mapmaking-resources.7331/) which aim to help with mapmaking.
 - On the server, `/warp teleport mapmaking` has a guide to many aspects of creating maps.
 
-## My Guides to Scripting & Mapmaking
+## Guides to Scripting & Mapmaking
 
 - A step-by-step guide to [setting up your map with a resource pack](resource-packs).
 - An explanation of [functions](functions).
