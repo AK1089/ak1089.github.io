@@ -7,6 +7,17 @@ address_bar_title: Scripting Polish
 
 Here's a list of simple things you can do with scripts which have a really high return on effort in terms of making feel polished and complete.
 
+### Use The Right Teleports
+
+When teleporting players with scripts, make sure to use the correct teleport:
+
+```
+# This displays a message in chat like [Minr] Teleported AK1089 to 123, 45, 678, Theta.
+@bypass /tp 123 45 678
+# This always runs in the right world, is silent, supports relative teleports, and gets the rotation right!
+@bypass /execute in minecraft:theta run teleport @s 123 45 678 0 0
+```
+
 ### Reset Lecterns
 
 Make your lecterns automatically flip back to page 1, so that a new player coming to read instructions doesn't have to flip all the way back.
@@ -51,7 +62,6 @@ You can use `/item replace` for extra control over player inventories compared t
 ```
 
 Be careful when using this with multiple items, as you could replace something the player is holding and thereby erase it!
-
 
 ### Pluralise Quantities
 
