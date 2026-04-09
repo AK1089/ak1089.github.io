@@ -222,6 +222,12 @@
     "display": true
   },
   {
+    "name": "NBS Converter",
+    "url": "/minr/music",
+    "parent": "/minr#utilities",
+    "display": true
+  },
+  {
     "name": "Resource Packs",
     "url": "/minr/resource-packs",
     "parent": "/minr#guides",
