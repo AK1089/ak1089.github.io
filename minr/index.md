@@ -24,6 +24,7 @@ A major draw of the server is the custom plugin, which includes Minr Script Code
 - `Lightwood13`'s [VSCode extension](https://marketplace.visualstudio.com/items?itemName=Lightwood13.msc) helps with writing MSC scripts
 - `rmanimal`'s [Scripts with rman](https://forums.minr.org/threads/scripts-with-rman-1-basic-script-understanding.3193/) is the original tutorial-style introduction to scripting.
 - `egabbac` maintains a collection of [mapmaking resources](https://forums.minr.org/threads/compilation-of-mapmaking-resources.7331/).
+- The official [Greenie Resources](https://wiki.minr.org/Greenie_Resources) page lists various helpful tools and links.
 
 ## Guides to Scripting & Mapmaking
 
