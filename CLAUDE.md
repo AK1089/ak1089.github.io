@@ -4,7 +4,7 @@ This file provides guidance to coding agents when working with code in this repo
 
 ## Project Overview
 
-Personal portfolio website for Avish Kumar (ak1089.github.io). Fully custom-built with vanilla HTML, CSS, and JavaScript—no static site generator frameworks. Uses a Python-based Markdown build system with custom extensions.
+Personal portfolio website for Avish Kumar (ak1089.github.io). Fully custom-built with vanilla HTML, CSS, and JavaScript, no static site generator frameworks. Uses a Python-based Markdown build system with custom extensions.
 
 ## Build System Architecture
 
@@ -36,10 +36,10 @@ The build pipeline (`builder/build.py`) works as follows:
 ```yaml
 ---
 title: Page Title           # Required
-date: 2024-01-15           # Required (YYYY-MM-DD)
-updated: 2024-02-20        # Optional
+date: 2024-01-15            # Required (YYYY-MM-DD)
+updated: 2024-02-20         # Optional (YYYY-MM-DD)
 address_bar_title: Custom   # Optional (defaults to title)
-manual_html: true          # Optional (skip MD processing)
+manual_html: true           # Optional (use if building would break)
 ---
 ```
 
@@ -53,10 +53,7 @@ manual_html: true          # Optional (skip MD processing)
 
 ## Key Conventions
 
-- **Edit `.md` files, not `.html`**: To modify page content, edit the source `.md` file (rebuilt live automatically if the `dev.sh` script is running). Never edit the generated `.html` directly (except for pages with `manual_html: true` in frontmatter).
-- Images use AVIF format for compression (~90% smaller than PNG)
-- Icons accessed via SVG spritesheet using `<use>` tag
-- LaTeX rendered server-side via `markdown-katex` (no client-side JS)
-- Pages include `[llm-friendly-page]` HTML comments pointing to raw GitHub markdown URLs
-- Git pre-commit hook auto-formats staged HTML files with Prettier
-- Files listed in `.prettierignore` are skipped by Prettier (used for pages with complex inline SVGs that Prettier mangles)
+- **Edit `.md` files, not `.html`**: To modify page content, edit the source `.md` file. Never edit the generated `.html` directly (except for pages with `manual_html: true` in frontmatter).
+- Icons are accessed via SVG spritesheet using `<use>` tag
+- Use the generator and map building scripts to build. Do not add entries yourself.
+- Activate the venv when running Python scripts.
