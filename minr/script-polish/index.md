@@ -11,7 +11,7 @@ Here's a list of simple things you can do with scripts which have a really high 
 
 When teleporting players with scripts, make sure to use the correct teleport:
 
-```
+```msc
 # This displays a message in chat like [Minr] Teleported AK1089 to 123, 45, 678, Theta.
 @bypass /tp 123 45 678
 # This always runs in the right world, is silent, supports relative teleports, and gets the rotation right!
