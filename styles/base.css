@@ -1072,6 +1072,52 @@ pre .copy-button:hover {
     }
 }
 
+/* Tables */
+.main-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.main-content thead th {
+    text-align: left;
+    font-weight: 600;
+    color: var(--text);
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid var(--surface-a);
+    background: var(--mantle);
+}
+
+.main-content tbody td {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--surface-a);
+    color: var(--subtext-b);
+}
+
+.main-content tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.main-content tbody tr:hover {
+    background: var(--mantle);
+}
+
+@media (max-width: 768px) {
+    .main-content table {
+        font-size: 0.85rem;
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .main-content thead th,
+    .main-content tbody td {
+        padding: 0.4rem 0.6rem;
+    }
+}
+
 .responsive-svg {
     width: 100%;
     height: auto;
