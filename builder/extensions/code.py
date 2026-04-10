@@ -23,23 +23,18 @@ class CodeLineWrapper(Postprocessor):
                 if line:
                     wrapped_lines.append(f"<span>{line}</span>")
                 else:
-                    wrapped_lines.append("<span></span>")
+                    wrapped_lines.append("<span>&nbsp;</span>")
 
             wrapped_code = "\n".join(wrapped_lines)
 
-            # Create copy button with sprite icon
-            copy_button = (
-                '<button class="copy-button" onclick="copyCode(this)" '
-                'aria-label="Copy code to clipboard">'
-                '<svg class="icon icon--stroke" width="24" height="24">'
-                '<use href="/assets/icons/sprite.svg#copy"></use>'
-                '</svg>'
-                '</button>'
+            # Language badge doubles as copy button
+            badge = (
+                f'<span class="lang-badge" onclick="copyCode(this)">{lang}</span>'
             )
 
             return (
-                f'<pre data-language="{lang}">'
-                f'{copy_button}'
+                f'<pre>'
+                f'{badge}'
                 f'<code class="language-{lang}">{wrapped_code}</code>'
                 f'</pre>'
             )
@@ -47,6 +42,6 @@ class CodeLineWrapper(Postprocessor):
         # More specific pattern that handles the actual structure
         pattern = r'<pre><code class="language-([^"]*)">(.*?)</code></pre>'
         altered = re.sub(pattern, replace_code_block, text, flags=re.DOTALL)
-        altered = altered.replace("<span></span></code>", "</code>").replace("\n", "")
+        altered = altered.replace("<span>&nbsp;</span></code>", "</code>").replace("\n", "")
 
         return altered

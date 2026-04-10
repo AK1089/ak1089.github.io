@@ -521,33 +521,6 @@ a:hover {
     color: var(--text);
 }
 
-.copy-button .icon {
-    width: 24px;
-    height: 24px;
-    color: var(--surface-a);
-    stroke: none;
-    fill: var(--surface-a);
-    transition: color 0.2s ease;
-}
-
-pre:hover .copy-button {
-    opacity: 1;
-}
-
-.copy-button:hover {
-    filter: brightness(1.1);
-}
-
-.copy-button:hover .icon {
-    color: white;
-}
-
-.copy-button.copied .icon {
-    stroke: var(--lime);
-    fill: none;
-    stroke-width: 2;
-}
-
 
 /* Figure container */
 figure {
@@ -937,32 +910,33 @@ blockquote>svg {
 pre {
     position: relative;
     background: var(--code-base);
-    margin: 2rem 0;
-    padding: 1.5rem 0;
-    border-radius: 0.5rem;
+    margin: 1.2rem 0;
+    padding: 0.6rem 0;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow:
-        0 4px 6px rgba(0, 0, 0, 0.1),
-        0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
-/* Horizontal scroll container */
+/* Code content */
 pre>code {
     display: block;
-    padding: 0.25rem 1.5rem 0.5rem 3.5rem;
-    margin-bottom: -0.5rem;
+    padding: 0.25rem 1rem 0.25rem 3rem;
     color: var(--code-text);
     font-family: "Cascadia Code", ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 0.925rem;
-    line-height: 1.2;
+    font-size: 0.825rem;
+    line-height: 1.5;
     tab-size: 2;
     overflow-x: auto;
     width: 100%;
     box-sizing: border-box;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    scrollbar-color: var(--scrollbar) transparent;
-    margin-right: 1rem;
+    counter-reset: line;
+    scrollbar-width: thin;
+    scrollbar-color: var(--code-surf) transparent;
+}
+
+pre>code::-webkit-scrollbar {
+    height: 6px;
 }
 
 pre>code::-webkit-scrollbar-track {
@@ -970,105 +944,73 @@ pre>code::-webkit-scrollbar-track {
 }
 
 pre>code::-webkit-scrollbar-thumb {
-    background: var(--scrollbar);
+    background: var(--code-surf);
     border-radius: 3px;
 }
 
-/* Line numbers */
-pre>code {
-    counter-reset: line;
-}
-
+/* Lines */
 pre>code>span {
     display: block;
     position: relative;
-    line-height: 1.0;
-    padding: 0.25rem 0;
-    min-height: 1.6em;
-    margin-right: 1rem;
 }
 
+/* Line numbers */
 pre>code>span::before {
     counter-increment: line;
     content: counter(line);
     position: absolute;
-    left: -3rem;
-    width: 2rem;
-    font-size: 0.925rem;
+    left: -2.5rem;
+    width: 1.75rem;
+    font-size: 0.75rem;
     color: var(--code-line);
     text-align: right;
     user-select: none;
-    opacity: 0.5;
 }
 
-/* Language badge */
-pre::after {
-    content: attr(data-language);
+/* Language badge (click to copy) */
+pre .lang-badge {
     position: absolute;
-    top: 0;
-    right: 4rem;
-    color: var(--surface-a);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 0.75rem;
+    top: 0.4rem;
+    right: 0.75rem;
+    color: var(--code-surf);
+    font-family: var(--text-sans);
+    font-size: 0.65rem;
     font-weight: 500;
-    padding: 0.25rem 0.75rem;
-    background: var(--text);
-    border-radius: 0 0 0.25rem 0.25rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    cursor: pointer;
+    user-select: none;
+    z-index: 2;
+    transition: color 0.15s ease;
+}
+
+pre .lang-badge:hover {
+    color: var(--code-text);
+}
+
+pre .lang-badge.copied {
+    color: var(--lime);
 }
 
 /* Selection highlighting */
 pre code ::selection {
-    background: var(--selection-bg, rgba(147, 153, 178, 0.3));
-    color: var(--selection-text, inherit);
+    background: rgba(147, 153, 178, 0.3);
 }
 
-/* Copy button styling */
-pre .copy-button {
-    position: absolute;
-    top: 0;
-    right: 1rem;
-    padding: 0.25rem 0.25rem;
-    height: 2rem;
-    background: var(--text);
-    border: none;
-    border-radius: 0 0 0.25rem 0.25rem;
-    cursor: pointer;
-    opacity: 0;
-    transition:
-        opacity 0.2s ease,
-        background-color 0.2s ease,
-        transform 0.1s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    user-select: none;
-}
-
-pre:hover .copy-button {
-    opacity: 1;
-}
-
-pre .copy-button:hover {
-    background: var(--text-hover, var(--text));
-    transform: translateY(1px);
-}
-
-
-/* Mobile optimizations */
+/* Mobile */
 @media (max-width: 768px) {
     pre {
-        margin: 1.5rem -1rem;
+        margin: 1rem -1rem;
         border-radius: 0;
     }
 
     pre>code {
-        font-size: 0.8125rem;
-        padding-left: 3.5rem;
+        font-size: 0.775rem;
+        padding-left: 3rem;
     }
 
     pre>code>span::before {
-        left: -2.5rem;
+        left: -2.25rem;
     }
 }
 
