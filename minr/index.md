@@ -31,6 +31,7 @@ A major draw of the server is the custom plugin, which includes Minr Script Code
 - How do [functions](functions) work?
 - Some [tips](script-polish) for making your maps feel more polished.
 - How to [bulk import dialogue scripts](bulk-import) onto armor stands.
+- A primer on [regex](regex) for answer string matching.
 
 ## Fun Things
 

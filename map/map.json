@@ -204,6 +204,12 @@
     "display": true
   },
   {
+    "name": "Bulk Imports",
+    "url": "/minr/bulk-import",
+    "parent": "/minr#guides",
+    "display": true
+  },
+  {
     "name": "Collab Map",
     "url": "/minr/collab-map",
     "parent": "/minr#fun",
@@ -230,6 +236,12 @@
   {
     "name": "Resource Packs",
     "url": "/minr/resource-packs",
+    "parent": "/minr#guides",
+    "display": true
+  },
+  {
+    "name": "Regex",
+    "url": "/minr/regex",
     "parent": "/minr#guides",
     "display": true
   },
