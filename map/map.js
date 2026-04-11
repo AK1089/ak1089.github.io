@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const svg = document.getElementById('sitemap-svg');
     const margin = { top: 30, right: 50, bottom: 30, left: 50 };
 
+    // On mobile, size the container to fill exactly to the bottom of the screen
+    if (window.innerWidth <= 768) {
+        const rect = container.getBoundingClientRect();
+        container.style.height = (window.innerHeight - rect.top - 16) + 'px';
+    }
+
     // Create the tree layout
     const width = container.clientWidth - margin.left - margin.right;
     const height = container.clientHeight - margin.top - margin.bottom;
@@ -21,13 +27,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     const root = stratify(visibleData)
         .sort((a, b) => a.data.name.localeCompare(b.data.name));
 
-    const estimatedNodeHeight = 40; // Increased to 50px to ensure no overlap
+    const isMobile = window.innerWidth <= 768;
+    const estimatedNodeHeight = isMobile ? 50 : 40;
     const totalNodes = root.descendants().length;
     const minHeight = estimatedNodeHeight * (totalNodes / 2);
 
+    const horizontalScale = isMobile ? 1.6 : 1.1;
     const treeLayout = d3.tree()
-        .size([Math.max(height, minHeight), width])
-        .separation((a, b) => 2.5);
+        .size([Math.max(height, minHeight), width * horizontalScale])
+        .separation((a, b) => isMobile ? 5 : 2.5);
 
     treeLayout(root);
 
@@ -43,7 +51,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     svg.addEventListener('wheel', (e) => e.preventDefault(), { passive: false });
     d3.select(svg).call(zoom);
 
-    const initialTransform = d3.zoomIdentity.translate(40, 10).scale(1);
+    const containerHeight = container.clientHeight;
+    const scale = isMobile ? 0.75 : 1;
+    const centerY = containerHeight / 2 - root.x * scale;
+    const initialTransform = d3.zoomIdentity
+        .translate(isMobile ? 20 : 40, centerY)
+        .scale(scale);
     d3.select(svg).call(zoom.transform, initialTransform);
 
     // g.setAttribute("transform", `translate(${margin.left},${margin.top})`);
@@ -77,6 +90,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Add circle
         const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("r", 7);
         if (visitedUrls.has(url)) {
             circle.classList.add('visited');
         }

@@ -127,3 +127,9 @@
     r: 12;
     transition: all 0.1s ease;
 }
+
+@media (max-width: 768px) {
+    .sitemap-node text {
+        font-size: 10px;
+    }
+}
