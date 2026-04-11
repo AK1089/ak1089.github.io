@@ -16,26 +16,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home | AK1089's Site</title>
     <link rel="stylesheet" href="/styles/base.css" />
-
+    
     <script>
-      function copyCode(button) {
-        const pre = button.parentElement;
+      function copyCode(badge) {
+        const pre = badge.closest("pre");
         const code = pre.querySelector("code");
-        const text = code.innerText;
+        navigator.clipboard.writeText(code.innerText);
 
-        navigator.clipboard.writeText(text);
-
-        button.classList.add("copied");
-        const originalIcon = button.innerHTML;
-        button.innerHTML = `
-            <svg class="icon icon--stroke" width="24" height="24">
-                <use href="/assets/icons/sprite.svg#check"></use>
-            </svg>
-        `;
+        const original = badge.textContent;
+        badge.textContent = "copied!";
+        badge.classList.add("copied");
 
         setTimeout(() => {
-          button.classList.remove("copied");
-          button.innerHTML = originalIcon;
+          badge.textContent = original;
+          badge.classList.remove("copied");
         }, 1000);
       }
     </script>
@@ -185,82 +179,19 @@
 
       <!-- The main content of the page: this is changed per-page and contains the actual content -->
       <main class="main-content">
+        
         <header class="page-header">
-          <div class="header-container">
-            <div class="path"></div>
-            <h1 class="title">Home</h1>
-            <div class="metadata">
-              <span class="published-date">published April 19, 2024</span
-              ><span class="updated-date">, updated April 06, 2026</span>
+            <div class="header-container">
+                <div class="path">
+                    
+                </div>
+                <h1 class="title">Home</h1>
+                <div class="metadata">
+                    <span class="published-date">published April 19, 2024</span><span class="updated-date">, updated April 06, 2026</span>
+                </div>
             </div>
-          </div>
         </header>
-        <p></p>
-        <img
-          src="/assets/images/portrait.avif"
-          alt="A picture of me"
-          style="
-            float: right !important;
-            width: 25% !important;
-            margin-left: 20px !important;
-            margin-bottom: 10px !important;
-            border: none !important;
-            padding: 0 !important;
-            filter: brightness(1.2) !important;
-            box-shadow: none !important;
-          "
-        />
-        <p></p>
-        <p>
-          Welcome! My name is Avish, and this is my personal site for things I
-          make or find interesting. I&rsquo;m 22 years old, born and raised in
-          London, and am currently working as a quantitative researcher in
-          Amsterdam.
-        </p>
-        <p>
-          In my free time, I enjoy programming, reading, making and solving
-          puzzles, social deduction games, board games, playing on Minr, and
-          creating things. Online, I often go by AK1089, after my initials and
-          <a href="https://en.wikipedia.org/wiki/1089_%28number%29#In_magic"
-            >favourite number</a
-          >. You can find me at the social links down on the left.
-        </p>
-        <p><br /></p>
-        <h2>What&rsquo;s Here</h2>
-        <p>
-          See the site sections on the sidebar, or view everything from the
-          <a href="map">site map</a>. Popular pages include:
-        </p>
-        <ul>
-          <li>
-            My <a href="/puzzles">collection of puzzles</a> of various genres
-          </li>
-          <li>
-            My <a href="/maths/notes">lecture notes</a> from Part II Mathematics
-            at Cambridge
-          </li>
-          <li>
-            Minr-specific <a href="/minr">games</a> I&rsquo;ve built,
-            especially the <a href="/minr/map-art">map art creator</a>
-          </li>
-        </ul>
-        <p>
-          Recently, I&rsquo;ve looked at
-          <a href="/maths/n-dimensional-chess/">higher-dimensional chess</a> and
-          <a href="/maths/prime-reciprocal-divergence/">prime numbers</a>.
-        </p>
-        <h2>Site Features</h2>
-        <p>
-          I designed this site myself, using vanilla
-          <span style="color: #e34c26">HTML</span>,
-          <span style="color: #c4b018">JavaScript</span>, and
-          <span style="color: #264de4">CSS</span>. I use a custom Markdown
-          parser to convert my written content into formatted HTML which meets
-          my specifications. You can see all the code for this website
-          <a href="https://github.com/AK1089/ak1089.github.io">here</a>, or read
-          more about my design principles, choices, and influences
-          <a href="/other/design">here</a>.
-        </p>
+    <p></p><img src="/assets/images/portrait.avif" alt="A picture of me" style="float: right !important; width: 25% !important; margin-left: 20px !important; margin-bottom: 10px !important; border: none !important; padding: 0 !important; filter: brightness(1.2) !important; box-shadow: none !important;" /><p></p><p>Welcome! My name is Avish, and this is my personal site for things I make or find interesting. I&rsquo;m 22 years old, born and raised in London, and am currently working as a quantitative researcher in Amsterdam.</p><p>In my free time, I enjoy programming, reading, making and solving puzzles, social deduction games, board games, playing on Minr, and creating things. Online, I often go by AK1089, after my initials and <a href="https://en.wikipedia.org/wiki/1089_%28number%29#In_magic">favourite number</a>. You can find me at the social links down on the left.</p><p><br></p><h2>What&rsquo;s Here</h2><p>See the site sections on the sidebar, or view everything from the <a href="map">site map</a>. Popular pages include:</p><ul><li>My <a href="/puzzles">collection of puzzles</a> of various genres</li><li>My <a href="/maths/notes">lecture notes</a> from Part II Mathematics at Cambridge</li><li>Minr-specific <a href="/minr">utilities</a> I&rsquo;ve built, especially the <a href="/minr/map-art">map art creator</a></li></ul><p>Recently, I&rsquo;ve looked at <a href="/maths/n-dimensional-chess/">higher-dimensional chess</a> and <a href="/maths/prime-reciprocal-divergence/">prime numbers</a>.</p><h2>Site Features</h2><p>I designed this site myself, using vanilla <span style="color: #e34c26">HTML</span>,  <span style="color: #c4b018">JavaScript</span>, and  <span style="color: #264de4">CSS</span>.  I use a custom Markdown parser to convert my written content into formatted HTML which meets my specifications. You can see all the code for this website <a href="https://github.com/AK1089/ak1089.github.io">here</a>, or read more about my design principles, choices, and influences <a href="/other/design">here</a>.</p>
       </main>
 
       <!-- Spacing between the sidebar and the main content -->
