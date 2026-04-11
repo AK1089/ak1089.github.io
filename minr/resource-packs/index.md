@@ -10,7 +10,7 @@ If you already have a pack and just need help with hosting it, skip to [Setting 
 
 A Minecraft Resource Pack is essentially a folder which holds a lot of files with your custom textures and resources in them. The below file tree shows how this folder might be organised.
 
-(This is adapted from the Minecraft wiki [page on resource packs](https://minecraft.fandom.com/wiki/Resource_pack#Folder_structure). I have simplified it to omit some paths which are more complex or less relevant for server resource packs.)
+(This is adapted from the Minecraft wiki [page on resource packs](https://minecraft.wiki/w/Resource_pack#Directory_structure). I have simplified it to omit some paths which are more complex or less relevant for server resource packs.)
 
 ```filetree
 .
@@ -74,7 +74,7 @@ The `pack.mcmeta` file is a JSON file that provides information about your resou
 }
 ```
 
-Pack format 42 is valid for Minecraft version 1.21.3. To check the most recent version, you can see the [Minecraft wiki](https://minecraft.fandom.com/wiki/Pack_format#Resources) page on pack formats.
+Pack format 42 is valid for Minecraft version 1.21.3. To check the most recent version, you can see the [Minecraft wiki](https://minecraft.wiki/w/Pack_format#List_of_pack_formats) page on pack formats.
 
 In the description field, add the description you want to be visible in the Resource Pack Selection screen. Note that this is displayed over two lines, and cut off if it is too long.
 
