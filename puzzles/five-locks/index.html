@@ -38,7 +38,14 @@
   <!-- The body: the layout-container div contains all the content -->
 
   <body>
+    <!-- Mobile sidebar toggle (checkbox hack: no JS needed) -->
+    <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle" />
+    <label for="sidebar-toggle" class="sidebar-overlay"></label>
+
     <div class="layout-container">
+      <!-- Hamburger button (only visible on mobile) -->
+      <label for="sidebar-toggle" class="hamburger"></label>
+
       <!-- Padding on the left -->
       <div class="spacing-left"></div>
 

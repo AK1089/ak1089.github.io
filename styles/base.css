@@ -1064,3 +1064,144 @@ pre code ::selection {
     width: 100%;
     height: auto;
 }
+
+/* ── Mobile sidebar hamburger menu ── */
+
+/* Hidden checkbox that drives the toggle */
+.sidebar-toggle {
+    display: none;
+}
+
+/* Hamburger button: hidden by default, shown when sidebar disappears */
+.hamburger {
+    display: none;
+}
+
+/* Dark overlay behind the sidebar drawer */
+.sidebar-overlay {
+    display: none;
+}
+
+/* Show hamburger + enable drawer when the left sidebar is normally hidden */
+@media (max-width: 1139px) {
+
+    /* Hamburger bar: fixed strip at the top of the viewport */
+    .hamburger {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1001;
+        width: 100%;
+        height: 48px;
+        cursor: pointer;
+        background: var(--base);
+        border-bottom: 1px solid var(--surface-a);
+    }
+
+    /* Push main content below the fixed hamburger bar, less top padding, more bottom for mobile browser bars */
+    .main-content {
+        margin-top: 48px;
+        height: calc(100vh - 48px);
+        padding-top: 0.75rem !important;
+        padding-bottom: 8rem !important;
+    }
+
+    /* Top line */
+    .hamburger::before {
+        content: "";
+        position: absolute;
+        top: 14px;
+        left: 1rem;
+        width: 28px;
+        height: 3px;
+        background: var(--subtext-a);
+        border-radius: 2px;
+        transition: transform 0.3s ease, top 0.3s ease;
+    }
+
+    /* Bottom line (middle line done via box-shadow on ::after) */
+    .hamburger::after {
+        content: "";
+        position: absolute;
+        bottom: 14px;
+        left: 1rem;
+        width: 28px;
+        height: 3px;
+        background: var(--subtext-a);
+        border-radius: 2px;
+        box-shadow: 0 -8.5px 0 var(--subtext-a);
+        transition: transform 0.3s ease, bottom 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Animate hamburger to X when open */
+    .sidebar-toggle:checked ~ .layout-container .hamburger::before {
+        top: 22.5px;
+        transform: rotate(45deg);
+    }
+
+    .sidebar-toggle:checked ~ .layout-container .hamburger::after {
+        bottom: 22.5px;
+        transform: rotate(-45deg);
+        box-shadow: none;
+    }
+
+    /* Overlay: covers the whole screen with dark translucent background */
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .sidebar-toggle:checked ~ .sidebar-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Override the sidebar-left hidden rule: make it a slide-in drawer */
+    .sidebar-left {
+        display: block !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        width: 80vw;
+        max-width: 320px;
+        height: 100vh;
+        overflow-y: auto;
+        background: var(--crust);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        padding: 1rem 1.25rem;
+    }
+
+    .sidebar-toggle:checked ~ .layout-container .sidebar-left {
+        transform: translateX(0);
+    }
+
+    /* More top padding so the fixed bar doesn't cover "AK1089's Site" */
+    .sidebar-left .sidebar-header {
+        margin-top: 3.5rem;
+    }
+
+    /* Pull breadcrumbs into the fixed hamburger bar */
+    .path {
+        position: fixed;
+        top: 0;
+        left: 4rem;
+        right: 1rem;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        z-index: 1002;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        pointer-events: auto;
+    }
+}
