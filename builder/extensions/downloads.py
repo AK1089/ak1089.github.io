@@ -2,6 +2,9 @@ from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 import re
 
+_DOWNLOAD_RE = re.compile(r'<download\s+([^>]+)>')
+
+
 class DownloadFormatter(Extension):
     def extendMarkdown(self, md):
         md.preprocessors.register(
@@ -11,11 +14,10 @@ class DownloadFormatter(Extension):
 class DownloadPreprocessor(Preprocessor):
     def run(self, lines):
         new_lines = []
-        pattern = r'<download\s+([^>]+)>'
-        
+
         for line in lines:
             # Find all download tags in the line
-            matches = re.finditer(pattern, line)
+            matches = _DOWNLOAD_RE.finditer(line)
             
             # Replace each match with the file download HTML
             last_end = 0

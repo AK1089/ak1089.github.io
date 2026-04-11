@@ -2,6 +2,10 @@ from markdown.extensions import Extension
 from markdown.postprocessors import Postprocessor
 import re
 
+_CODE_BLOCK_RE = re.compile(
+    r'<pre><code class="language-([^"]*)">(.*?)</code></pre>', re.DOTALL
+)
+
 
 class CodeFormatter(Extension):
     def extendMarkdown(self, md):
@@ -38,9 +42,7 @@ class CodeLineWrapper(Postprocessor):
                 f'</pre>'
             )
 
-        # More specific pattern that handles the actual structure
-        pattern = r'<pre><code class="language-([^"]*)">(.*?)</code></pre>'
-        altered = re.sub(pattern, replace_code_block, text, flags=re.DOTALL)
+        altered = _CODE_BLOCK_RE.sub(replace_code_block, text)
         altered = altered.replace("<span>&nbsp;</span></code>", "</code>").replace("\n", "")
 
         return altered

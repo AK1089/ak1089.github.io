@@ -11,6 +11,32 @@ class ImageFormatter(Extension):
             ImageWrapper(md), "image_wrapper", 25
         )
 
+_IMG_PARAGRAPH_RE = re.compile(r'<p><img[^>]+/></p>')
+_ALT_RE = re.compile(r'alt="([^"]*)"')
+_SRC_RE = re.compile(r'src="([^"]*)"')
+_TITLE_RE = re.compile(r'title="([^"]*)"')
+
+# Cache directory listings so we don't re-scan per image.
+_dir_listing_cache: dict[Path, dict[str, list[Path]]] = {}
+
+
+def _get_avif_variants(source_dir: Path, stem: str, suffix: str) -> list[Path]:
+    """Return variant files matching stem-*suffix, using a cached dir listing."""
+    if source_dir not in _dir_listing_cache:
+        listing: dict[str, list[Path]] = {}
+        try:
+            for entry in source_dir.iterdir():
+                if entry.is_file() and entry.suffix.lower() == ".avif":
+                    listing.setdefault(entry.suffix, []).append(entry)
+        except OSError:
+            pass
+        _dir_listing_cache[source_dir] = listing
+    return [
+        p for p in _dir_listing_cache[source_dir].get(suffix, [])
+        if p.stem.startswith(stem + "-")
+    ]
+
+
 class ImageWrapper(Postprocessor):
     @staticmethod
     def _is_local_source(src: str) -> bool:
@@ -36,7 +62,7 @@ class ImageWrapper(Postprocessor):
         suffix = src_path.suffix
 
         candidates = []
-        for variant in source_dir.glob(f"{stem}-*{suffix}"):
+        for variant in _get_avif_variants(source_dir, stem, suffix):
             width_token = variant.stem.rsplit("-", 1)[-1]
             if width_token.isdigit():
                 rel_variant = variant.relative_to(source_dir).as_posix()
@@ -55,12 +81,12 @@ class ImageWrapper(Postprocessor):
     def run(self, text):
         def replace_image(match):
             whole_tag = match.group(0)
-            
-            # Extract attributes using regex
-            alt_match = re.search(r'alt="([^"]*)"', whole_tag)
-            src_match = re.search(r'src="([^"]*)"', whole_tag)
-            title_match = re.search(r'title="([^"]*)"', whole_tag)
-            
+
+            # Extract attributes using pre-compiled regexes
+            alt_match = _ALT_RE.search(whole_tag)
+            src_match = _SRC_RE.search(whole_tag)
+            title_match = _TITLE_RE.search(whole_tag)
+
             alt = alt_match.group(1) if alt_match else ""
             src = src_match.group(1) if src_match else ""
             title = title_match.group(1) if title_match else alt  # Use alt as fallback caption
@@ -69,7 +95,7 @@ class ImageWrapper(Postprocessor):
             src_escaped = html.escape(src, quote=True)
             title_escaped = html.escape(html.unescape(title))
             responsive_attrs = self._build_responsive_attrs(src)
-            
+
             # Create figure element
             return (
                 f'<figure>'
@@ -79,6 +105,4 @@ class ImageWrapper(Postprocessor):
                 f'</figure>'
             )
 
-        # Pattern matches a paragraph containing just an image
-        pattern = r'<p><img[^>]+/></p>'
-        return re.sub(pattern, replace_image, text)
+        return _IMG_PARAGRAPH_RE.sub(replace_image, text)
