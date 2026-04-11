@@ -126,6 +126,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         g.appendChild(nodeGroup);
     });
 
+    // Random page button
+    const pages = data.filter(d => d.display !== false && !d.url.includes('#') && d.url !== '/' && d.url !== '/map');
+    document.getElementById('random-page-btn').addEventListener('click', () => {
+        const weighted = pages.flatMap(d => {
+            const weight = visitedUrls.has(d.url) ? 1 : 3;
+            return Array(weight).fill(d);
+        });
+        const page = weighted[Math.floor(Math.random() * weighted.length)];
+        window.location.href = page.url;
+    });
+
     // Handle window resize
     window.addEventListener('resize', () => {
         const newWidth = container.clientWidth - margin.left - margin.right;
