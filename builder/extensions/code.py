@@ -1,5 +1,4 @@
 from markdown.extensions import Extension
-from markdown.preprocessors import Preprocessor
 from markdown.postprocessors import Postprocessor
 import re
 

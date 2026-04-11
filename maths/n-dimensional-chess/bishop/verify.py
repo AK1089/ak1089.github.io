@@ -8,7 +8,7 @@ from collections import Counter, deque
 from functools import lru_cache
 from itertools import combinations, combinations_with_replacement, product
 from math import comb
-from typing import Iterable
+from typing import Any, Iterable
 
 BOARD_SIDE = 8
 BOARD_VALUES = tuple(range(BOARD_SIDE))
@@ -25,7 +25,7 @@ Point = tuple[int, ...]
 MoveVector = tuple[int, ...]
 MoveTriple = tuple[int, int, int]
 
-PAIR_TYPES: tuple[Pair, ...] = tuple(product(BOARD_VALUES, repeat=2))
+PAIR_TYPES: tuple[Pair, ...] = tuple((a, b) for a, b in product(BOARD_VALUES, repeat=2))
 
 
 def format_point(point: Point) -> str:
@@ -212,10 +212,10 @@ def shortest_path_3d(start: Point, end: Point) -> tuple[MoveVector, ...]:
     if end not in parents:
         raise ValueError(f"No 3D S-bishop path found from {start} to {end}.")
 
-    positions = [end]
+    positions: list[Point] = [end]
     current = end
-    while parents[current] is not None:
-        current = parents[current]
+    while (prev := parents[current]) is not None:
+        current = prev
         positions.append(current)
     positions.reverse()
 
@@ -253,7 +253,7 @@ def multiset_supports_pattern(
     return (2, 2, 2) in states
 
 
-def verify_proposition_1() -> dict[str, object]:
+def verify_proposition_1() -> dict[str, Any]:
     """Verify the 4D template theorem by reducing to unordered coordinate multisets."""
 
     total_multisets = comb(len(PAIR_TYPES) + 4 - 1, 4)
@@ -271,7 +271,6 @@ def verify_proposition_1() -> dict[str, object]:
             "verified": False,
             "checked_multisets": checked_multisets,
             "total_multisets": total_multisets,
-            "diagonal_multisets": diagonal_multisets,
             "counterexample": (counterexample_start, counterexample_end),
         }
 
@@ -291,7 +290,7 @@ def verify_proposition_1() -> dict[str, object]:
     }
 
 
-def verify_proposition_2() -> dict[str, object]:
+def verify_proposition_2() -> dict[str, Any]:
     """Verify that each template can absorb one extra coordinate independently."""
 
     checks_per_pattern: dict[Pattern, int] = {}
@@ -321,7 +320,7 @@ def verify_proposition_2() -> dict[str, object]:
     }
 
 
-def verify_proposition_3() -> dict[str, object]:
+def verify_proposition_3() -> dict[str, Any]:
     """Verify the 3D theorem directly by exhaustive BFS on the full move graph."""
 
     positions = tuple(product(BOARD_VALUES, repeat=3))
@@ -367,7 +366,7 @@ def verify_proposition_3() -> dict[str, object]:
     }
 
 
-def verify_all() -> tuple[dict[str, object], dict[str, object], dict[str, object]]:
+def verify_all() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     return (
         verify_proposition_1(),
         verify_proposition_2(),
@@ -385,12 +384,12 @@ def parse_point(text: str) -> Point:
 
 
 def print_verification_summary(
-    proposition_1: dict[str, object],
-    proposition_2: dict[str, object],
-    proposition_3: dict[str, object],
+    proposition_1: dict[str, Any],
+    proposition_2: dict[str, Any],
+    proposition_3: dict[str, Any],
 ) -> None:
     if not proposition_1["verified"]:
-        start, end = proposition_1["counterexample"]  # type: ignore[index]
+        start, end = proposition_1["counterexample"]
         print("Proposition 1: FAILED")
         print(f"  Counterexample: {format_point(start)} -> {format_point(end)}")
         return
@@ -406,11 +405,11 @@ def print_verification_summary(
         f"{format_point(proposition_1['sample_start'])} -> {format_point(proposition_1['sample_end'])} "
         f"using pattern {format_pattern(proposition_1['sample_pattern'])}."
     )
-    for move_index, move in enumerate(proposition_1["sample_moves"], start=1):  # type: ignore[assignment]
+    for move_index, move in enumerate(proposition_1["sample_moves"], start=1):
         print(f"    move {move_index}: {format_point(move)}")
 
     if not proposition_2["verified"]:
-        start, end = proposition_2["counterexample"]  # type: ignore[index]
+        start, end = proposition_2["counterexample"]
         print("Proposition 2: FAILED")
         print(
             f"  Counterexample for pattern {format_pattern(proposition_2['pattern'])}: "
@@ -421,29 +420,29 @@ def print_verification_summary(
     print("Proposition 2: verified")
     print("  Every one-dimensional start/end pair works for every template:")
     for pattern in PATTERNS:
-        start, end, extension = proposition_2["sample_extensions"][pattern]  # type: ignore[index]
+        start, end, extension = proposition_2["sample_extensions"][pattern]
         print(
             f"    {format_pattern(pattern)}: {proposition_2['checks_per_pattern'][pattern]} checks, "
             f"sample {start} -> {end} via {extension}"
         )
 
     if not proposition_3["verified"]:
-        start, end = proposition_3["counterexample"]  # type: ignore[index]
+        start, end = proposition_3["counterexample"]
         print("Proposition 3: FAILED")
         print(f"  Counterexample: {format_point(start)} -> {format_point(end)}")
         return
 
     print("Proposition 3: verified")
     print(f"  Exhaustive 3D graph diameter: {proposition_3['diameter']}")
-    histogram = proposition_3["distance_histogram"]  # type: ignore[assignment]
+    histogram = proposition_3["distance_histogram"]
     histogram_text = ", ".join(f"{distance}: {count}" for distance, count in histogram.items())
     print(f"  Ordered-pair distance histogram: {histogram_text}")
-    hardest_start, hardest_end = proposition_3["hardest_pair"]  # type: ignore[index]
+    hardest_start, hardest_end = proposition_3["hardest_pair"]
     print(
         "  Sample diameter-3 pair: "
         f"{format_point(hardest_start)} -> {format_point(hardest_end)}"
     )
-    for move_index, move in enumerate(proposition_3["hardest_path"], start=1):  # type: ignore[assignment]
+    for move_index, move in enumerate(proposition_3["hardest_path"], start=1):
         print(f"    move {move_index}: {format_point(move)}")
 
 

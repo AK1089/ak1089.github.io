@@ -89,7 +89,7 @@ def create_header_html(metadata: HeaderMetadata) -> str:
 
     if breadcrumb_html:
         breadcrumb_html = (
-            f'<a href="/" class="path-link">home</a> <span class="separator"> / </span>'
+            '<a href="/" class="path-link">home</a> <span class="separator"> / </span>'
             + breadcrumb_html
         )
 
@@ -185,7 +185,7 @@ def build_file(template: str, md_path: Path, force: bool = False) -> bool:
 
     # convert markdown and add header
     md.reset()
-    md.current_source_dir = md_path.parent
+    setattr(md, "current_source_dir", md_path.parent)
     content_html = md.convert(content)
     extra_head = KATEX_HEAD_LINK if 'class="katex' in content_html else ""
     page_html = create_header_html(metadata) + content_html
