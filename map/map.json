@@ -252,6 +252,12 @@
     "display": true
   },
   {
+    "name": "Search",
+    "url": "/minr/search",
+    "parent": "/minr#guides",
+    "display": true
+  },
+  {
     "name": "Yeroc% Patch",
     "url": "/minr/yeroc",
     "parent": "/minr#utilities",
