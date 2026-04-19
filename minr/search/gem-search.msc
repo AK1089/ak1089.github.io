@@ -1,0 +1,33 @@
+# Before running this script, ask an admin to run these two commands:
+# /namespace define treasure
+# /variable define treasure search::SearchTemplate gemSearchTemplate
+
+@var treasure::gemSearchTemplate = search::SearchTemplate("treasure::gemSearch")
+
+# list out every findable
+@var treasure::gemSearchTemplate.add("6523 64 -802 Theta")
+@var treasure::gemSearchTemplate.add("6535 70 -795 Theta")
+@var treasure::gemSearchTemplate.add("6518 72 -811 Theta")
+
+# default messages
+@var treasure::gemSearchTemplate.message_ON_FINDABLE_FOUND_NEW = "&aYou found a gem! &e${found}&7/&e${total}"
+@var treasure::gemSearchTemplate.message_ON_FINDABLE_FOUND_OLD = "&7You already found this gem. &e${found}&7/&e${total}"
+@var treasure::gemSearchTemplate.message_ON_FINDABLE_FOUND_ALL = "&6&lAll ${total:w} gems found!"
+
+# default sounds
+@var treasure::gemSearchTemplate.sound_ON_FINDABLE_FOUND_NEW = "minecraft:block.note_block.chime"
+@var treasure::gemSearchTemplate.sound_ON_FINDABLE_FOUND_OLD = "minecraft:block.note_block.bass"
+@var treasure::gemSearchTemplate.sound_ON_FINDABLE_FOUND_ALL = "minecraft:entity.player.levelup"
+
+# a special-case override for one particular gem
+@var treasure::gemSearchTemplate.addCustomMessage("6523 64 -802 Theta", "&b&lThe rare sapphire! &e${found}&7/&e${total}", "ON_FINDABLE_FOUND_NEW")
+@var treasure::gemSearchTemplate.addCustomSound("6523 64 -802 Theta", "minecraft:entity.ender_dragon.growl", "ON_FINDABLE_FOUND_NEW")
+
+# teleport the player to the reward area when they find the last one
+@var treasure::gemSearchTemplate.finishTeleport = Position(1500, 80, -850, "Theta")
+
+# generate all the scripts
+@var treasure::gemSearchTemplate.import()
+
+# Then, on the script that starts the map for a player, add this line:
+# @var treasure::gemSearch = treasure::gemSearchTemplate.start(player)
