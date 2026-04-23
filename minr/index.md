@@ -13,6 +13,7 @@ A major draw of the server is the custom plugin, which includes Minr Script Code
 
 - My [map art creator](map-art) allows you to upload images and view them as custom maps in game.
 - My [Yeroc% Patch Library](yeroc) allows you to easily patch a common skip method in your maps.
+- My [ScriptedEntity Pool](scriptentity) allows you to add scripts on dynamically created entities.
 - RYgamer's [NBS to MSC converter](music) converts Note Block Studio files to Minr scripts.
 
 ## Links to External Resources
