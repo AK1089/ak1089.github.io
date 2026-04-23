@@ -252,6 +252,12 @@
     "display": true
   },
   {
+    "name": "ScriptedEntity Pool",
+    "url": "/minr/scriptentity",
+    "parent": "/minr#utilities",
+    "display": true
+  },
+  {
     "name": "Search",
     "url": "/minr/search",
     "parent": "/minr#guides",
