@@ -312,6 +312,12 @@
     "display": true
   },
   {
+    "name": "Distribution Game",
+    "url": "/puzzles/distribution-game",
+    "parent": "/puzzles#probability",
+    "display": true
+  },
+  {
     "name": "Five Locks",
     "url": "/puzzles/five-locks",
     "parent": "/puzzles#probability",

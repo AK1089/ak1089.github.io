@@ -18,5 +18,6 @@ I'm a huge fan of all sorts of puzzles (especially logic puzzles with a mathemat
 | Probability | [Anthropics](anthropics) | Some "easy" introductory puzzles about anthropics |
 | Probability | [Five Locks](five-locks) | Crack five locks by pure chance |
 | Probability | [Monty Hall](monty-hall) | Play on the famed Monty Hall gameshow (and some variants) |
+| Probability | [Distribution Game](distribution-game) | Find the optimal probability distribution to win |
 | Number | [Sorting Numbers](sorting-numbers) | A trivia-style quiz where you sort numbers from cryptic clues |
 | Word | [Bracket City](bracket-city) | A clone of [the original](https://www.theatlantic.com/games/bracket-city/) for making and sharing your own |
