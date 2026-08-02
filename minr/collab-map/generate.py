@@ -32,10 +32,10 @@ for line in lines:
         # increment the count for this pair
         collaboration_counts[(x, y)] += 1
     
-# create the nodes for the graph
+# create the nodes for the graph (sorted, so the JSON output is reproducible)
 nodes = [
     {"id": creator, "name": creator}
-    for creator in all_creators
+    for creator in sorted(all_creators)
 ]
 
 # create the edges for the graph
