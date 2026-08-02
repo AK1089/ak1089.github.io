@@ -14,6 +14,7 @@ from extensions.image import ImageFormatter
 from extensions.downloads import DownloadFormatter
 from extensions.spoiler import SpoilerFormatter
 from extensions.blockquote import BlockquoteFormatter
+from extensions.environments import EnvironmentFormatter
 from markdown_katex import wrapper as katex_wrapper
 from markdown_katex.extension import (
     iter_inline_katex, BLOCK_START_RE, FENCE_RE, _clean_block_text,
@@ -279,8 +280,10 @@ def _create_md_instance() -> markdown.Markdown:
         "nl2br",
         "sane_lists",
         "smarty",
+        "md_in_html",
         KatexExtension(insert_fonts_css=False),
         BlockquoteFormatter(),
+        EnvironmentFormatter(),
         CodeFormatter(),
         ImageFormatter(),
         DownloadFormatter(),
