@@ -1,9 +1,12 @@
 from datetime import UTC, datetime
 from itertools import combinations
 from json import dumps
+from pathlib import Path
+
+DATA_DIR = Path(__file__).parent
 
 # read the raw data from the text file
-with open("minr/collab-map/raw-data.txt", "r") as f:
+with open(DATA_DIR / "raw-data.txt", "r") as f:
     lines = f.readlines()
     
 # parse the data into a set of creators and collaborations
@@ -61,7 +64,7 @@ data = {
 }
 
 # write the data to a JSON file
-with open("minr/collab-map/data.json", "w") as f:
+with open(DATA_DIR / "data.json", "w") as f:
     f.write(dumps(data, indent=4))
     
 # create the set of creators in lowercase
