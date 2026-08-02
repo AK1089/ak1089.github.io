@@ -1,6 +1,7 @@
 import json
 import subprocess
 from pathlib import Path
+from typing import Any
 
 
 def get_parent_url(url):
@@ -25,7 +26,7 @@ def generate_flat_sitemap(start_path):
         except json.JSONDecodeError:
             print("Warning: Existing map.json was invalid")
 
-    results = []
+    results: list[dict[str, Any]] = []
 
     # Add root if not in existing map
     if "/" not in existing_map:
@@ -46,7 +47,7 @@ def generate_flat_sitemap(start_path):
 
         # Convert path to URL by getting the parent directory of index.html
         relative_path = path.parent.relative_to(site_root)
-        url = f"/{str(relative_path)}".replace("\\", "/")
+        url = f"/{relative_path!s}".replace("\\", "/")
         if url == "/.":  # Handle root directory
             continue  # Skip as we already added root
 
@@ -66,21 +67,21 @@ def generate_flat_sitemap(start_path):
                 "display": True
             }
         )
-        
+
     # get the actual urls which are still in use
     valid_base_urls = [page["url"] for page in results]
-        
+
     # scan through the previous items for purely organisational branches which aren't pages
     for url, data in existing_map.items():
-        
+
         # ignore ones which are actual pages
         if "#" not in url:
             continue
-        
+
         # get the actual page url: if it is still a valid page, use it
         if url.split("#")[0] in valid_base_urls:
             results.append(data)
-        
+
 
     # Sort results by URL length (shorter URLs first) and then alphabetically
     results.sort(key=lambda x: (len(x["url"].split("/")), x["url"]))
@@ -95,7 +96,8 @@ def update_index_with_tree(map_dir):
     result = subprocess.run(
         ["python3", str(tree_script)],
         capture_output=True,
-        text=True
+        text=True,
+        check=False
     )
 
     if result.returncode != 0:

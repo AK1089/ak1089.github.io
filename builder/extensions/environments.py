@@ -1,6 +1,7 @@
+import re
+
 from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
-import re
 
 # Boxed, numbered environments (mirroring the amsthm boxes in the PDF notes).
 BOXED = {"theorem", "definition", "proposition", "example", "remark", "lemma"}
@@ -68,8 +69,8 @@ class EnvironmentPreprocessor(Preprocessor):
         num, title = "", ""
         if suffix:
             m = _TITLE.match(suffix)
-            num = m.group(1) or ""
-            title = m.group(2) or ""
+            num = "" if m is None else m.group(1) or ""
+            title = "" if m is None else m.group(2) or ""
         head = f'<span class="env-label">{label}{(" " + num) if num else ""}</span>'
         if title:
             head += f' <span class="env-title">{title}</span>'

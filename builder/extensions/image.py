@@ -1,8 +1,9 @@
+import html
+import re
+from pathlib import Path
+
 from markdown.extensions import Extension
 from markdown.postprocessors import Postprocessor
-from pathlib import Path
-import re
-import html
 
 
 class ImageFormatter(Extension):
@@ -40,12 +41,7 @@ def _get_avif_variants(source_dir: Path, stem: str, suffix: str) -> list[Path]:
 class ImageWrapper(Postprocessor):
     @staticmethod
     def _is_local_source(src: str) -> bool:
-        return not (
-            src.startswith("http://")
-            or src.startswith("https://")
-            or src.startswith("data:")
-            or src.startswith("//")
-        )
+        return not src.startswith(("http://", "https://", "data:", "//"))
 
     def _build_responsive_attrs(self, src: str) -> str:
         if not self._is_local_source(src):

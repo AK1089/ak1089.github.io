@@ -1,23 +1,27 @@
-from pathlib import Path
 import json
-import markdown
 import os
 import subprocess
-import yaml
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
+from pathlib import Path
 from sys import argv
 from threading import local as thread_local
-from markdown_katex import KatexExtension
-from extensions.code import CodeFormatter
-from extensions.image import ImageFormatter
-from extensions.downloads import DownloadFormatter
-from extensions.spoiler import SpoilerFormatter
+
+import markdown
+import yaml
 from extensions.blockquote import BlockquoteFormatter
+from extensions.code import CodeFormatter
+from extensions.downloads import DownloadFormatter
 from extensions.environments import EnvironmentFormatter
+from extensions.image import ImageFormatter
+from extensions.spoiler import SpoilerFormatter
+from markdown_katex import KatexExtension
 from markdown_katex import wrapper as katex_wrapper
 from markdown_katex.extension import (
-    iter_inline_katex, BLOCK_START_RE, FENCE_RE, _clean_block_text,
+    BLOCK_START_RE,
+    FENCE_RE,
+    _clean_block_text,
+    iter_inline_katex,
 )
 
 # Pre-seed the KaTeX options cache so that KatexExtension.__init__ never
@@ -139,6 +143,7 @@ def _prewarm_katex_cache(text: str) -> None:
         capture_output=True,
         text=True,
         cwd=str(ROOT),
+        check=False
     )
 
     if proc.returncode != 0:
@@ -157,7 +162,7 @@ def batched_katex_cache_cleanup():
     render. Disable that inside a build run and clean once at the end.
     """
     original_cleanup = katex_wrapper._cleanup_cache_dir
-    katex_wrapper._cleanup_cache_dir = lambda: None
+    katex_wrapper._cleanup_cache_dir = lambda: None  # ty: ignore[invalid-assignment]
     try:
         yield
     finally:
@@ -188,20 +193,17 @@ def should_process_markdown_file(md_path: Path) -> bool:
         return False
 
     # Allow site content at root (`index.md`) but skip repository docs.
-    if md_path.parent == ROOT and md_path.name != "index.md":
-        return False
-
-    return True
+    return not (md_path.parent == ROOT and md_path.name != "index.md")
 
 
 class HeaderMetadata:
     def __init__(self, path: Path, frontmatter: dict):
         self.title = frontmatter.get("title", path.stem.replace("-", " ").title())
-        
+
         date = frontmatter.get("date")
         assert date is not None, "Date is required in frontmatter"
         self.date = date.strftime("%B %d, %Y")
-        
+
         updated = frontmatter.get("updated")
         self.updated = None if updated is None else updated.strftime("%B %d, %Y")
 
@@ -210,7 +212,7 @@ class HeaderMetadata:
         # create breadcrumb path (excluding the file itself)
         self.path_parts = []
         relative_path = path.relative_to(ROOT)
-                
+
         # Create breadcrumb path (excluding the file itself)
         self.path_parts = [
             (p.name, f"/{p}") for p in relative_path.parents if p != Path(".")
@@ -384,7 +386,8 @@ def build_file(
 
     # convert markdown and add header
     md_inst.reset()
-    setattr(md_inst, "current_source_dir", md_path.parent)
+    # Custom attribute read back by the image extension.
+    md_inst.current_source_dir = md_path.parent  # ty: ignore[invalid-assignment]
     content_html = md_inst.convert(content)
     extra_head = KATEX_HEAD_LINK if 'class="katex' in content_html else ""
     page_html = create_header_html(metadata) + content_html

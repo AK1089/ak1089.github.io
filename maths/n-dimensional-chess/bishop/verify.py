@@ -5,10 +5,11 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter, deque
-from functools import lru_cache
-from itertools import combinations, combinations_with_replacement, product
+from collections.abc import Iterable
+from functools import cache
+from itertools import combinations, combinations_with_replacement, pairwise, product
 from math import comb
-from typing import Any, Iterable
+from typing import Any
 
 BOARD_SIDE = 8
 BOARD_VALUES = tuple(range(BOARD_SIDE))
@@ -46,7 +47,7 @@ def apply_moves(start: Point, moves: Iterable[MoveVector]) -> tuple[Point, ...]:
     return tuple(positions)
 
 
-@lru_cache(maxsize=None)
+@cache
 def coordinate_options(start: int, end: int, pattern: Pattern) -> tuple[MoveTriple, ...]:
     """All legal one-coordinate increment triples for a fixed three-move pattern."""
 
@@ -69,7 +70,7 @@ def coordinate_options(start: int, end: int, pattern: Pattern) -> tuple[MoveTrip
     return tuple(options)
 
 
-@lru_cache(maxsize=None)
+@cache
 def coordinate_support_masks(start: int, end: int, pattern: Pattern) -> tuple[int, ...]:
     masks = {
         ((first != 0) << 0) | ((second != 0) << 1) | ((third != 0) << 2)
@@ -94,7 +95,7 @@ def find_path_for_pattern(start: Point, end: Point, pattern: Pattern) -> tuple[M
     if len(start) < 4:
         raise ValueError("Template construction requires at least four dimensions.")
     if start == end:
-        return tuple()
+        return ()
 
     options_by_axis = [coordinate_options(source, target, pattern) for source, target in zip(start, end)]
     if any(not options for options in options_by_axis):
@@ -103,10 +104,10 @@ def find_path_for_pattern(start: Point, end: Point, pattern: Pattern) -> tuple[M
     order = tuple(sorted(range(len(start)), key=lambda axis: len(options_by_axis[axis])))
     reverse_order = {axis: offset for offset, axis in enumerate(order)}
 
-    @lru_cache(maxsize=None)
+    @cache
     def search(offset: int, counts: tuple[int, int, int]) -> tuple[MoveTriple, ...] | None:
         if offset == len(order):
-            return tuple() if counts == (2, 2, 2) else None
+            return () if counts == (2, 2, 2) else None
 
         axis = order[offset]
         for choice in options_by_axis[axis]:
@@ -172,7 +173,7 @@ def legal_step_signs(position_value: int, length: int) -> tuple[int, ...]:
     return tuple(signs)
 
 
-@lru_cache(maxsize=None)
+@cache
 def legal_s_bishop_moves(position: Point) -> tuple[Point, ...]:
     """All legal one-move destinations for the S-bishop from a given point."""
 
@@ -196,7 +197,7 @@ def shortest_path_3d(start: Point, end: Point) -> tuple[MoveVector, ...]:
     if len(start) != 3 or len(end) != 3:
         raise ValueError("This solver only applies to 3D points.")
     if start == end:
-        return tuple()
+        return ()
 
     queue: deque[Point] = deque([start])
     parents: dict[Point, Point | None] = {start: None}
@@ -221,7 +222,7 @@ def shortest_path_3d(start: Point, end: Point) -> tuple[MoveVector, ...]:
 
     return tuple(
         tuple(destination[axis] - source[axis] for axis in range(3))
-        for source, destination in zip(positions, positions[1:])
+        for source, destination in pairwise(positions)
     )
 
 
@@ -276,8 +277,8 @@ def verify_proposition_1() -> dict[str, Any]:
 
     sample_start = (0, 0, 0, 0)
     sample_end = (7, 7, 7, 7)
-    sample_pattern, sample_moves = find_high_dimensional_path(sample_start, sample_end) or (None, tuple())
-    sample_positions = apply_moves(sample_start, sample_moves) if sample_moves else tuple()
+    sample_pattern, sample_moves = find_high_dimensional_path(sample_start, sample_end) or (None, ())
+    sample_positions = apply_moves(sample_start, sample_moves) if sample_moves else ()
     return {
         "verified": True,
         "checked_multisets": checked_multisets,

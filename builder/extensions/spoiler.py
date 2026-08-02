@@ -1,6 +1,8 @@
+import xml.etree.ElementTree as etree
+
 from markdown.extensions import Extension
 from markdown.inlinepatterns import InlineProcessor
-import xml.etree.ElementTree as etree
+
 
 class SpoilerFormatter(Extension):
    def extendMarkdown(self, md):

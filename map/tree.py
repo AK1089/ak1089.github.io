@@ -5,10 +5,9 @@ Generate a visual tree structure from map.json
 
 import json
 from pathlib import Path
-from typing import Dict, List, Optional
 
 
-def load_map_data(json_path: str | Path) -> List[Dict]:
+def load_map_data(json_path: str | Path) -> list[dict]:
     """Load and filter the map data from JSON file."""
     with open(json_path, 'r') as f:
         data = json.load(f)
@@ -17,7 +16,7 @@ def load_map_data(json_path: str | Path) -> List[Dict]:
     return [entry for entry in data if entry.get('display', True)]
 
 
-def build_tree(entries: List[Dict]) -> Dict[Optional[str], List[Dict]]:
+def build_tree(entries: list[dict]) -> dict[str | None, list[dict]]:
     """Build a tree structure organized by parent."""
     tree = {}
     for entry in entries:
@@ -27,13 +26,13 @@ def build_tree(entries: List[Dict]) -> Dict[Optional[str], List[Dict]]:
         tree[parent].append(entry)
 
     # Sort children by name for consistent output
-    for parent in tree:
-        tree[parent].sort(key=lambda x: x['name'])
+    for children in tree.values():
+        children.sort(key=lambda x: x['name'])
 
     return tree
 
 
-def print_tree(tree: Dict[Optional[str], List[Dict]], parent: Optional[str] = None,
+def print_tree(tree: dict[str | None, list[dict]], parent: str | None = None,
                prefix: str = "", is_last: bool = True):
     """Recursively print the tree structure."""
     if parent not in tree:

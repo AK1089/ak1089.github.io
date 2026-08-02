@@ -1,6 +1,7 @@
+import re
+
 from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
-import re
 
 
 class BlockquoteFormatter(Extension):

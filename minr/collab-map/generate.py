@@ -1,5 +1,5 @@
+from datetime import UTC, datetime
 from itertools import combinations
-from datetime import datetime
 from json import dumps
 
 # read the raw data from the text file
@@ -49,7 +49,7 @@ links = [
 ]
 
 # create metadata for the graph
-last_updated = datetime.now().strftime("%Y-%m-%d")
+last_updated = datetime.now(UTC).strftime("%Y-%m-%d")
 source = "https://docs.google.com/spreadsheets/d/12adnu29aV7pS7K62oacxKRFdaRifxzzw8-x1A-514MI/"
 
 # create the final data structure
@@ -65,9 +65,7 @@ with open("minr/collab-map/data.json", "w") as f:
     f.write(dumps(data, indent=4))
     
 # create the set of creators in lowercase
-lowercased = set([
-    creator.lower() for creator in all_creators
-])
+lowercased = {creator.lower() for creator in all_creators}
 
 # remove the lowercase versions of the creators from the set
 for creator in all_creators:

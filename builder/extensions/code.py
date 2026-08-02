@@ -1,6 +1,7 @@
+import re
+
 from markdown.extensions import Extension
 from markdown.postprocessors import Postprocessor
-import re
 
 _CODE_BLOCK_RE = re.compile(
     r'<pre><code class="language-([^"]*)">(.*?)</code></pre>', re.DOTALL
