@@ -276,6 +276,12 @@
     "display": true
   },
   {
+    "name": "Anki",
+    "url": "/other/anki",
+    "parent": "/other",
+    "display": true
+  },
+  {
     "name": "Website Design",
     "url": "/other/design",
     "parent": "/other",
