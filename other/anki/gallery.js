@@ -1,4 +1,27 @@
 (() => {
+    document.querySelectorAll('.deck-footer').forEach(footer => {
+        const text = footer.querySelector('p');
+        const download = footer.querySelector('.deck-download');
+        const positionDownload = () => {
+            const bounds = text.getBoundingClientRect();
+            const button = download.getBoundingClientRect();
+            const range = document.createRange();
+            range.selectNodeContents(text);
+            let top = Math.max(0, bounds.height - button.height);
+            // Only lines reaching the button's column constrain its vertical position.
+            for (const rect of range.getClientRects()) {
+                if (rect.right > bounds.right - button.width - 8) {
+                    top = Math.max(top, rect.bottom - bounds.top + 4);
+                }
+            }
+            footer.style.setProperty('--download-top', `${top}px`);
+            footer.style.minHeight = `${Math.max(bounds.height, top + button.height)}px`;
+            footer.classList.add('download-positioned');
+        };
+        new ResizeObserver(positionDownload).observe(text);
+        document.fonts.ready.then(positionDownload);
+    });
+
     const icon = name => `<svg aria-hidden="true" viewBox="0 0 24 24"><use href="/assets/icons/sprite.svg#${name}"></use></svg>`;
     const button = (label, symbol, action) => {
         const element = document.createElement('button');

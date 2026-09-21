@@ -26,10 +26,7 @@
 }
 
 .deck-footer {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 40px;
-    align-items: end;
-    gap: 8px;
+    position: relative;
     margin-top: auto;
 }
 
@@ -39,6 +36,16 @@
 
 .deck-footer .deck-download {
     vertical-align: bottom;
+}
+
+.deck-footer > p:last-child {
+    text-align: right;
+}
+
+.deck-footer.download-positioned > p:last-child {
+    position: absolute;
+    right: 0;
+    top: var(--download-top);
 }
 
 .gallery-icon {
