@@ -1,0 +1,8 @@
+{
+  "periodic-table": { "field": "Symbol", "value": "Fe" },
+  "tube-map": { "field": "Name", "value": "Gloucester Road" },
+  "amsterdam-metro-map": { "field": "Name", "value": "Isolatorweg" },
+  "countries": { "field": "ISO", "value": "JP" },
+  "ipa": { "field": "Symbol", "value": "p" },
+  "alphabet": { "field": "Letter", "value": "R" }
+}
