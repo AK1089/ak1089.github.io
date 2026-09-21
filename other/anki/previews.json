@@ -1,0 +1,129 @@
+{
+  "periodic-table": [
+    {
+      "name": "Details from Position",
+      "front": "previews/periodic-table-3-front.webp",
+      "back": "previews/periodic-table-3-back.webp"
+    },
+    {
+      "name": "Find Element",
+      "front": "previews/periodic-table-4-front.webp",
+      "back": "previews/periodic-table-4-back.webp"
+    },
+    {
+      "name": "Name from Symbol",
+      "front": "previews/periodic-table-1-front.webp",
+      "back": "previews/periodic-table-1-back.webp"
+    },
+    {
+      "name": "Symbol from Name",
+      "front": "previews/periodic-table-2-front.webp",
+      "back": "previews/periodic-table-2-back.webp"
+    },
+    {
+      "name": "Properties",
+      "front": "previews/periodic-table-5-front.webp",
+      "back": "previews/periodic-table-5-back.webp"
+    },
+    {
+      "name": "Trivia",
+      "front": "previews/periodic-table-6-front.webp",
+      "back": "previews/periodic-table-6-back.webp"
+    }
+  ],
+  "tube-map": [
+    {
+      "name": "Station Name",
+      "front": "previews/tube-map-1-front.webp",
+      "back": "previews/tube-map-1-back.webp"
+    },
+    {
+      "name": "Locate Station",
+      "front": "previews/tube-map-2-front.webp",
+      "back": "previews/tube-map-2-back.webp"
+    }
+  ],
+  "amsterdam-metro-map": [
+    {
+      "name": "Station Name",
+      "front": "previews/amsterdam-metro-map-1-front.webp",
+      "back": "previews/amsterdam-metro-map-1-back.webp"
+    },
+    {
+      "name": "Locate Station",
+      "front": "previews/amsterdam-metro-map-2-front.webp",
+      "back": "previews/amsterdam-metro-map-2-back.webp"
+    }
+  ],
+  "countries": [
+    {
+      "name": "Locate Country",
+      "front": "previews/countries-1-front.webp",
+      "back": "previews/countries-1-back.webp"
+    },
+    {
+      "name": "Capital",
+      "front": "previews/countries-2-front.webp",
+      "back": "previews/countries-2-back.webp"
+    },
+    {
+      "name": "Name from Map",
+      "front": "previews/countries-3-front.webp",
+      "back": "previews/countries-3-back.webp"
+    },
+    {
+      "name": "Recognise Flag",
+      "front": "previews/countries-4-front.webp",
+      "back": "previews/countries-4-back.webp"
+    }
+  ],
+  "ipa": [
+    {
+      "name": "Recognize the symbol",
+      "front": "previews/ipa-1-front.webp",
+      "back": "previews/ipa-1-back.webp"
+    },
+    {
+      "name": "Recall the symbol",
+      "front": "previews/ipa-2-front.webp",
+      "back": "previews/ipa-2-back.webp"
+    },
+    {
+      "name": "Decode coordinates",
+      "front": "previews/ipa-3-front.webp",
+      "back": "previews/ipa-3-back.webp"
+    }
+  ],
+  "alphabet": [
+    {
+      "name": "Position to Letter",
+      "front": "previews/alphabet-1-front.webp",
+      "back": "previews/alphabet-1-back.webp"
+    },
+    {
+      "name": "Morse to Letter",
+      "front": "previews/alphabet-2-front.webp",
+      "back": "previews/alphabet-2-back.webp"
+    },
+    {
+      "name": "Letter to Morse",
+      "front": "previews/alphabet-3-front.webp",
+      "back": "previews/alphabet-3-back.webp"
+    },
+    {
+      "name": "Letter to Position",
+      "front": "previews/alphabet-4-front.webp",
+      "back": "previews/alphabet-4-back.webp"
+    },
+    {
+      "name": "Letter to Frequency",
+      "front": "previews/alphabet-5-front.webp",
+      "back": "previews/alphabet-5-back.webp"
+    },
+    {
+      "name": "Letter to NATO",
+      "front": "previews/alphabet-6-front.webp",
+      "back": "previews/alphabet-6-back.webp"
+    }
+  ]
+}
