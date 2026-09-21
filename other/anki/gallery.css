@@ -1,0 +1,267 @@
+.deck-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.deck-card {
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid var(--surface-a);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.deck-card h3 {
+    margin: 1rem 0 0.5rem;
+    font-size: 1.2rem;
+}
+
+.deck-card p {
+    margin: 0 0 1rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.deck-footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 40px;
+    align-items: end;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.deck-card .deck-footer p {
+    margin: 0;
+}
+
+.deck-footer .deck-download {
+    vertical-align: bottom;
+}
+
+.gallery-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    padding: 8px;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.gallery-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.gallery-icon:hover {
+    background: var(--mantle);
+    border-color: var(--surface-a);
+    color: var(--teal);
+}
+
+.gallery-icon:focus-visible,
+.type-dots button:focus-visible,
+.deck-lightbox button:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+}
+
+.type-controls {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.type-dots {
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+}
+
+.type-dots button {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.type-dots button::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--surface-b);
+}
+
+.type-dots button[aria-pressed="true"]::before {
+    background: var(--teal);
+    box-shadow: 0 0 0 3px var(--mantle);
+}
+
+.type-name {
+    grid-column: 1 / -1;
+    min-height: 2.6em;
+    text-align: center;
+    font: 0.8rem/1.3 var(--text-sans);
+    color: var(--subtext-a);
+    overflow-wrap: anywhere;
+}
+
+.deck-lightbox {
+    box-sizing: border-box;
+    margin: auto;
+    width: min(1200px, calc(100vw - 32px));
+    height: min(940px, calc(100dvh - 32px));
+    max-width: none;
+    max-height: none;
+    padding: 16px;
+    border: 1px solid var(--surface-a);
+    border-radius: 8px;
+    background: var(--base);
+    color: var(--text);
+}
+
+.deck-lightbox[open] {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+    gap: 8px;
+}
+
+.deck-lightbox::backdrop {
+    background: rgb(0 0 0 / 75%);
+}
+
+.lightbox-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+}
+
+.lightbox-header select {
+    min-width: 0;
+    max-width: calc(100% - 52px);
+    padding: 8px;
+    border: 1px solid var(--surface-a);
+    border-radius: 4px;
+    color: var(--text);
+    background: var(--base);
+    font: 1rem var(--text-sans);
+}
+
+.lightbox-image {
+    min-height: 0;
+}
+
+.lightbox-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.lightbox-sides {
+    display: flex;
+    justify-content: center;
+}
+
+.lightbox-sides button {
+    width: 90px;
+    height: 40px;
+    background: transparent;
+    color: var(--text);
+    border: 0;
+    border-bottom: 2px solid var(--surface-a);
+    cursor: pointer;
+    font: 0.9rem var(--text-sans);
+}
+
+.lightbox-sides button[aria-pressed="true"] {
+    border-color: var(--teal);
+    background: var(--mantle);
+}
+
+.lightbox-navigation {
+    width: min(400px, 100%);
+    justify-self: center;
+}
+
+.deck-preview {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+
+.deck-preview input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.deck-preview label {
+    padding: 0.5rem;
+    text-align: center;
+    font: 0.8rem var(--text-sans);
+    cursor: pointer;
+    border-bottom: 2px solid var(--surface-a);
+    color: var(--subtext-a);
+}
+
+.deck-preview input:checked + label {
+    color: var(--text);
+    border-color: var(--teal);
+    background: var(--mantle);
+}
+
+.deck-preview input:focus-visible + label {
+    outline: 2px solid var(--teal);
+    outline-offset: -2px;
+}
+
+.deck-preview .preview-image {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: none;
+    aspect-ratio: 20 / 13;
+    margin-top: 0.75rem;
+}
+
+.deck-preview input[value="front"]:checked ~ .preview-front,
+.deck-preview input[value="back"]:checked ~ .preview-back {
+    display: block;
+}
+
+.main-content .deck-preview img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+@media (max-width: 600px) {
+    .deck-gallery {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
