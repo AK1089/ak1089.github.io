@@ -180,6 +180,12 @@
     "display": true
   },
   {
+    "name": "Pie Chart Totals",
+    "url": "/maths/pie-chart-totals",
+    "parent": "/maths#other",
+    "display": true
+  },
+  {
     "name": "Prime Reciprocals",
     "url": "/maths/prime-reciprocal-divergence",
     "parent": "/maths#number-theory",

@@ -23,3 +23,4 @@ I graduated from the University of Cambridge in 2025, where I read Mathematics. 
 
 - A taxonomy of real numbers, which I call the [number zoo](the-number-zoo).
 - Some analysis of [higher-dimensional chess](n-dimensional-chess), including a proof that [bishops are very fast](n-dimensional-chess/bishop).
+- A tiny tool for recovering possible [pie chart totals](pie-chart-totals) from rounded percentages.
