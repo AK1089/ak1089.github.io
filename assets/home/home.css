@@ -1,0 +1,223 @@
+.home-carousel {
+    clear: both;
+    margin: 1.5rem 0;
+}
+
+.carousel-track {
+    position: relative;
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 10% 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+/* Cards */
+
+.main-content .home-card {
+    position: relative;
+    flex: 0 0 80%;
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--surface-a);
+    border-radius: 8px;
+    background: var(--base);
+    color: var(--subtext-a);
+    text-decoration: none;
+    opacity: 0.45;
+    transform: scale(0.94);
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.main-content .home-card.is-current {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.main-content .home-card.is-current:hover {
+    color: var(--subtext-a);
+    border-color: var(--accent);
+    box-shadow: 0 8px 20px rgb(0 0 0 / 8%);
+    transform: translateY(-4px);
+}
+
+.home-card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.main-content .home-card img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 20 / 13;
+    object-fit: cover;
+    border-radius: 0;
+    border-bottom: 1px solid var(--surface-a);
+}
+
+/* A sheen of light sweeps across the preview on hover */
+.home-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    aspect-ratio: 20 / 13;
+    z-index: 1;
+    background: linear-gradient(115deg, transparent 35%, rgb(255 255 255 / 45%) 50%, transparent 65%) no-repeat;
+    background-size: 250% 100%;
+    background-position: 150% 0;
+    pointer-events: none;
+}
+
+.home-card.is-current:hover::before {
+    background-position: -50% 0;
+    transition: background-position 0.8s ease;
+}
+
+.carousel-track.is-jumping .home-card {
+    transition: none;
+}
+
+.home-card-body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 3.5rem 1rem 1.25rem;
+    border-top: 3px solid var(--accent);
+    background: var(--base);
+    font: 0.9rem/1.5 var(--text-sans);
+}
+
+.home-card-kicker {
+    color: var(--accent);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.home-card strong {
+    color: var(--text);
+    font-size: 1.15rem;
+}
+
+/* An arrow slides in at the right of the card body on hover */
+.home-card-body::after {
+    content: '→';
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    color: var(--accent);
+    font-size: 1.5rem;
+    opacity: 0;
+    transform: translate(-8px, -50%);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.home-card.is-current:hover .home-card-body::after {
+    opacity: 1;
+    transform: translate(0, -50%);
+}
+
+/* Controls */
+
+.carousel-controls {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+    align-items: center;
+    width: min(320px, 100%);
+    margin: 0 auto;
+}
+
+.carousel-arrow {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.carousel-arrow svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.carousel-arrow:hover {
+    background: var(--mantle);
+    border-color: var(--surface-a);
+    color: var(--teal);
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-dots button {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.carousel-dots button::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 4px;
+    background: var(--surface-b);
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+.carousel-dots button[aria-current="true"]::before {
+    width: 18px;
+    background: var(--teal);
+}
+
+.carousel-arrow:focus-visible,
+.carousel-dots button:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-carousel * {
+        transition: none !important;
+    }
+
+    .home-card::before {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .carousel-track {
+        padding-inline: 5%;
+    }
+
+    .main-content .home-card {
+        flex-basis: 90%;
+    }
+}

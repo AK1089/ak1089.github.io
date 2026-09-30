@@ -1,28 +1,34 @@
 ---
 title: Home
 date: 2024-04-19
-updated: 2026-04-06
+updated: 2026-09-30
 address_bar_title: Home | AK1089's Site
 ---
 
 </p><img src="/assets/images/portrait.avif" alt="A picture of me" style="float: right !important; width: 25% !important; margin-left: 20px !important; margin-bottom: 10px !important; border: none !important; padding: 0 !important; filter: brightness(1.2) !important; box-shadow: none !important;" /><p>
 
-Welcome! My name is Avish, and this is my personal site for things I make or find interesting. I'm 22 years old, born and raised in London, and am currently working as a quantitative researcher in Amsterdam.
+Welcome! My name is Avish, and this is my site for things I make or find interesting. I'm 22 years old, born and raised in London, and am currently working as a quantitative researcher in Amsterdam.
 
-In my free time, I enjoy programming, reading, making and solving puzzles, social deduction games, board games, playing on Minr, and creating things. Online, I often go by AK1089, after my initials and [favourite number](https://en.wikipedia.org/wiki/1089_%28number%29#In_magic). You can find me at the social links down on the left.
-
-<br>
+In my free time, I enjoy programming, reading, making and solving puzzles, social deduction games, board games, travelling, doing maths, and more. Online, I often go by AK1089, after my initials and [favourite number](https://en.wikipedia.org/wiki/1089_%28number%29#In_magic).
 
 ## What's Here
 
-See the site sections on the sidebar, or view everything from the [site map](map). Popular pages include:
- 
-- My [collection of puzzles](/puzzles) of various genres
-- My [lecture notes](/maths/notes) from Part II Mathematics at Cambridge
-- Minr-specific [utilities](/minr) I've built, especially the [map art creator](/minr/map-art)
+See categories on the sidebar or view everything from the [site map](map). My favourite pages include:
 
-Recently, I've looked at [higher-dimensional chess](/maths/n-dimensional-chess/) and [prime numbers](/maths/prime-reciprocal-divergence/).
+<link rel="stylesheet" href="/assets/home/home.css">
+<script src="/assets/home/home.js" defer></script>
 
-## Site Features
-
-I designed this site myself, using vanilla <span style="color: #e34c26">HTML</span>,  <span style="color: #c4b018">JavaScript</span>, and  <span style="color: #264de4">CSS</span>.  I use a custom Markdown parser to convert my written content into formatted HTML which meets my specifications. You can see all the code for this website [here](https://github.com/AK1089/ak1089.github.io), or read more about my design principles, choices, and influences [here](/other/design).
+<div class="home-carousel" aria-roledescription="carousel" aria-label="Favourite pages">
+<div class="carousel-track">
+<a class="home-card" href="/other/anki/" style="--accent: var(--teal)"><img src="/other/anki/previews/periodic-table-front.webp" alt="" width="1200" height="780" loading="lazy"><span class="home-card-body"><span class="home-card-kicker">Other</span><strong>Anki Decks</strong><span>Flashcard decks for elements, metro maps, and more.</span></span></a>
+<a class="home-card" href="/puzzles/logic-gates/" style="--accent: var(--purple)"><img src="/assets/home/logic-gates.webp" alt="" width="1200" height="780" loading="lazy"><span class="home-card-body"><span class="home-card-kicker">Puzzles</span><strong>Logic Gates</strong><span>Work out three mystery gates from five diagrams.</span></span></a>
+<a class="home-card" href="/maths/notes/" style="--accent: var(--darkblue)"><img src="/assets/home/notes.webp" alt="" width="1200" height="780" loading="lazy"><span class="home-card-body"><span class="home-card-kicker">Maths</span><strong>Cambridge Notes</strong><span>Lecture notes from Part II Mathematics.</span></span></a>
+<a class="home-card" href="/games/randomness/" style="--accent: var(--peach)"><img src="/assets/home/randomness.webp" alt="" width="1200" height="780" loading="lazy"><span class="home-card-body"><span class="home-card-kicker">Games</span><strong>Randomness Test</strong><span>Can you fake a fair coin?</span></span></a>
+<a class="home-card" href="/maths/n-dimensional-chess/" style="--accent: var(--darkblue)"><img src="/assets/home/n-dimensional-chess.webp" alt="" width="1200" height="780" loading="lazy"><span class="home-card-body"><span class="home-card-kicker">Maths</span><strong>N-Dimensional Chess</strong><span>How chess pieces move in higher dimensions.</span></span></a>
+</div>
+<div class="carousel-controls">
+<button class="carousel-arrow" data-step="-1" aria-label="Previous page"><svg aria-hidden="true" viewBox="0 0 24 24"><use href="/assets/icons/sprite.svg#chevron-left"></use></svg></button>
+<div class="carousel-dots"></div>
+<button class="carousel-arrow" data-step="1" aria-label="Next page"><svg aria-hidden="true" viewBox="0 0 24 24"><use href="/assets/icons/sprite.svg#chevron-right"></use></svg></button>
+</div>
+</div>
