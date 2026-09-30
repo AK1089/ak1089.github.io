@@ -300,6 +300,12 @@
     "display": true
   },
   {
+    "name": "Pincer Dismissal",
+    "url": "/other/pincer-dismissal",
+    "parent": "/other",
+    "display": true
+  },
+  {
     "name": "12 Coins",
     "url": "/puzzles/12-coins",
     "parent": "/puzzles#optimisation",
