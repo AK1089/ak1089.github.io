@@ -162,6 +162,12 @@
     "display": true
   },
   {
+    "name": "The Kelly Criterion",
+    "url": "/maths/kelly",
+    "parent": "/maths#probability",
+    "display": true
+  },
+  {
     "name": "Laplace's Rule Of Succession",
     "url": "/maths/laplaces-rule-of-succession",
     "parent": "/maths#probability",

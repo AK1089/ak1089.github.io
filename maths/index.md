@@ -14,6 +14,7 @@ I graduated from the University of Cambridge in 2025, where I read Mathematics. 
 - A very incomplete [catalogue](probability-distributions) of probability distributions.
 - An [explainer](laplaces-rule-of-succession) and [interactive model](laplaces-rule-of-succession/interactive) of Laplace's Rule of Succession.
 - An [article](tail-events) about Chebyshev's inequality and extreme tail events (black swans), and a [proof](tail-events/chebyshev-25) that Chebyshev's inequality is not tight for sample means.
+- An [introduction](kelly) to the Kelly criterion for optimal bet sizing.
 
 ## Number Theory
 
