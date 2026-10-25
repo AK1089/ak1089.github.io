@@ -19,6 +19,31 @@
     font-size: 1.2rem;
 }
 
+.deck-card h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.deck-card h3 a:hover {
+    color: var(--teal);
+    text-decoration: underline;
+}
+
+.gallery-status {
+    grid-column: 1 / -1;
+}
+
+.gallery-retry {
+    margin-left: 0.5rem;
+    padding: 0.35rem 0.65rem;
+    border: 1px solid var(--surface-a);
+    border-radius: 4px;
+    background: var(--base);
+    color: var(--text);
+    font: inherit;
+    cursor: pointer;
+}
+
 .deck-card p {
     margin: 0 0 1rem;
     font-size: 0.9rem;
@@ -27,7 +52,7 @@
 
 .deck-footer {
     position: relative;
-    margin-top: auto;
+    flex-grow: 1;
 }
 
 .deck-card .deck-footer p {
@@ -45,7 +70,7 @@
 .deck-footer.download-positioned > p:last-child {
     position: absolute;
     right: 0;
-    top: var(--download-top);
+    bottom: 0;
 }
 
 .gallery-icon {
@@ -80,6 +105,7 @@
 }
 
 .gallery-icon:focus-visible,
+.gallery-retry:focus-visible,
 .type-dots button:focus-visible,
 .deck-lightbox button:focus-visible {
     outline: 2px solid var(--teal);
@@ -103,6 +129,8 @@
     display: grid;
     place-items: center;
     width: 28px;
+    flex: 0 1 28px;
+    min-width: 0;
     height: 40px;
     padding: 0;
     border: 0;
