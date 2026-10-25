@@ -228,6 +228,12 @@
     "display": true
   },
   {
+    "name": "All About UUIDs",
+    "url": "/minr/all-about-uuids",
+    "parent": "/minr#guides",
+    "display": true
+  },
+  {
     "name": "Bulk Imports",
     "url": "/minr/bulk-import",
     "parent": "/minr#guides",

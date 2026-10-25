@@ -31,6 +31,7 @@ A major draw of the server is the custom plugin, which includes Minr Script Code
 
 - Set up a [resource pack](resource-packs) for your map.
 - How do [functions](functions) work?
+- Learn [all about UUIDs](all-about-uuids) by building a selector-to-entity converter.
 - Make a [search map](search) with minimal scripting knowledge.
 - Some [tips](script-polish) for making your maps feel more polished.
 - How to [bulk import dialogue scripts](bulk-import) onto armor stands.

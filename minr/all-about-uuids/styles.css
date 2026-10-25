@@ -1,0 +1,51 @@
+.converter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.75rem 1rem;
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    background-color: var(--mantle);
+    border: 1px solid var(--crust);
+    border-radius: 8px;
+}
+
+.converter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    flex: 1 1 12rem;
+    max-width: 16rem;
+}
+
+.converter-field span {
+    font-family: var(--text-sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--subtext-a);
+}
+
+.converter-field input {
+    font-family: "Cascadia Code", ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 1rem;
+    padding: 0.5rem 0.65rem;
+    color: var(--text);
+    background-color: var(--base);
+    border: 1px solid var(--surface-a);
+    border-radius: 6px;
+    min-width: 0;
+}
+
+.converter-field input:focus {
+    outline: none;
+    border-color: var(--link);
+    box-shadow: 0 0 0 3px rgba(77, 115, 191, 0.2);
+}
+
+.converter-arrow {
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    color: var(--overlay-b);
+}
