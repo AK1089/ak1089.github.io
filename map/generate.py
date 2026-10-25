@@ -13,7 +13,7 @@ def get_parent_url(url):
 
 def generate_flat_sitemap(start_path):
     # Define directories to block
-    blocklist = {"assets", "styles", "scripts", "node_modules", "venv"}
+    blocklist = {"archive", "assets", "styles", "scripts", "node_modules", "venv"}
 
     # Try to load existing map
     existing_map = {}

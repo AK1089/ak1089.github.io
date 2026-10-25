@@ -45,3 +45,6 @@ bower_components/
 .tox/
 .nox/
 .mypy_cache/
+
+# Local archive of old site versions
+archive/
