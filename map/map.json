@@ -174,6 +174,12 @@
     "display": true
   },
   {
+    "name": "Markov Chain Convergence",
+    "url": "/maths/markov-chain-convergence",
+    "parent": "/maths#probability",
+    "display": true
+  },
+  {
     "name": "N-Dimensional Chess",
     "url": "/maths/n-dimensional-chess",
     "parent": "/maths#other",
@@ -194,6 +200,12 @@
   {
     "name": "Prime Reciprocals",
     "url": "/maths/prime-reciprocal-divergence",
+    "parent": "/maths#number-theory",
+    "display": true
+  },
+  {
+    "name": "Primes and Irreducibles",
+    "url": "/maths/primes-and-irreducibles",
     "parent": "/maths#number-theory",
     "display": true
   },
