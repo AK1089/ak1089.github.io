@@ -29,6 +29,9 @@
     <symbol id="check" viewBox="0 0 24 24">
         <path d="M20 6L9 17l-5-5"/>
     </symbol>
+    <symbol id="shuffle" viewBox="0 0 24 24">
+        <path d="M2 18h3C10 18 12 6 17 6h4M2 6h3C6.8 6 8.21 7.56 9.51 9.55M12.49 14.45C13.79 16.44 15.2 18 17 18h4M18 3l3 3-3 3M18 15l3 3-3 3"/>
+    </symbol>
     <symbol id="download" viewBox="0 0 24 24">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
     </symbol>
