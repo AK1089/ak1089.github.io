@@ -14,6 +14,7 @@ from extensions.code import CodeFormatter
 from extensions.dollar import rewrite_dollars
 from extensions.downloads import DownloadFormatter
 from extensions.environments import EnvironmentFormatter
+from extensions.gates import GateFormatter
 from extensions.image import ImageFormatter
 from extensions.spoiler import SpoilerFormatter
 from markdown_katex import KatexExtension
@@ -291,6 +292,7 @@ def _create_md_instance() -> markdown.Markdown:
         ImageFormatter(),
         DownloadFormatter(),
         SpoilerFormatter(),
+        GateFormatter(),
     ])
 
 

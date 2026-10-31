@@ -764,6 +764,68 @@ figcaption {
     display: none;
 }
 
+/* Gates (builder/extensions/gates.py): a divider with buttons that reveal the rest of the page */
+.gate {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 2rem 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--surface-b);
+    font-family: var(--text-sans);
+}
+
+.gate button,
+.gate-skipped {
+    padding: 0.35rem 0.9rem;
+    border: 1px solid var(--surface-a);
+    border-radius: 999px;
+    background: none;
+    color: var(--text);
+    font: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.gate button:hover:not(:disabled),
+.gate-skipped:hover {
+    background: var(--crust);
+}
+
+.gate .gate-all {
+    border-color: transparent;
+    color: var(--overlay-b);
+}
+
+/* Once used, a gate is just a divider labelled with the choice that was made: ——— Label ——— */
+.gate-used {
+    padding-top: 0;
+    border-top: none;
+}
+
+.gate-used::before,
+.gate-used::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid var(--surface-b);
+}
+
+.gate-used button:disabled {
+    border-color: transparent;
+    color: var(--overlay-b);
+    cursor: default;
+}
+
+.gate-skipped {
+    display: block;
+    margin: 1rem auto;
+    border-style: dashed;
+    color: var(--subtext-a);
+    font-family: var(--text-sans);
+}
+
 blockquote {
     --quote-fg: var(--red);
     --quote-bg: #FFF6F6;
