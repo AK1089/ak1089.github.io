@@ -43,9 +43,9 @@ I also started using SVG icons, built off a single spritesheet. These are all st
 
 Thanks to the wonderful work of [KaTeX](https://katex.org/) and specifically the `markdown-katex` [Python library](https://pypi.org/project/markdown-katex/), this site serves fast and beautiful LaTeX prerendered by the server.
 
-```math
+$$
 \oint_{C} (P \, dx + Q \, dy) = \iint_{D} \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) \, dA \quad \text{(Green's Theorem).}
-```
+$$
 
 Previously, I would have used client-side rendering for mathematical content, due to my lack of care for scripts. This is a lot nicer!
 

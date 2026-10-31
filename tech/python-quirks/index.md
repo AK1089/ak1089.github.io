@@ -20,7 +20,7 @@ This is because Python ||preallocates the integers from -5 to 256 at initialisat
 int((3.0 * 0.1 - 0.3) ** (-0.1))
 ```
 
-This maps to an integer, despite the fact that $`(3 \times 0.1 - 0.3)^{-0.1} = 0^{-0.1}`$ is undefined. Can you guess the integer?
+This maps to an integer, despite the fact that $(3 \times 0.1 - 0.3)^{-0.1} = 0^{-0.1}$ is undefined. Can you guess the integer?
 
 In fact, it is ||forty-two (42). This is because `0.3` is not representable exactly in binary.||
 

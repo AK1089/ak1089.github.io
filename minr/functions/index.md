@@ -24,7 +24,7 @@ To create a new function in MSC, you use the following syntax:
 ```
 
 - `<namespace>`: The namespace your function will be defined in. This is just a place to keep all the variables and functions for a project organised, so multiple people can use the same names for things without worrying about overlaps. Here, we'll use the `function_demo` namespace.
-- `<returnType>`: The type of value the function will return: is it going to be a word, a number, a list, or something else? Here, since we're calculating a distance, we're going to be returning a `Double`. This is short for a double-precision floating point number, which is a decimal like $`3.141592`$.
+- `<returnType>`: The type of value the function will return: is it going to be a word, a number, a list, or something else? Here, since we're calculating a distance, we're going to be returning a `Double`. This is short for a double-precision floating point number, which is a decimal like $3.141592$.
 - `<functionName>`: This is the name of the function, which you'll use to call it later. Let's call our function `getDistance`. Function names should be clean and descriptive: it should be obvious what they do from the name alone.
 - `<type_1> <argument_1>, ...`: This is list of input arguments the function accepts, specified as pairs of Type and argument name. Arguments, or parameters, are things which a function uses to do its job. The output of a function depends on the arguments. Here, the function needs to know which player we're checking, and the coordinates we want to get the distance to. The argument name doesn't matter except within the function, so name your arguments things which are helpful and easy to remember. Here, we'll call our arguments `player` and `coordinates`, which are of type `Player` and `Int[]` respectively.
 
@@ -60,7 +60,7 @@ Now, let's write our script:
 @define Double distance = (deltaX^2 + deltaY^2 + deltaZ^2)^0.5
 @return distance
 ```
-Here, the distance is calculated as $`\sqrt{x^2 + y^2 + z^2}`$, by Pythagoras' Theorem. On the last line, we use the `@return` keyword. You might recognise this from normal scripts as ending the execution of a program. It still does this in functions, but it has a more important purpose: it *returns* the value of the distance as the function's *output*. We'll see what this means when we use the function.
+Here, the distance is calculated as $\sqrt{x^2 + y^2 + z^2}$, by Pythagoras' Theorem. On the last line, we use the `@return` keyword. You might recognise this from normal scripts as ending the execution of a program. It still does this in functions, but it has a more important purpose: it *returns* the value of the distance as the function's *output*. We'll see what this means when we use the function.
 
 ## Importing functions
 
@@ -170,7 +170,7 @@ We can shorten this to:
 ```msc
 @player You are {{function_demo::getDistance(player, Int[123, 45, 678])}} metres away from the point (123, 45, 678)!
 ```
-`{{•}}` is the *evaluation operator*: it automatically evaluates everything you put inside it. Here, it's evaluating the expression `function_demo::getDistance(player, Int[123, 45, 678])`, which is equal to the distance from the player to $`(123, 45, 678)`$.
+`{{•}}` is the *evaluation operator*: it automatically evaluates everything you put inside it. Here, it's evaluating the expression `function_demo::getDistance(player, Int[123, 45, 678])`, which is equal to the distance from the player to $(123, 45, 678)$.
 
 ## Test yourself
 
@@ -183,7 +183,7 @@ How would you *define* a function in the `function_demo` namespace which:
 How would you *call* the following functions in the `function_demo` namespace from an interact script?
 
 - `giveIngot(Player p)`, to give the player a gold ingot? ||`@var giveIngot(player)`||
-- `Int maximum(Int[] numbers)`, to create the variable `x` and set it to be equal to the largest of $`-4, 10, 17`$, and $`2`$? ||`@define Int x = maximum(Int[-4, 10, 17, 2])`||
+- `Int maximum(Int[] numbers)`, to create the variable `x` and set it to be equal to the largest of $-4, 10, 17$, and $2$? ||`@define Int x = maximum(Int[-4, 10, 17, 2])`||
 
 
 ## More advanced notes and quirks

@@ -6,7 +6,7 @@ address_bar_title: Pie Chart Totals | AK1089's Site
 
 Suppose a pie chart shows rounded whole-number percentages, but the slices came from integer counts. Which totals could have produced it?
 
-A possible total $`N`$ is valid when every entered percentage could be $`\operatorname{round}(100k/N)`$ for some positive integer $`k`$.
+A possible total $N$ is valid when every entered percentage could be $\operatorname{round}(100k/N)$ for some positive integer $k$.
 
 <link rel="stylesheet" href="styles.css">
 

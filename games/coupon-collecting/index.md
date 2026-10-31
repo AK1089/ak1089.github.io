@@ -7,12 +7,12 @@ address_bar_title: Coupon Collecting
 The original [coupon collector's problem](https://en.wikipedia.org/wiki/Coupon_collector%27s_problem) poses the question:
 
 ```quote-question
-If each cereal box contains a random coupon uniformly drawn from $`n`$ varieties, what is the probability that $`t`$ boxes must be bought in order to collect each coupon?
+If each cereal box contains a random coupon uniformly drawn from $n$ varieties, what is the probability that $t$ boxes must be bought in order to collect each coupon?
 ```
 
 A subtly different question arises when considering the case that one does not know the total number of coupons. How many boxes must be bought before you know you have all of them?
 
-Of course, you can never be absolutely certain. But say you buy one billion boxes, and get $`333{,}495{,}391`$ blue, $`333{,}284{,}381`$ red, and $`333{,}220{,}228`$ green coupons. I would be fairly confident that in fact there are three varieties of coupon! Here, you can test that intuition.
+Of course, you can never be absolutely certain. But say you buy one billion boxes, and get $333{,}495{,}391$ blue, $333{,}284{,}381$ red, and $333{,}220{,}228$ green coupons. I would be fairly confident that in fact there are three varieties of coupon! Here, you can test that intuition.
 
 <link rel="stylesheet" href="styles.css">
 
@@ -61,4 +61,4 @@ Of course, you can never be absolutely certain. But say you buy one billion boxe
 
 <script src="script.js" defer></script>
 
-There is an *extremely* simple stopping rule which achieves a success rate of about $`95\%`$ uniformly over all $`n`$. The messages after each round show you what I would have done in your situation using this rule. Can you determine the strategy?
+There is an *extremely* simple stopping rule which achieves a success rate of about $95\%$ uniformly over all $n$. The messages after each round show you what I would have done in your situation using this rule. Can you determine the strategy?

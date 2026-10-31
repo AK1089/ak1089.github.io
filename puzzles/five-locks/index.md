@@ -12,7 +12,7 @@ You have to crack five combination locks, which you do not have the combinations
 
 It takes you one second to try each incorrect combination, no matter the size of the lock, plus an extra half-second for the correct combination. This means that on average the first lock takes 5 seconds to crack, the next 50 seconds, the next 500 (~8 minutes), the next 5000 (~83 minutes), and the last 50000 (~14 hours).
 
-Let's call locks 1--3 the "easy" locks. No matter howa unlucky you are, you can always finish all three of them within twenty minutes: it only takes $`10 + 100 + 1000 = 1110`$ seconds to try every combination on all three.
+Let's call locks 1--3 the "easy" locks. No matter howa unlucky you are, you can always finish all three of them within twenty minutes: it only takes $10 + 100 + 1000 = 1110$ seconds to try every combination on all three.
 
 By contrast, let's call locks 4 and 5 the "hard" locks. Since you're guessing at random, you probably can't crack either of them within an hour.
 
@@ -24,7 +24,7 @@ On average, it takes 555 seconds (a little over nine minutes) to crack the easy 
 
 **Question 1**: What is the probability you can crack all five locks within half an hour?
 
-**Answer**: Your chance of success is ||exactly $`0.08146118\%`$, or slightly under 1 in 1,200.||
+**Answer**: Your chance of success is ||exactly $0.08146118\%$, or slightly under 1 in 1,200.||
 
 This can be found using a dynamic programming method, like the below.
 
@@ -51,7 +51,7 @@ print(sum(
 ))
 ```
 
-This gives the result that there are ||$`814611750000`$ (815 billion)|| orderings to try the numbers which result in a solution taking less than half an hour, out of a total of one quadrillion orderings.
+This gives the result that there are ||$814611750000$ (815 billion)|| orderings to try the numbers which result in a solution taking less than half an hour, out of a total of one quadrillion orderings.
 
 ## Part 2
 

@@ -9,7 +9,7 @@ You're probably familiar with UUIDs in Minecraft. They're the weird strings of n
 
 ## What is a UUID?
 
-A UUID, short for *<b>U</b>niversally <b>U</b>nique <b>ID</b>entifier*, is a 32-character long [hexadecimal](https://byjus.com/maths/hexadecimal-number-system/) number with dashes to separate it into blocks of `8-4-4-4-12`. Hexadecimal is a number system with 16 digits (hexa = 6, deci = 10), which are 0-9 then A-F. For example, the number `23` in hexadecimal represents what we would think of as 35, since $`35 = 2 × 16 + 3 × 1`$.
+A UUID, short for *<b>U</b>niversally <b>U</b>nique <b>ID</b>entifier*, is a 32-character long [hexadecimal](https://byjus.com/maths/hexadecimal-number-system/) number with dashes to separate it into blocks of `8-4-4-4-12`. Hexadecimal is a number system with 16 digits (hexa = 6, deci = 10), which are 0-9 then A-F. For example, the number `23` in hexadecimal represents what we would think of as 35, since $35 = 2 × 16 + 3 × 1$.
 
 The "point" of UUIDs is that they really are unique, and you can (almost) guarantee this *without having to put in effort into ensuring it manually*. Why? Well, let's understand the structure of UUIDs to find out.
 
@@ -23,11 +23,11 @@ The `4` in position 13 represents the version of the UUID (since Minecraft uses 
 
 Why is this unique? Well, probability!
 
-The 13th digit is always 4. The 17th digit can be any of 4 possibilities. The 30 other digits each have 16 possibilities. This means the number of total possible UUIDs is $`4 \times 16^{30} = 2^{122} = 5,316,911,983,139,663,491,615,228,241,121,378,304`$, or over 5 billion billion billion billion. This is a mindblowingly large number. To put it in perspective, if you generated one UUID every second *since the dawn of the universe*, there would be an over 98% chance that they were *all* unique!
+The 13th digit is always 4. The 17th digit can be any of 4 possibilities. The 30 other digits each have 16 possibilities. This means the number of total possible UUIDs is $4 \times 16^{30} = 2^{122} = 5,316,911,983,139,663,491,615,228,241,121,378,304$, or over 5 billion billion billion billion. This is a mindblowingly large number. To put it in perspective, if you generated one UUID every second *since the dawn of the universe*, there would be an over 98% chance that they were *all* unique!
 
-```math
+$$
 \mathbb{P}(\text{collision}) \approx 1 - e^{-t^2/2n} = 1 - e^{-1.89 \cdot 10^{35} / 2^{123}} \approx 0.0176
-```
+$$
 
 That's pretty useful! We can generate these things pretty easily and cheaply, and have a guarantee that they're unique, so we can use them as our internal references for things without worrying that something will break because we've given two things the same name.
 
@@ -54,11 +54,11 @@ A 32-bit integer is an integer which is stored using 32 binary digits, or "bits"
 = 0001 0001 1010 1100 0000 1001 1000 0010
 ```
 
-`00010001101011000000100110000010` in binary is exactly `296487298`. You can see how each 4 bits (also known as a nibble: $`2^4 = 16`$, so each hexadecimal digit contains $`\mathrm{log}_2 (16) = 4`$ times as much information as a bit) correspond to each hexadecimal character, too.
+`00010001101011000000100110000010` in binary is exactly `296487298`. You can see how each 4 bits (also known as a nibble: $2^4 = 16$, so each hexadecimal digit contains $\mathrm{log}_2 (16) = 4$ times as much information as a bit) correspond to each hexadecimal character, too.
 
 However, you might notice something weird. If you put the third number, `-1461925534`, into the converter on the decimal side, you'll notice that it doesn't match up at all with the third octet of hexadecimal digits. We should get `a8dcc962`, but we get a negative number.
 
-Okay, what number *would have* given us the correct answer? Sticking `a8dcc962` into the hexadecimal side of the converter, we get `2833041762`. On a whim, let's calculate $`2833041762 + 1461925534 = 4294967296 = 2^{32}`$. So the number we wanted is exactly $`2^{32}`$ away from the number we have. This is interesting, because we're dealing with 32-bit numbers! In fact, that's exactly why this works. Let's see how `a8dcc962` is stored in binary.
+Okay, what number *would have* given us the correct answer? Sticking `a8dcc962` into the hexadecimal side of the converter, we get `2833041762`. On a whim, let's calculate $2833041762 + 1461925534 = 4294967296 = 2^{32}$. So the number we wanted is exactly $2^{32}$ away from the number we have. This is interesting, because we're dealing with 32-bit numbers! In fact, that's exactly why this works. Let's see how `a8dcc962` is stored in binary.
 
 ```hexadecimal-binary
      a    8    d    c    c    9    6    2
@@ -157,13 +157,13 @@ We use `util::executeAndQueryResult` to steal a number from Minecraft's `/data g
 /execute in {{world}} run data get entity @e[{{selectorString}},limit=1] UUID[{{i}}]
 ```
 
-which is exactly what we want, for each $`i \in \{ 0, 1, 2, 3 \}`$ (this is what the `list::range` part does: as usual in programming, the numbering starts from 0)! It might look like
+which is exactly what we want, for each $i \in \{ 0, 1, 2, 3 \}$ (this is what the `list::range` part does: as usual in programming, the numbering starts from 0)! It might look like
 
 ```minecraft
 /execute in minecraft:theta run data get entity @e[type=pig,x=113,dx=20,y=35,dy=20,z=668,limit=1] UUID[0]
 ```
 
-for the first number of the four. Now, let's work on converting it to hexadecimal. Do you remember the issue with negative numbers being $`2^{32}`$ off where they needed to be? Well, this fixes that! We add $`4294967296`$ to all negative numbers we get, to make them the corresponding positive number which we can then convert into hexadecimal as usual.
+for the first number of the four. Now, let's work on converting it to hexadecimal. Do you remember the issue with negative numbers being $2^{32}$ off where they needed to be? Well, this fixes that! We add $4294967296$ to all negative numbers we get, to make them the corresponding positive number which we can then convert into hexadecimal as usual.
 
 ```msc
     # half the time, this number is negative due to integer overflows.
@@ -190,11 +190,11 @@ How do we convert a `Long` into an eight-digit hexadecimal number? We use the fa
 
 and so by decomposing a number like 670474423 into the form
 
-```math
+$$
 N = \sum_{i=0}^7 a_i \cdot 16^i \quad a_i \in \{0, \, 1, \, \ldots, \, 15\}
-```
+$$
 
-we can reverse this process and get the sequence of digits we need. We use a greedy algorithm to do this: for each base, take off as many as possible (maximise $`a_7`$, then $`a_6`$, then ...). For our specific example of $`670474423`$, we would do:
+we can reverse this process and get the sequence of digits we need. We use a greedy algorithm to do this: for each base, take off as many as possible (maximise $a_7$, then $a_6$, then ...). For our specific example of $670474423$, we would do:
 
 ```decimal
 current number we're working with is 670,474,423.
@@ -220,7 +220,7 @@ so last digit is a 7.
 so the full hexadecimal number is 27f6a0b7.
 ```
 
-Let's implement this in code, using $`\mathrm{pow} = 16^i`$:
+Let's implement this in code, using $\mathrm{pow} = 16^i$:
 
 ```msc
     # converts decimal to hexadecimal using backwards-iterating powers of 16
@@ -235,9 +235,9 @@ Let's implement this in code, using $`\mathrm{pow} = 16^i`$:
     @done
 ```
 
-Here, $`a_i =`$ `Int(currentUUID / pow)` is the biggest multiple of $`16^i`$ you can take off the number you're working with. This is then the next digit of the UUID in hexadecimal, so we can add it to our list (line 5 of the above code block).
+Here, $a_i =$ `Int(currentUUID / pow)` is the biggest multiple of $16^i$ you can take off the number you're working with. This is then the next digit of the UUID in hexadecimal, so we can add it to our list (line 5 of the above code block).
 
-We then need to remove it to "trim" the first hexadecimal digit. This is done with line 7. We take off `Long(Int(currentUUID / pow) * pow)`, which is equal to $`a_i \cdot 16^i`$. This means we can repeat the process with the next largest power of 16.
+We then need to remove it to "trim" the first hexadecimal digit. This is done with line 7. We take off `Long(Int(currentUUID / pow) * pow)`, which is equal to $a_i \cdot 16^i$. This means we can repeat the process with the next largest power of 16.
 
 And with that, we're pretty much done! We just need to do this for all four parts of the UUID (the four integers, as Minecraft stores them), and we can concatenate them together to get our UUID. In fact, we get this for free. Since we're looping through in order, and each digit is just appended to the list, all four parts are *automatically in the right order after each other*. Isn't that neat?!
 

@@ -42,13 +42,13 @@ If the light in `c1` is <span style="color: var(--darkblue)">off</span>, then cl
 
 If the light in `c1` is <span style="color: var(--yellow)">on</span>, then switch it <span style="color: var(--darkblue)">off</span>. Now, we go *back* to `c0`. If the light here has mysteriously switched <span style="color: var(--darkblue)">off</span>, then clearly `c1` is the same as `c0`, since the light switch in `c1` affected the light in `c0`! We can thus conclude that there is one carriage. Otherwise, we have disproven the hypothesis, and can return to `c0`.
 
-Now, we repeat this procedure, conjecturing that there are $`n`$ carriages:
+Now, we repeat this procedure, conjecturing that there are $n$ carriages:
 
 1. Turn the light in `c0` <span style="color: var(--yellow)">on</span>.
-2. Go $`n`$ steps forward to `cn`.
-3. If the light in `cn` is <span style="color: var(--darkblue)">off</span>, then go back to `c0`, and return to step 1, setting $`n = n+1`$.
+2. Go $n$ steps forward to `cn`.
+3. If the light in `cn` is <span style="color: var(--darkblue)">off</span>, then go back to `c0`, and return to step 1, setting $n = n+1$.
 4. If the light in `cn` is <span style="color: var(--yellow)">on</span>, turn it <span style="color: var(--darkblue)">off</span> and go back to `c0`.
-5. If the light in `c0` is <span style="color: var(--darkblue)">off</span>, then there are precisely $`n`$ carriages!
-6. If the ligth in `c0` is <span style="color: var(--yellow)">on</span>, then return to step 1, setting $`n = n+1`$.
+5. If the light in `c0` is <span style="color: var(--darkblue)">off</span>, then there are precisely $n$ carriages!
+6. If the ligth in `c0` is <span style="color: var(--yellow)">on</span>, then return to step 1, setting $n = n+1$.
 
-This always terminates on iteration $`n`$, where $`n`$ is the number of carriages. Iteration $`i`$ of the algorithm takes at most $`2i`$ steps, so this procedure will always find the correct number within $`n^2 + n`$ moves!
+This always terminates on iteration $n$, where $n$ is the number of carriages. Iteration $i$ of the algorithm takes at most $2i$ steps, so this procedure will always find the correct number within $n^2 + n$ moves!
