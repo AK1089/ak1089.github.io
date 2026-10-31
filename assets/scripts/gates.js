@@ -1,6 +1,6 @@
 // Progressive reveal for pages with gates (see builder/extensions/gates.py).
 // The page is split into chunks at each gate; everything after the first gate starts hidden.
-// A gate's first option reveals the next chunk. Any other option jumps to the later gate with
+// A gate's first option reveals the next chunk. Any other option jumps to the last later gate with
 // the same label, folding the chunks in between into a "Skipped" line that can be expanded.
 // Revealing a chunk fires a "gate:reveal" event on it, so diagrams inside can lay themselves out.
 (function () {
@@ -87,7 +87,7 @@
     others.forEach((button) => {
       button.addEventListener("click", () => {
         const later = gates.slice(gates.indexOf(gate) + 1);
-        const target = later.find((g) => [...g.querySelectorAll(".gate-option")].some((b) => labelOf(b) === labelOf(button)));
+        const target = later.findLast((g) => [...g.querySelectorAll(".gate-option")].some((b) => labelOf(b) === labelOf(button)));
         if (target) skip(gate, target, button);
         else open(gate, button);
       });

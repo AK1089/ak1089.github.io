@@ -6,7 +6,7 @@ from markdown.preprocessors import Preprocessor
 
 # A line like "--- Let's see the solution..." or "--- Go on / Skip ahead" becomes a gate:
 # everything below it stays hidden until a reader picks an option. A second option
-# jumps to the later gate with the same label. /assets/scripts/gates.js does the hiding.
+# jumps to the last later gate with the same label. /assets/scripts/gates.js does the hiding.
 _GATE_RE = re.compile(r'^--- (\S.*)$')
 _EMPHASIS_RE = re.compile(r'\*([^*]+)\*')
 
