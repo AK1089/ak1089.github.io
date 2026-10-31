@@ -11,6 +11,7 @@ import markdown
 import yaml
 from extensions.blockquote import BlockquoteFormatter
 from extensions.code import CodeFormatter
+from extensions.dollar import rewrite_dollars
 from extensions.downloads import DownloadFormatter
 from extensions.environments import EnvironmentFormatter
 from extensions.image import ImageFormatter
@@ -375,6 +376,8 @@ def build_file(
     except AssertionError as e:
         print(f"Error processing {md_path}: {e}")
         raise
+
+    content = rewrite_dollars(content)
 
     # Batch-render any uncached KaTeX formulas in a single Node.js process
     # before md.convert(), so every tex2html call hits the file cache.
