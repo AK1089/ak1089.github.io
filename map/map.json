@@ -366,6 +366,12 @@
     "display": true
   },
   {
+    "name": "Hats",
+    "url": "/puzzles/hats",
+    "parent": "/puzzles#strategy-finding",
+    "display": true
+  },
+  {
     "name": "Logic Gates",
     "url": "/puzzles/logic-gates",
     "parent": "/puzzles#logic",

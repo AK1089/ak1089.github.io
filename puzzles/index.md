@@ -13,6 +13,7 @@ I'm a huge fan of all sorts of puzzles (especially logic puzzles with a mathemat
 | Logic | [Logic Gates](logic-gates) | Determine the behaviour of three mystery logic gates |
 | State Exploration | [Circular Train](circular-train) | Deduce the number of carriages while trapped on a circular train |
 | Strategy | [Bridge Battle](bridges) | Lock your opponent off from travelling in a bridge battle |
+| Strategy | [Black and White Hats](hats) | A sequence of increasingly abstract hat-guessing puzzles. |
 | Optimisation | [12 Coins](12-coins) | Weigh up 12 coins to find the fake (with some bonus puzzles) |
 | Optimisation | [Subway](subway) | Find the fastest route through a subway system |
 | Probability | [Anthropics](anthropics) | Some "easy" introductory puzzles about anthropics |

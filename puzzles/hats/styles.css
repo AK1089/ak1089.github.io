@@ -1,0 +1,167 @@
+.hats-figure {
+  position: relative;
+}
+
+.hats-shuffle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  padding: 0.3rem;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--overlay-b);
+  cursor: pointer;
+}
+
+.hats-shuffle:hover {
+  background: var(--crust);
+  color: var(--text);
+}
+
+.hats-shuffle .icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+
+.hats-figure text,
+.hats-infinite text,
+.hats-diagram text {
+  font-family: var(--text-sans);
+}
+
+/* Bubble diagrams push the queue down by 44 of 640 viewBox units; keep the button level with it */
+.hats-figure[data-guesser] .hats-shuffle {
+  margin-top: calc(44 / 640 * 100%);
+}
+
+.hats-infinite-figure {
+  position: relative;
+}
+
+/* Fade the right edge to hint that the queue carries on; the left fades in as you scroll */
+.hats-infinite {
+  --fade-left: 0px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  mask-image: linear-gradient(to right, transparent, black var(--fade-left), black 85%, transparent);
+}
+
+.hats-infinite::-webkit-scrollbar {
+  display: none;
+}
+
+.hats-infinite svg {
+  display: block;
+}
+
+/* Drag sideways to move the prisoner; vertical swipes still scroll the page */
+.hats-past svg {
+  cursor: ew-resize;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.hats-circle,
+.hats-pillar,
+.hats-ebert,
+.hats-pair,
+.hats-stacks {
+  position: relative;
+}
+
+.hats-circle-controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  color: var(--overlay-b);
+  font-family: var(--text-sans);
+  font-size: 0.9rem;
+}
+
+.hats-circle-controls .hats-count {
+  min-width: 1.4em;
+  text-align: center;
+  color: var(--text);
+}
+
+.hats-step {
+  width: 1.8rem;
+  height: 1.8rem;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.hats-step:hover:not(:disabled) {
+  background: var(--crust);
+  color: var(--text);
+}
+
+.hats-step:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.circle-person {
+  cursor: pointer;
+  outline: none;
+}
+
+.hats-rounds-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.hats-round-button {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--surface-a);
+  border-radius: 6px;
+  background: none;
+  color: var(--text);
+  font-family: var(--text-sans);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.hats-round-button:hover:not(:disabled) {
+  background: var(--crust);
+}
+
+.hats-round-button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.rounds-leaf {
+  cursor: pointer;
+  outline: none;
+}
+
+/* Endless stacks: scroll up through the hats; the top fades to hint that they carry on,
+   and the bottom fades in as you scroll away from the ground */
+.hats-stacks-scroll {
+  --fade-bottom: 0px;
+  height: 320px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  mask-image: linear-gradient(to bottom, transparent, black 30%, black calc(100% - var(--fade-bottom)), transparent);
+}
+
+.hats-stacks-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.hats-stacks-scroll svg {
+  display: block;
+}
